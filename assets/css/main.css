@@ -128,14 +128,14 @@ section {
 # Header
 --------------------------------------------------------------*/
 .header {
-  height: 50px;
+  height: 90px;
   transition: all 0.5s;
   z-index: 997;
   background: #f2f2f2;
 }
 
 .header.sticked {
-  height: 40px;
+  height: 70px;
 }
 
 .header .logo img {
