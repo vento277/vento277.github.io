@@ -9,14 +9,9 @@ body {
   font-family: "DM Sans", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  background-color: #fefeff;
+  background-color: #ffffff;
   color: #484847;
   padding-bottom: 5rem;
-}
-
-img {
-  display: block;
-  max-width: 100%;
 }
 
 .responsive-wrapper {
@@ -77,32 +72,6 @@ img {
 .header-link:hover{
   color: #202020a8;
 }
-
-.header-link--button {
-  background-color: #000;
-  color: #fff;
-  padding: 0.5rem 1.25rem;
-}
-.header-menu-button {
-  margin-left: 0.75rem;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  font: inherit;
-  position: relative;
-  padding-right: 30px;
-  font-weight: 500;
-}
-.header-menu-button:after, .header-menu-button:before {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 20px;
-  height: 2px;
-  background-color: currentcolor;
-  right: 0;
-  top: 8px;
-}
 .header-menu-button:after {
   top: 16px;
   width: 12px;
@@ -123,7 +92,6 @@ img {
   position: relative;
 }
 .page-title h1:after {
-  content: "";
   display: block;
   position: absolute;
   width: 100%;
@@ -143,7 +111,6 @@ img {
 .magazine-column {
   padding-left: 2rem;
   padding-right: 2rem;
-  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   grid-column: span 1;
 }
@@ -166,15 +133,6 @@ img {
   padding-top: 2rem;
   margin-top: 2rem;
   border-top: 1px solid #ccc;
-}
-
-.article-img + * {
-  margin-top: 1rem;
-}
-
-.article-link {
-  color: inherit;
-  text-decoration: none;
 }
 
 .article-title {
@@ -210,33 +168,18 @@ img {
 	outline: none;
 }
 
+.article-nonlink {
+  color: inherit;
+}
+
 .article-link:hover {
   color: #1f00aa;
 }
 
-.mark {
-  background-color: #fabea1;
-}
-.mark--secondary {
-  background-color: #c2dddf;
-}
-.mark--tertiary {
-  background-color: #F8E177;
-}
-
-.article-excerpt,
-.article-creditation {
-  font-size: 1.125rem;
-  line-height: 1.4;
-}
-.article-excerpt p + p,
-.article-creditation p + p {
-  margin-top: 1.5rem;
-}
-
 .article-skills{
   display: flex;
-  font-size: 0.9rem;
+  font-style: italic;
+  font-size: 0.85rem;
   margin-top: 0.3rem;
 }
 
@@ -256,109 +199,46 @@ img {
 .article-sub {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
 }
 
-.article-author-img {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 12px;
-  background-color: #323232;
-  overflow: hidden;
-  background-blend-mode: multiply;
-}
-.article-author-img + .article-author-info {
-  margin-left: 0.5rem;
-}
-
-.article-author-info {
-  line-height: 1.375;
-}
-.article-author-info dl {
-  margin-top: 0.25em;
-}
-.article-author-info dt {
-  font-weight: 600;
-}
-.article-author-info dd {
-  font-size: 0.875em;
-}
-
-.article-category {
-  font-weight: 500;
-  margin-bottom: 1rem;
-  display: block;
-}
-.article-category svg {
-  max-width: 1.5rem;
-  margin-right: 0.5rem;
-  vertical-align: middle;
-}
-
-.article-podcast-player {
+.column {
   display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  margin-top: 1.25rem;
-}
-
-.podcast-play-button {
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 12px;
-  border: 0;
-  background-color: #000;
-  margin-right: 0.5rem;
-}
-.podcast-play-button svg {
-  max-width: 1rem;
-  max-height: 1rem;
-  fill: #FFF;
-}
-
-.podcast-progression {
-  flex: 1;
-  height: 8px;
-  border-radius: 99em;
-  background-color: #D9D4CD;
-  background-image: linear-gradient(to right, #F99970 30%, #D9D4CD 30%, #D9D4CD 100%);
-}
-
-.podcast-time {
-  font-weight: 500;
-  font-size: 1.125rem;
-  margin-left: 0.5rem;
-}
-
-:focus {
-  outline: 0;
-}
-
-nav {
-  margin-top: 1rem;
-  color: var(--c-text-secondary);
-  display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  color: #000;
+  float: left;
+  width: 50%;
+  font-size: 0.90rem;
 }
 
-nav a {
-  text-decoration: none;
-  font-size: 1.125rem;
-  display: inline-block;
-  padding: 0.375em 1em;
-  border-radius: 3px;
-  color: #000;
-}
-nav a:hover {
-  background-color: var(--c-bg-secondary);
-  color: #000;
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
+
+.mark {
+  background-color: #fabea1;
+}
+.mark--secondary {
+  background-color: #c2dddf;
+}
+.mark--tertiary {
+  background-color: #F8E177;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: 500;
+  color: #000000;
+}
 
 .button-23 {
-  background-color: #fefeff;
+  background-color: #ffffff;
   border: 1px solid #222222;
   border-radius: 8px;
   box-sizing: border-box;
@@ -399,5 +279,7 @@ nav a:hover {
   cursor: not-allowed;
   opacity: 1;
 }
+
+
 
 
