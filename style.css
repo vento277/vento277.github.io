@@ -5,13 +5,15 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "DM Sans", sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  background-color: #ffffff;
-  color: #484847;
-  padding-bottom: 5rem;
+@media only screen and (max-width: 600px){
+  body {
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: #ffffff;
+    color: #484847;
+    padding-bottom: 5rem;
+  }
 }
 
 .responsive-wrapper {
@@ -36,9 +38,6 @@ body {
   width: auto;
 }
 
-.header-middle {
-  display: none;
-}
 @media (min-width: 1200px) {
   .header-middle {
     display: block;
