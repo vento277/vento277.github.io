@@ -215,6 +215,17 @@ body {
   color: #1f00aa;
 }
 
+.article-link-2 {
+  color: inherit;
+	text-decoration: none;
+	background-image: linear-gradient(to top, #0a2ef84b 0, #0a2ef84b .13169rem, rgba(255, 102, 140, 0) .13169rem, rgba(255, 102, 140, 0) 100%);
+	transition: 0.2s;
+	outline: none;
+}
+.article-link-2:hover {
+  color: #1f00aa;
+}
+
 .article-skills{
   display: flex;
   font-style: italic;
@@ -318,6 +329,12 @@ th {
   cursor: not-allowed;
   opacity: 1;
 }
+
+th {
+  font-weight:bold
+}
+
+
 
 
 
