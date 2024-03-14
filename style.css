@@ -31,15 +31,16 @@ table {
 }
 
 th {
-  font-weight:bold;
+  font-weight: bold;
   color: #000000;
 }
 
 p {
-  font-size:0.90rem;
+  font-size: 0.90rem;
 }
 
 li {
+  margin-left: 1.2rem;
   padding-top: 3px;
 }
 
@@ -110,6 +111,7 @@ li {
   padding-left: 2rem;
   justify-content: left;
   width: 50%;
+  font-size: 0.90rem;
 }
 
 /* Column Layouts */
@@ -154,7 +156,7 @@ li {
 .article-sub-title {
   display: flex;
   flex-wrap: wrap;
-  font-weight: 500;
+  font-weight: 450;
   font-size: 0.95rem;
 }
 .article-link {
@@ -191,11 +193,6 @@ li {
   margin-top: 0.3rem;
   padding-bottom: 7px;
 }
-.article-sub-content{
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 0.1rem;
-}
 
 /* Other */
 .button-23 {
@@ -224,7 +221,7 @@ li {
 @media only screen and (max-width: 1200px) {
   li {
     padding-top: 3px;
-    margin-left: 2rem;
+    margin-left: 1.2rem;
   }
   .responsive-wrapper {
     width: 100%;
