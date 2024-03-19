@@ -48,7 +48,7 @@ li {
 /* Class */
 /* Main Wrapper */
 .responsive-wrapper {
-  width: 80%;
+  width: 82%;
   justify-content: center;
   max-width: 1900px;
   margin-left: auto;
@@ -206,7 +206,7 @@ li {
     font-size:0.90rem;
   }
   .responsive-wrapper {
-    width: 100%;
+    width: 97%;
     justify-content: center;
   }
   .header {
@@ -222,7 +222,7 @@ li {
   .magazine-column {
     display: flex;
     flex-wrap: wrap;
-    flex:1 1 100%;
+    flex:1 1 80%;
     padding-left: 2rem;
     padding-right: 2rem;
     padding-bottom: 2rem;
