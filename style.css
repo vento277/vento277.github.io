@@ -197,40 +197,45 @@ li {
   width: auto;
 }
 
-@media only screen and (max-width: 1200px) {
-  li {
-    padding-top: 3px;
-    font-size:0.90rem;
-  }
+@media only screen and (max-width: 1020px) {
   .responsive-wrapper {
-    width: 97%;
+    width: 80%;
     justify-content: center;
   }
-  .header {
-    padding-top: 2rem;
-    display: flex;
-  }
   .page-title {
-    padding-right: 2rem;
+    padding-bottom: 1rem;
     display: flex;
     justify-content: left;
+  }
+  .page-intro {
+    justify-content: left;
+    width: 90%;
+    font-size: 0.90rem;
   }
   .magazine-column {
     display: flex;
     flex-wrap: wrap;
     flex:1 1 80%;
-    padding-right: 2rem;
-    padding-bottom: 2rem;
-  }
-  .page-intro {
-    padding-right: 2rem;
-    display: flex;
-    justify-content: left;
-    flex-basis: 100%;
-    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #000000;
   }
 }
 
+@media only screen and (max-width: 800px){
+  .page-title {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: left;
+  }
+  .responsive-wrapper {
+    width: 95%;
+    justify-content: center;
+    max-width: 1900px;
+    padding-top: 1rem;
+    padding-left: 1.5rem;
+  }
+} 
 
 
 
