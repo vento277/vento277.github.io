@@ -59,16 +59,12 @@ li {
 .header {
   padding-left: 1.2rem;
   padding-top: 2rem;
-  display: flex;
-}
-.header-sub{
-  padding-left: 1.2rem;
-  padding-TOP: 0.35rem;
   padding-bottom: 2rem;
   display: flex;
 }
 .header-menu {
   padding-left: 1.2rem;
+  padding-top: 0.35rem;
   padding-bottom: 2rem;
   display: flex;
   justify-content: left;
