@@ -40,41 +40,45 @@ p {
 }
 
 li {
-  margin-left: 1.2rem;
-  padding-top: 3px;
+  padding-top: 0.1rem;
+  margin-left: 0.5rem;
   font-size:0.90rem;
 }
 
 /* Class */
 /* Main Wrapper */
 .responsive-wrapper {
-  width: 82%;
+  width: 100%;
   justify-content: center;
   max-width: 1900px;
-  margin-left: auto;
-  margin-right: auto;
+  padding-top: 1.5rem;
+  padding-left: 7rem;
 }
 
 /* Header */
 .header {
-  padding-left: 1.2rem;
-  padding-top: 2rem;
   padding-bottom: 2rem;
   display: flex;
 }
+.header-link {
+  color: #000;
+  text-decoration: none;
+  padding-right: 1rem;
+  display: none;
+  font-weight: 500;
+  display: inline-block;
+}
 .header-menu {
-  padding-left: 1.2rem;
   padding-top: 0.35rem;
   padding-bottom: 2rem;
   display: flex;
   justify-content: left;
   font-style: italic;
 }
-.header-link {
+.header-menu-link {
   color: #000;
   text-decoration: none;
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
+  padding-right:1.5rem;
   display: none;
   font-weight: 500;
   display: inline-block;
@@ -85,7 +89,6 @@ li {
 
 /* Page Titles */
 .page-title {
-  padding-left: 2rem;
   padding-bottom: 2rem;
   display: flex;
   justify-content: left;
@@ -106,9 +109,8 @@ li {
   background-color: currentcolor;
 }
 .page-intro {
-  padding-left: 2rem;
   justify-content: left;
-  width: 50%;
+  width: 60%;
   font-size: 0.90rem;
 }
 
@@ -116,19 +118,18 @@ li {
 .magazine-layout {
   display: flex;
   flex-wrap: wrap;
+  width: 90%;
 }
 .magazine-column {
   display: flex;
   flex:1 1 33%;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-right: 1.5rem;
   padding-bottom: 3rem;
 }
 
 /* Column contents */
 .article + .article {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-right: 1rem;
 }
 .article-title {
   font-weight: 900;
@@ -199,7 +200,6 @@ li {
 @media only screen and (max-width: 1200px) {
   li {
     padding-top: 3px;
-    margin-left: 1.2rem;
     font-size:0.90rem;
   }
   .responsive-wrapper {
@@ -207,7 +207,6 @@ li {
     justify-content: center;
   }
   .header {
-    padding-left: 1.2rem;
     padding-top: 2rem;
     display: flex;
   }
@@ -220,12 +219,10 @@ li {
     display: flex;
     flex-wrap: wrap;
     flex:1 1 80%;
-    padding-left: 2rem;
     padding-right: 2rem;
     padding-bottom: 2rem;
   }
   .page-intro {
-    padding-left: 2rem;
     padding-right: 2rem;
     display: flex;
     justify-content: left;
