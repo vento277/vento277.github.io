@@ -5,16 +5,6 @@
   box-sizing: border-box;
 }
 
-/*
-Page Title:  1.35
-Title        1.1
-Sub Title    0.95
-Skills       0.85
-Content      0.9
-
-Padding      2
-*/
-
 /* Non Class */
 body {
   font-family: "DM Sans", sans-serif;
@@ -24,28 +14,18 @@ body {
   color: #484847;
   padding-bottom: 5rem;
 }
-table {
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
+li {
+  padding-top: 0.1rem;
+  margin-left: 0.5rem;
+  font-size:0.90rem;
 }
 
-th {
-  font-weight: bold;
-  color: #000000;
-}
-
+/* Main Fonts */
 p {
   font-size: 0.90rem;
 }
 h1 {
   font-size: 1.2rem;
-}
-
-li {
-  padding-top: 0.1rem;
-  margin-left: 0.5rem;
-  font-size:0.90rem;
 }
 
 /* Class */
@@ -185,6 +165,7 @@ li {
   width: auto;
 }
 
+/* Tablet */
 @media only screen and (max-width: 1020px) {
 .responsive-wrapper {
   width: 90%;
@@ -211,9 +192,9 @@ li {
   padding-bottom: 1rem;
   border-bottom: 1px solid #000000;
 }
-
 }
 
+/* Mobile */
 @media only screen and (max-width: 800px){
   .responsive-wrapper {
     width: 95%;
@@ -241,6 +222,16 @@ li {
     border-bottom: 1px solid #000000;
   }
 } 
+
+/*
+Page Title:  1.35
+Title        1.1
+Sub Title    0.95
+Skills       0.85
+Content      0.9
+
+Padding      2
+*/
 
 
 
