@@ -110,12 +110,7 @@ li {
   height: 2px;
   background-color: currentcolor;
 }
-.page-intro {
-  justify-content: left;
-  width: 40%;
-  font-size: 0.90rem;
-}
-.page-esy {
+.page-text {
   justify-content: left;
   width: 40%;
   font-size: 0.90rem;
@@ -203,7 +198,7 @@ li {
   display: flex;
   justify-content: left;
 }
-.page-intro {
+.page-text {
   justify-content: left;
   width: 85%;
   font-size: 0.90rem;
@@ -232,7 +227,7 @@ li {
     display: flex;
     justify-content: left;
   }
-  .page-intro {
+  .page-text {
     justify-content: left;
     width: 90%;
     font-size: 0.90rem;
