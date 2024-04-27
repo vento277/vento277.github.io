@@ -12,7 +12,7 @@ body {
   line-height: 1.5;
   background-color: #ffffff;
   color: #484847;
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
 }
 li {
   padding-top: 0.1rem;
@@ -92,7 +92,7 @@ h1 {
 }
 .page-text {
   justify-content: left;
-  width: 40%;
+  width: 45%;
   font-size: 0.90rem;
 }
 
@@ -181,8 +181,13 @@ h1 {
 }
 .page-text {
   justify-content: left;
-  width: 85%;
+  width: 95%;
   font-size: 0.90rem;
+}
+.magazine-layout {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
 }
 .magazine-column {
   display: flex;
@@ -193,35 +198,6 @@ h1 {
   border-bottom: 1px solid #000000;
 }
 }
-
-/* Mobile */
-@media only screen and (max-width: 800px){
-  .responsive-wrapper {
-    width: 95%;
-    justify-content: center;
-    padding-top: 1.5rem;
-    padding-left: 1.5rem;
-  }
-  .page-title {
-    padding-bottom: 1rem;
-    width: 95%;
-    display: flex;
-    justify-content: left;
-  }
-  .page-text {
-    justify-content: left;
-    width: 90%;
-    font-size: 0.90rem;
-  }
-  .magazine-column {
-    display: flex;
-    flex-wrap: wrap;
-    flex:1 1 100%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #000000;
-  }
-} 
 
 /*
 Page Title:  1.35
