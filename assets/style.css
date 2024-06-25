@@ -105,7 +105,7 @@ h1 {
 .magazine-column {
   display: flex;
   flex:1 1 33%;
-  padding-bottom: 3rem;
+  padding-bottom: 2.75rem;
   padding-right: 3rem;
 }
 
@@ -115,12 +115,6 @@ h1 {
   line-height: 1.25;
   color: #000;
   font-size: 1.1rem;
-}
-.article-sub-title {
-  display: flex;
-  flex-wrap: wrap;
-  font-weight: 450;
-  font-size: 0.95rem;
 }
 .article-link {
   color: inherit;
@@ -133,13 +127,7 @@ h1 {
 .article-link:hover {
   color: #6d6d744b;
 }
-.article-skills{
-  display: flex;
-  font-style: italic;
-  font-size: 0.85rem;
-  margin-top: 0.3rem;
-  padding-bottom: 7px;
-}
+
 
 /* Other */
 .button-23 {
