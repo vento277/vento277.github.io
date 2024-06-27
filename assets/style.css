@@ -153,10 +153,34 @@ h1 {
   width: auto;
 }
 
-/*Embed*/
-
 /* Tablet */
-@media only screen and (max-width: 1020px) {
+@media only screen and (min-width: 1080px) {
+  .responsive-wrapper {
+    width: 90%;
+    justify-content: center;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .page-title {
+    padding-bottom: 1rem;
+    width: 80%;
+    display: flex;
+    justify-content: left;
+  }
+  .page-text {
+    justify-content: left;
+    width: 95%;
+    font-size: 0.90rem;
+  }
+  .magazine-layout {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+  }
+}
+
+/* Phone */
+@media only screen and (max-width: 1000px) {
 .responsive-wrapper {
   width: 90%;
   justify-content: center;
@@ -165,7 +189,7 @@ h1 {
 }
 .page-title {
   padding-bottom: 1rem;
-  width: 90%;
+  width: 80%;
   display: flex;
   justify-content: left;
 }
