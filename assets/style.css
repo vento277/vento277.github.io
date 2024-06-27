@@ -100,12 +100,12 @@ h1 {
 .magazine-layout {
   display: flex;
   flex-wrap: wrap;
-  width: 75%;
+  width: 70%;
 }
 .magazine-column {
   display: flex;
   flex:1 1 33%;
-  padding-bottom: 2.75rem;
+  padding-bottom: 3rem;
   padding-right: 3rem;
 }
 
@@ -152,6 +152,8 @@ h1 {
   -webkit-user-select: none;
   width: auto;
 }
+
+/*Embed*/
 
 /* Tablet */
 @media only screen and (max-width: 1020px) {
