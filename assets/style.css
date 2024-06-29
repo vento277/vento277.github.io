@@ -186,6 +186,15 @@ textarea {
     flex-wrap: wrap;
     width: 95%;
   }
+  textarea {
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.90rem;
+    width: 80%;
+    height: 200px;
+    margin-bottom: 10px;
+    border: none;
+    resize: none;
+  }
 }
 
 /* Phone */
@@ -219,6 +228,15 @@ textarea {
   padding-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #000000;
+}
+textarea {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.90rem;
+  width: 95%;
+  height: 200px;
+  margin-bottom: 10px;
+  border: none;
+  resize: none;
 }
 }
 
