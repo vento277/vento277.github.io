@@ -128,21 +128,21 @@ h1 {
   color: #6d6d744b;
 }
 
-
 /* Other */
 .button-23 {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
   background-color: #ffffff;
+  color: #484847;
   border: 1px solid #000000;
-  border-radius: 8px;
+  border-radius: 10px;
   box-sizing: border-box;
-  color: #000000;
   cursor: pointer;
   display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 10px;
+  font-weight: 500;
   outline: none;
-  padding: 10px 15px;
+  padding: 5px 7.5px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -152,9 +152,18 @@ h1 {
   -webkit-user-select: none;
   width: auto;
 }
+textarea {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.90rem;
+  width: 75%;
+  height: 200px;
+  margin-bottom: 10px;
+  border: none;
+  resize: none;
+}
 
 /* Tablet */
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 1200px) {
   .responsive-wrapper {
     width: 90%;
     justify-content: center;
@@ -169,7 +178,7 @@ h1 {
   }
   .page-text {
     justify-content: left;
-    width: 95%;
+    width: 60%;
     font-size: 0.90rem;
   }
   .magazine-layout {

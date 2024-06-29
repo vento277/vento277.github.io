@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+  <title>Peter Kim</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<!--Header-->
+<body>
+<main class="responsive-wrapper">
+	<div class="header">
+		<a class="header-link" href="../index.html">Peter Kim</a>
+		<span class="header-link">/</span>
+		<a class="header-link" href="mailto:peterkim.bm@gmail.com" target="_blank" >@</a>
+		<a class="header-link" href="https://www.linkedin.com/in/peter-kim25/" target="_blank">in</a>
+	</div>
+	<div class="header-menu">
+		<a class="header-menu-link" href="../index.html">About</a>
+		<a class="header-menu-link" href="../build.html">Build</a>
+		<a class="header-menu-link" href="../write.html">Write</a>
+	</div>
+<!--End of Header-->
+
+<!--Content-->
+    <div class="article-title">
+        <h1>Gaussian Decision Maker</h1>
+    </div>
+    <div class="page-text">
+        <label for="numInputs"><br>Number of options:</label>
+        <input type="number" id="numInputs" min="2" value="2" class="option-input">
+        <button onclick="generateInputs()" class="button-23">Generate Options</button>
+    </div>
+    <br>
+    <div id="inputContainer"></div>
+    <br>
+    <button onclick="makeDecision()" id="decideButton" class="button-23" style="display: none;">Make Decision</button>
+    <br><br>
+    <p id="result"></p>
+
+    <script>
+        function generateInputs() {
+            const numInputs = parseInt(document.getElementById('numInputs').value);
+            const inputContainer = document.getElementById('inputContainer');
+            inputContainer.innerHTML = '';
+
+            for (let i = 0; i < numInputs; i++) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = `Option ${i + 1}`;
+                input.className = 'option-input';
+                inputContainer.appendChild(input);
+            }
+
+            document.getElementById('decideButton').style.display = 'inline-block';
+        }
+
+        function gaussianRandom() {
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random();
+            while (v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        }
+
+        function makeDecision() {
+            const options = document.getElementsByClassName('option-input');
+            if (options.length < 2) {
+                alert('Please enter at least two options.');
+                return;
+            }
+
+            const values = [];
+            for (let option of options) {
+                if (option.value.trim() === '') {
+                    alert('Please fill in all options.');
+                    return;
+                }
+                values.push(gaussianRandom());
+            }
+
+            const maxIndex = values.indexOf(Math.max(...values));
+            const result = document.getElementById('result');
+            result.textContent = `The decision is: ${options[maxIndex].value}!`;
+        }
+    </script>
+<!--End of Content-->
+</main>
+
+<!-- partial -->
+</body>
+</html>
