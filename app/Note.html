@@ -1,42 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-  <title>Peter Kim</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
-  <link rel="stylesheet" href="../assets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <title>Peter Kim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 
 <!--Header-->
 <body>
 <main class="responsive-wrapper">
-	<div class="header">
-		<a class="header-link" href="../index.html">Peter Kim</a>
-		<span class="header-link">/</span>
-		<a class="header-link" href="mailto:peterkim.bm@gmail.com" target="_blank" >@</a>
-		<a class="header-link" href="https://www.linkedin.com/in/peter-kim25/" target="_blank">in</a>
-	</div>
-	<div class="header-menu">
-		<a class="header-menu-link" href="../index.html">About</a>
-		<a class="header-menu-link" href="../build.html">Build</a>
-		<a class="header-menu-link" href="../write.html">Write</a>
-	</div>
 <!--End of Header-->
 
 <!--Content-->
-    
     <div class="article-title">
         <h1>Quick Note</h1><br>
     </div>
     <textarea id="userInput" placeholder="Enter your text here..."></textarea>
-    <br>
-    <button onclick="saveText()" class="button-23">Save Text</button>
-    <br><br>
     <p id="status"></p>
-    
+    <br>
+    <button onclick="saveAsFile()" class="button-23">Save as File</button>
     <script>
         let userIP = '';
+        let saveTimeout;
 
         // Fetch the user's IP address
         fetch('https://api.ipify.org?format=json')
@@ -50,10 +37,13 @@
                 document.getElementById('status').textContent = 'Error fetching IP address.';
             });
 
-        function saveText() {
-            const text = document.getElementById('userInput').value;
-            localStorage.setItem(userIP, text);
-            document.getElementById('status').textContent = 'Text saved successfully!';
+        function autoSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                const text = document.getElementById('userInput').value;
+                localStorage.setItem(userIP, text);
+                document.getElementById('status').textContent = 'Text saved';
+            }, 1000); // Saves 1 second after the user stops typing
         }
 
         function loadSavedText() {
@@ -63,6 +53,21 @@
                 document.getElementById('status').textContent = 'Loaded previously saved text.';
             }
         }
+
+        function saveAsFile() {
+            const text = document.getElementById('userInput').value;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'quick_note.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            document.getElementById('status').textContent = 'File saved successfully!';
+        }
+
+        // Add event listener for auto-save
+        document.getElementById('userInput').addEventListener('input', autoSave);
     </script>
 <!--End of Content-->
 </main>
