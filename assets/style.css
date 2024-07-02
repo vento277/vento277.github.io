@@ -13,8 +13,6 @@ body {
   background-color: #ffffff;
   color: #484847;
   padding-bottom: 3rem;
-  height: 100%;
-  width: 100%;
 }
 li {
   padding-top: 0.1rem;
@@ -108,7 +106,7 @@ h1 {
   display: flex;
   flex:1 1 33%;
   padding-bottom: 3rem;
-  padding-right: 3rem;
+  padding-right: 4rem;
 }
 
 /* Column contents */
@@ -154,13 +152,6 @@ h1 {
   -webkit-user-select: none;
   width: auto;
 }
-textarea {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.90rem;
-  width: 80%;
-  height: 75vh;
-  resize: none;
-}
 
 /* Tablet */
 @media only screen and (max-width: 1200px) {
@@ -186,15 +177,6 @@ textarea {
     flex-wrap: wrap;
     width: 95%;
   }
-  textarea {
-    font-family: "DM Sans", sans-serif;
-    font-size: 0.90rem;
-    width: 90%;
-    height: 200px;
-    margin-bottom: 10px;
-    border: none;
-    resize: none;
-  }
 }
 
 /* Phone */
@@ -207,7 +189,7 @@ textarea {
 }
 .page-title {
   padding-bottom: 1rem;
-  width: 95%;
+  width: 80%;
   display: flex;
   justify-content: left;
 }
@@ -228,15 +210,6 @@ textarea {
   padding-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #000000;
-}
-textarea {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.90rem;
-  width: 100%;
-  height: 200px;
-  margin-bottom: 10px;
-  border: none;
-  resize: none;
 }
 }
 
