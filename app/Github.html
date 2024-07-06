@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <title>Peter Kim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<!--Header-->
+<body>
+<main class="responsive-wrapper">
+<!--End of Header-->
+
+<!--Content-->
+<div class="article-title">
+    <h1>GitHub Downloader</h1>
+</div> <br>
+<input type="text" placeholder="https://github.com/username/repository">
+<button id="download-btn" class="button-23">Download ZIP</button>
+
+<p id="error-message"></p>
+
+<script>
+    document.getElementById('download-btn').addEventListener('click', function() {
+        const repoUrl = document.getElementById('repo-url').value.trim();
+        const errorMessage = document.getElementById('error-message');
+        
+        // Basic URL validation
+        if (!repoUrl.startsWith('https://github.com/')) {
+            errorMessage.textContent = 'Please enter a valid GitHub repository URL.';
+            return;
+        }
+        
+        // Extract username and repository name
+        const parts = repoUrl.split('/');
+        if (parts.length < 5) {
+            errorMessage.textContent = 'Invalid GitHub URL format.';
+            return;
+        }
+        
+        const username = parts[3];
+        const repository = parts[4];
+        
+        // Construct the download URL
+        const downloadUrl = `https://github.com/${username}/${repository}/archive/master.zip`;
+        
+        // Create a temporary anchor element to trigger the download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = `${repository}.zip`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        errorMessage.textContent = ''; // Clear any previous error messages
+    });
+</script>
+<!--End of Content-->
+</main>
+
+<!-- partial -->
+</body>
+</html>
