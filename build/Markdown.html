@@ -1,79 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!--Header-->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Previewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <title>Markdown Live Preview</title>
     <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
     <link rel="stylesheet" href="../assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
+   
     <style>
         body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: "DM Sans", sans-serif;
+            background-color:#ffffff;
+            color: #484847;
+            overflow: hidden;
         }
         .container {
             display: flex;
-            height: 100%;
+            height: calc(95vh - 100px);
+            width: 95%;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
         }
-        .input, .preview {
-            width: 50%;
-            padding: 20px;
-            box-sizing: border-box;
+        .input-area, .preview-area {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
         }
-        #editor {
+        .input-area {
+            border-right: 1px solid #e0e0e0;
+        }
+        #markdown-input {
             width: 100%;
             height: 100%;
             resize: none;
-        }
-        #preview {
-            height: 100%;
-            overflow-y: auto;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            line-height: 1.0;
+            font-family: "DM Sans", sans-serif;
         }
     </style>
 </head>
+<!--End of Header-->
+
+<!--Content-->
 <body>
+<main class="responsive-wrapper">
+    <div class="article-title">
+        <h1>Markdown Live Preview</h1>
+    </div>
     <div class="container">
-        <div class="input">
-            <textarea id="editor"></textarea>
+        <div class="input-area">
+            <textarea id="markdown-input" placeholder="Enter your Markdown here..."></textarea>
         </div>
-        <div class="preview">
+        <div class="preview-area">
             <div id="preview"></div>
         </div>
     </div>
-
     <script>
-        const editor = document.getElementById('editor');
+        const input = document.getElementById('markdown-input');
         const preview = document.getElementById('preview');
-
         function updatePreview() {
-            preview.innerHTML = marked(editor.value);
-            saveProgress();
+            preview.innerHTML = marked(input.value);
         }
+        input.addEventListener('input', updatePreview);
 
-        function saveProgress() {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    localStorage.setItem(`markdownContent_${data.ip}`, editor.value);
-                });
-        }
-
-        function loadProgress() {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    const savedContent = localStorage.getItem(`markdownContent_${data.ip}`);
-                    if (savedContent) {
-                        editor.value = savedContent;
-                        updatePreview();
-                    }
-                });
-        }
-
-        editor.addEventListener('input', updatePreview);
-        window.addEventListener('load', loadProgress);
     </script>
+<!--End of Content-->
+</main>
+
+<!-- partial -->
 </body>
 </html>
