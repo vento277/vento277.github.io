@@ -25,32 +25,12 @@
 <!--End of Header-->
 
 <!--Content-->
-<div class="iframe-container">
-    <iframe class="stream-element"
-        src="https://docs.google.com/document/d/e/2PACX-1vR7zsKqmPzqA86Q0Z2qmbeUSUMx4dV5Lee-iJtRDAb1a6NEGeLxe6zRSVFcNHJAd5zUkfAVZCXDBx70/pub?embedded=true"
-        style="width: 100%; height: 100%; border: none; outline: none; margin: 0; padding: 0;"
-        allowfullscreen="yes"
-        frameborder="0"
-    ></iframe>
-</div>
-
-<script>
-    function resizeIframe() {
-        var container = document.querySelector('.iframe-container');
-        var wrapper = container.closest('.responsive-wrapper');
-        var wrapperHeight = wrapper ? wrapper.offsetHeight : 0;
-        
-        container.style.height = (window.innerHeight - wrapperHeight) + 'px';
-        container.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-    }
-   
-    // Resize on load
-    window.addEventListener('load', resizeIframe);
-   
-    // Resize on window resize
-    window.addEventListener('resize', resizeIframe);
-</script>
+<iframe 
+    src="https://docs.google.com/document/d/e/2PACX-1vR7zsKqmPzqA86Q0Z2qmbeUSUMx4dV5Lee-iJtRDAb1a6NEGeLxe6zRSVFcNHJAd5zUkfAVZCXDBx70/pub?embedded=true"
+    style="width: 100%; height: 85vh; border: none; outline: none; margin: 0; padding: 0;"
+    allowfullscreen="yes"
+    frameborder="0"
+></iframe>
 <!--End of Content-->
 
 </main>
