@@ -159,7 +159,7 @@ p {
 /* Tablet */
 @media only screen and (max-width: 1200px) {
   .responsive-wrapper {
-    width: 90%;
+    width: 95%;
     justify-content: center;
     padding-top: 1.5rem;
     padding-left: 1.5rem;
@@ -178,14 +178,14 @@ p {
   .magazine-layout {
     display: flex;
     flex-wrap: wrap;
-    width: 95%;
+    width: 100%;
   }
 }
 
 /* Phone */
 @media only screen and (max-width: 1000px) {
 .responsive-wrapper {
-  width: 90%;
+  width: 95%;
   justify-content: center;
   padding-top: 1.5rem;
   padding-left: 1.5rem;
