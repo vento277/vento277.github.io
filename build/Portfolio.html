@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+	<title>Investment Portfolio</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+	<link rel="stylesheet" href="../assets/style.css">
+    <style>
+        .iframe-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;  
+        }
+        iframe {
+            width: 90%;
+            height: 80%;
+            border: none;
+            outline: none;      
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding-right: 5%;
+        }
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+            cursor: pointer; 
+            padding-bottom: 35%;
+        }
+        .grid-item-sold {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            background-color: rgb(196, 196, 196);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+            padding-bottom: 35%;
+        }
+        .grid-item-sold:hover {
+            transform: scale(1.07);
+        }
+        .grid-item:hover {
+            transform: scale(1.07);
+        }
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            color: black;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+        .text {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .grid-item a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<!--Header-->
+<body>
+<main class="responsive-wrapper">
+	<div class="header">
+		<a class="header-link" href="/">Peter Kim</a>
+		<span class="header-link">/</span>
+		<a class="header-link" href="mailto:peterkim.bm@gmail.com" target="_blank" >@</a>
+		<a class="header-link" href="https://www.linkedin.com/in/peter-kim25/" target="_blank">in</a>
+	</div>
+	<div class="header-menu">
+		<a class="header-menu-link" href="/">About</a>
+		<a class="header-menu-link" href="../build">Build</a>
+		<a class="header-menu-link" href="../write">Write</a>
+	</div>
+<!--End of Header-->
+
+<!--Content-->
+    <div class="article-title">
+        <h1>Investment Portfolio</h1>
+    </div>
+    <div class="page-text">
+        <a>
+            I started buying stocks when I first turned 19. Below is a consolidated record of all my trades and my current holdings. 
+            I have stocks that I've owned since the start, as well as some stocks that I've traded based on more short-term theses.
+        </a>
+    </div><br>
+    <div class="grid">
+        <div class="grid-item">
+            <a href = "https://www.apple.com/ca/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Apple</h2>
+                    <p class="date">Entry Price: $153</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href = "https://www.berkshirehathaway.com/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Berkshire Hathaway</h2>
+                    <p class="date">Entry Price: $409</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href = "http://www.google.com" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Google</h2>
+                    <p class="date">Entry Price: $121</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href = "https://www.csisoftware.com/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Constellation Software</h2>
+                    <p class="date">Entry Price: $3642</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href = "https://www.vanguard.ca/en/advisor/products/products-group/etfs/VFV" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">S&P 500 Index</h2>
+                    <p class="text">Entry Price: $103.06</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item">
+            <a href = "https://www.alibaba.com/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Alibaba</h2>
+                    <p class="text">Entry Price: $142</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://www.tesla.com/en_ca" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Tesla</h2>
+                    <p class="text">Entry Price: $254 | Exit Price: $253</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://www.microsoft.com/en-ca" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Microsoft</h2>
+                    <p class="text">Entry Price: $289 | Exit Price: $309.5</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://www.micron.com/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Micron Technology</h2>
+                    <p class="text">Entry Price: $58 | Exit Price: $63</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://www.netflix.com/ca/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Netflix</h2>
+                    <p class="text">Entry Price: $349 | Exit Price: $338</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://www.nestle.com/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Nestle</h2>
+                    <p class="text">Entry Price: $125 | Exit Price: $128.5</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://www.oxy.com" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Occidental Petroleum</h2>
+                    <p class="text">Entry Price: $54 | Exit Price: $58</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://algonquinpower.com/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Algonquin</h2>
+                    <p class="text">Entry Price: $20 | Exit Price: $19.5</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid-item-sold">
+            <a href = "https://firmcapital.com/" target="_blank">
+                <div class="overlay">
+                    <h2 class="title">Firm Capital</h2>
+                    <p class="text">Entry Price: $13.5 | Exit Price: $15</p>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+<!--End of Content-->
+</main>
+
+<!-- partial -->
+</body>
+</html>
+
+
+
+
+

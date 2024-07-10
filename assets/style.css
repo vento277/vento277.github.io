@@ -97,7 +97,7 @@ p {
 .magazine-layout {
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
+  width: 75%;
 }
 .magazine-column {
   display: flex;
