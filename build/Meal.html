@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="stylesheet" href="../assets/style.css">
+    <title>Meal Planner</title>
+    <style>
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        button {
+			background-color: #ffffff;
+			color: #484847;
+			border: 1px solid #000000;
+            padding: 10px 12.5px;
+			font-size: 0.8rem;
+			border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        button:hover {
+            background-color: #0077ed;
+        }
+        #mealPlan {
+            margin-top: 30px;
+        }
+        .meal {
+            background-color: #f5f5f7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .meal h2 {
+            font-size: 18px;
+            margin-top: 0;
+        }
+        .meal p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Meal Planner</h1>
+        <button onclick="generateMealPlan()">Generate</button>
+        <div id="mealPlan"></div>
+    </div>
+
+	<script>
+		const meals = [
+			// Existing meals
+			{
+				name: "Grilled Chicken with Steamed Broccoli",
+				ingredients: "Chicken breast, broccoli, olive oil, lemon",
+				fruit: "Apple slices",
+				cost: 4.50,
+				cookingTime: 15
+			},
+			{
+				name: "Pan-Seared Tilapia with Sautéed Spinach",
+				ingredients: "Tilapia fillet, spinach, garlic, olive oil",
+				fruit: "Orange wedges",
+				cost: 4.75,
+				cookingTime: 12
+			},
+			{
+				name: "Turkey and Vegetable Stir-Fry",
+				ingredients: "Ground turkey, mixed vegetables, soy sauce",
+				fruit: "Grapes",
+				cost: 4.25,
+				cookingTime: 10
+			},
+			{
+				name: "Egg and Vegetable Scramble",
+				ingredients: "Eggs, bell peppers, onions, mushrooms",
+				fruit: "Banana",
+				cost: 3.75,
+				cookingTime: 8
+			},
+			{
+				name: "Lemon Herb Baked Cod with Asparagus",
+				ingredients: "Cod fillet, asparagus, lemon, herbs",
+				fruit: "Strawberries",
+				cost: 4.90,
+				cookingTime: 15
+			},
+			// New meals
+			{
+				name: "Shrimp and Zucchini Noodles",
+				ingredients: "Shrimp, zucchini, garlic, olive oil",
+				fruit: "Pear",
+				cost: 6.50,
+				cookingTime: 10
+			},
+			{
+				name: "Beef and Broccoli Stir-Fry",
+				ingredients: "Lean beef strips, broccoli, soy sauce, ginger",
+				fruit: "Mandarin orange",
+				cost: 6.75,
+				cookingTime: 12
+			},
+			{
+				name: "Salmon with Roasted Brussels Sprouts",
+				ingredients: "Salmon fillet, brussels sprouts, olive oil, lemon",
+				fruit: "Blueberries",
+				cost: 7.00,
+				cookingTime: 15
+			},
+			{
+				name: "Tuna and White Bean Salad",
+				ingredients: "Canned tuna, white beans, red onion, parsley",
+				fruit: "Peach",
+				cost: 4.25,
+				cookingTime: 5
+			},
+			{
+				name: "Caprese Chicken Skillet",
+				ingredients: "Chicken breast, tomatoes, mozzarella, basil",
+				fruit: "Kiwi",
+				cost: 5.50,
+				cookingTime: 12
+			},
+			{
+				name: "Vegetable Frittata",
+				ingredients: "Eggs, bell peppers, spinach, onions, cheese",
+				fruit: "Raspberries",
+				cost: 4.00,
+				cookingTime: 10
+			},
+			{
+				name: "Garlic Shrimp with Cauliflower Rice",
+				ingredients: "Shrimp, cauliflower, garlic, lemon",
+				fruit: "Cantaloupe",
+				cost: 6.25,
+				cookingTime: 12
+			},
+			{
+				name: "Pork Chop with Sautéed Apples",
+				ingredients: "Pork chop, apples, onion, thyme",
+				fruit: "Blackberries",
+				cost: 5.75,
+				cookingTime: 15
+			},
+			{
+				name: "Greek Salad with Grilled Chicken",
+				ingredients: "Chicken breast, cucumber, tomatoes, feta, olives",
+				fruit: "Grapes",
+				cost: 5.50,
+				cookingTime: 10
+			},
+			{
+				name: "Tofu and Vegetable Stir-Fry",
+				ingredients: "Firm tofu, mixed vegetables, soy sauce, sesame oil",
+				fruit: "Pineapple chunks",
+				cost: 4.50,
+				cookingTime: 10
+			},
+			{
+				name: "Microwave Stuffed Sweet Potato",
+				ingredients: "Sweet potato, black beans, cheese, salsa",
+				fruit: "Apple",
+				cost: 3.75,
+				cookingTime: 8
+			},
+			{
+				name: "Tuna Avocado Wrap",
+				ingredients: "Canned tuna, avocado, lettuce, whole wheat wrap",
+				fruit: "Plum",
+				cost: 4.25,
+				cookingTime: 5
+			},
+			{
+				name: "Turkey Burger with Roasted Vegetables",
+				ingredients: "Ground turkey, mixed vegetables, spices",
+				fruit: "Watermelon",
+				cost: 5.25,
+				cookingTime: 15
+			},
+			{
+				name: "Lentil and Spinach Soup",
+				ingredients: "Lentils, spinach, carrots, onion, broth",
+				fruit: "Clementine",
+				cost: 3.50,
+				cookingTime: 15
+			},
+			{
+				name: "Sardine and Avocado Toast",
+				ingredients: "Canned sardines, avocado, whole grain bread, lemon",
+				fruit: "Cherries",
+				cost: 4.00,
+				cookingTime: 5
+			},
+			{
+				name: "Veggie and Hummus Pita Pocket",
+				ingredients: "Whole wheat pita, hummus, cucumber, tomato, lettuce",
+				fruit: "Nectarine",
+				cost: 3.75,
+				cookingTime: 5
+			},
+			{
+				name: "Chicken and Quinoa Bowl",
+				ingredients: "Chicken breast, quinoa, mixed vegetables, olive oil",
+				fruit: "Mixed berries",
+				cost: 5.75,
+				cookingTime: 15
+			},
+			{
+				name: "Microwave Egg and Veggie Mug",
+				ingredients: "Eggs, spinach, tomato, cheese",
+				fruit: "Banana",
+				cost: 3.25,
+				cookingTime: 5
+			},
+			{
+				name: "Miso Soup with Tofu and Seaweed",
+				ingredients: "Miso paste, tofu, seaweed, green onions",
+				fruit: "Asian pear",
+				cost: 4.50,
+				cookingTime: 10
+			},
+			{
+				name: "Turkey and Cheese Roll-Ups",
+				ingredients: "Turkey slices, cheese, lettuce, mustard",
+				fruit: "Green grapes",
+				cost: 4.00,
+				cookingTime: 5
+			}
+		];
+	
+		function generateMealPlan() {
+			const mealPlanDiv = document.getElementById('mealPlan');
+			mealPlanDiv.innerHTML = '';
+	
+			const shuffledMeals = [...meals].sort(() => 0.5 - Math.random());
+			const selectedMeals = shuffledMeals.slice(0, 3);
+	
+			selectedMeals.forEach(meal => {
+				const mealDiv = document.createElement('div');
+				mealDiv.className = 'meal';
+				mealDiv.innerHTML = `
+					<h2>${meal.name}</h2>
+					<p><strong>Ingredients:</strong> ${meal.ingredients}</p>
+					<p><strong>Fruit side:</strong> ${meal.fruit}</p>
+					<p><strong>Estimated cost:</strong> $${meal.cost.toFixed(2)}</p>
+					<p><strong>Cooking time:</strong> ${meal.cookingTime} minutes</p>
+				`;
+				mealPlanDiv.appendChild(mealDiv);
+			});
+		}
+	</script>
+</body>
+</html>
