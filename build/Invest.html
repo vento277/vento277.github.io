@@ -127,6 +127,38 @@
                 overflow: auto;
             }
         }
+        @media not all and (min-resolution:.001dpcm){
+            .container {
+                flex-direction: column;
+                min-height: 100svh; 
+            }
+            .menu {
+                flex-direction: row;
+                width: 95%;
+                position: static;
+                height: auto;
+                margin: auto;
+                margin-bottom: 30px; /* Adjusted padding */
+                border-bottom: 1px solid #ffffff; /* Added border for separation */
+            }
+            .menu a {
+                padding: 10px;
+                font-size: 15px;
+            }
+            .content {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            iframe {
+                padding-top: 5%;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+            }
+        }
     </style>
 </head>
 <body>
