@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <title>Investment Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+        }
+        .image-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100vh; /* Ensure the image takes full height */
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensures the image covers the container */
+        }
+        .text-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .article-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-link {
+            font-size: 1rem;
+            text-decoration: none;
+            color: #333;
+        }
+        li {
+            padding-top: 0.1rem;
+            margin-left: 1rem;
+            font-size: 0.90rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Image on the left half -->
+    <div class="image-container" id="imageContainer">
+        <img src="https://c0.wallpaperflare.com/path/404/220/951/south-korea-seoul-bukchon-hanok-village-korea-e6febcf2d5e67ae0cddeaf6b191bb302.jpg" alt="Korean village" id="mainImage">
+    </div>
+
+    <!-- Text on the right half -->
+    <div class="text-container">
+        <div class="article-title">
+            <h1>Research</h1>
+        </div>
+        <ul>
+            <li><a class="article-link" href="write\Invest" target="_blank">Investment Philosophy</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // Function to adjust image container height based on image aspect ratio
+        function adjustImageHeight() {
+            var imageContainer = document.getElementById('imageContainer');
+            var mainImage = document.getElementById('mainImage');
+            
+            if (mainImage.complete) {
+                var aspectRatio = mainImage.naturalWidth / mainImage.naturalHeight;
+                var containerWidth = imageContainer.offsetWidth;
+                var containerHeight = containerWidth / aspectRatio;
+                
+                imageContainer.style.height = containerHeight + 'px';
+            }
+        }
+
+        // Call adjustImageHeight on page load and resize
+        window.addEventListener('load', adjustImageHeight);
+        window.addEventListener('resize', adjustImageHeight);
+    </script>
+</body>
+</html>
