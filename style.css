@@ -21,7 +21,7 @@ body {
 
 .content {
     width: 100%;
-    padding-top: 30px;
+    padding-top: 10px;
     padding-bottom: 40px;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -32,7 +32,7 @@ iframe{
     width: 100%; 
 }
 
-h1, h2 { margin-top: 20px; margin-bottom: 20px;} 
+h1, h2 { margin-top: 25px; margin-bottom: 30px;} 
 h1 {font-size: 25px;} 
 h2 {font-size: 20px;}
 

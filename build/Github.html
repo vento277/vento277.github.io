@@ -1,53 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" >
-
+<html lang="en">
 <!--Header-->
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <title>GitHub Downloader</title>
     <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
     <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        .responsive-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .page-text {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <!--End of Header-->
-
 <!--Content-->
 <body>
 <main class="responsive-wrapper">
-<div class="article-title">
-    <h1>GitHub Downloader</h1>
-</div>
-<div class="page-text">
-    <label for="numInputs">Enter URL:</label>
-    <input type="text" placeholder="https://github.com/username/repository">
-    <button id="download-btn" class="button-23">Download ZIP</button>
-</div>
-
-<p id="error-message"></p>
-
+    <div class="article-title">
+        <h1>GitHub Downloader</h1>
+    </div>
+    <div class="page-text">
+        <label for="repo-url">Enter URL:</label>
+        <input type="text" id="repo-url" placeholder="https://github.com/username/repository">
+        <button id="download-btn" class="button-23">Download ZIP</button>
+    </div>
+    <p id="error-message"></p>
+</main>
 <script>
     document.getElementById('download-btn').addEventListener('click', function() {
         const repoUrl = document.getElementById('repo-url').value.trim();
         const errorMessage = document.getElementById('error-message');
-        
+       
         // Basic URL validation
         if (!repoUrl.startsWith('https://github.com/')) {
             errorMessage.textContent = 'Please enter a valid GitHub repository URL.';
             return;
         }
-        
+       
         // Extract username and repository name
         const parts = repoUrl.split('/');
         if (parts.length < 5) {
             errorMessage.textContent = 'Invalid GitHub URL format.';
             return;
         }
-        
+       
         const username = parts[3];
         const repository = parts[4];
-        
+       
         // Construct the download URL
         const downloadUrl = `https://github.com/${username}/${repository}/archive/master.zip`;
-        
+       
         // Create a temporary anchor element to trigger the download
         const downloadLink = document.createElement('a');
         downloadLink.href = downloadUrl;
@@ -55,13 +76,9 @@
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
-        
+       
         errorMessage.textContent = ''; // Clear any previous error messages
     });
 </script>
-<!--End of Content-->
-</main>
-
-<!-- partial -->
 </body>
 </html>
