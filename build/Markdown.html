@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <title>Markdown Previewer</title>
     <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
    
     <style>
@@ -18,7 +18,8 @@
         }
         .container {
             display: flex;
-            height: calc(95vh - 100px);
+            height: calc(95vh - 50px);
+            margin-top: 30px;
             width: 95%;
             background-color: #fff;
             border-radius: 5px;
@@ -49,10 +50,7 @@
 
 <!--Content-->
 <body>
-<main class="responsive-wrapper">
-    <div class="article-title">
-        <h1>Markdown Previewer</h1>
-    </div>
+<main>
     <div class="container">
         <div class="input-area">
             <textarea id="markdown-input" placeholder="Enter your Markdown here..."></textarea>
@@ -68,7 +66,6 @@
             preview.innerHTML = marked(input.value);
         }
         input.addEventListener('input', updatePreview);
-
     </script>
 <!--End of Content-->
 </main>

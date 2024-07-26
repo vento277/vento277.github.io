@@ -27,12 +27,20 @@ body {
     word-wrap: break-word;
 }
 
+.row {
+display: flex;
+}
+  
+.column {
+flex: 50%;
+}
+
 iframe{
     border: none; 
     width: 100%; 
 }
 
-h1, h2 { margin-top: 25px; margin-bottom: 30px;} 
+h1, h2 { margin-top: 20px; margin-bottom: 15px;} 
 h1 {font-size: 25px;} 
 h2 {font-size: 20px;}
 
@@ -44,11 +52,11 @@ a[href]:hover {color: #202020a8;}
 
 @media screen and (max-width: 1200px) {
     .container {
-        width: 75%;
+        width: 70%;
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 500px) {
     .container {
         width: 90%;
     }
