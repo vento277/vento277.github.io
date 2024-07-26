@@ -1,100 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equal Height Quadrant Layout</title>
-    <link rel="stylesheet" href="../style.css">
-	<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Fraunces:ital,wght@0,500;0,600;0,700;1,600&display=swap");
-        *,
-        *:after,
-        *:before {
-        box-sizing: border-box;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            font-family: "DM Sans", sans-serif;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            height: 100svh;
-            width: 100%;
-        }
-
-        .quadrant {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            border-right: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-            border-color: black;
-        }
-
-        .quadrant:nth-child(2n) {
-            border-right: none;
-        }
-
-        .quadrant:nth-child(3),
-        .quadrant:nth-child(4) {
-            border-bottom: none;
-        }
-
-        .quadrant h2 {
-            margin-top: 0;
-        }
-
-        .quadrant iframe {             
-            width: 100%;             
-            height: 100%;             
-            border: none;         
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(4, minmax(25vh, auto));
-            }
-
-            .quadrant {
-                border-right: none;
-                border-bottom: 1px solid #ccc;
-            }
-
-            .quadrant:last-child {
-                border-bottom: none;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Fraunces:ital,wght@0,500;0,600;0,700;1,600&display=swap");
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100svh;
+  width: 100%;
+}
+.quadrant {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-color: black;
+}
+.quadrant:nth-child(2n) {
+  border-right: none;
+}
+.quadrant:nth-child(3),
+.quadrant:nth-child(4) {
+  border-bottom: none;
+}
+.quadrant h2 {
+  margin-top: 0;
+}
+.quadrant iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 100svh);
+  }
+  .quadrant {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    height: 100svh;
+  }
+  .quadrant:last-child {
+    border-bottom: none;
+  }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="quadrant">  
-            <iframe src="../build/Markdown.html" title="Quadrant 4"></iframe> 
-            <p style = "font-weight: bold;">Preview Markdown [<a style = "font-size: 14px;" href = 'Markdown'>full page</a>]</p>
-            
-        </div>
-        <div class="quadrant">
-            <iframe src="../build/Github.html" title="Quadrant 4"></iframe> 
-            <p style = "font-weight:bold;">Download Github Repo</p>
-            
-
-        </div>
-        <div class="quadrant">
-        </div>
-        <div class="quadrant">
-        </div>
-    </div>
+<div class="container">
+  <div class="quadrant">
+    <iframe src="../build/Markdown.html" title="Quadrant 4"></iframe>
+    <p style="font-weight: bold;">Preview Markdown [<a style="font-size: 14px;" href='Markdown'>full page</a>]</p>
+  </div>
+  <div class="quadrant">
+    <iframe src="../build/Github.html" title="Quadrant 4"></iframe>
+    <p style="font-weight:bold;">Download Github Repo</p>
+  </div>
+  <div class="quadrant">
+  </div>
+  <div class="quadrant">
+  </div>
+</div>
 </body>
 </html>
