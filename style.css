@@ -39,6 +39,15 @@ iframe{
     border: none; 
     width: 100%; 
 }
+.fit-picture {
+    width: 100%;
+    margin-top: 17px;
+}
+.image-caption {
+    font-size: 10.5px;
+    margin-top: 0;
+    padding-top: 0;
+}
 
 h1, h2 { margin-top: 30px; margin-bottom: 0px;} 
 h1 {font-size: 25px;} 

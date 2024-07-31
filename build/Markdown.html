@@ -5,31 +5,21 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <title>Markdown Previewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
     <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
     <link rel="stylesheet" href="../style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
-   
     <style>
-        body, html {
-            font-family: "DM Sans", sans-serif;
-            background-color:#ffffff;
-            color: #484847;
-            overflow: hidden;
-        }
         .container {
             display: flex;
-            height: calc(95svh - 50px);
-            margin-top: 30px;
+            height: 99svh;
             width: 95%;
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
         }
         .input-area, .preview-area {
             flex: 1;
             padding: 10px;
-            overflow-y: auto;
         }
         .input-area {
             border-right: 1px solid #e0e0e0;
