@@ -26,14 +26,17 @@ body {
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+.site-footer {
+    width: 100%;
+    background-color: transparent;
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+}
 
-.row {
-display: flex;
-}
+.row {display: flex;}
   
-.column {
-flex: 50%;
-}
+.column {flex: 50%;}
 
 iframe{
     border: none; 
@@ -44,7 +47,7 @@ iframe{
     margin-top: 17px;
 }
 .image-caption {
-    font-size: 10.5px;
+    font-size: 11px;
     margin-top: 0;
     padding-top: 0;
 }
@@ -54,6 +57,8 @@ h1 {font-size: 25px;}
 h2 {font-size: 20px;}
 
 p {font-size: 14px; padding-bottom: 10px;}
+.site-footer p {font-size: 11px;}
+
 
 a{font-size: inherit; color: inherit;} 
 a[href] {text-decoration: underline;} 
