@@ -19,6 +19,12 @@ body {
     box-sizing: border-box;
 }
 
+.container-writing {
+    width: 750px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 .content {
     width: 100%;
     padding-top: 10px;
@@ -26,6 +32,7 @@ body {
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+
 .site-footer {
     width: 100%;
     background-color: transparent;
@@ -34,14 +41,25 @@ body {
     bottom: 0;
 }
 
-.row {display: flex;}
-  
-.column {flex: 50%;}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.column {
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
 
 iframe{
     border: none; 
     width: 100%; 
 }
+
 .fit-picture {
     width: 100%;
     margin-top: 17px;
@@ -58,6 +76,7 @@ h2 {font-size: 20px;}
 
 p {font-size: 14px; padding-bottom: 10px;}
 .site-footer p {font-size: 11px;}
+.column p {padding-bottom: 0px;}
 
 
 a{font-size: inherit; color: inherit;} 
@@ -65,13 +84,13 @@ a[href] {text-decoration: underline;}
 a[href]:hover {color: #202020a8;}
 
 @media screen and (max-width: 1200px) {
-    .container {
+    .container, .container-writing {
         width: 70%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .container {
+    .container, .container-writing {
         width: 90%;
     }
 }
