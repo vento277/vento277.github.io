@@ -85,7 +85,7 @@ a[href]:hover {color: #202020a8;}
 
 @media screen and (max-width: 1200px) {
     .container, .container-writing {
-        width: 70%;
+        width: 80%;
     }
 }
 
