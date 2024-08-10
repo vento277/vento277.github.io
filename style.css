@@ -82,14 +82,22 @@ a{font-size: inherit; color: inherit;}
 a[href] {text-decoration: underline;} 
 a[href]:hover {color: #202020a8;}
 
-@media screen and (max-width: 1200px) {
-    .container, .container-writing {
-        width: 80%;
-    }
+@media screen and (max-width: 1000px) {
+    .container, .container-writing {width: 80%;}
 }
 
-@media screen and (max-width: 500px) {
-    .container, .container-writing {
-        width: 90%;
+@media screen and (max-width: 600px) {
+    .container, .container-writing {width: 90%;}
+    .row {
+        display: flex;
+    }
+    .column {
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 0px;
+        margin-top: 0px;
     }
 }
