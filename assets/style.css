@@ -19,12 +19,6 @@ body {
     box-sizing: border-box;
 }
 
-.container-writing {
-    width: 800px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
 .content {
     width: 100%;
     padding-top: 10px;
@@ -86,7 +80,7 @@ hr {
     margin-left: 0;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .container, .container-writing {width: 80%;}
 }
 
