@@ -80,10 +80,6 @@ hr {
     margin-left: 0;
 }
 
-@media screen and (max-width: 1200px) {
-    .container, .container-writing {width: 80%;}
-}
-
 @media screen and (max-width: 800px) {
     h2 {margin-bottom: 0; margin-top:0;}
 
