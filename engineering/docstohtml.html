@@ -15,19 +15,17 @@
         #outputHtml {
             width: 100%;
             height: 200px;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Google Docs to HTML Converter</h1>
-    <p>Paste your text from Google Docs below:</p>
-
+    <h2>Google Doc:</h2>
     <div id="editableContent" contenteditable="true">
     </div>
-
     <button onclick="convertToHtml()">Convert to HTML</button>
+
+    <br><br>
 
     <h2>Generated HTML Code:</h2>
     <textarea id="outputHtml" readonly></textarea>
@@ -45,6 +43,5 @@
             outputHtml.value = htmlContent;
         }
     </script>
-
 </body>
 </html>
