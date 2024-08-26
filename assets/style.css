@@ -21,7 +21,7 @@ body {
 }
 
 .container-write {
-    width: 750px;
+    width: 600px;
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -81,10 +81,10 @@ a{font-size: inherit; color: inherit;}
 a[href] {text-decoration: underline;} 
 a[href]:hover {color: #202020a8;}
 
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
     h2 {margin-bottom: 0; margin-top:0;}
 
-    .container, .container-writing {width: 90%;}
+    .container{width: 90%;}
 
     .row {display: flex;}
 
