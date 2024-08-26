@@ -8,8 +8,8 @@
     <title>Gallery</title>
     <style>
         .section {
-            width: 40vw;
-            height: 100svh;
+            width: 35vw;
+            height: 99svh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -19,7 +19,6 @@
         .wrapper {
             display: flex;
             flex-direction: row;
-            width: 110vw;
             transform: rotate(90deg) translateY(-100vh);
             transform-origin: top left;
         }
@@ -60,10 +59,16 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        @media (max-width: 768px) {
+
+        @media (max-width: 1000px) {
             .section {
                 width: 100vw; /* Full viewport width */
                 height: auto; /* Adjust height based on content */
+                margin: 0px;
+                padding-bottom: 5%;
+                padding-top: 5%;
+                padding-right: 5%;
+                padding-left: 5%;
         }
             .wrapper {
                 flex-direction: column;
@@ -76,6 +81,7 @@
                 height: auto; /* Adjust height for vertical stacking */
                 transform: none; /* Remove rotation for mobile */
             }
+
         }
     </style>
 </head>
@@ -87,6 +93,7 @@
                     <h1>Some amazing stuff...</h1>
                 </div>
             </section>
+            
             <section class="section">
                 <div class="image-wrapper">
                     <a href="https://www.instagram.com/bar.san.chiangmai/">
@@ -101,8 +108,18 @@
                     </a>
                 </div>
             </section>
-
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const imageWrappers = document.querySelectorAll('.image-wrapper');
+                let baseWidth = 100; // Start with 100% width
+    
+                imageWrappers.forEach((wrapper, index) => {
+                    const width = baseWidth + (index * 100); // Increase by 10svw for each wrapper
+                    wrapper.style.width = width + 'svw';
+                });
+            });
+        </script>
     </main>
 </body>
 </html>
