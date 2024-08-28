@@ -75,10 +75,10 @@ a{font-size: inherit; color: inherit;}
 a[href] {text-decoration: underline;} 
 a[href]:hover {color: #202020a8;}
 
-@media (max-width: 700px){
+@media (max-width: 400px){
     h2 {margin-bottom: 0; margin-top:0;}
 
-    .container{width: 90%;}
+    .container{width: 95%;}
 
     .row {display: flex;}
 
@@ -95,7 +95,7 @@ a[href]:hover {color: #202020a8;}
 
 @media (max-height: 800px) {
     .container {
-        width: 500px;
+        width: 38%;
         margin: 0 auto;
         box-sizing: border-box;
     }
