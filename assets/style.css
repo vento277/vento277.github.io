@@ -58,6 +58,7 @@ iframe{
     width: 100%;
     margin-top: 17px;
 }
+
 .image-caption {
     font-size: 11px;
     margin-top: 0;
@@ -75,7 +76,7 @@ a{font-size: inherit; color: inherit;}
 a[href] {text-decoration: underline;} 
 a[href]:hover {color: #202020a8;}
 
-@media (max-width: 400px){
+@media (max-width: 1000px){
     h2 {margin-bottom: 0; margin-top:0;}
 
     .container{width: 95%;}
@@ -93,10 +94,3 @@ a[href]:hover {color: #202020a8;}
     }
 }
 
-@media (max-height: 800px) {
-    .container {
-        width: 38%;
-        margin: 0 auto;
-        box-sizing: border-box;
-    }
-}
