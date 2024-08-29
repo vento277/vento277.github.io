@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <title>Quotes</title>
+    <style>
+        body {
+        align-content: center;
+        justify-content: center;
+        width: 70%;
+        margin: auto;
+        }
+        .sticky-txt {
+        display: flex;
+        align-items: flex-start;
+        }
+
+        .content-right {
+        flex: 1;
+        padding: 50px;
+        box-sizing: border-box;
+        }
+        .content-left {
+        flex: 1;
+        position: sticky;
+        will-change: transform;
+        text-align: center;
+        box-sizing: border-box;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        }
+
+        .content-box-div-right {
+        border-radius: 20px;
+        margin-bottom: 10px;
+        padding: 20px 20px;
+        transition: transform 0.3s ease;
+        box-sizing: border-box;
+        }
+        
+        .image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            padding: 5%
+        }
+        .image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 15px;
+            object-fit: contain;     
+        }
+
+        p {padding-bottom: 0px;}
+
+        @media (max-width: 768px) {
+        .sticky-txt {
+            flex-direction: column;
+            align-items: center;
+        }
+        .content-left, .content-right {
+            padding: 20px;
+            width: 100%;
+        }
+        .content-left {
+            position: static;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        }
+
+    </style>
+
+    <script>
+        function adjustStickyPosition() {
+        var contentLeft = document.getElementById('left-content');
+        var height = contentLeft.clientHeight;
+        var topOffset = 'calc(50% - ' + (height / 2) + 'px)';
+        contentLeft.style.top = topOffset;
+        }
+
+        window.onload = adjustStickyPosition;
+        window.onresize = adjustStickyPosition;
+    </script>
+</head>
+<body>
+    <section class="sticky-txt">
+    <div class="content-left" id="left-content">
+        <div class="image-wrapper">
+            <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Francisco_Jos%C3%A9_de_Goya_y_Lucientes_-_The_sleep_of_reason_produces_monsters_%28No._43%29%2C_from_Los_Caprichos_-_Google_Art_Project.jpg/1693px-Francisco_Jos%C3%A9_de_Goya_y_Lucientes_-_The_sleep_of_reason_produces_monsters_%28No._43%29%2C_from_Los_Caprichos_-_Google_Art_Project.jpg">
+
+        </div>
+    </div>
+    <div class="content-right">
+        <div class="content-box-div-right">
+        <h2>Viktor Frankl</h2>
+        <p>When a man can't find a deep sense of meaning, they distract themselves with pleasure.</p>
+        </div>
+        <div class="content-box-div-right">
+        <h2>Haruki Murakami</h2>
+        <p>If you only read the books that everyone else is reading, you can only think what everyone else is thinking.</p>
+        </div>
+        <div class="content-box-div-right">
+        <h2>René Descartes</h2>
+        <p>The reading of all good books is like a conversation with the finest minds of past centuries.</p>
+        </div>
+    </div>
+    </section>
+</body>
+</html>
