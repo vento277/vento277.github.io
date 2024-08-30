@@ -26,11 +26,9 @@
         .content-left {
         flex: 1;
         position: sticky;
-        will-change: transform;
         text-align: center;
+        will-change: transform;
         box-sizing: border-box;
-        margin-top: 100px;
-        margin-bottom: 100px;
         }
 
         .content-box-div-right {
@@ -56,7 +54,7 @@
             object-fit: contain;     
         }
 
-        p {padding-bottom: 0px;}
+        p {padding: 0px;}
 
         @media (max-width: 768px) {
         .sticky-txt {
@@ -73,9 +71,8 @@
             margin-bottom: 20px;
         }
         }
-
     </style>
-
+    
     <script>
         function adjustStickyPosition() {
         var contentLeft = document.getElementById('left-content');
@@ -90,30 +87,39 @@
 </head>
 <body>
     <section class="sticky-txt">
-    <div class="content-left" id="left-content">
-        <div class="image-wrapper">
-            <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Francisco_Jos%C3%A9_de_Goya_y_Lucientes_-_The_sleep_of_reason_produces_monsters_%28No._43%29%2C_from_Los_Caprichos_-_Google_Art_Project.jpg/1693px-Francisco_Jos%C3%A9_de_Goya_y_Lucientes_-_The_sleep_of_reason_produces_monsters_%28No._43%29%2C_from_Los_Caprichos_-_Google_Art_Project.jpg">
-
+        <div class="content-left" id="left-content">
+            <div class="image-wrapper">
+                <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Francisco_Jos%C3%A9_de_Goya_y_Lucientes_-_The_sleep_of_reason_produces_monsters_%28No._43%29%2C_from_Los_Caprichos_-_Google_Art_Project.jpg/1693px-Francisco_Jos%C3%A9_de_Goya_y_Lucientes_-_The_sleep_of_reason_produces_monsters_%28No._43%29%2C_from_Los_Caprichos_-_Google_Art_Project.jpg">
+            </div>
+            <p class="image-caption">The Dream of Reason Produces Monsters, Francisco Goya</p>
         </div>
-    </div>
-    <div class="content-right">
-        <div class="content-box-div-right">
-            <h2>Viktor Frankl</h2>
-            <p>When a man can't find a deep sense of meaning, they distract themselves with pleasure.</p>
+        
+        <div class="content-right">
+            <div class="content-box-div-right" style="margin: 0; padding-bottom:0;">
+                <p><a style = "font-size: 8pt; text-decoration: none; text-align: left;" href="../engineering">ENGINEERING</a></p>
+            </div>
+            
+            <div class="content-box-div-right">
+                <h2>Viktor Frankl</h2>
+                <p>When a man can't find a deep sense of meaning, they distract themselves with pleasure.</p>
+            </div>
+            <div class="content-box-div-right">
+                <h2>Michel de Montaigne</h2>
+                <p>My life has been full of terrible misfortunes, most of which never happened.</p>
+            </div>
+            <div class="content-box-div-right">
+                <h2>René Descartes</h2>
+                <p>The reading of all good books is like a conversation with the finest minds of past centuries.</p>
+            </div>
+            <div class="content-box-div-right">
+                <h2>Socrates</h2>
+                <p>The unexamined life is not worth living</p>
+            </div>
+            <div class="content-box-div-right">
+                <h2>Confucius</h2>
+                <p>The Superior Man is aware of righteousness, the inferior man is aware of advantage.</p>
+            </div>
         </div>
-        <div class="content-box-div-right">
-            <h2>Michel de Montaigne</h2>
-            <p>My life has been full of terrible misfortunes, most of which never happened.</p>
-        </div>
-        <div class="content-box-div-right">
-            <h2>René Descartes</h2>
-            <p>The reading of all good books is like a conversation with the finest minds of past centuries.</p>
-        </div>
-        <div class="content-box-div-right">
-            <h2>Socrates</h2>
-            <p>The unexamined life is not worth living</p>
-        </div>
-    </div>
     </section>
 </body>
 </html>

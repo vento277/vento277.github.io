@@ -19,23 +19,24 @@ body, html {
     width: 100%;
     font-family: "DM Sans", sans-serif;
 }
+.engineering-link {
+    text-align: center;
+}
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-auto-rows: minmax(300px, 1fr);
-    height: 100vh;
+    flex-grow: 1;
     width: 100%;
+    height: 100%;
 }
 .quadrant {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border: 1px solid black;
 }
 
 .quadrant h2 {
@@ -46,15 +47,16 @@ body, html {
     height: 100%;
     border: none;
 }
+
 @media (max-width: 900px) {
     .container {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 100svh);
     }
     .quadrant {
         border-right: none;
         border-bottom: 1px solid black;
-        height: 95svh;
+        height: auto;
+        min-height: 300px;
     }
     .quadrant:last-child {
         border-bottom: none;
@@ -63,25 +65,28 @@ body, html {
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="quadrant">
-        <iframe src="markdown" title="Quadrant 1"></iframe>
-        <p style="font-weight: bold;">Preview Markdown [<a style="font-size: 14px;" href='markdown'>full page</a>]</p>
+    <div class="engineering-link">
+        <p><a style = "font-size: 8pt; text-decoration: none;" href="../engineering">ENGINEERING</a></p>
     </div>
-    <div class="quadrant">
-        <iframe src="github" title="Quadrant 2"></iframe>
-        <p style="font-weight:bold;">Download Github Repo Sub-folders</p>
+    <div class="container">
+        <div class="quadrant">
+            <iframe src="markdown"></iframe>
+            <p style="font-weight: bold;">Preview Markdown [<a style="font-size: 14px;" href='markdown'>full page</a>]</p>
+        </div>
+        <div class="quadrant">
+            <iframe src="github"></iframe>
+            <p style="font-weight:bold;">Download Github Repo Sub-folders</p>
+        </div>
     </div>
-</div>
-<div class="container">
-    <div class="quadrant">
-        <iframe src="docstohtml" title="Quadrant 3"></iframe>
-        <p style="font-weight:bold;">Convert Google Docs to HTML</p>
+    <div class="container">
+        <div class="quadrant">
+            <iframe src="docstohtml"></iframe>
+            <p style="font-weight:bold;">Convert Google Docs to HTML</p>
+        </div>
+        <div class="quadrant">
+            <iframe src="htmltodoc"></iframe>
+            <p style="font-weight:bold;">Conver HTML to Google Docs</p>
+        </div>
     </div>
-    <div class="quadrant">
-        <iframe src="htmltodoc" title="Quadrant 4"></iframe>
-        <p style="font-weight:bold;">Conver HTML to Google Docs</p>
-    </div>
-</div>
 </body>
 </html>
