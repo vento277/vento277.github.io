@@ -10,7 +10,37 @@
             width: 35%;
             text-align: left;
             margin-left: 0;
+        }
+        .project {
+            display: flex;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .project-image {
+            width: 330px;
+            height: 200px;
+            border-radius: 5px;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        .project-content {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+        .project {
+            flex-direction: column;
+            align-items: flex-start;
             }
+        .project-image {
+            width: 100%;
+            height: auto;
+            margin-right: 0;
+            margin-bottom: 10px;
+            }
+        }
+    
     </style>
 </head>
 
@@ -21,55 +51,95 @@
                 <span style = "font-size: 14px;">/</span>
                 <a style = "font-size: 14px; text-decoration: none;" href="https://www.kpeter.net">Home</a> 
             </h1>
-
-            <img class="fit-picture" style="border-radius: 10px;" src="assets\img\iron.avif" alt="img">
-            <p class="image-caption">Iron Man, Jon Favreau</p>
-
+            <br>
+            
             <h2>PROJECTS</h2>
-            <p>	<a style = "font-weight: bold;">Polaris</a> [<a href="https://github.com/UBCSailbot/com-module-firmware">code</a>]<br>
-                Developing firmware at UBC Sailbot for a communication module that provides control and computation abilities for an autonomous sailboat.
-                <br>
-            </p>
-            <p> <a style = "font-weight: bold;">Iris</a> [<a href="https://github.com/vento277/IRIS">code</a>]<br>
-                Developing a virtual assistant using vosk STT and google TTS.
-                <br>
-            </p>
-            <p>	<a style = "font-weight: bold;">UBC Smart City</a> 
-                [<a href="engineering\sc_annual.pdf">annual report</a>]
-                [<a href="engineering\sc_prospectus.pdf">prospectus</a>]
-                <br>
-                Led an engineering design team from 2022-2024. The team had a 50% budget increase and 
-                deployed the first official domain. 
-                <br>
-            </p>
-            <p>	<a style = "font-weight: bold;">HTML</a> [<a href="engineering/tools">tools</a>] [<a href="engineering/collection">collections</a>]<br>
-                Developed html tools and a page to collect quotes & design/arts.
-                <br>
-            </p>
-       
-            <br><hr>
+            <div class="project">
+                <img src="assets\img\sb.avif" class="project-image">
+                <div class="project-content">
+                    <p><a style="font-weight: bold;">Polaris</a> [<a href="https://github.com/UBCSailbot/com-module-firmware">code</a>]<br>
+                    Developing firmware at UBC Sailbot for a communication module that provides control and computation abilities for an autonomous sailboat.</p>
+                </div> 
+            </div>
+
+            <div class="project">
+                <img src="https://m.media-amazon.com/images/M/MV5BNjE3ODc3NTk0N15BMl5BanBnXkFtZTgwNzkwNjM3MDE@._V1_.jpg" class="project-image">
+                <div class="project-content">
+                    <p> <a style = "font-weight: bold;">Iris</a> [<a href="https://github.com/vento277/IRIS">code</a>]<br>
+                        Developing a virtual assistant using vosk STT and google TTS.
+                        <br>
+                    </p>
+                </div> 
+            </div>
+
+            <div class="project">
+                <img src="assets\img\sc.avif" class="project-image">
+                <div class="project-content">
+                    <p>	<a style = "font-weight: bold;">UBC Smart City</a> 
+                        [<a href="engineering\sc_annual.pdf">annual report</a>]
+                        [<a href="engineering\sc_prospectus.pdf">prospectus</a>]
+                        <br>
+                        Led an engineering design team from 2022-2024. The team had a 50% budget increase and 
+                        deployed the first official domain. 
+                        <br>
+                    </p>
+                </div> 
+            </div>
+
+            <div class="project">
+                <img src="https://www.tallengestore.com/cdn/shop/products/Leonardo-da-Vinci_-_Salvator_Mundi_-_DETAIL_1eb0dbac-0860-4059-9253-8440781c1110.jpg?v=1570132289" class="project-image">
+                <div class="project-content">
+                    <p>	<a style = "font-weight: bold;">HTML</a> [<a href="engineering/tools">tools</a>] [<a href="engineering/collection">collections</a>]<br>
+                        Developed html tools and a page to collect quotes & design/arts.
+                        <br>
+                    </p>        
+                </div> 
+            </div>
+            <br><br>
 
             <h2>COMPETITIONS</h2>
-            <p>	<a style = "font-weight: bold;">EUI Forecasting</a>
-                [<a href="https://github.com/UBCSmartCity/EUI_Model">code</a>]
-                [<a href="engineering\sc_murc.pdf">poster</a>]<br>
-                Led the study of energy usage intensity forecasting for Multidisciplinary Undergraduate Research Conference 2024.
-                <br>
-            </p>
-            <p>	<a style = "font-weight: bold;">IS & M</a> [<a href="engineering\sc_regen.pdf">poster</a>]<br>
-                Led the design of smart streetlight for reGENERATE Ideas Challenge 2024.
-                <br>
-            </p>
-            <p>	<a style = "font-weight: bold;">Third Space</a> [<a href="engineering\sc_tqd.pdf">poster</a>]<br>
-                Led the design of smart home system for US Solar Decathlon 2023.
-                <br>
-            </p>
-            <p> <a style = "font-weight: bold;">Konstructor</a> [<a href="engineering\sc_cic.mp4">vod</a>]<br>
-                Led the design of construction logistics app for CIC Student Competition 2022.
-                <br>
-            </p>
+            <div class="project">
+                <img src="assets/img/murc.avif" class="project-image">
+                <div class="project-content">
+                    <p>	<a style = "font-weight: bold;">EUI Forecasting</a>
+                        [<a href="https://github.com/UBCSmartCity/EUI_Model">code</a>]
+                        [<a href="engineering\sc_murc.pdf">poster</a>]<br>
+                        Led the study of energy usage intensity forecasting for Multidisciplinary Undergraduate Research Conference 2024.
+                        <br>
+                    </p>     
+                </div> 
+            </div>
             
-            <br><hr>
+            <div class="project">
+                <img src="assets/img/regen.png" class="project-image">
+                <div class="project-content">
+                    <p>	<a style = "font-weight: bold;">IS & M</a> [<a href="engineering\sc_regen.pdf">poster</a>]<br>
+                        Led the design of smart streetlight for reGENERATE Ideas Challenge 2024.
+                        <br>
+                    </p>   
+                </div> 
+            </div>
+
+            <div class="project">
+                <img src="https://apsc.ubc.ca/sites/default/files/announcement-images/2023-04/TQD_Feature_960x640.jpg" class="project-image">
+                <div class="project-content">
+                    <p>	<a style = "font-weight: bold;">Third Space</a> [<a href="engineering\sc_tqd.pdf">poster</a>]<br>
+                        Led the design of smart home system for US Solar Decathlon 2023.
+                        <br>
+                    </p>  
+                </div> 
+            </div>
+
+            <div class="project">
+                <img src="assets/img/cic.png" class="project-image">
+                <div class="project-content">
+                    <p> <a style = "font-weight: bold;">Konstructor</a> [<a href="engineering\sc_cic.mp4">vod</a>]<br>
+                        Led the design of construction logistics app for CIC Student Competition 2022.
+                        <br>
+                    </p>  
+                </div> 
+            </div>
+            <br><br>
 
             <h2>ARCHIVES</h2>
             <div class="row">
@@ -78,7 +148,7 @@
                         <a style = "font-size: smaller;">grade: 92% | class avg: 69% </a><br>
                         <a style = "font-weight: bold;">Economic Analysis of Engineering Projects<br>
                         (ELEC 481)</a>
-                        [<a href="engineering\481_business.pdf">peter & associates</a>]
+                        [<a href="engineering\481_business.pdf">business plan</a>]
                     </p>
                 </div>
                 <div class="column">
