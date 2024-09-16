@@ -91,5 +91,9 @@ a[href]:hover {color: #202020a8;}
         margin-bottom: 0px;
         margin-top: 0px;
     }
+    .fit-picture {
+        width: 99%;
+        margin-top: 17px;
+    }
 }
 
