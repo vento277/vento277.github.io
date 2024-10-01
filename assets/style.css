@@ -20,7 +20,7 @@ body {
     width: 95%;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 0 15px;
+    align-items: center;
 }
 
 .content {
@@ -29,14 +29,6 @@ body {
     padding-bottom: 40px;
     overflow-wrap: break-word;
     word-wrap: break-word;
-}
-
-.site-footer {
-    width: 100%;
-    background-color: transparent;
-    text-align: left;
-    position: fixed;
-    bottom: 0;
 }
 
 .row {
