@@ -43,6 +43,7 @@ body {
     overflow-wrap: break-word;
     flex: 0 0 50%;
     padding: 0 15px;
+    padding-bottom: 40px;
 }
 
 iframe {
