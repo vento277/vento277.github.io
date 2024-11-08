@@ -4,30 +4,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <title>Peter Kim</title>
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
 </head>
-<body>
-    <div class="container">
-        <div class="content">
-            <h1>PETER KIM
-                <span style="font-size: 14px;">/</span>
-                <a style="font-size: 14px; text-decoration: none;" href="mailto:peterkim.bm@gmail.com">@</a>&nbsp;
-                <a style="font-size: 14px; text-decoration: none;" href="https://www.linkedin.com/in/peter-kim25/">in</a>
-            </h1>
+<html>
+  <body>
+    <h1>Peter Kim</h1>
+    <p>Electrical Engineering student at UBC.</p>
 
-            <img class="fit-picture" style="border-radius: 10px;" src="https://samuelearp.com/wp-content/uploads/2023/05/9_image-asset.jpg" alt="img">
-            <p class="image-caption">Samuel Earp, Seascape (2017)</p>
+    <nav class="tab-nav">
+        <button class="tab-button" onclick="switchTab('portfolio')" id="portfolioTab">Engineering</button>
+        <button class="tab-button" onclick="switchTab('investment')" id="investmentTab">Investments</button>
+    </nav>
 
-            <p>
-                Hey, this is Peter Kim - an electrical <a href="engineering">engineering</a> student at UBC. 
-                <br><br>
-                I worked at Weir Motion Metrics, focusing on designing and refining manufacturing processes, 
-                and at Smith + Andersen, where I provided high-voltage electrical consulting services for construction projects.
-                <br><br>
-                In my free time, I <a href="writings">write</a>.
-            </p>
-            <p style = "font-size: 11px;">&copy; 2022~2024 Peter Kim</p>
+    <section id="portfolio" class="tab-content active">
+        <div class="grid-portfolio">
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/sb.avif">
+                <p>
+                    <a href="https://github.com/UBCSailbot/com-module-firmware/tree/main/projects/base-library">Polaris</a><br>
+                    Developing firmware at UBC Sailbot for a communication module that provides control and computation abilities for an autonomous sailboat.
+                </p>
+            </article>
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/sc.avif">
+                <p>
+                    <a href="https://ubcsmartcity.com/">UBC Smart City</a><br>
+                    Led an engineering design team from 2022 to 2024, increasing its project budget by 50%. Read my 
+                    <a href="engineering/sc_annual.pdf">annual report</a> and 
+                    <a href="engineering/sc_prospectus.pdf">prospectus</a> for more detailed information.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/murc.avif">
+                <p>
+                    <a href="engineering/sc_murc.pdf">EUI Forecasting</a><br>
+                    Led the study of energy usage intensity forecasting for Multidisciplinary Undergraduate Research Conference 2024. Codes for this research can be found 
+                    <a href="https://github.com/UBCSmartCity/EUI_Model">here</a>.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/regen.png">
+                <p>
+                    <a href="engineering/sc_regen.pdf">IS & M</a><br>
+                    Led the design of New Westminster neighborhoods for reGENERATE Ideas Challenge 2024.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://apsc.ubc.ca/sites/default/files/announcement-images/2023-04/TQD_Feature_960x640.jpg">
+                <p>
+                    <a href="engineering/sc_tqd.pdf">Third Space</a><br>
+                    Led the design of a smart home system for US Solar Decathlon 2023.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/cic.png">
+                <p>
+                    <a href="engineering\sc_cic.mp4">Konstructor</a><br>
+                    Led the design of a construction logistics app for CIC Student Competition 2022.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://m.media-amazon.com/images/M/MV5BNjE3ODc3NTk0N15BMl5BanBnXkFtZTgwNzkwNjM3MDE@._V1_.jpg">
+                <p>
+                    <a href="https://github.com/vento277/IRIS">IRIS</a><br>
+                    Developed a virtual assistant using vosk STT and google TTS.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://ires.ubc.ca/files/2019/10/ubc-logo.png">
+                <p>
+                    <a href="https://ece.ubc.ca/">UBC Electrical Engineering</a><br>
+                    ELEC481: Economic Analysis (92%) <a href="engineering/481_business.pdf">[Paper]</a><br>
+                    ELEC391: Design Studio II (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-II">[Code]</a><br>
+                    ELEC311: Electromagnetism (95%) <a href="engineering/311_NT.pdf">[Note]</a><br>
+                    ELEC291: Design Studio I (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I">[Code]</a><br>
+                    ELEC202: Circuit Analysis II (92%) <a href="engineering/202_NT.pdf">[Note]</a><br>
+                    NA: Introduction to Marketing (97%) <a href="engineering/hs_depast.mov">[Vod]</a><br>
+                </p>
+            </article>
+            <p>&nbsp;</p>
         </div>
-    </div>
+    </section>
+
+    <section id="investment" class="tab-content">
+        <div class="grid-content">
+            <div class="content-label">Insights</div>
+            <div class="content-details">
+                <a href="investments/philosophy.pdf">Investment Philosophy</a><br style="margin-bottom: 5px;">
+                <br style = "margin-bottom: 15px;">
+            </div>
+
+            <div class="content-label">Holdings</div>
+            <div class="content-details">
+                <a href="investments/tr_240831.pdf">2024 Q3 Holdings</a><br style="margin-bottom: 5px;">
+                <br style = "margin-bottom: 15px;">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).style.display = 'block';
+            
+            // Update button styles
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.style.fontWeight = 'normal';
+            });
+            document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
+            
+            // Save the selected tab
+            localStorage.setItem('selectedTab', tabName);
+        }
+
+        // Initialize with the last selected tab or default to 'portfolio'
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTab = localStorage.getItem('selectedTab') || 'portfolio';
+            switchTab(savedTab);
+        });
+    </script>
 </body>
 </html>
