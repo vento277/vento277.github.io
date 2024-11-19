@@ -121,3 +121,11 @@ a {
     width: 100%;          
     object-fit: cover;
 }
+
+ul {
+    margin-left: 2%;
+}
+
+ol {
+    margin-left: 2.5%
+}
