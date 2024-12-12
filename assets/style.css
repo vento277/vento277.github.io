@@ -92,6 +92,19 @@ a:hover {
     display: block;
 }
 
+/*-----------Extra----------*/
+.toggle-section {
+    display: none;
+    transition: max-height 0.3s ease; /* Smooth transition when opening/closing */
+    max-height: 0; /* Initially collapsed */
+    overflow: hidden; /* Hide overflow content */
+}
+
+/* Optional styling for the text */
+.toggle-text {
+    cursor: pointer;
+}
+
 /*-----------Mobile Version----------*/
 @media (max-width: 1500px) {
     body {

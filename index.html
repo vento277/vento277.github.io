@@ -28,7 +28,7 @@
             Most of my days are spent analyzing circuits and experimenting with microcontrollers. 
             <br><br>
 
-            Whem I'm free, I enjoy watching movies, taking long walks, and studying investments!  
+            When I'm free, I enjoy watching movies, taking long walks, and studying investments!  
             <br><br>
 
             <img class="image" src="https://media.gq.com/photos/5cb63465e233c1e38f9a3df4/1:1/w_1804,h_1804,c_limit/MCDWHHA_EC025.jpg">
@@ -70,24 +70,27 @@
                     <a href="https://github.com/UBCSmartCity/EUI_Model">here</a>.
 
                     <br><br>
+                    <div class="toggle-text" onclick="toggleSection(event)">&#8594; Project Archive (2020~2023)</div>
 
-                    <a href="engineering/sc_regen.pdf">IS & M</a><br>
-                    Led the design of New Westminster neighborhoods for reGENERATE Ideas Challenge 2024.
-
-                    <br><br>
-
-                    <a href="engineering/sc_tqd.pdf">Third Space</a><br>
-                    Led the design of a smart home system for US Solar Decathlon 2023.
-
-                    <br><br>
-
-                    <a href="engineering\sc_cic.mp4">Konstructor</a><br>
-                    Led the design of a construction logistics app for CIC Student Competition 2022.
-
-                    <br><br>
-
-                    <a href="https://github.com/vento277/IRIS">IRIS</a><br>
-                    Developed a virtual assistant using vosk STT and google TTS.
+                    <section class="toggle-section"><br>
+                        <a href="engineering/sc_regen.pdf">IS & M</a><br>
+                        Led the design of New Westminster neighborhoods for reGENERATE Ideas Challenge 2024.
+    
+                        <br><br>
+    
+                        <a href="engineering/sc_tqd.pdf">Third Space</a><br>
+                        Led the design of a smart home system for US Solar Decathlon 2023.
+    
+                        <br><br>
+    
+                        <a href="engineering\sc_cic.mp4">Konstructor</a><br>
+                        Led the design of a construction logistics app for CIC Student Competition 2022.
+    
+                        <br><br>
+    
+                        <a href="https://github.com/vento277/IRIS">IRIS</a><br>
+                        Developed a virtual assistant using vosk STT and google TTS.
+                    </section>
                 </div>
 
                 <div class="content-label">Experiences</div>
@@ -95,16 +98,18 @@
                     <a href="https://smithandandersen.com/">Smith and Andersen</a><br>
                     As an Electrical Co-op, I was responsible for drafting and designing electrical systems for residential buildings, including power, lighting and fire alarm systems.
                     <br><br>
-                    Involvement:<br>
-                    &#8226; Low-Rise Design Manual<br>
-                    &#8226; Maplewood Garden (SLD + Suite P, L & FA design)<br>
-                    &#8226; King George Tower (Load Calc. + Suite P, L & FA design)<br>
-                    &#8226; Laval Square (Load Calc.)<br>
-                    &#8226; VAHA Apartments (Load Calc.)<br>
-                    &#8226; Isabella Residences (Lighting Coordination + Suite P, L & FA design)<br>
-                    &#8226; University of Waterloo Residence (Mechanical Coordination)<br>
-                    &#8226; OAK & 37th (Suite P, L & FA design)<br>
-                    &#8226; The Steller (Suite P, L & FA design)
+                    <div class="toggle-text" onclick="toggleSection(event)">&#8594; Involvement</div>
+                    <section class="toggle-section"><br>
+                        &#8226; Low-Rise Design Manual<br>
+                        &#8226; Maplewood Garden (SLD + P, L & FA design)<br>
+                        &#8226; King George Tower (Load Calc. + P, L & FA design)<br>
+                        &#8226; Laval Square (Load Calc.)<br>
+                        &#8226; VAHA Apartments (Load Calc.)<br>
+                        &#8226; Isabella Residences (Lighting Coord. + P, L & FA design)<br>
+                        &#8226; Univ. of Waterloo Residence (Mech. Coord.)<br>
+                        &#8226; OAK & 37th (P, L & FA design)<br>
+                        &#8226; The Steller (P, L & FA design)
+                    </section>
 
                     <br><br>
 
@@ -112,12 +117,14 @@
                     As a Hardware Systems Co-op, I was mainly responsible for testing the products.
                     My role extended to writing new assembly manuals and updating out-dated BOMs, as well as streamlining the manufacturing processes.
                     <br><br>
-                    Involvement:<br>
-                    &#8226; ShovelMetrics (Test + Manual + BOM)<br>
-                    &#8226; RS232 - RS422 Converter (Test + Manual & BOM)<br>
-                    &#8226; Power Supplies (Test + Manual & BOM)<br>
-                    &#8226; Order Management Tool<br>
-                    &#8226; Storage Labelling System
+                    <div class="toggle-text" onclick="toggleSection(event)">&#8594; Involvement</div>
+                    <section class="toggle-section"><br>
+                        &#8226; Order Management Tool<br>
+                        &#8226; Storage Labelling System<br>
+                        &#8226; ShovelMetrics (Test + Manual & BOM)<br>
+                        &#8226; RS232 - RS422 Converter (Test + Manual & BOM)<br>
+                        &#8226; Power Supplies (Test)
+                    </section>
                 </div>
     
                 <div class="content-label">Academics</div>
@@ -152,6 +159,7 @@
                     <a href="https://www.csisoftware.com/category/pres-letters">Constellation Software Letters</a><br>
                     <a href="https://www.oaktreecapital.com/insights/memos">Oaktree Memos</a><br>
                     <a href="https://www.bvp.com/memos">Bessemer Venture Partners Memos</a><br>
+                    <a href="https://www.grahamanddoddsville.net/files/buffett__superinvestors_of_graham_and_doddsville.pdf">The Superinvestors of Graham-and-Doddsville</a><br>
                 </div>
             </div>
             <p>&nbsp;</p>
@@ -200,18 +208,19 @@
             switchTab(savedTab);
         });
 
-        function toggleSection() {
-            const section = document.querySelector('.toggle-section');
-            
-            // Toggle visibility
-            if (section.style.display === 'none' || section.style.display === '') {
-                section.style.display = 'block'; // Show the section
-                section.style.maxHeight = section.scrollHeight + 'px'; // Animate opening
-            } else {
-                section.style.display = 'none'; // Hide the section
-                section.style.maxHeight = '0'; // Animate closing
-            }
+        function toggleSection(event) {
+        const section = event.target.nextElementSibling; // Get the next sibling of the clicked element
+        
+        // Toggle visibility
+        if (section.style.display === 'none' || section.style.display === '') {
+            section.style.display = 'block'; // Show the section
+            section.style.maxHeight = section.scrollHeight + 'px'; // Animate opening
+        } else {
+            section.style.display = 'none'; // Hide the section
+            section.style.maxHeight = '0'; // Animate closing
         }
+        }
+
     </script>
 </html>
 
