@@ -6,28 +6,201 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
 </head>
-<body>
-    <div class="container">
-        <div class="content">
-            <h1>PETER KIM
-                <span style="font-size: 14px;">/</span>
-                <a style="font-size: 14px; text-decoration: none;" href="mailto:peterkim.bm@gmail.com">@</a>&nbsp;
-                <a style="font-size: 14px; text-decoration: none;" href="https://www.linkedin.com/in/peter-kim25/">in</a>
-            </h1>
+<html>
+  <body>
+    <h1>Peter Kim</h1>
+    <p>Electrical Engineering student at UBC.</p>
 
-            <img class="fit-picture" style="border-radius: 10px;" src="https://samuelearp.com/wp-content/uploads/2023/05/9_image-asset.jpg" alt="img">
-            <p class="image-caption">Samuel Earp, Seascape (2017)</p>
+    <nav class="tab-nav">
+        <button class="tab-button" onclick="switchTab('portfolio')" id="portfolioTab">Engineering</button>
+        <button class="tab-button" onclick="switchTab('investment')" id="investmentTab">Investments</button>
+        <button class="tab-button" onclick="switchTab('philosophy')" id="philosophyTab">Philosophy</button>
+    </nav>
 
-            <p>
-                Hey, this is Peter Kim - an electrical <a href="engineering">engineering</a> student at UBC. 
-                <br><br>
-                I worked at Weir Motion Metrics, focusing on designing and refining manufacturing processes, 
-                and at Smith + Andersen, where I provided high-voltage electrical consulting services for construction projects.
-                <br><br>
-                In my free time, I <a href="writings">write</a>.
-            </p>
-            <p style = "font-size: 11px;">&copy; 2022~2024 Peter Kim</p>
+    <section id="portfolio" class="tab-content active">
+        <div class="grid-portfolio">
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/sb.avif"><div style="margin-bottom: 5px;"></div>
+                <p>
+                    <a href="https://github.com/UBCSailbot/com-module-firmware/tree/main/projects/base-library">Polaris</a><div style="margin-bottom: 5px;"></div>
+                    Developing firmware at UBC Sailbot for a communication module that provides control and computation abilities for an autonomous sailboat.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/sc.avif"><div style="margin-bottom: 5px;"></div>
+                <p>
+                    <a href="https://ubcsmartcity.com/">UBC Smart City</a><div style="margin-bottom: 5px;"></div>
+                    Led an engineering design team from 2022 to 2024, increasing its project budget by 50%. Read my 
+                    <a href="engineering/sc_annual.pdf">annual report</a> and 
+                    <a href="engineering/sc_prospectus.pdf">prospectus</a> if you would like to know more about the team!
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/murc.avif"><div style="margin-bottom: 5px;"></div>
+                <p>
+                    <a href="engineering/sc_murc.pdf">EUI Forecasting</a><div style="margin-bottom: 5px;"></div>
+                    Led the study of energy usage intensity forecasting for Multidisciplinary Undergraduate Research Conference 2024. Codes for this research can be found 
+                    <a href="https://github.com/UBCSmartCity/EUI_Model">here</a>.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/regen.png"><div style="margin-bottom: 5px;"></div>
+                <p>
+                    <a href="engineering/sc_regen.pdf">IS & M</a><div style="margin-bottom: 5px;"></div>
+                    Led the design of New Westminster neighborhoods for reGENERATE Ideas Challenge 2024.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://apsc.ubc.ca/sites/default/files/announcement-images/2023-04/TQD_Feature_960x640.jpg"><div style="margin-bottom: 5px;"></div>
+                <p>
+                    <a href="engineering/sc_tqd.pdf">Third Space</a><div style="margin-bottom: 5px;"></div>
+                    Led the design of a smart home system for US Solar Decathlon 2023.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="assets/img/cic.png"><div style="margin-bottom: 5px;"></div>
+                <p>
+                    <a href="engineering\sc_cic.mp4">Konstructor</a><div style="margin-bottom: 5px;"></div>
+                    Led the design of a construction logistics app for CIC Student Competition 2022.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://m.media-amazon.com/images/M/MV5BNjE3ODc3NTk0N15BMl5BanBnXkFtZTgwNzkwNjM3MDE@._V1_.jpg"><div style="margin-bottom: 5px;"></div>
+                <p>
+                    <a href="https://github.com/vento277/IRIS">IRIS</a><div style="margin-bottom: 5px;"></div>
+                    Developed a virtual assistant using vosk STT and google TTS.
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+            </article>
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://live.staticflickr.com/8027/29016431894_d3a9befbfd_h.jpg">
+            </article>
+            <article class="portfolio-item">
+                <p>
+                    <a href="https://ece.ubc.ca/">Department of Electrical Engineering</a><div style="margin-bottom: 5px;"></div>
+                    ELEC 481: Economic Analysis (92%) <a href="engineering/481_business.pdf">[Paper]</a><br>
+                    ELEC 391: Design Studio II (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-II">[Code]</a><br>
+                    ELEC 311: Electromagnetism II (95%) <a href="engineering/311_NT.pdf">[Note]</a><br>
+                    ELEC 291: Design Studio I (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I">[Code]</a><br>
+                    ELEC 202: Circuit Analysis II (92%) <a href="engineering/202_NT.pdf">[Note]</a><br>
+                    NA: Introduction to Marketing (97%) <a href="engineering/hs_depast.mov">[Vod]</a><br>
+                </p>
+            </article>
+
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://www.global.weir/globalassets/brand-images/esco/weir-logo.png">
+            </article>
+            <article class="portfolio-item">
+                <p>
+                    <a href="https://www.motionmetrics.com/">Weir Motion Metrics</a><div style="margin-bottom: 5px;"></div>
+                    ELEC 481: Economic Analysis (92%) <a href="engineering/481_business.pdf">[Paper]</a><br>
+                    ELEC 391: Design Studio II (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-II">[Code]</a><br>
+                    ELEC 311: Electromagnetism II (95%) <a href="engineering/311_NT.pdf">[Note]</a><br>
+                    ELEC 291: Design Studio I (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I">[Code]</a><br>
+                    ELEC 202: Circuit Analysis II (92%) <a href="engineering/202_NT.pdf">[Note]</a><br>
+                    NA: Introduction to Marketing (97%) <a href="engineering/hs_depast.mov">[Vod]</a><br>
+                </p>
+            </article>
+            <article class="portfolio-item">
+                <img class="portfolio-image" src="https://isarta.com/images-members2/2023/269/smithandandersen/smithandandersen_logo_rs.png">
+            </article>
+            <article class="portfolio-item">
+                <p>
+                    <a href="https://smithandandersen.com/">Smith and Andersen</a><div style="margin-bottom: 5px;"></div>
+                    ELEC 481: Economic Analysis (92%) <a href="engineering/481_business.pdf">[Paper]</a><br>
+                    ELEC 391: Design Studio II (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-II">[Code]</a><br>
+                    ELEC 311: Electromagnetism II (95%) <a href="engineering/311_NT.pdf">[Note]</a><br>
+                    ELEC 291: Design Studio I (89%) <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I">[Code]</a><br>
+                    ELEC 202: Circuit Analysis II (92%) <a href="engineering/202_NT.pdf">[Note]</a><br>
+                    NA: Introduction to Marketing (97%) <a href="engineering/hs_depast.mov">[Vod]</a><br>
+                </p>
+            </article>
+            <p>&nbsp;</p>
         </div>
-    </div>
+    </section>
+
+    <section id="investment" class="tab-content">
+        <img  style = "display: block; margin-top: 5%; border-radius: 10px;" width="100%" height="100%" src = "https://advisoranalyst.com/wp-content/uploads/2017/02/munger.jpg">
+        <div class="grid-content">
+            <div class="content-label">Insights</div>
+            <div class="content-details">
+                <a href="investments/philosophy.html">Investment Philosophy</a><div style="margin-bottom: 5px;"></div>
+                <div style="margin-bottom: 20px;"></div>
+            </div>
+
+            <div class="content-label">Holdings</div>
+            <div class="content-details">
+                <a href="investments/tr_240831.pdf">2024 Q3 Holdings</a><div style="margin-bottom: 5px;"></div>
+                <a href="investments/tr_241130.pdf">2024 Q4 Holdings</a><div style="margin-bottom: 5px;"></div>
+                <div style="margin-bottom: 20px;"></div>
+            </div>
+
+            <div class="content-label">Resources</div>
+            <div class="content-details">
+                <a href="https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf">Buffett Partnership Letters</a><div style="margin-bottom: 5px;"></div>
+                <a href="https://www.csisoftware.com/category/pres-letters">Constellation Software Letters</a><div style="margin-bottom: 5px;"></div>
+                <a href="https://www.oaktreecapital.com/insights/memos">Oaktree Memos</a><div style="margin-bottom: 5px;"></div>
+                <a href="https://www.bvp.com/memos">Bessemer Venture Partners Memos</a><div style="margin-bottom: 5px;"></div>
+                <a href="https://www.valueinvestorsclub.com/member/charlie479/1180">charlie479</a><div style="margin-bottom: 5px;"></div>
+                <div style="margin-bottom: 20px;"></div>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+    </section>
+
+    <section id="philosophy" class="tab-content">
+        <img  style = "display: block; margin-top: 5%; border-radius: 10px;" width="100%" height="100%" src = "https://upload.wikimedia.org/wikipedia/commons/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg">
+
+        <div class="grid-content">
+            <div class="content-label">Essays</div>
+            <div class="content-details">
+                <a href="philosophy/response.html">Mengzi and Xunzi</a><div style="margin-bottom: 5px;"></div>
+                <div style="margin-bottom: 20px;"></div>
+            </div>
+
+            <div class="content-label">Resources</div>
+            <div class="content-details">
+                <a href="https://terebess.hu/zen/mesterek/ana.pdf">The Analects of Confucius</a><div style="margin-bottom: 5px;"></div>
+                <a href="https://antilogicalism.com/">Antilogicalism</a><div style="margin-bottom: 5px;"></div>
+                <div style="margin-bottom: 20px;"></div>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+    </section>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).style.display = 'block';
+            
+            // Update button styles
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.style.fontWeight = 'normal';
+            });
+            document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
+            
+            // Save the selected tab
+            localStorage.setItem('selectedTab', tabName);
+        }
+
+        // Initialize with the last selected tab or default to 'portfolio'
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTab = localStorage.getItem('selectedTab') || 'portfolio';
+            switchTab(savedTab);
+        });
+    </script>
 </body>
 </html>
