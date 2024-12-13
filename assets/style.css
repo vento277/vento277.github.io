@@ -116,5 +116,18 @@ a:hover {
     body {
         max-width: 95%;
     }
+    .tab-button {
+        margin-right: 0.5%;
+        border: none;
+        font-size: 11px;
+        font-family: inherit;
+        background-color: transparent;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+    }
+    .header-col-L {
+        font-size: 15px;
+        width: 20%;
+    }
 }
 
