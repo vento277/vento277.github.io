@@ -127,7 +127,11 @@ a:hover {
     }
     .header-col-L {
         font-size: 15px;
-        width: 20%;
+        width: 15%;
+    }
+    .header-col-R {
+        width: 85%;
+        text-align: right;
     }
 }
 
