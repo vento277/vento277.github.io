@@ -1,29 +1,21 @@
 /*-----------Setup----------*/
-
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
-
 body {
     font-family: 'Inter';
-    font-weight: 400;  /* Regular weight */
+    font-weight: 400;
     text-rendering: optimizeLegibility;
-    max-width: 34%;
+    max-width: 35%;
     font-size: 13px;
     margin: auto;
     background-color: #fcfcfc;
     line-height: 150%;
 }
-
-::selection {
-    background-color: color-mix(in srgb, rgb(225, 139, 9) 50%, transparent);
-}
-
 p {
     font-size: 13px;
 }
-
 a {
     color: black;
     text-decoration: underline;
@@ -31,6 +23,9 @@ a {
 }
 a:hover {
     color: rgb(225, 139, 9);
+}
+::selection {
+    background-color: color-mix(in srgb, rgb(225, 139, 9) 50%, transparent);
 }
 
 /*-----------Header----------*/
@@ -54,18 +49,15 @@ a:hover {
     grid-template-columns: 3fr 7fr;
     padding: 0; /* Remove any extra padding */
 }
-
 .image {
     width: 100%;
     object-fit: cover;
     border-radius: 2%;
     margin-top: 1%;
 }
-
 .content-details{
     margin-bottom: 10%;
 }
-
 .content-label{
     color: grey;
 }
@@ -99,12 +91,9 @@ a:hover {
     max-height: 0; /* Initially collapsed */
     overflow: hidden; /* Hide overflow content */
 }
-
-/* Optional styling for the text */
 .toggle-text {
     cursor: pointer;
 }
-
 .caption{
     text-align: right; 
     color:grey; 
@@ -115,7 +104,7 @@ a:hover {
 /*-----------Mobile Version----------*/
 @media (max-width: 1500px) {
     body {
-        max-width: 50%;
+        max-width: 60%;
     }
 }
 
@@ -148,25 +137,21 @@ a:hover {
         font-family: inherit;
         background-color: transparent;
         cursor: pointer;
-        transition: opacity 0.3s ease;
     }
     .header-col-L {
         font-size: 11px;
-        width: 13%;
+        width: 20%;
     }
     .header-col-R {
-        width: 87%;
+        font-size: 9px;
+        width: 80%;
         text-align: right;
     }
-
     .caption{
         font-size: 9px;
         text-align: right; 
         color:grey; 
         margin: 0%;
     }
-
-
-    
 }
 
