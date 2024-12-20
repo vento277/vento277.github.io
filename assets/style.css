@@ -67,6 +67,12 @@ a[href]:hover {
 .content-details{
     margin-bottom: 10%;
 }
+.content-details-row {
+    display: flex;
+}
+.content-details-col {
+    flex: 50%;
+}
 .content-label{
     color: grey;
 }
