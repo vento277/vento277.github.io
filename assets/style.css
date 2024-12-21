@@ -43,13 +43,8 @@ a[href]:hover {
 }
 .header-col-M {
     font-size: 20px;
-    width: 100%;
+    width: 80%;
     text-align: left;
-}
-.header-col-M-small {
-    font-size: 15px;
-    width: 100%;
-    text-align: center;
 }
 
 /*-----------Content----------*/
@@ -117,50 +112,13 @@ a[href]:hover {
     margin: 0%;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-}
-
-.grid-item {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.grid-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.grid-item a {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-/*-----------Mobile Version----------*/
-@media (max-width: 1500px) {
+@media (max-width: 1650px) {
     body {
         max-width: 60%;
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     body {
         max-width: 80%;
     }
