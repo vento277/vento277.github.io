@@ -63,11 +63,11 @@ a[href]:hover {
     margin-bottom: 10%;
 }
 .content-details-row {
+    width: 100%;
     display: flex;
+    gap: 5%;
 }
-.content-details-col {
-    flex: 50%;
-}
+
 .content-label{
     color: grey;
 }
