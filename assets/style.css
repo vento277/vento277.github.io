@@ -41,11 +41,6 @@ a[href]:hover {
     width: 80%;
     text-align: right;
 }
-.header-col-M {
-    font-size: 20px;
-    width: 80%;
-    text-align: left;
-}
 
 /*-----------Content----------*/
 .grid-content {
@@ -64,10 +59,12 @@ a[href]:hover {
 }
 .content-details-row {
     width: 100%;
+    gap: 1%;
     display: flex;
-    gap: 5%;
 }
-
+.content-details-col-L, .content-details-col-R{
+    width: 50%;
+}
 .content-label{
     color: grey;
 }
