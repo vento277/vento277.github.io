@@ -7,12 +7,13 @@ body {
     font-family: 'Inter';
     font-weight: 400;
     text-rendering: optimizeLegibility;
-    max-width: 35%;
+    max-width: 39%;
     font-size: 13px;
     margin: auto;
     background-color: #fcfcfc;
     line-height: 150%;
 }
+
 p {
     font-size: 13px;
 }
@@ -62,7 +63,7 @@ a[href]:hover {
     gap: 1%;
     display: flex;
 }
-.content-details-col-L, .content-details-col-R{
+.content-details-col{
     width: 50%;
 }
 .content-label{
@@ -71,6 +72,7 @@ a[href]:hover {
 
 /*-----------Navigation----------*/
 .tab-button {
+    text-decoration: none;
     margin-right: 2%;
     border: none;
     font-size: inherit;
@@ -80,6 +82,7 @@ a[href]:hover {
     transition: opacity 0.3s ease;
     color:#0460c2
 }
+
 .tab-button:hover {
     opacity: 0.7;
 }

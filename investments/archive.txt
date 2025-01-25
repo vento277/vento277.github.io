@@ -1,0 +1,35 @@
+<div class="content-details-row">   
+                    <div class="content-details-col-L">
+                        <a href="https://www.berkshirehathaway.com/letters/letters.html">Berkshire Hathaway Letters</a><br>
+                        <a href="https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf">Buffett Partnership Letters</a><br>
+                        <a href="https://worldlypartners.com/charlie-munger-archive/">Charlie Munger Archive</a><br>
+                        <br>
+                        <a href="https://bn.brookfield.com/reports-filings/letters-shareholders">Brooksfield Letters</a><br>
+                        <a href="https://www.csisoftware.com/category/pres-letters">Constellation Software Letters</a><br>
+                        <a href="https://www.mklgroup.com/who-we-are/shareholder-letters">Markel Group Letters</a><br>
+                        <a href="https://www.baroncapitalgroup.com/insights-webcasts#Reports">Baron Capital Letters</a><br>
+                        <a href="https://pershingsquareholdings.com/materials/letters-to-shareholders/">Pershing Square Holdings Letters</a><br>
+                        <a href="https://www.aquamarinefund.com/annual-letter-to-investors/">Aquamarine Fund Letters</a><br>
+                        <a href="https://givernycapital.com/en/letters-to-our-partners/">Giverny Capital Letters</a><br>
+                        <a href="https://www.semperaugustus.com/clientletter">Semper Augustus Letters</a><br>
+                        <a href="https://igyfoundation.org.uk/wp-content/uploads/2021/03/Full_Collection_Nomad_Letters_.pdf">Nomad Parnership Letters</a><br>
+                        <br>
+                        <a href="https://www.oaktreecapital.com/insights/memos">Oaktree Capital Memos</a><br>
+                        <a href="https://www.bvp.com/memos">Bessemer Venture Partners Memos</a><br>
+                    </div>
+                    <div class="content-details-col-R">
+                        <a href="https://www.tweedyfunds.com/commentary/">Tweedy Browne Insights</a><br>
+                        <a href="https://www.akrecapital.com/our-thinking/">Akre Capital Insights</a><br>
+                        <a href="https://altos.vc/blog/foxes-and-hedgehogs">Altos Ventures Insights</a><br>
+                        <a href="https://www.sequoiacap.com/stories/">Sequoia Capital Insights</a><br>
+                        <a href="https://foundersfund.com/anatomy-of-next/">Founders Fund Insights</a><br>
+                        <br>
+                        <a href="https://taovalue.net/2015/12/02/whos-who-behind-vic-anonymous-users/">VIC users</a><br>  
+                        <a href="http://csinvesting.org/about/">CSI Investing</a><br> 
+                        <a href="https://www.grahamanddoddsville.net/">Graham and Doddsville</a><br>
+                        <a href="https://www.joinyellowbrick.com/">Yellowbrick</a><br>
+                        <a href="https://thebearcave.substack.com/p/our-2024-hedge-fund-analyst-christmas?utm_source=post-email-title&publication_id=26828&post_id=153355211&utm_campaign=email-post-title&isFreemail=true&r=30398p&triedRedirect=true&utm_medium=email">The Bear Cave</a><br>
+                        <a href="https://www.michaelmauboussin.com/writing">Michael J. Mauboussin</a><br>
+                        <a href="https://theoraclesclassroom.com/resources/">The Oracle's Classroom</a><br>
+                    </div>
+                </div>    
