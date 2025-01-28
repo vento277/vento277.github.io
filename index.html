@@ -49,18 +49,18 @@
         <section class="tab-content active" id="portfolio">
             <div class="grid-content">              
                 <div class="content-label">Projects</div>
-                <div class="content-details">
+                <div class="content-details"> 
+                    <a style="font-weight: 600; text-decoration: None;">Fieldnotes</a><br>
+                    Building a technical <a href = "engineering/fieldnotes">archive</a> to practice the Feynman Technique.
+
+                    <br><br>
+
                     <a style="font-weight: 600; text-decoration: None;">Smart Street Light</a><br>
                     Leading a team at <a href= "https://ubcsmartcity.com/">UBC Smart City</a> to develop a net-zero <a href= "https://github.com/UBCSmartCity/SmartStreetLight">smart street light</a> featuring a wind turbine, autonomous lighting control, and a remote maintenance system.
                     <br><br>
 
                     <a style="font-weight: 600; text-decoration: None;">Polaris</a><br>
                     Leading the <a href="https://github.com/UBCSailbot/com-module-firmware/tree/main/projects/base-library">firmware</a> development at <a href="https://www.ubcsailbot.org/">UBC Sailbot</a> for a communication module that provides control and computation abilities for an autonomous sailboat. 
-
-                    <br><br>
-
-                    <a style="font-weight: 600; text-decoration: None;">Fieldnotes</a><br>
-                    Building a technical <a href = "engineering/fieldnotes">blog</a> to practice the Feynman Technique.
 
                     <br><br>
 
@@ -200,16 +200,45 @@
 
         function toggleSection(event) {
             const section = event.target.nextElementSibling; // Get the next sibling of the clicked element
+            const sectionId = section.className; // Use the section's class for storage
             
             // Toggle visibility
             if (section.style.display === 'none' || section.style.display === '') {
                 section.style.display = 'block'; // Show the section
                 section.style.maxHeight = section.scrollHeight + 'px'; // Animate opening
+                localStorage.setItem(`section_${sectionId}_open`, 'true');
+                event.target.innerHTML = '&#8595; Past (2020~2024)'; // Change arrow direction
             } else {
                 section.style.display = 'none'; // Hide the section
                 section.style.maxHeight = '0'; // Animate closing
+                localStorage.setItem(`section_${sectionId}_open`, 'false');
+                event.target.innerHTML = '&#8594; Past (2020~2024)'; // Change arrow direction
             }
         }
+
+        // Function to initialize section states on page load
+        function initializeSections() {
+            document.querySelectorAll('.toggle-text').forEach(trigger => {
+                const section = trigger.nextElementSibling;
+                const sectionId = section.className;
+                
+                // Check localStorage for previous state
+                const isOpen = localStorage.getItem(`section_${sectionId}_open`) === 'true';
+                
+                if (isOpen) {
+                    section.style.display = 'block';
+                    section.style.maxHeight = section.scrollHeight + 'px';
+                    trigger.innerHTML = '&#8595; Past (2020~2024)'; // Open arrow
+                } else {
+                    section.style.display = 'none';
+                    section.style.maxHeight = '0';
+                    trigger.innerHTML = '&#8594; Past (2020~2024)'; // Closed arrow
+                }
+            });
+        }
+
+        // Call initialization when the page loads
+        document.addEventListener('DOMContentLoaded', initializeSections);
 
     </script>
 </html>
