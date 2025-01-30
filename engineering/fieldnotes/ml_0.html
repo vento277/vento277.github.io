@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Introduction</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include MathJax CDN -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Linear Regression</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        <b>Context</b><br>
+        Linear regression is a model that estimates the linear relationship 
+        between a scalar response (dependent variable) and one or more 
+        explanatory variables (regressor or independent variable) [1]. 
+        <br><br>
+
+        In building a model, we need data. Given an original dataset,  
+        we split the data into training and testing sets. The training data is used to build the model, which produces an output or prediction.  
+        The testing data is then used to evaluate the model's performance. Sometimes, the data is split into three sets, including a validation set.  
+        The validation data is used to tune the hyperparameters [a].  
+        <br><br>
+
+        Now, ML has two types of 'learning'. Supervised is when there is a given set of \((x, y)\) to learn and to predict the  
+        y using x. For example, predicting the housing price based on its year, location, size, etc.  
+        Unsupervised is when there is a given set of \(x\), and we are to infer the underlying structure or relationships of \(x\).  
+        For example, outlier detection and grouping customers. Essentially,  
+        supervised learning uses data with the right answers, and unsupervised learning uses data that is unlabeled.  
+        <br><br>
+
+        Finally, note that classification is different from regression. Regression models the exact point for its prediction
+        while classification models wheter \(x\) is above or below the threshold. 
+        <br><br>
+
+        <b>A Very Brief Word on Optimization</b><br>
+        Optimization is the branch of mathematics that aims to solve the problem of
+        finding the elements that maximize or minimize a given function. And 
+        many problems in engineering and ML can be cast as optimization problem. For example,
+        when an engineer designs a pipe, we will seek for the design that minimizes cost while
+        respecting some safety constraints.
+        <br><br>
+
+        The target of the optimization problem is often referred to as the objective function \(f(x)\), and  
+        there are several ways of solving one. For example, given a 2-dimensional optimization problem with \((1-x_1)^2 + 100(x_2 - x_1^2)^2\)  
+        as its \(f(x)\), the simplest approach would be a grid search, while a more efficient method  
+        would involve setting a starting point and iteratively solving for the best matching solution.  
+        <br><br>
+
+        Another important concept in optimization is convexity. Convex functions are those in which 
+        the line segment between any two distinct points on the graph of the function lies above or on the graph 
+        between the two points. This is important because convex functions have the desirable property that the gradient 
+        minimizes only at a global optimum (a single optimum).
+        <br><br>
+
+
+        <b>Basics</b><br>
+        Let's start with an example. Assume a dataset of incomes:
+        <figure class="image" data-ckbox-resource-id="zUs2KAE--YD3">
+            <picture>
+                <source srcset="https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/80.webp 80w,https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/160.webp 160w,https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/240.webp 240w,https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/312.webp 312w" type="image/webp" sizes="(max-width: 312px) 100vw, 312px"><img src="https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/312.png" width="312" height="339">
+            </picture>
+        </figure>
+        With predictors \(X = (X_1, ..., X_p)\), all relationships of the given data can be 
+        generalized as \(Y = f(X) + \epsilon\), where \(Y\) is the quantitative response,
+        \(f(X)\) is the given data, and \(\epsilon\) is the error term. And through modelling,
+        we derive \(\hat{Y} = \hat{f}(X)\), where the hat represents the predicted terms.
+        <br><br>
+
+        <i><b>Notes</b><br>
+        [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process<br>    
+        <br>
+        <b>References</b><br>
+        [1] https://en.wikipedia.org/wiki/Linear_regression<br>    
+        </i>
+    </section>
+</body>
+</html>

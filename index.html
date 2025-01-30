@@ -78,28 +78,6 @@
                         Developed a <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-II">digital communication system</a> on DE1-SoC.
     
                         <br><br>
-                        
-                        <a style="font-weight: 600; text-decoration: None;">Energy Forecasting</a><br>
-                        Led the study of <a href = "engineering/sc_murc.pdf">energy usage intensity forecasting</a> for 
-                        <a href="https://students.ubc.ca/career/events-workshops/multidisciplinary-undergraduate-research-conference/">Multidisciplinary Undergraduate Research Conference 2024</a>.
-
-                        <br><br>
-
-                        <a style="font-weight: 600; text-decoration: None;">IS & M</a><br>
-                        Led the design of <a href="engineering/sc_regen.pdf">New Westminster neighborhoods</a> for                         
-                        <a href="https://www.newwestcity.ca/planning-building-and-development/new-westminsters-official-community-plan/ocp-implementation-projects/22nd-street-regenerate">reGENERATE Ideas Challenge 2024</a>.
-    
-                        <br><br>
-    
-                        <a style="font-weight: 600; text-decoration: None;">Third-Space</a><br>
-                        Led the design of a <a href="engineering/sc_tqd.pdf">smart home system</a> for <a href="https://www.solardecathlon.gov/event/2023-design-challenge-teams">US Solar Decathlon 2023</a>.
-    
-                        <br><br>
-    
-                        <a style="font-weight: 600; text-decoration: None;">Konstructor</a><br>
-                        Led the design of a <a href="engineering\sc_cic.mp4">construction logistics app</a> for <a href="https://constructioncic.ca/competition2022/">CIC Student Competition 2022</a>.
-    
-                        <br><br>
 
                         <a style="font-weight: 600; text-decoration: None;">Game and Robot</a><br>
                         Developed <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I/tree/main/Game%20Design">games</a> using capacitive properties of a circuit, and built a <a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I/tree/main/Robot%20Design">metal detecting robot</a>.
@@ -107,12 +85,35 @@
                         <br><br>
                         <a style="font-weight: 600; text-decoration: None;">IRIS</a><br>
                         Developed a <a href="https://github.com/vento277/IRIS">virtual assistant</a> using vosk STT and google TTS.
-
-                        <br><br>
-
-                        <a style="font-weight: 600; text-decoration: None;">Depast</a><br>
-                        Produced and edited an advertisement <a href="engineering/hs_depast.mov" target="blank">video</a> for a smart-band.  
                     </section>
+                </div>
+
+                <div class="content-label">Competitions</div>
+                <div class="content-details"> 
+                    <a style="font-weight: 600; text-decoration: None;">Energy Forecasting</a><br>
+                    Led the study of <a href = "engineering/sc_murc.pdf">energy usage intensity forecasting</a> for 
+                    <a href="https://students.ubc.ca/career/events-workshops/multidisciplinary-undergraduate-research-conference/">Multidisciplinary Undergraduate Research Conference 2024</a>.
+
+                    <br><br>
+
+                    <a style="font-weight: 600; text-decoration: None;">Third-Space</a><br>
+                    Led the design of a <a href="engineering/sc_tqd.pdf">smart home system</a> for <a href="https://www.solardecathlon.gov/event/2023-design-challenge-teams">US Solar Decathlon 2023</a>.
+
+                    <br><br>
+
+                    <a style="font-weight: 600; text-decoration: None;">Konstructor</a><br>
+                    Led the design of a <a href="engineering\sc_cic.mp4">construction logistics app</a> for <a href="https://constructioncic.ca/competition2022/">CIC Student Competition 2022</a>.
+
+                    <br><br>
+
+                    <a style="font-weight: 600; text-decoration: None;">IS & M</a><br>
+                    Led the design of <a href="engineering/sc_regen.pdf">New Westminster neighborhoods</a> for                         
+                    <a href="https://www.newwestcity.ca/planning-building-and-development/new-westminsters-official-community-plan/ocp-implementation-projects/22nd-street-regenerate">reGENERATE Ideas Challenge 2024</a>.
+                    
+                    <br><br>
+
+                    <a style="font-weight: 600; text-decoration: None;">Depast</a><br>
+                    Designed a smart-band and produced its <a href="engineering/hs_depast.mp4" target="blank">advertisement video</a> for a high-school senior business competition. 
                 </div>
 
                 <div class="content-label">Experiences</div>
@@ -127,7 +128,7 @@
                         &#8226; King George Tower (Load Calc. + P, L & FA design)<br>
                         &#8226; Laval Square (Load Calc.)<br>
                         &#8226; VAHA Apartments (Load Calc.)<br>
-                        &#8226; Isabella Residences (Lighting Coord. + P, L & FA design)<br>
+                        &#8226; Isabella Residences (Light. Coord. + P, L & FA design)<br>
                         &#8226; Univ. of Waterloo Residence (Mech. Coord.)<br>
                         &#8226; OAK & 37th (P, L & FA design)<br>
                         &#8226; The Steller (P, L & FA design)
@@ -199,20 +200,22 @@
         });
 
         function toggleSection(event) {
-            const section = event.target.nextElementSibling; // Get the next sibling of the clicked element
-            const sectionId = section.className; // Use the section's class for storage
+            const trigger = event.target;
+            const section = trigger.nextElementSibling;
+            const sectionId = section.className;
+            const text = trigger.textContent.replace('→', '').replace('↓', '').trim(); // Remove arrows and trim whitespace
             
             // Toggle visibility
             if (section.style.display === 'none' || section.style.display === '') {
-                section.style.display = 'block'; // Show the section
-                section.style.maxHeight = section.scrollHeight + 'px'; // Animate opening
+                section.style.display = 'block';
+                section.style.maxHeight = section.scrollHeight + 'px';
                 localStorage.setItem(`section_${sectionId}_open`, 'true');
-                event.target.innerHTML = '&#8595; Past (2020~2024)'; // Change arrow direction
+                trigger.innerHTML = `&#8595; ${text}`; // Down arrow + original text
             } else {
-                section.style.display = 'none'; // Hide the section
-                section.style.maxHeight = '0'; // Animate closing
+                section.style.display = 'none';
+                section.style.maxHeight = '0';
                 localStorage.setItem(`section_${sectionId}_open`, 'false');
-                event.target.innerHTML = '&#8594; Past (2020~2024)'; // Change arrow direction
+                trigger.innerHTML = `&#8594; ${text}`; // Right arrow + original text
             }
         }
 
@@ -221,6 +224,7 @@
             document.querySelectorAll('.toggle-text').forEach(trigger => {
                 const section = trigger.nextElementSibling;
                 const sectionId = section.className;
+                const text = trigger.textContent.replace('→', '').replace('↓', '').trim(); // Remove arrows and trim whitespace
                 
                 // Check localStorage for previous state
                 const isOpen = localStorage.getItem(`section_${sectionId}_open`) === 'true';
@@ -228,11 +232,11 @@
                 if (isOpen) {
                     section.style.display = 'block';
                     section.style.maxHeight = section.scrollHeight + 'px';
-                    trigger.innerHTML = '&#8595; Past (2020~2024)'; // Open arrow
+                    trigger.innerHTML = `&#8595; ${text}`; // Down arrow + original text
                 } else {
                     section.style.display = 'none';
                     section.style.maxHeight = '0';
-                    trigger.innerHTML = '&#8594; Past (2020~2024)'; // Closed arrow
+                    trigger.innerHTML = `&#8594; ${text}`; // Right arrow + original text
                 }
             });
         }
