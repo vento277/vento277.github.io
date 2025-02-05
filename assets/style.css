@@ -35,7 +35,7 @@ a[href]:hover {
     display: flex;
 }
 .header-col-L {
-    font-size: 20px;
+    font-size: 25px;
     width: 20%;
 }
 .header-col-R {
@@ -43,8 +43,22 @@ a[href]:hover {
     text-align: right;
 }
 .header-col-L2 {
-    font-size: 20px;
+    font-size: 25px;
     width: 80%;
+}
+
+h1 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1%;
+}
+
+h2 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1%;
 }
 
 /*-----------Content----------*/
