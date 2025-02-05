@@ -43,27 +43,6 @@
         while classification models wheter \(x\) is above or below the threshold. 
         <br><br>
 
-        <b>A Very Brief Word on Optimization</b><br>
-        Optimization is the branch of mathematics that aims to solve the problem of
-        finding the elements that maximize or minimize a given function. And 
-        many problems in engineering and ML can be cast as optimization problem. For example,
-        when an engineer designs a pipe, we will seek for the design that minimizes cost while
-        respecting some safety constraints.
-        <br><br>
-
-        The target of the optimization problem is often referred to as the objective function \(f(x)\), and  
-        there are several ways of solving one. For example, given a 2-dimensional optimization problem with \((1-x_1)^2 + 100(x_2 - x_1^2)^2\)  
-        as its \(f(x)\), the simplest approach would be a grid search, while a more efficient method  
-        would involve setting a starting point and iteratively solving for the best matching solution.  
-        <br><br>
-
-        Another important concept in optimization is convexity. Convex functions are those in which 
-        the line segment between any two distinct points on the graph of the function lies above or on the graph 
-        between the two points. This is important because convex functions have the desirable property that the gradient 
-        minimizes only at a global optimum (a single optimum).
-        <br><br>
-
-
         <b>Basics</b><br>
         Let's start with an example. Assume a dataset of incomes:
         <figure class="image" data-ckbox-resource-id="zUs2KAE--YD3">
@@ -76,10 +55,186 @@
         \(f(X)\) is the given data, and \(\epsilon\) is the error term. And through modelling,
         we derive \(\hat{Y} = \hat{f}(X)\), where the hat represents the predicted terms.
         <br><br>
+        The result can be something like this:
+        <picture>
+            <source srcset="https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/125.webp 125w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/250.webp 250w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/375.webp 375w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/500.webp 500w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/625.webp 625w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/750.webp 750w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/875.webp 875w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1000.webp 1000w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1125.webp 1125w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1248.webp 1248w" sizes="(max-width: 1248px) 100vw, 1248px" type="image/webp"><img src="https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1248.png">
+        </picture>
+        The training represents the data that has been used to derive the fitting function. And the
+        testing data are used to validate the fitting function using various statistical tools such as \( R^2 \), \( MSE \) or \( RSS \).
+        But as one can observe, this only considers a simple one to one relationship. But as we know, salary dosen't only depend on experience.
+        It also depends on location, field of specialization, and many other factors. 
+        <br><br>
+        To handle the mutifaced aspect, we can formulate a n-dimensional feature sapce:
+        \[
+            \hat{y} = f(\theta_0, \theta_1, \dots, \theta_n; x_1, x_2, \dots, x_n) = \theta_0 + \theta_1 x_1 + \dots + \theta_n x_n
+        \]
 
+        Where the goal here is to find the best \({\theta_0, \theta_1, \dots, \theta_n}\) to predict y given x.
+        We can rewrite the multivariate linear function using matrix notation:
+        \[
+            \hat{y} = f(\Theta, X) = X^T \Theta
+        \]
+
+        where:
+        \[
+            \Theta = \begin{bmatrix} \theta_0 \\ \theta_1 \\ \vdots \\ \theta_n \end{bmatrix}, \quad X = \begin{bmatrix} 1 \\ x_1 \\ \vdots \\ x_n \end{bmatrix}
+        \]
+        
+        Here: <br>
+        - \( \hat{y} \in \mathbb{R} \) is the predicted output.<br>
+        - \( \Theta \in \mathbb{R}^{n+1} \) represents the parameter vector [b].<br>
+        - \( X \in \mathbb{R}^{n+1} \) represents the feature vector.
+
+        <br><br>
+
+        Now, what if there are multiple samples \( m \)? For a dataset with \( m \) training samples, each sample has its own feature vector:
+        \[
+            X^{(1)} = \begin{bmatrix} 1 \\ x_1^{(1)} \\ \vdots \\ x_n^{(1)} \end{bmatrix}, \quad
+            X^{(2)} = \begin{bmatrix} 1 \\ x_1^{(2)} \\ \vdots \\ x_n^{(2)} \end{bmatrix}, \quad
+            \dots, \quad
+            X^{(m)} = \begin{bmatrix} 1 \\ x_1^{(m)} \\ \vdots \\ x_n^{(m)} \end{bmatrix}
+        \]
+        
+        The corresponding labels are:
+        \begin{equation}
+            y = \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ \vdots \\ y^{(m)} \end{bmatrix}
+        \end{equation}
+
+        We can define the data matrix \( \mathbb{X} \in \mathbb{R}^{m \times (n+1)} \), where each row represents a sample and each column represents a feature,
+        to better represent this:
+        \[
+            \mathbb{X} = \begin{bmatrix}
+            X^{(1)T} \\ X^{(2)T} \\ \vdots \\ X^{(m)T}
+            \end{bmatrix} =
+            \begin{bmatrix}
+            1 & x_1^{(1)} & x_2^{(1)} & \dots & x_n^{(1)} \\
+            1 & x_1^{(2)} & x_2^{(2)} & \dots & x_n^{(2)} \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            1 & x_1^{(m)} & x_2^{(m)} & \dots & x_n^{(m)}
+            \end{bmatrix}
+        \]
+        
+        The final equation for multiple samples is:
+        \[
+            \hat{Y} = f(\Theta, \mathbb{X}) = \mathbb{X} \Theta
+        \]
+
+        where:<br>
+        - \( \hat{Y} \) is the vector of predicted values.<br>
+        - \( \Theta \) is the parameter vector.<br>
+        - \( \mathbb{X} \) is the feature matrix
+        <br><br>
+        This allows us to compute predictions for all training samples using matrix operations, which can be more efficient. 
+        <br><br>
+
+        Now let's explore the geometry of linear regression to gain a deeper understanding of the operation.
+        Again, linear regression aims to model the relationship between a dependent variable \( y \) and multiple independent variables \( x_1, x_2, \dots, x_n \). The data points:
+        \[
+        (x_1^{(1)}, x_2^{(1)}, \dots, x_n^{(1)}, y^{(1)}), \dots, (x_1^{(m)}, x_2^{(m)}, \dots, x_n^{(m)}, y^{(m)})
+        \]
+        form an \( n + 1\)-dimensional space.<br>
+        - In a one-dimensional feature space ($n=1$), the model is a straight line.<br>
+        - In a two-dimensional feature space ($n=2$), the model is a plane.<br>
+        - In general, for $n$-dimensional feature space, the fitting function represents an $n$-dimensional hyperplane [c].
+
+        The goal of linear regression is to find a hyperplane that best fits the given data points. Below are some examples for
+        linear gression on 2D feature space:
+        <picture>
+            <source srcset="https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/114.webp 114w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/228.webp 228w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/342.webp 342w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/456.webp 456w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/570.webp 570w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/684.webp 684w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/798.webp 798w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/912.webp 912w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/1026.webp 1026w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/1138.webp 1138w" sizes="(max-width: 1138px) 100vw, 1138px" type="image/webp"><img src="https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/1138.png">
+        </picture>
+
+        <b>Optimization</b><br>
+        Optimization is the branch of mathematics that aims to solve the problem of
+        finding the elements that maximize or minimize a given function. And 
+        many problems in engineering and ML can be cast as optimization problem. For example,
+        when an engineer designs a pipe, we will seek for the design that minimizes cost while
+        respecting some safety constraints.
+        <br><br>
+
+        The target of the optimization problem is referred to as the objective function \( J(\Theta) = J(\Theta; Y, \hat{Y}) \).
+        (also called cost or loss function) quantifies the error between predicted values \( \hat{Y} \) and true values \( Y \).
+        <br><br>
+
+        Another important concept in optimization is convexity. Convex functions are those in which 
+        the line segment between any two distinct points on the graph of the function lies above or on the graph 
+        between the two points. This is important because convex functions have the desirable property that the gradient 
+        minimizes only at a global optimum (a single optimum).
+        <br><br>
+
+        What has this to do with linear regression? Well, we need to find the best parameter for \( \Theta \),
+        in other words, we are looking for an optimal fit. This is a optimization question!
+        <br><br>
+
+        So what does a good fit really mean? A good fit minimizes the difference between predicted values \( \hat{Y} \) and actual target values \(Y\). 
+        This requires defining a measure of error, which leads to the concept of an objective function.
+        One of the common choice of quaityfing error is Residual Sum of Squares \( RSS \):
+        \[
+            J_\Theta(Y, \hat{Y}) = \sum_{i=1}^{m} (f_\Theta(X^i) - y^i)^2 = \|\hat{Y} - Y\|_2^2.
+        \]
+        For each training sample, the residual is the difference between the predicted value (which lies on the regression hyperplane) and the true value. 
+        The total residual error over all samples is what we aim to minimize.
+        <br><br>
+
+        To find the optimal parameters, we solve for \( \Theta^* \) that minimizes \( J(\Theta) \). The necessary condition for optimality is:
+        \[
+            J'(\Theta^*) = 0, \quad J''(\Theta^*) > 0
+        \]
+        Since the objective function is convex, solving for the critical point guarantees an optimal solution.
+        <br><br>
+
+        The cost function can be rewritten in matrix form as:
+        \begin{equation}
+        J(\Theta) = \| f_\Theta(X) - Y \|_2^2 = \|X\Theta - Y\|_2^2.
+        \end{equation}
+        Expanding this expression:
+        \begin{equation}
+        J(\Theta) = \Theta^T X^T X \Theta - Y^T X \Theta - \Theta^T X^T Y + Y^T Y.
+        \end{equation}  
+        <br><br>
+
+        Taking the first derivative:
+        \begin{equation}
+        \frac{\partial J(\Theta)}{\partial \Theta} = 2 X^T X \Theta - 2 X^T Y = 0.
+        \end{equation}
+        Solving for \( \Theta^* \) gives:
+        \begin{equation}
+        \Theta^* = (X^T X)^{-1} X^T Y.
+        \end{equation}
+        <br><br>
+
+        Finally, the second derivative is:
+        \begin{equation}
+        \frac{\partial^2 J(\Theta)}{\partial \Theta^2} = 2 X^T X > 0,
+        \end{equation}
+        which confirms convexity, ensuring that \( \Theta^* \) is the optimal solution.
+
+
+
+
+
+
+        
+
+        
+
+
+        <br><br>
         <i><b>Notes</b><br>
         [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process<br>    
+        <br><br>
+        [b] The dimension \( n+1 \) indicates that the vector has \( n \) parameters plus one additional parameter. 
+        The \( n \) corresponds to the actual features of the data, and the extra \( n + 1-th\) component typically
+        is a 1 to represent the bias input to hand;e the bias term algebraically in vector form.  
+        <br><br>
+        [c] Imagine a room with a bunch of colorful marbles on the floor. 
+        Some marbles are red, some are blue. Now, you're holding a big, flat board, and you want to use it to divide the marbles 
+        into two groups: all the red ones on one side, and all the blue ones on the other side.
         <br>
+        If the room was super simple with just two directions, left and right, you could just place a board like a straight line that separates the
+        marbles. This line would be a hyperplane in 2D.
+        <br>
+        Now, if the room was more complicated, with marbles scattered in every direction (up, down, left, right, and even more directions), the board you use to divide the marbles might need to be something more than just a line—it could be a flat surface (like a wall) that separates the marbles into two groups. This "flat surface" is still a hyperplane, just in a higher number of dimensions.
+        <br><br>
         <b>References</b><br>
         [1] https://en.wikipedia.org/wiki/Linear_regression<br>    
         </i>
