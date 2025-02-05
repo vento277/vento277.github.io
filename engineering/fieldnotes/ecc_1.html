@@ -158,14 +158,232 @@
         Every field must contain at least two elements: the additive identity \( 0 \) and the multiplicative identity \( 1 \). Thus, \( p \geq 2 \).<br>
         -- For GF(3), the next smallest field after \( GF(2) \) is \( GF(3) \), which consists of the set \( \{0,1,2\} \) with addition and multiplication modulo 3<br>
         -- For a prime \( p \), the set of integers \( \{0, 1, \dots, p - 1\} \) forms a field under modulo \( p \) addition and multiplication.
-        This field is called a prime field, denoted as \( GF(p) \). However, modulo arithmetic cannot construct a field if \( p \) is not prime.
+        This field is called a prime field, denoted as \( GF(p) \). Modulo arithmetic cannot construct a field if \( p \) is not prime.<br>
         -- Finite fields \( GF(q) \) do not exist for all values of \( q \). 
         However, the prime field \( GF(p) \) can be extended to a field of \( p^m \) elements, denoted as \( GF(p^m) \), where \( m \geq 2 \).
         This is known as an extended prime field. The finite fields \( GF(p^m) \) can be constructed as vector spaces over the prime field \( GF(p) \).
         <br><br>
 
         <!------------------------------------------------------------------------------------------------------------------------------>
-        <h1>Tangent</h1>
+        <h1>Vector</h1>
+        A vector space consists of:<br>
+        - A set \( V \) of elements called vectors, with a defined binary operation addition \( + \).<br>
+        - A field \( F \) of elements called scalars.<br>
+        - A multiplication operation \( \cdot \) between elements of \( F \) and elements of \( V \).
+        <br><br>
+        
+        \( V \) is a vector space over \( F \) if it satisfies:<br>
+        - Commutative Group: \( (V, +) \) forms a commutative group:
+        \[
+        v \in V, \quad u + v = v + u \in V
+        \]
+        - Closure under Scalar Multiplication:
+        \[
+        v \in V, \quad a \in F, \quad a \cdot v \in V
+        \]
+        - Distributive Laws: 
+        \[
+        a \cdot (u + v) = a \cdot u + a \cdot v, \quad (a + b) \cdot u = a \cdot u + b \cdot u
+        \]
+        - Associativity: 
+        \[
+        v \in V, \quad a, b \in F, \quad (a \cdot b) v = a \cdot (b \cdot v)
+        \]
+        - Multiplicative Identity: Let 1 be the unit element in \( F \), then:
+        \[
+        v \in V, \quad 1 \cdot v = v
+        \]
+        <br>
+        
+        Fields operations include:<br>
+        - Vector Addition: Addition within \( V \).<br>
+        - Scalar Multiplication: Multiplication of a vector in \( V \) by a scalar in \( F \).<br>
+        - Zero Vector \( 0 \): The additive identity in \( V \).<br>
+        - Zero Scalar \( 0 \): The zero element in \( F \).
+        <br><br>
+
+        Field properties include:<br>
+        - \( 0 \cdot v = 0 \) for all \( v \in V \).<br>
+        - \( c \cdot 0 = 0 \) for all \( c \in F \).<br>
+        - \( (-c) \cdot v = c \cdot (-v) = -(c \cdot v) \).
+        <br><br>
+        
+        What about finite fields? Consider an ordered sequence of \( n \) components (\( n \)-tuple), \((v_0, v_1, \dots, v_{n-1})\),      
+        where \( v_i \in GF(p) \) (a finite field of order \( p \)):<br>
+        - Addition (modulo-\( p \)):
+        \[
+        v \in V, \quad u + v = (u_0 + v_0, u_1 + v_1, \dots, u_{n-1} + v_{n-1})
+        \]
+        - Scalar Multiplication (modulo-\( p \)): 
+        \[
+        v \in V, \quad a \in GF(p), \quad a \cdot v = (a \cdot v_0, a \cdot v_1, \dots, a \cdot v_{n-1})
+        \]
+        This vector space over \( GF(p) \) is denoted \( V_n \).
+        <br><br>
+
+        Now let's dive in to an example. Consider a vector space \( V_3 \) over \( GF(2) \) consists of the following \( 2^3 = 8 \) elements:  
+        \[
+        (0,0,0), (0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0), (1,1,1)
+        \]
+        
+        Example operations:
+        \[
+        (0,1,1) + (1,1,0) = (1,0,1)
+        \]
+        \[
+        0 \cdot (0,1,1) = (0,0,0)
+        \]
+        \[
+        1 \cdot (0,1,1) = (0,1,1)
+        \]
+        <br><br>
+        
+        <h2>Subspaces</h2>       
+        A subspace \( S \) of \( V \) over \( F \) is a subset of \( V \) that is also a vector space over \( F \). 
+        A nonempty subset \( S \) of \( V \) is a subspace if:<br>
+        - Closure under Addition: \( \forall u, v \in S \), then \( u + v \in S \).<br>
+        - Closure under Scalar Multiplication: \( \forall a \in F, \forall u \in S \), then \( a \cdot u \in S \).<br>
+        <br>
+        Since a subspace is closed under vector addition and scalar multiplication, it is also a subgroup of \( V \).
+        <br><br>
+
+        As an example, for \( V_3 \) over \( GF(2) \), \( \{(0,0,0), (0,0,1), (0,1,0), (0,1,1)\} \) is a subspace of \( V_3 \) over \( GF(2) \).
+        <br><br>
+
+        <h2>Linear Combinations</h2>       
+        Given vectors \( v_1, v_2, \dots, v_k \in V \) and scalars \( a_1, a_2, \dots, a_k \in F \), the expression:<br>
+        \[
+        a_1 v_1 + a_2 v_2 + \dots + a_k v_k
+        \]
+        is called a linear combination of \( v_1, v_2, \dots, v_k \).
+        The set of all linear combinations of \( v_1, v_2, \dots, v_k \) forms a subspace of \( V \).
+
+        <br><br>
+        As an example, consider vectors \( (0,1,0) \) and \( (0,1,1) \), their linear combinations are:<br>
+        \[
+        0 \cdot (0,1,0) + 0 \cdot (0,1,1) = (0,0,0)
+        \]
+        \[
+        0 \cdot (0,1,0) + 1 \cdot (0,1,1) = (0,1,1)
+        \]
+        \[
+        1 \cdot (0,1,0) + 0 \cdot (0,1,1) = (0,1,0)
+        \]
+        \[
+        1 \cdot (0,1,0) + 1 \cdot (0,1,1) = (0,0,1)
+        \]
+        This forms the same subspace as in the previous example.
+        <br><br>
+        
+        <h2>Linear Dependence</h2>
+        A set of vectors \( v_1, v_2, \dots, v_k \) is linearly dependent if there exist scalars \( a_1, a_2, \dots, a_k \in F \), not all zero, such that:
+        \[
+        a_1 v_1 + a_2 v_2 + \dots + a_k v_k = 0
+        \]
+        Otherwise, the vectors are linearly independent. In general, vectors are linearly dependent if one can be written as the
+        linear combination of the others. For instance, for subspaces example, the vectors are linearly dependent as:
+        \[
+        (0,0,1) + (0,1,0) = (0,1,1)
+        \]
+        <br><br>
+
+        <h2>Spanning Sets and Bases</h2>
+        A set of vectors \( \{ v_1, v_2, \dots, v_k \} \) spans a vector space \( V \) if every vector in \( V \) can be expressed as a linear combination of these vectors:
+        \[
+        v = a_1 v_1 + a_2 v_2 + \dots + a_k v_k, \quad v \in V, \quad a_i \in F.
+        \]
+        <br>
+
+        A basis of \( V \) is a linearly independent spanning set. This means that:
+        <br>
+        - The vectors in the basis are linearly independent.<br>
+        - Any vector in \( V \) can be uniquely represented as a linear combination of these basis vectors.
+        <br><br>
+        The number of vectors in a basis is called the dimension of \( V \), denoted as \( \dim(V) \). If \( \dim(V) = k \), then any set of more than \( k \) vectors in \( V \) must be linearly dependent.
+        
+        <br><br>
+        
+        <h2>Inner Product and Orthogonality</h2>
+        The inner product of two vectors \( u, v \in V \) is defined as:
+        \[
+        u \cdot v = u_0 v_0 + u_1 v_1 + \dots + u_{n-1} v_{n-1} = \sum_{i=0}^{n-1} u_i v_i
+        \]
+        <br>
+        Two vectors \( u \) and \( v \) are said to be orthogonal if \( u \cdot v = 0 \).
+        
+        <br><br>
+        Inner product properties:
+        <br>
+        - Commutativity: \( u \cdot v = v \cdot u \)<br>
+        - Distributivity: \( u \cdot (v + w) = u \cdot v + u \cdot w \)<br>
+        - Scalar Associativity: \( (a u) \cdot v = a (u \cdot v) \)
+        <br><br>
+        
+        <h2>Null Space</h2>
+        In the context of coding theory, the null space is often important for finding error-detecting or correcting codes because it relates to the way information is transmitted and how errors can be identified and corrected during transmission.
+        Given a \( k \)-dimensional subspace \( S \) of \( V_n \), the null space (or dual space) \( S_d \) consists of all vectors \( v \) such that:
+        \[
+        u \cdot v = 0, \quad \forall u \in S
+        \]
+        <br>
+        The null space \( S_d \) is itself a subspace of \( V_n \) with dimension \( \dim(S_d) = n - k \), satisfying:
+        \[
+        \dim(S) + \dim(S_d) = n
+        \]
+        <br>
+        
+        <h2>Matrices and Row Space</h2>
+        A \( k \times n \) matrix \( G \) over \( GF(2) \) is a rectangular array:
+        \[
+        G = \begin{bmatrix} g_0 \\ g_1 \\ \vdots \\ g_{k-1} \end{bmatrix} = \begin{bmatrix} g_{00} & g_{01} & \dots & g_{0,n-1} \\ g_{10} & g_{11} & \dots & g_{1,n-1} \\ \vdots & \vdots & \ddots & \vdots \\ g_{k-1,0} & g_{k-1,1} & \dots & g_{k-1,n-1} \end{bmatrix}
+        \]
+        <br>
+        If the \( k \) rows of \( G \) are linearly independent, they form a \( k \)-dimensional subspace of \( V_n \), called the row space of \( G \).
+        <br><br>
+        Elementary row operations on \( G \):<br>
+        - Swapping two rows.<br>
+        - Adding one row to another.<br>
+        - Multiplying a row by a nonzero scalar.<br>
+        <br>
+        These operations do not change the row space of \( G \).
+        
+        <br><br>
+        
+        <h2>Parity Check Matrices</h2>
+        Let \( S \) be the row space of a \( k \times n \) matrix \( G \) with \( \dim(S) = k \). The null space \( S_d \) is defined by \( n-k \) linearly independent vectors forming the rows of an \( (n-k) \times n \) matrix \( H \):
+        \[
+        H = \begin{bmatrix} h_0 \\ h_1 \\ \vdots \\ h_{n-k-1} \end{bmatrix}
+        \]
+        <br>
+        For any \( k \times n \) matrix \( G \) over \( GF(2) \), there exists an \( (n-k) \times n \) matrix \( H \) such that:
+        \[
+        g_i \cdot h_j = 0, \quad \forall g_i \in G, \quad \forall h_j \in H.
+        \]
+        That is, the row space of \( G \) is the null space of \( H \), and vice versa.
+        
+        <br><br>
+        
+        <h2>Matrix Operations</h2>
+        - Matrix Addition: Given two \( k \times n \) matrices \( A \) and \( B \), their sum is computed element-wise:
+        \[
+        C = A + B = \begin{bmatrix} a_{ij} + b_{ij} \end{bmatrix}.
+        \]
+        - Matrix Multiplication: Given a \( k \times n \) matrix \( A \) and an \( n \times \ell \) matrix \( B \), their product is defined as:
+        \[
+        C = A \times B = \begin{bmatrix} c_{ij} \end{bmatrix}, \quad c_{ij} = \sum_{t=0}^{n-1} a_{it} b_{tj}.
+        \]
+        
+        <br>
+        Example:
+        \[
+        \begin{bmatrix} 1 & 1 & 0 & 1 & 1 & 0 \\ 0 & 0 & 1 & 1 & 1 & 0 \\ 0 & 1 & 0 & 0 & 1 & 1 \end{bmatrix},
+        \begin{bmatrix} 1 & 0 & 1 & 1 & 0 & 0 \\ 0 & 1 & 1 & 0 & 1 & 0 \\ 1 & 1 & 0 & 0 & 0 & 1 \end{bmatrix}.
+        \]
+        Here, the row space of the first matrix is the null space of the second, verifying \( g_i \cdot h_j = 0 \) for all rows.
+        <br><br>
+
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>Tangent</h1> 
         Why are we using modulo arithmetic? Imagine you have a circle, and on that circle, you have numbers going around it. 
         Let's say you have a small circle with the numbers 0, 1, 2, and 3. When you get to 3, instead of continuing to 4, you go back to 0. 
         It's like wrapping around the circle!
