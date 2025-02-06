@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <title>Introduction</title>
+    <title>Linear Regression</title>
     <link rel="stylesheet" href="../../assets/style.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
     
@@ -20,7 +20,6 @@
     </section>
 
     <section>
-        <b>Context</b><br>
         Linear regression is a model that estimates the linear relationship 
         between a scalar response (dependent variable) and one or more 
         explanatory variables (regressor or independent variable) [1]. 
@@ -207,8 +206,173 @@
         \frac{\partial^2 J(\Theta)}{\partial \Theta^2} = 2 X^T X > 0,
         \end{equation}
         which confirms convexity, ensuring that \( \Theta^* \) is the optimal solution.
+        <br><br>
 
+        While the analytic solution provides a closed-form expression for \( \Theta^* \) , it assumes that \( X^T X \) is invertible. This raises important questions:<br>
+        - What happens if \( (X^T X)^{-1} \) does not exist?<br>
+        - Under what conditions is \( X^T X \) invertible?
+        <br><br>
 
+        A necessary and sufficient condition for \( X^T X \) to be invertible is that the columns of \( X \) are linearly independent. If the columns are dependent, then \( X^T X \) is singular, 
+        meaning that an exact solution may not exist.
+        <br><br>
+
+        <h2>Error Metrics</h2>
+        Linear regression models are evaluated based on how accurately they predict numerical values. 
+        Various metrics summarize the predictive skill of a model by measuring different types of errors.
+        <br><br>
+
+        Given total samples \( N \), true labels \( Y \), and predictions \( \hat{Y} \), the following metrics are commonly used:<br>
+        - Mean Absolute Error (MAE): \( MAE = \frac{1}{N} \sum_{n=1}^{N} |Y_n - \hat{Y}_n| \)<br>
+        - Mean Squared Error (MSE): \(  MSE = \frac{1}{N} \sum_{n=1}^{N} (Y_n - \hat{Y}_n)^2 \)<br>
+        - Root Mean Squared Error (RMSE): \( RMSE = \sqrt{\text{MSE}} \)<br>
+        - R-sqaure (\( R^2 \) score): \( R^2 = 1 - \frac{\sum (Y - \hat{Y})^2}{\sum (Y - \bar{Y})^2} \)
+        <br><br>
+        
+        Looking at an example for R-sqaure, consider the following dataset:
+        
+        \begin{array}{|c|c|c|c|c|c|c|}
+        \hline
+        X & Y & Y - \bar{Y} & (Y - \bar{Y})^2 & \hat{Y} & Y - \hat{Y} & (Y - \hat{Y})^2 \\
+        \hline
+        1 & 2 & -2 & 4 & 2.8 & -0.8 & 0.64 \\
+        2 & 4 & 0  & 0 & 3.4 & 0.6  & 0.36 \\
+        3 & 5 & 1  & 1 & 4.0 & 1.0  & 1.00 \\
+        4 & 4 & 0  & 0 & 4.6 & -0.6 & 0.36 \\
+        5 & 5 & 1  & 1 & 5.2 & -0.2 & 0.04 \\
+        \hline
+        \end{array}
+        
+        
+        The total variance (sum of squares of deviations from the mean) is:
+        \[
+        \sum (Y - \bar{Y})^2 = 6
+        \]
+        The residual sum of squares (sum of squared errors between actual and predicted values) is:
+        \[
+        \sum (Y - \hat{Y})^2 = 2.4
+        \]
+        Thus, the ℝ<sup>2</sup> value is:
+        \[
+        R^2 = 1 - \frac{2.4}{6} = 0.6
+        \]
+        <br><br>
+
+        In Interpreting this result with regards to the fit of the model:
+        - \( R^2 = 0.02 \): Poor fit; the model explains only 2% of the variance.<br>
+        - \( R^2 = 0.6 \): Moderate fit; the model explains 60% of the variance.<br>
+        - \( R^2 = 0.9 \): Good fit; the model explains 90% of the variance.<br>
+        <br><br>
+        
+        <h2>Bias and Variance</h2>
+        Bias is the measure of how far off predictions are from actual values on average. 
+        And variance is the measure of how much predictions fluctuate for different training datasets.
+        A model should balance the trade-offs between bias and variance to avoid overfitting (low bias, high variance) or underfitting (high bias, low variance).
+        <br><br>
+
+        Using the two meaures, we can compute the expected prediction error (EPE) which 
+        refers to the difference between the actual values (observed data) and the predicted values (obtained from the model) on unseen data.
+        It essentially measures how well the linear regression model generalizes to new, unseen data.
+        <br><br>
+
+        The relation between input and output is modeled by a function \( f(X) \), but due to noise \( \epsilon \):
+        \[
+        Y = f(X) + \epsilon,
+        \]
+        where we assume \( \mathbb{E}[\epsilon] = 0 \) and \( \text{Var}(\epsilon) = \sigma^2 \).
+        <br><br>
+
+        For a fixed input \( X \), the Expected Prediction Error (EPE) is given by:
+        \[
+        EPE(X) = \mathbb{E}[(Y - \hat{f}(X))^2] = \text{Bias}^2 + \text{Variance} + \sigma^2,
+        \]
+        where:
+        \[
+        \text{Bias}(\hat{f}(X)) = f(X) - \mathbb{E}[\hat{f}(X)],
+        \]
+        \[
+        \text{Var}(\hat{f}(X)) = \mathbb{E}[(\hat{f}(X) - \mathbb{E}[\hat{f}(X)])^2].
+        \]
+        For a detailed derivation, see [Bias-Variance Tradeoff](https://en.wikipedia.org/wiki/Bias-variance_tradeoff#Derivation).
+        <br><br>
+
+        <h2>Regularization</h2>
+        Regularization is a technique used in linear regression to prevent overfitting, 
+        especially when the model has too many parameters (features) relative to the number of observations. 
+        It involves adding a penalty to the loss function, which discourages overly complex models that fit the noise in the data rather than the true underlying relationship.
+        <br><br>
+        
+        There are two common types of regularization used in linear regression:  Ridge Regression (L2 Regularization) and Lasso Regression (L1 Regularization).
+        <br><br>
+
+        Let's start with the Ridge Regression. The standard linear regression function is:
+        \[
+        \hat{Y} = X\Theta + \theta_0
+        \]
+        
+        The ordinary least squares (OLS) optimization problem is:
+        \[
+        \hat{\Theta} = \arg\min_{\Theta} \|X\Theta + \theta_0 - Y\|^2_2
+        \]
+        
+        Ridge regression aims to shrink the parameters by imposing a penalty on the square of the magnitude of the coefficients. The objective function is modified as follows:
+        \[
+        \hat{\Theta}_{\text{ridge}} = \arg\min_{\Theta} \|X\Theta + \theta_0 - Y\|^2_2 + \lambda \|\Theta\|^2_2
+        \]
+        
+        where \( \lambda \) is the regularization parameter that controls the strength of the penalty, and \( \|\Theta\|^2_2 \) is the penalty term (or L2 norm), given by:
+        \[
+        \|\Theta\|^2_2 = \sum_{i=1}^{n} \theta_i^2.
+        \]
+        <br>
+        
+        For the L2 penalty term, consider:<br>
+        - When there are many correlated features in a linear regression model, their coefficients can become poorly determined and exhibit high variance.<br>
+        - A large positive coefficient on one variable can be canceled by a similarly large negative coefficient on its correlated feature.<br>
+        - The penalty term regularizes the coefficients such that large values are penalized, reducing overfitting.<br>
+        - This technique is also used in neural networks, where it is known as weight decay.<br>
+        - Note that the bias term \( \theta_0 \) is not included in the penalty term.
+        <br><br>
+        
+        And finally, for L2, note:<br>
+        - Ridge shrinks all coefficients towards zero but does not eliminate any features.<br>
+        - The penalty term regularizes the coefficients such that the coefficients won’t be large. Shrinks coefficients but retains all features.<br>
+        - It helps prevent multicollinearity and improves generalization without performing feature selection.
+        <br><br>
+
+        Next, we'll take a look at the Lasso Regression. Lasso Regression is similar to ridge regression but differs in the penalty term:
+        \[
+        \hat{\Theta}_{\text{lasso}} = \arg\min_{\Theta} \|X\Theta + \theta_0 - Y\|^2_2 + \lambda \|\Theta\|_1
+        \]
+        
+        where \( \|\Theta\|_1 \) is the L1 norm, given by:
+        \[
+        \|\Theta\|_1 = \sum_{i=1}^{n} |\theta_i|.
+        \]
+        
+        For the L1 penalty term, consider:<br>
+        - The L1 norm measures the sparsity of parameters, meaning it encourages some coefficients to become exactly zero.<br>
+        - This leads to a simpler model that selects only the most important features.<br>
+        - Sparsity implies that fewer features are used, reducing model complexity and improving interpretability.
+        <br><br>
+
+        And finally, for L1, note:<br>
+        - Lasso tends to drive some coefficients to zero, effectively removing less important features from the model.<br>
+        - The penalty term regularizes the coefficients such that coefficients are sparse (containing many zeros elements). Shrinks some coefficients to zero, performing feature selection.<br>
+        - It provides both regularization and feature selection, making it useful for high-dimensional data.
+        <br><br>
+
+        There are also implications with regards to the bias and variance as regularization helps manage the bias-variance trade-off:<br>
+        - Without regularization, a complex model may overfit the data (low bias, high variance).<br>
+        - With regularization, the model is more constrained, reducing variance but increasing bias.
+        <br><br>
+
+        So regularization is essential for building models that generalize well, reducing overfitting and improving predictive performance!
+        
+        
+
+        
+        
 
 
 
@@ -219,25 +383,28 @@
 
 
         <br><br>
-        <i><b>Notes</b><br>
-        [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process<br>    
-        <br><br>
-        [b] The dimension \( n+1 \) indicates that the vector has \( n \) parameters plus one additional parameter. 
-        The \( n \) corresponds to the actual features of the data, and the extra \( n + 1-th\) component typically
-        is a 1 to represent the bias input to hand;e the bias term algebraically in vector form.  
-        <br><br>
-        [c] Imagine a room with a bunch of colorful marbles on the floor. 
-        Some marbles are red, some are blue. Now, you're holding a big, flat board, and you want to use it to divide the marbles 
-        into two groups: all the red ones on one side, and all the blue ones on the other side.
-        <br>
-        If the room was super simple with just two directions, left and right, you could just place a board like a straight line that separates the
-        marbles. This line would be a hyperplane in 2D.
-        <br>
-        Now, if the room was more complicated, with marbles scattered in every direction (up, down, left, right, and even more directions), the board you use to divide the marbles might need to be something more than just a line—it could be a flat surface (like a wall) that separates the marbles into two groups. This "flat surface" is still a hyperplane, just in a higher number of dimensions.
-        <br><br>
-        <b>References</b><br>
-        [1] https://en.wikipedia.org/wiki/Linear_regression<br>    
+        <i>
+            <b>Notes</b><br>
+            [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process.
+            <br><br>
+            [b] The dimension \( n+1 \) indicates that the vector has \( n \) parameters plus one additional parameter. 
+            The \( n \) corresponds to the actual features of the data, and the extra \( n + 1-th\) component typically
+            is a 1 to represent the bias input to hand;e the bias term algebraically in vector form.  
+            <br><br>
+            [c] Imagine a room with a bunch of colorful marbles on the floor. 
+            Some marbles are red, some are blue. Now, you're holding a big, flat board, and you want to use it to divide the marbles 
+            into two groups: all the red ones on one side, and all the blue ones on the other side.
+            <br>
+            If the room was super simple with just two directions, left and right, you could just place a board like a straight line that separates the
+            marbles. This line would be a hyperplane in 2D.
+            <br>
+            Now, if the room was more complicated, with marbles scattered in every direction (up, down, left, right, and even more directions), the board you use to divide the marbles might need to be something more than just a line—it could be a flat surface (like a wall) that separates the marbles into two groups. This "flat surface" is still a hyperplane, just in a higher number of dimensions.
+            <br><br>
+            <b>References</b><br>
+            [1] https://en.wikipedia.org/wiki/Linear_regression<br>    
         </i>
+
+        <br><br>
     </section>
 </body>
 </html>

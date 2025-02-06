@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Logistic Regression</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include MathJax CDN -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Logistic Regression</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        <h1>Introduction to Logistic Regression</h1>
+        Logistic regression is a statistical model used for classification problems. Unlike linear regression, which predicts continuous values, logistic regression is used when the output is categorical.
+        <br><br>
+        <h2>Real-World Examples</h2>
+        - **Spam Detection:** Classifies emails as spam or not spam.<br>
+        - **Image Classification:** Identifies objects in an image (e.g., cat, dog, or car).<br>
+        - **Disease Diagnosis:** Determines whether a patient has a malignant tumor or a benign lesion.<br>
+        <br>
+        <h2>Basic Concepts</h2>
+        Classification is the process of categorizing objects into predefined groups. The goal of a classification model is to learn from training data and generalize to unseen examples.<br>
+        <br>
+        <h2>Comparing Classification and Regression</h2>
+        - **Classification:** Output is a discrete category (e.g., spam or not spam).<br>
+        - **Regression:** Output is a continuous value (e.g., predicting house prices).<br>
+        <br>
+        <h2>Mathematical Notation</h2>
+        Each sample in classification is represented as a feature vector:
+        \[
+        x^{(i)} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})
+        \]
+        where \(x^{(i)}\) represents the \(i\)-th training sample, and \(x_j^{(i)}\) represents the \(j\)-th feature of that sample.<br>
+        <br>
+        The corresponding categorical labels belong to a set of classes \( K \), such as:
+        \[
+        y^{(i)} \in \{1, 2, ..., K\}
+        \]
+        <br>
+        <h2>Binary vs. Multi-Class Classification</h2>
+        - **Binary Classification:** Two possible categories (e.g., "cat" vs. "not cat").<br>
+        - **Multi-Class Classification:** More than two possible categories (e.g., "cat", "dog", "horse").<br>
+        <br>
+        <h2>Decision Boundary</h2>
+        A decision boundary is a surface that separates different categories. In a 2D space, it is often a straight line for linear classifiers.
+        <br><br>
+        <h1>Logistic Regression Model</h1>
+        Logistic regression is a type of linear classifier that uses the logistic (sigmoid) function to map inputs to probabilities:
+        \[
+        P(y=1|x) = \frac{1}{1 + e^{-x^T\theta}}
+        \]
+        <br>
+        <h2>Understanding the Sigmoid Function</h2>
+        The sigmoid function transforms any real-valued number into the range (0,1), making it suitable for probability estimation:
+        \[
+        \sigma(z) = \frac{1}{1 + e^{-z}}
+        \]
+        This ensures that the output can be interpreted as a probability.
+        <br><br>
+        <h2>Maximum Likelihood Estimation (MLE)</h2>
+        The logistic regression model is trained by maximizing the likelihood function, which is the probability of the observed data given the model:
+        \[
+        L(\theta) = \prod_{i=1}^{m} P(y^{(i)} | x^{(i)}; \theta)
+        \]
+        Taking the negative log-likelihood gives the loss function:
+        \[
+        J(\theta) = - \sum_{i=1}^{m} \left[y^{(i)} \log P(y^{(i)} | x^{(i)}) + (1 - y^{(i)}) \log (1 - P(y^{(i)} | x^{(i)})) \right]
+        \]
+        This is known as **binary cross-entropy loss**, which measures how well the model's predicted probabilities align with the actual labels.
+        <br><br>
+        <h2>Gradient Descent for Optimization</h2>
+        Since the loss function is non-linear, we use **gradient descent** to find the optimal parameters:
+        \[
+        \theta := \theta - \alpha \nabla J(\theta)
+        \]
+        where \(\alpha\) is the learning rate, and \(\nabla J(\theta)\) is the gradient of the loss function with respect to \(\theta\).
+        <br><br>
+        <h1>Advantages of Logistic Regression</h1>
+        - Outputs direct probability estimates.<br>
+        - Works well for linearly separable data.<br>
+        - Robust to small amounts of noise in the data.<br>
+        <br>
+        <h1>Conclusion</h1>
+        Logistic regression is a powerful yet simple classification algorithm. By modeling probabilities using the sigmoid function and optimizing parameters with maximum likelihood estimation, it provides a solid foundation for binary classification tasks.
+    
+
+        <i>
+            <b>Notes</b><br>
+            [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process.
+            <br><br>
+            [b] The dimension \( n+1 \) indicates that the vector has \( n \) parameters plus one additional parameter. 
+            The \( n \) corresponds to the actual features of the data, and the extra \( n + 1-th\) component typically
+            is a 1 to represent the bias input to hand;e the bias term algebraically in vector form.  
+            <br><br>
+            [c] Imagine a room with a bunch of colorful marbles on the floor. 
+            Some marbles are red, some are blue. Now, you're holding a big, flat board, and you want to use it to divide the marbles 
+            into two groups: all the red ones on one side, and all the blue ones on the other side.
+            <br>
+            If the room was super simple with just two directions, left and right, you could just place a board like a straight line that separates the
+            marbles. This line would be a hyperplane in 2D.
+            <br>
+            Now, if the room was more complicated, with marbles scattered in every direction (up, down, left, right, and even more directions), the board you use to divide the marbles might need to be something more than just a line—it could be a flat surface (like a wall) that separates the marbles into two groups. This "flat surface" is still a hyperplane, just in a higher number of dimensions.
+            <br><br>
+            <b>References</b><br>
+            [1] https://en.wikipedia.org/wiki/Linear_regression<br>    
+            
+        </i>
+
+        <br><br>
+    </section>
+</body>
+</html>
