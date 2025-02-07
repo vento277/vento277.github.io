@@ -20,22 +20,19 @@
     </section>
 
     <section>
-        <h1>Introduction to Logistic Regression</h1>
         Logistic regression is a statistical model used for classification problems. Unlike linear regression, which predicts continuous values, logistic regression is used when the output is categorical.
         <br><br>
-        <h2>Real-World Examples</h2>
-        - **Spam Detection:** Classifies emails as spam or not spam.<br>
-        - **Image Classification:** Identifies objects in an image (e.g., cat, dog, or car).<br>
-        - **Disease Diagnosis:** Determines whether a patient has a malignant tumor or a benign lesion.<br>
-        <br>
-        <h2>Basic Concepts</h2>
+
+        Some of the real world examples include:<br>
+        - Spam Detection: Classifies emails as spam or not spam.<br>
+        - Image Classification: Identifies objects in an image (e.g., cat, dog, or car).<br>
+        - Disease Diagnosis: Determines whether a patient has a malignant tumor or a benign lesion.
+        <br><br>
+        
+        <h2>Classification</h2>
         Classification is the process of categorizing objects into predefined groups. The goal of a classification model is to learn from training data and generalize to unseen examples.<br>
         <br>
-        <h2>Comparing Classification and Regression</h2>
-        - **Classification:** Output is a discrete category (e.g., spam or not spam).<br>
-        - **Regression:** Output is a continuous value (e.g., predicting house prices).<br>
-        <br>
-        <h2>Mathematical Notation</h2>
+
         Each sample in classification is represented as a feature vector:
         \[
         x^{(i)} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})
@@ -47,25 +44,39 @@
         y^{(i)} \in \{1, 2, ..., K\}
         \]
         <br>
-        <h2>Binary vs. Multi-Class Classification</h2>
-        - **Binary Classification:** Two possible categories (e.g., "cat" vs. "not cat").<br>
-        - **Multi-Class Classification:** More than two possible categories (e.g., "cat", "dog", "horse").<br>
+
+        In general, there are two types of classifiers<br>
+        - Binary Classification: Two possible categories (e.g., "cat" vs. "not cat").<br>
+        - Multi-Class Classification: More than two possible categories (e.g., "cat", "dog", "horse").<br>
         <br>
-        <h2>Decision Boundary</h2>
-        A decision boundary is a surface that separates different categories. In a 2D space, it is often a straight line for linear classifiers.
+        
+        And the decision boundary is a surface that separates different categories. 
+        In a 2D space, it is often a straight line for linear classifiers.
+        Here, linear classifier is a kind of linear models, which classifies data
+        based on a linear combination of input features, where its decision boundary is a 
+        straight line / hyperplane that partitions the feature space into two half-spaces.
+        <picture>
+            <source srcset="https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/104.webp 104w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/208.webp 208w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/312.webp 312w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/416.webp 416w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/520.webp 520w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/624.webp 624w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/728.webp 728w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/832.webp 832w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/936.webp 936w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/1038.webp 1038w" sizes="(max-width: 1038px) 100vw, 1038px" type="image/webp"><img src="https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/1038.png" width="1038" height="334">
+        </picture>
         <br><br>
-        <h1>Logistic Regression Model</h1>
-        Logistic regression is a type of linear classifier that uses the logistic (sigmoid) function to map inputs to probabilities:
+
+        Before diving into the mathematics of the model, we should clarify the difference between likeligood and probability.
+        With probabilities, we assume given parameters and compute it in the context of sampling from a distribution. On the other hand,
+        when we consider likelihoods, we regard the data as fixed and vary the parameters of the distribution.
+        In a lot of ML context, we are interested in finding the parameters that maximize the likelihood.
+
+        Now, recall logistic regression is a type of linear classifier that uses the logistic (sigmoid) function to map inputs to probabilities:
         \[
         P(y=1|x) = \frac{1}{1 + e^{-x^T\theta}}
         \]
         <br>
-        <h2>Understanding the Sigmoid Function</h2>
+
         The sigmoid function transforms any real-valued number into the range (0,1), making it suitable for probability estimation:
         \[
         \sigma(z) = \frac{1}{1 + e^{-z}}
         \]
         This ensures that the output can be interpreted as a probability.
+        
         <br><br>
         <h2>Maximum Likelihood Estimation (MLE)</h2>
         The logistic regression model is trained by maximizing the likelihood function, which is the probability of the observed data given the model:
@@ -90,10 +101,7 @@
         - Works well for linearly separable data.<br>
         - Robust to small amounts of noise in the data.<br>
         <br>
-        <h1>Conclusion</h1>
-        Logistic regression is a powerful yet simple classification algorithm. By modeling probabilities using the sigmoid function and optimizing parameters with maximum likelihood estimation, it provides a solid foundation for binary classification tasks.
-    
-
+        
         <i>
             <b>Notes</b><br>
             [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process.
