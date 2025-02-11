@@ -20,51 +20,98 @@
     </section>
 
     <section>
-    <h1>text</h1>
-    text
-    <br><br>
+        Backpropagation is a supervised learning algorithm used to train artificial neural networks. 
+        It’s an optimization algorithm that helps adjust the weights of the network to minimize the error (or loss) between the predicted output and the actual target.
+        <br><br>
+
+        In simple terms, backpropagation allows the neural network to learn from its mistakes by adjusting the weights and biases to reduce the difference between the predicted output and the true output.
+        <br><br>
+
+        The process of backpropagation involves the following steps:<br>
+        - Forward Pass is when the input passes through the network to generate predictions.<br>
+        - Loss Calculation is when the prediction is compared to the actual target using loss function.<br>
+        - Backward Pass computes the gradient of the loss with repect to each weight in the network. 
+        The gradient tells us how to change the weights to reduce the loss.<br>
+        - Gradien Descent is when the weights are adjusted in the opposite direction of the gradient to minimize the loss. 
+        <br><br>
+
+        Consider a MLP. During forward pass:
+
+        <figure class="image" style="width:90%; max-width:100%;" data-ckbox-resource-id="Jq95TVpUO5O_">
+            <picture>
+                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/120.webp 120w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/240.webp 240w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/360.webp 360w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/480.webp 480w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/600.webp 600w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/720.webp 720w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/840.webp 840w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/960.webp 960w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1080.webp 1080w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1192.webp 1192w" sizes="(max-width: 1192px) 100vw, 1192px" type="image/webp">
+                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1192.png" width="1192" height="542" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+
+        <h1>Math Review</h1>
+
+        The gradient of a scalar function \( f(x) \) is a vector of its partial derivatives with respect to all the variables of the input vector \( f(x) \). The gradient points in the direction of the steepest ascent of the function. Mathematically, it is represented as:
+        \[
+            \nabla f(x) = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]
+        \]
+        The gradient provides the direction and magnitude of the steepest ascent, guiding optimization algorithms like gradient descent.
+        <br><br>
+
+        The Jacobian matrixcgeneralizes the gradient to vector-valued functions. It represents the rate of change of each component of the output vector with respect to each input variable. For a vector function \( y = f(x) \), the Jacobian is defined as:
+        \[
+            J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} = \begin{bmatrix}
+            \frac{\partial y_1}{\partial x_1} & \frac{\partial y_1}{\partial x_2} & \dots & \frac{\partial y_1}{\partial x_n} \\
+            \frac{\partial y_2}{\partial x_1} & \frac{\partial y_2}{\partial x_2} & \dots & \frac{\partial y_2}{\partial x_n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \frac{\partial y_m}{\partial x_1} & \frac{\partial y_m}{\partial x_2} & \dots & \frac{\partial y_m}{\partial x_n}
+            \end{bmatrix}
+        \]
+        The Jacobian matrix helps in understanding how small changes in input \( \mathbf{x} \) affect the output \( \mathbf{y} \) and is critical for algorithms in optimization and deep learning, such as backpropagation.
+        <br><br>
+
+        The Chain Rule is a fundamental concept in calculus that allows the differentiation of composite functions. If we have a function \( f(u) \) and \( g(x) \), the derivative of \( y \) with respect to \( x \) is given by:
+        \[
+            \frac{df(g(x))}{dx} = \frac{df(g(x))}{dg(x)} \frac{dg(x)}{dx}
+        \]
+        
+        For multiple variables where \( f: \mathbb{R}^m \rightarrow  \mathbb{R} \quad g: \mathbb{R}^n \rightarrow  \mathbb{R}^m \) 
+        \[
+            \frac{df(g(x))}{dx} = J_g(x)^T \nabla f(g(x))
+        \]
+
+        <h1>Backward Pass</h1>
+        During the backward pass:
+        <figure class="image" style="width:90%; max-width:100%;" data-ckbox-resource-id="XgEMG-aVQdcC">
+            <picture>
+                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/86.webp 86w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/172.webp 172w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/258.webp 258w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/344.webp 344w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/430.webp 430w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/516.webp 516w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/602.webp 602w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/688.webp 688w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/774.webp 774w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/852.webp 852w" sizes="(max-width: 852px) 100vw, 852px" type="image/webp">
+                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/852.png" width="852" height="514" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+
+
+
+        <br><br>
+        
+        <h2>text</h2>
+        - list<br>
+        -- sub<br>
+        --- and so one
+        <br><br>
+
+        equation:
+        \[
+        x = 1
+        \]
+        <br>
+
+        text
+        <br><br>
+
+        use this for images: https://onlinehtmleditor.dev/
+        <br><br>
+
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>text</h1>
+
+
+
     
-    <h2>text</h2>
-    - list<br>
-    -- sub<br>
-    --- and so one
-    <br><br>
-
-    equation:
-    \[
-    x = 1
-    \]
-    <br>
-
-    text
-    <br><br>
-
-    use this for images: https://onlinehtmleditor.dev/
-
-    <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="aEYsLGcMgdFu">
-        <picture>
-            <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/94.webp 94w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/188.webp 188w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/282.webp 282w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/376.webp 376w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/470.webp 470w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/564.webp 564w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/658.webp 658w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/752.webp 752w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/846.webp 846w,
-                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.webp 934w"
-                    type="image/webp" sizes="(max-width: 934px) 100vw, 934px">
-            <img src="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.png" width="934" height="500" style="max-width:100%; height:auto;">
-        </picture>
-    </figure>
-    <br><br>
-
-    <!------------------------------------------------------------------------------------------------------------------------------>
-    <h1>text</h1>
-
-
-
-    
 
 
 
@@ -73,17 +120,17 @@
 
 
 
-    <i>
-        <b>Notes</b><br>
-        [a] 
-        <br><br>
-        [b] 
-        <br><br>
-        [c]
-        <br><br>
-        <b>References</b><br>
-        [1]  
-    </i>
+        <i>
+            <b>Notes</b><br>
+            [a] 
+            <br><br>
+            [b] 
+            <br><br>
+            [c]
+            <br><br>
+            <b>References</b><br>
+            [1]  
+        </i>
 
        
     </section>
