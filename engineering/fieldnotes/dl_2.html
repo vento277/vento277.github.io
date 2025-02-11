@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Multilayer Perceptron</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include MathJax CDN -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Multilayer Perceptron</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+    A Multilayer Perceptron (MLP) is a type of artificial neural network that consists of multiple layers of neurons (nodes), typically including an input layer, one or more hidden layers, and an output layer. It is one of the most basic and widely used models in deep learning for solving problems like classification, regression, and pattern recognition.
+    <br><br>
+    An MLP is composed of the following components:<br>
+    - Input Layer receives the raw data (features) and feeds it into the next layer.
+    Each neuron in this layer corresponds to an individual feature of the input data.<br>
+    - Hidden Layer is a layer between the input and output layer. It processes the data via weighted sums and activation functions.<br>
+    - Output Layer provides the final prediction (e.g., a class label for classification problems or a numerical value for regression).<br>
+    - Activation Functions introduces non-linearity to the model, allowing it to learn complex patterns in the data.<br>
+    - Weights and Biases are adjusted using an optimization technique (usually gradient descent) to minimize the loss function and improve model predictions.
+    <br><br>
+
+    Reason why MLPs are used is beacuse it can approximate any continuous function, making them very flexible and suitable for a wide range of tasks. 
+    Infact, the Universal Approximation Theorem states that an MLP with a single hidden layer and a sufficient number of neurons can approximate any continuous function to any desired accuracy, given appropriate training.
+
+    <h1>Linear Layer</h1>
+    Consider the following linear layer of single output unit:
+    <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="aEYsLGcMgdFu">
+        <picture>
+            <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/94.webp 94w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/188.webp 188w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/282.webp 282w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/376.webp 376w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/470.webp 470w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/564.webp 564w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/658.webp 658w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/752.webp 752w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/846.webp 846w,
+                            https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.webp 934w"
+                    type="image/webp" sizes="(max-width: 934px) 100vw, 934px">
+            <img src="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.png" width="934" height="500" style="max-width:100%; height:auto;">
+        </picture>
+    </figure>
+
+    For multiple layers:
+    <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="-Aw_WjdmUmEn">
+        <picture>
+            <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/105.webp 105w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/210.webp 210w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/315.webp 315w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/420.webp 420w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/525.webp 525w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/630.webp 630w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/735.webp 735w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/840.webp 840w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/945.webp 945w,https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/1046.webp 1046w" sizes="(max-width: 1046px) 100vw, 1046px" type="image/webp">
+            <img src="https://ckbox.cloud/830b7006e5852830747f/assets/-Aw_WjdmUmEn/images/1046.png" width="1046" height="510" style="max-width:100%; height:auto;">
+        </picture>
+    </figure>
+
+    With bias:
+    <figure class="image image_resized" style="width:70%; max-width:100%;"  data-ckbox-resource-id="KC44LtkVUWLd">
+        <picture>
+            <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/84.webp 84w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/168.webp 168w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/252.webp 252w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/336.webp 336w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/420.webp 420w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/504.webp 504w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/588.webp 588w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/672.webp 672w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/756.webp 756w,https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/838.webp 838w" sizes="(max-width: 838px) 100vw, 838px" type="image/webp">
+            <img src="https://ckbox.cloud/830b7006e5852830747f/assets/KC44LtkVUWLd/images/838.png" width="838" height="498" style="max-width:100%; height:auto;">
+        </picture>
+    </figure>
+
+    Combining everything, we can re-write it via homogeneous coordinates:
+    <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="GlJIj6LZMfL3">
+        <picture>
+            <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/111.webp 111w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/222.webp 222w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/333.webp 333w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/444.webp 444w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/555.webp 555w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/666.webp 666w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/777.webp 777w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/888.webp 888w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/999.webp 999w,https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/1106.webp 1106w" sizes="(max-width: 1106px) 100vw, 1106px" type="image/webp">
+            <img src="https://ckbox.cloud/830b7006e5852830747f/assets/GlJIj6LZMfL3/images/1106.png" width="1106" height="470" style="max-width:100%; height:auto;">
+        </picture>
+    </figure>
+
+    <!------------------------------------------------------------------------------------------------------------------------------>
+    <h1>Nonlinear Activation</h1>
+    To make neural networks become nonlinear models, we often apply element-wise[a] nonlinear activation functions.<br>
+    - Sigmoid: \( f(x) = \dfrac{1}{1+e^{-x}} \) <br>
+    - Tanh: \(f(x) = \dfrac{e^x - e^{-x}}{e^x + e^{-x}} \) <br>
+    - Softplus: \( f(x) = ln(1+e^x) \) <br>
+    - Rectified Linear Units: \( f(x) = \text{max}(x,0) \) <br>
+    - Parametric Rectified Linear Units: 
+    \( f(x) = 
+    \begin{cases}
+    \alpha x & \text{if } x < 0 \\
+    x & \text{otherwise }
+    \end{cases}
+     \) <br>
+    - Exponential Linear Unit: 
+    \( f(x) = 
+    \begin{cases}
+    \alpha (e^x - 1) & \text{if } x < 0 \\
+    x & \text{otherwise }
+    \end{cases}
+     \)
+     
+    <br><br>
+
+    There are also non-element-wise nonlinear activation functions. <br>
+    - Softmax: 
+    \(
+        f(x) = \frac{e^{x_i}}{\sum_{k=1}^{K} e^{x_k}}
+    \) <br>
+    - Maxout:
+    \(
+        f(x) = \max(x_1, x_2, \dots, x_k)
+    \) <br>
+    - Cummax:
+    \(
+        f(x) = \frac{e^{x_1}}{\sum_{k=1}^{K} e^{x_k}}, \ldots, \frac{\sum_{i=1}^{j} e^{x_i}}{\sum_{k=1}^{K} e^{x_k}}, \ldots, 1
+    \)
+
+    <br><br>
+    
+    <!------------------------------------------------------------------------------------------------------------------------------>
+    <h1>Batch Normalization</h1>
+    Internal Covariate Shift refers to the phenomenon where the distribution of network activations changes as the network parameters (weights) are updated during training. This happens because each layer’s input distribution shifts when the weights of the preceding layer change. It can slow down training, as the network must constantly adapt to these shifting distributions.
+    <br><br>
+
+    To mitigate this problem, we need to reduce Internal Covariate Shift. This can be done by normalizing the activations so that the input to each layer has a stable distribution. By doing so, we make the training process more stable, and the network can converge faster.
+    <br><br>
+
+    Batch Normalization (BN) is a technique designed specifically to reduce Internal Covariate Shift. It normalizes the activations (inputs to each layer) by ensuring they have zero mean and unit variance, stabilizing the learning process.
+    <br><br>
+
+    Suppose we have \( X \in \mathbb{R}^{B \times D} \):
+    \[
+        m[j] = \frac{1}{B} \sum_{i=1}^{B} X[i,j]
+    \]
+    \[
+        v[j] = \frac{1}{B} \sum_{i=1}^{B} (X[i,j] - m[j])^2
+    \]
+    \[
+        \hat{X}[i,j] = \gamma [j] \frac{X[i,j] - m[j]}{\sqrt{v[j] + \epsilon}} + \beta [j] \quad 
+        \text{\( \gamma [j] \) and \( \beta [j] \) are learnable parameters}
+    \]
+
+    In practice, o account for the dynamically changing weights and stochastic data, we use running mean and variance:
+    \[
+        m^t[j] = (1 - \alpha)m^{t-1} [j] + \alpha m[j]
+    \]
+    \[
+        v^t[j] = (1 - \alpha)v^{t-1} [j] + \alpha v[j]
+    \]
+    \[
+        \alpha \in \text{[0,1] is a hyperparameter}
+    \]
+
+    <!------------------------------------------------------------------------------------------------------------------------------>
+    <h1>Dropouts</h1>
+    Dropout is a regularization technique used in deep learning to prevent overfitting, particularly in neural networks. It works by randomly "dropping out" (i.e., setting to zero) a fraction of the neurons in a layer during each forward pass of training. This helps ensure that the network doesn't rely too heavily on any individual neuron, which can make it more robust and capable of generalizing better to unseen data.
+    <br><br>
+
+    Suppose we have \( X \in \mathbb{R}^{B \times D} \). We create a matrix mask  \( M \in \mathbb{R}^{B \times D} \) as follows:
+    \[
+        M[i,j] \sim \text{Bernoulli}(1-p)
+    \]
+    \[
+        \mathbb{P}(M[i,j] = 1) = 1 - p
+    \]
+    \[
+        \mathbb{P}(M[i,j] = 0) = p
+    \]
+
+    Then we perform element-wise product to drop out nuerons:
+    \[
+        \hat{X} = M \odot X
+    \]
+    \[
+        \hat{X}[i,j] = M[i,j]X[i,j]
+    \]
+
+    We test the dropout by computing the expected output for each unit:
+    \[
+    \begin{align*}
+    \mathbb{E}[ \hat{X}[i,j] ] &= \mathbb{E}[M[i,j]X[i,j]] \\
+    &= \mathbb{E}[M[i,j]]X[i,j] \\
+    &= (1 \times \mathbb{P}(M[i,j] = 1) + 0 \times \mathbb{P}(M[i,j] = 0)) X[i,j] \\
+    &= (1-p)X[i,j]
+    \end{align*}
+    \]
+
+    <!------------------------------------------------------------------------------------------------------------------------------>
+    <h1>Putting It All Together</h1>
+    <figure class="image" style="width:70%; max-width:100%;"  data-ckbox-resource-id="jeOXGYkvy81l">
+        <picture>
+            <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/92.webp 92w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/184.webp 184w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/276.webp 276w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/368.webp 368w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/460.webp 460w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/552.webp 552w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/644.webp 644w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/736.webp 736w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/828.webp 828w,https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/912.webp 912w" sizes="(max-width: 912px) 100vw, 912px" type="image/webp">
+            <img src="https://ckbox.cloud/830b7006e5852830747f/assets/jeOXGYkvy81l/images/912.png" width="912" height="170" style="max-width:100%; height:auto;">
+        </picture>
+    </figure>
+
+    Using multiple hidden layers, we can build a deep MLP.
+    
+
+
+
+
+
+
+
+    
+
+
+    
+    
+
+
+    <br><br>
+    
+    <h2>text</h2>
+    - list<br>
+    -- sub<br>
+    --- and so one
+    <br><br>
+
+    equation:
+    \[
+    x = 1
+    \]
+    <br>
+
+    text
+    <br><br>
+
+    use this for images: https://onlinehtmleditor.dev/
+    <br><br>
+
+    <!------------------------------------------------------------------------------------------------------------------------------>
+    <h1>text</h1>
+
+
+
+
+
+
+
+
+    <i>
+        <b>Notes</b><br>
+        [a] Element-wise refers to performing operations on corresponding elements of arrays, vectors, or matrices individually.
+        Instead of performing operations on the entire dataset as a whole, the operation is applied independently to each individual element.
+        <br><br>
+        [b] 
+        <br><br>
+        [c]
+        <br><br>
+        <b>References</b><br>
+        [1]  
+    </i>
+
+       
+    </section>
+</body>
+</html>
