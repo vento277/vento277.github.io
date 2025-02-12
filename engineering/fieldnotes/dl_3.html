@@ -35,15 +35,7 @@
         - Gradien Descent is when the weights are adjusted in the opposite direction of the gradient to minimize the loss. 
         <br><br>
 
-        Consider a MLP. During forward pass:
-
-        <figure class="image" style="width:90%; max-width:100%;" data-ckbox-resource-id="Jq95TVpUO5O_">
-            <picture>
-                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/120.webp 120w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/240.webp 240w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/360.webp 360w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/480.webp 480w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/600.webp 600w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/720.webp 720w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/840.webp 840w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/960.webp 960w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1080.webp 1080w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1192.webp 1192w" sizes="(max-width: 1192px) 100vw, 1192px" type="image/webp">
-                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1192.png" width="1192" height="542" style="max-width:100%; height:auto;">
-            </picture>
-        </figure>
-
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <h1>Math Review</h1>
 
         The gradient of a scalar function \( f(x) \) is a vector of its partial derivatives with respect to all the variables of the input vector \( f(x) \). The gradient points in the direction of the steepest ascent of the function. Mathematically, it is represented as:
@@ -53,7 +45,7 @@
         The gradient provides the direction and magnitude of the steepest ascent, guiding optimization algorithms like gradient descent.
         <br><br>
 
-        The Jacobian matrixcgeneralizes the gradient to vector-valued functions. It represents the rate of change of each component of the output vector with respect to each input variable. For a vector function \( y = f(x) \), the Jacobian is defined as:
+        The Jacobian matrix generalizes the gradient to vector-valued functions. It represents the rate of change of each component of the output vector with respect to each input variable. For a vector function \( y = f(x) \), the Jacobian is defined as:
         \[
             J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} = \begin{bmatrix}
             \frac{\partial y_1}{\partial x_1} & \frac{\partial y_1}{\partial x_2} & \dots & \frac{\partial y_1}{\partial x_n} \\
@@ -62,7 +54,7 @@
             \frac{\partial y_m}{\partial x_1} & \frac{\partial y_m}{\partial x_2} & \dots & \frac{\partial y_m}{\partial x_n}
             \end{bmatrix}
         \]
-        The Jacobian matrix helps in understanding how small changes in input \( \mathbf{x} \) affect the output \( \mathbf{y} \) and is critical for algorithms in optimization and deep learning, such as backpropagation.
+        The Jacobian matrix helps in understanding how small changes in input \( x \) affect the output \( y \) and is critical for algorithms in optimization and deep learning, such as backpropagation.
         <br><br>
 
         The Chain Rule is a fundamental concept in calculus that allows the differentiation of composite functions. If we have a function \( f(u) \) and \( g(x) \), the derivative of \( y \) with respect to \( x \) is given by:
@@ -74,63 +66,161 @@
         \[
             \frac{df(g(x))}{dx} = J_g(x)^T \nabla f(g(x))
         \]
+        Chain rule is used to consider all paths from \( x_1 \) to \( z \):
+        <figure class="image" style="width:90%; max-width:100%;" data-ckbox-resource-id="7KWLNA4t1ypr">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/86.webp 86w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/172.webp 172w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/258.webp 258w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/344.webp 344w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/430.webp 430w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/516.webp 516w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/602.webp 602w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/688.webp 688w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/774.webp 774w,https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/855.webp 855w" sizes="(max-width: 855px) 100vw, 855px" type="image/webp">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/7KWLNA4t1ypr/images/855.png" style="max-width:100%; height:auto;"> 
+            </picture>
+        </figure>
+        <br>
 
+        <h1>Forward Pass</h1>
+        Consider a MLP. During forward pass:
+        <figure class="image" style="width:90%; max-width:100%;" data-ckbox-resource-id="Jq95TVpUO5O_">
+            <picture>
+                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/120.webp 120w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/240.webp 240w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/360.webp 360w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/480.webp 480w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/600.webp 600w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/720.webp 720w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/840.webp 840w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/960.webp 960w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1080.webp 1080w,https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1192.webp 1192w" sizes="(max-width: 1192px) 100vw, 1192px" type="image/webp">
+                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/Jq95TVpUO5O_/images/1192.png" width="1192" height="542" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        The stages from \( x \) to \( y \) can be represented as the equation on the right.
+
+        <br><br>
         <h1>Backward Pass</h1>
-        During the backward pass:
-        <figure class="image" style="width:90%; max-width:100%;" data-ckbox-resource-id="XgEMG-aVQdcC">
+        Consider a MLP. During backward pass:
+        <figure class="image" style="width:80%; max-width:100%;" data-ckbox-resource-id="XgEMG-aVQdcC">
             <picture>
                 <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/86.webp 86w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/172.webp 172w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/258.webp 258w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/344.webp 344w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/430.webp 430w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/516.webp 516w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/602.webp 602w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/688.webp 688w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/774.webp 774w,https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/852.webp 852w" sizes="(max-width: 852px) 100vw, 852px" type="image/webp">
                 <img src="https://ckbox.cloud/830b7006e5852830747f/assets/XgEMG-aVQdcC/images/852.png" width="852" height="514" style="max-width:100%; height:auto;">
             </picture>
         </figure>
-
-
-
-        <br><br>
-        
-        <h2>text</h2>
-        - list<br>
-        -- sub<br>
-        --- and so one
-        <br><br>
-
-        equation:
+        Loss:
         \[
-        x = 1
+        L = l(y, \bar{y})
         \]
-        <br>
-
-        text
+        Gradient of loss with respect to \(y\):
+        \[
+        \frac{\partial L}{\partial y}
+        \]
+        Gradient of loss with respect to \(h_M\):
+        \[
+        \frac{\partial L}{\partial h_M} = \frac{\partial L}{\partial y} \cdot \frac{\partial y}{\partial h_M}
+        \]
+        where
+        \[
+        y = W_{m+1} h_M
+        \]
+        \[
+        \frac{\partial y}{\partial h_M} = W_{m+1}
+        \]
+        Gradient of loss with respect to \(W_{m+1}\):
+        \[
+        \frac{\partial L}{\partial W_{m+1}} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial W_{m+1}}
+        \]
+        But this is incorrect as \( \frac{\partial y}{\partial W_{m+1}}\) is the derivative of a vector w.r.t. a matrix. The shape dosen't work out[a].
+        Noting the \( y[i] \) only depends on \(W_{M+1}[i, :]\) and not \(W_{M+1}[j, :]\):
+        \[
+        y[i] = \sum_j W_{M+1}[i, j]h[j]
+        \]
+        \[
+        \frac{\partial y[i]}{\partial W_{M+1}[i, j]} = h[j]
+        \]
+        Therefore:
+        \[
+        \frac{\partial L}{\partial W_{M+1}[i,j]} = \frac{L}{y[i]} \frac{ \partial y[i]}{\partial W_{M+1}[i,j]} = \frac{\partial L}{\partial y[i]}h[j]
+        \]
+        \[
+        \frac{\partial L}{\partial W_{M+1}} = \frac{\partial L}{\partial y}h^T
+        \]
+        Gradient of loss with respect to \(h_2\):
+        \[
+        \frac{\partial L}{\partial h_M} = (\frac{\partial y}{\partial h_M})^T \frac{\partial L}{\partial y}
+        \]
+        \[
+        \frac{\partial L}{\partial h_{M-1}} = (\frac{\partial h_M}{\partial h_{M-1}})^T \frac{\partial L}{\partial h_M}
+        \]
+        Therefore:
+        \[
+        \frac{\partial L}{\partial h_2} = (\frac{\partial h_3}{\partial h_2})^T \ldots (\frac{\partial h_M}{\partial h_{M-1}})^T (\frac{\partial y}{\partial h_M})^T \frac{\partial L}{\partial y}
+        \]
+        The general form:
+        \[
+        \frac{\partial L}{\partial h_i} = J_{i+1}^T \ldots J_M^T \frac{\partial L}{\partial y} \quad \text{where} \quad J_{i+1} \equiv \frac{\partial h_{i+1}}{\partial h_i} \quad h_{M+1} \equiv y
+        \]
+        What is \( J_2 \equiv \frac{\partial h_2}{\partial h_1} \)? We know that \(h_2 = \sigma (W_2 h_1)\) and \( z_2 = W_2 h_1 \) so:
+        \[
+        \frac{\partial h_2}{\partial h_1} = \frac{\partial h_2}{\partial z_2} \frac{\partial z_2}{\partial h_1} = \text{diag}(\sigma ' (z_2))W_2 \quad \text{[b]}
+        \]
+        Gradient of loss with respect to \(W_2\):
+        \[
+        \frac{\partial L}{\partial z_2} = (\frac{\partial h_2}{\partial z_2})^T \frac{\partial L}{\partial h_2} = \sigma ' (z_2) \odot \frac{\partial L}{\partial h_2}
+        \]
+        The element-wise operation is due to non-linearity[c]. Now, note \( z_2[i] = \sum_j W_{2}[i, j]h_1[j]\):
+        \[
+        \frac{\partial L}{\partial W_2[i,j]} = \frac{\partial L}{\partial z_2[i]} \frac{\partial z_2[i]}{\partial W_2[i,j]} = \frac{\partial L}{\partial z_2[i]}h_1[j]
+        \]
+        \[
+        \frac{\partial L}{\partial W_2} = (\sigma ' (z_2) \odot \frac{\partial L}{\partial h_2})h_1^T
+        \]
+        From the above derviations, we can conclude that:
+        \[
+        z_i = W_i h_{i-1}
+        \]
+        \[
+        J_i = \text{diag}(\sigma ' (z_i))W_i
+        \]
+        \[
+        \frac{\partial L}{\partial h_i} = J_{i+1}^T \ldots J_M^T \frac{L}{y}
+        \]
+        \[
+        \frac{\partial L}{\partial W_i} = (\sigma ' (z_i) \odot \frac{\partial L}{\partial h_i})h_{i-1}^T
+        \]
+        The tensors[d] \(z_i\) and \(h_{i-1}^T\) can be cached[e] in foward pass to avoid duplicated computation in the backward pass:
+        \[
+        \text{forward pass: } h_2 = \sigma (W_2 h_1)
+        \] 
+        \[
+        \text{backward pass: } \frac{\partial L}{\partial h_1} = J_2^T \frac{\partial L}{\partial h_2} \quad \text{and} \quad 
+        \frac{\partial L}{\partial W_2} = (\sigma ' (z_2) \odot \frac{\partial L}{\partial h_2})h_{1}^T
+        \]
+        \[
+        z_2 = W_2 h_1 \quad \text{(cached)}
+        \]
         <br><br>
-
-        use this for images: https://onlinehtmleditor.dev/
-        <br><br>
-
-        <!------------------------------------------------------------------------------------------------------------------------------>
-        <h1>text</h1>
-
-
-
-    
-
-
-
-
-
-
-
 
         <i>
             <b>Notes</b><br>
-            [a] 
+            [a] The phrase "the shape doesn't work out" refers to a mismatch in the dimensions (shapes) of the tensors (vectors or matrices) involved in the calculation of gradients. 
+
             <br><br>
-            [b] 
+            [b] The diag operation takes a vector (in this case, \( \sigma'(z_2) \)) and creates a diagonal matrix with those elements on the diagonal. So, if \( \sigma'(z_2) = [a_1, a_2, \dots, a_n] \), then:
+                \[
+                \text{diag}(\sigma'(z_2)) = 
+                \begin{bmatrix}
+                a_1 & 0   & \dots & 0 \\
+                0   & a_2 & \dots & 0 \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0   & 0   & \dots & a_n
+                \end{bmatrix}
+                \]
+               This diagonal matrix is often used in backpropagation in neural networks to represent the element-wise derivative of the activation function.
+               <br><br>
+               Note that The Jacobian of element-wise nonlinearity is a diagonal matrix.
+               This refers to the fact that the Jacobian matrix of a nonlinearity (like ReLU or sigmoid) for each element in the input \( z_2 \) is a diagonal matrix, where each diagonal element corresponds to the derivative of the activation function with respect to its respective input.
+               This is because the activation function operates element-wise on the input, and each derivative only affects the corresponding element in the input. Hence, the Jacobian is diagonal (no cross-element dependencies).
+                        <br><br>
+            [c] Nonlinearity is typically element-wise because activation functions like ReLU, sigmoid, tanh, and others are designed to operate independently on each element of the input to a layer in a neural network.
             <br><br>
-            [c]
+
+            [d] A tensor is a multi-dimensional array that can represent data in many forms.
             <br><br>
+
+            [e] The idea of caching these tensors is to store the results so that they can be reused later during the backward pass. Without caching, you would need to recompute these values, which would be inefficient and slow.
+            
             <b>References</b><br>
             [1]  
         </i>
+        <br><br>
 
        
     </section>
