@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Learning Rate, Momentum and Adam</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include MathJax CDN -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Learning Rate, Momentum and Adam</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        <h1>text</h1>
+        Previously, we have discussed the method of computing graidents. Let us see how we perofmrn gradient-based learning, such as, Stochastic Gradient Descent (SGD).
+
+        <br><br>
+        
+        <h1>Stochastic Gradient Descent</h1>
+        Stochastic Gradient Descent (SGD) is an optimization algorithm used to minimize a loss function.
+        It’s a variant of the traditional gradient descent algorithm, with the key difference being that it updates the parameters using a small, random subset (a mini-batch) of the data at each step, rather than using the entire dataset.
+        <br><br>
+        Because it only uses one or few data points, each update tends to be faster. Also, It allows us to optimize on large datasets where using the full dataset would be too computationally expensive. But one of its disadvantages is nvatiagting ravines.
+        <br><br>
+        Ravines refer to areas in a loss landscape (the "surface" we're trying to optimize) where the curvature of the surface is significantly different in different directions. This happens when one direction is much steeper (higher gradient) than another.
+        Imagine a 2D hill with a steep drop in one direction (e.g., left to right) and a shallow drop in the other direction (e.g., forward and backward). The steep direction would be like a cliff, and the shallow direction would feel more like a long, gentle slope:
+        <figure class="image" style="width:70%; max-width:100%;"  data-ckbox-resource-id="1cuoIoRQeFdi">
+            <picture>
+                <source srcset="https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/80.webp 80w,https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/160.webp 160w,https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/240.webp 240w,https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/320.webp 320w,https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/400.webp 400w,https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/480.webp 480w,https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/560.webp 560w,https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/632.webp 632w" sizes="(max-width: 632px) 100vw, 632px" type="image/webp">
+                <img src="https://ckbox.cloud/a97183991c8954c75f0d/assets/1cuoIoRQeFdi/images/632.png" width="632" height="530" style="max-width:100%; height:auto;">>
+            </picture>
+        </figure>
+        In these regions, SGD may struggle to make efficient progress because it can get stuck or make inconsistent updates. SGD updates parameters based on the gradient, but in ravines, the gradient can point in very different directions, making the optimization process less stable and slow.
+
+        <h2>Momentum</h2>
+        Gradient descent is a man walking down a hill. He follows the steepest path downwards; his progress is slow, but steady.
+        Momentum is a heavy ball rolling down the same hill. The added inertia acts both as a smoother and an accelerator, dampening
+        oscillations and causing us to barrel through narrow valleys, small humps and local minima.
+        <br><br>
+        
+        Now, the algorithm for SGD with momentum is given as:<br>
+        - Input: Step \( T \), learning rate \( \eta \), initial weights \( W^0 \), batch size \( B \), momentum \( \beta \), initial momentum \( M^0 \).
+        For \( t = 1, \dots, T \):<br>
+        -- Get mini-batch data \( (X^t, Y^t) \)<br>
+        -- Compute the loss function:
+            \[
+            L(W^{t-1}, X^t, Y^t) = \frac{1}{B} \sum_{i=1}^{B} l(f(W^{t-1}, X^t[i]), Y^t[i])
+            \]<br>
+        -- Compute the momentum term:
+            \[
+            M^t = \beta M^{t-1} + \frac{\partial L (W^{t-1}, X^t, Y^T)}{\partial W}
+            \]<br>
+        -- Update the weights:
+            \[
+            W^t = W^{t-1} - \eta M^t
+            \] <br>
+        - Return \(W^T \)
+        <br><br>
+
+        Denoting \(g^t = \frac{\partial L (W^{t-1}, X^t, Y^t)}{\partial W} \), recall that we have the following update rule in the case of \( \beta = 0 \):
+        \[
+            W^t = W^{t-1} - \eta g^t
+        \]
+        How can we tune the learning rate? AdaGrad (Adaptive Gradient) proposes to assign larger learning rates to infrequently updated weights and smaller ones to
+        frequently updated weights:
+        \[
+            G^t = \sum_{\tau = 1}^t g^{\tau} g^{\tau T} \quad \text{In practive, we only need} \quad g^t \odot g^t
+        \]
+        \[
+            W^t = W^{t-1} - \eta diag(\epsilon I + G^t)^{-1/2} g^t
+        \]
+        The element-wise update rule of AdaGrad is:
+        \[
+            W^t[i] = W^{t-1}[i] - \frac{\eta}{\sqrt{\epsilon + G^t[i,i]^2}}g^t[i]
+        \]
+        Since we accumulate (squared) gradients from the beginning, our learning rate is always decaying and could vanish before we
+        converge. To deal with this, RMSProp [6] proposes to use exponential moving average (EMA) of past squared gradients:
+        \[
+            G^t = pG^{t-1} + (1-p)g^t {g^{t}}^{T}
+        \]
+        \[
+            W^t = W^{t-1} - \eta diag(\epsilon I + G^t)^{-1/2} g^t
+        \]
+        Now that we can tune the learning rate adaptively, how can we incorporate momentum? Based on RMSProp, Adam (Adaptive Momentum) proposes to keep another EMA of past gradients:
+
+
+
+
+        use this for images: https://onlinehtmleditor.dev/
+
+        <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="aEYsLGcMgdFu">
+            <picture>
+                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/94.webp 94w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/188.webp 188w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/282.webp 282w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/376.webp 376w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/470.webp 470w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/564.webp 564w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/658.webp 658w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/752.webp 752w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/846.webp 846w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.webp 934w"
+                        type="image/webp" sizes="(max-width: 934px) 100vw, 934px">
+                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.png" width="934" height="500" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br><br>
+
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>text</h1>
+
+
+
+    
+
+
+
+
+
+
+
+
+        <i>
+            <b>Notes</b><br>
+            [a] 
+            <br><br>
+            [b] 
+            <br><br>
+            [c]
+            <br><br>
+            <b>References</b><br>
+            [1]  
+        </i>
+
+       
+    </section>
+</body>
+</html>
