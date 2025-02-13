@@ -33,6 +33,7 @@
 
     Reason why MLPs are used is beacuse it can approximate any continuous function, making them very flexible and suitable for a wide range of tasks. 
     Infact, the Universal Approximation Theorem states that an MLP with a single hidden layer and a sufficient number of neurons can approximate any continuous function to any desired accuracy, given appropriate training.
+    <br><br>
 
     <h1>Linear Layer</h1>
     Consider the following linear layer of single output unit:
@@ -79,9 +80,10 @@
 
     <!------------------------------------------------------------------------------------------------------------------------------>
     <h1>Nonlinear Activation</h1>
-    To make neural networks become nonlinear models, we often apply element-wise[a] nonlinear activation functions.<br>
-    - Sigmoid: \( f(x) = \dfrac{1}{1+e^{-x}} \) <br>
-    - Tanh: \(f(x) = \dfrac{e^x - e^{-x}}{e^x + e^{-x}} \) <br>
+    To make neural networks become nonlinear models, we often apply element-wise[a] nonlinear activation functions.
+    Some examples of nonlinear activation functions include:<br>
+    - Sigmoid: \( f(x) = \frac{1}{1+e^{-x}} \) <br>
+    - Tanh: \(f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \) <br>
     - Softplus: \( f(x) = ln(1+e^x) \) <br>
     - Rectified Linear Units: \( f(x) = \text{max}(x,0) \) <br>
     - Parametric Rectified Linear Units: 
@@ -97,25 +99,24 @@
     \alpha (e^x - 1) & \text{if } x < 0 \\
     x & \text{otherwise }
     \end{cases}
-     \)
+    \)
      
     <br><br>
 
     There are also non-element-wise nonlinear activation functions. <br>
     - Softmax: 
-    \(
+    \[
         f(x) = \frac{e^{x_i}}{\sum_{k=1}^{K} e^{x_k}}
-    \) <br>
+    \]
     - Maxout:
-    \(
+    \[
         f(x) = \max(x_1, x_2, \dots, x_k)
-    \) <br>
+    \]
     - Cummax:
-    \(
+    \[
         f(x) = \frac{e^{x_1}}{\sum_{k=1}^{K} e^{x_k}}, \ldots, \frac{\sum_{i=1}^{j} e^{x_i}}{\sum_{k=1}^{K} e^{x_k}}, \ldots, 1
-    \)
-
-    <br><br>
+    \]
+    <br>
     
     <!------------------------------------------------------------------------------------------------------------------------------>
     <h1>Batch Normalization</h1>
@@ -140,16 +141,14 @@
         \text{\( \gamma [j] \) and \( \beta [j] \) are learnable parameters}
     \]
 
-    In practice, o account for the dynamically changing weights and stochastic data, we use running mean and variance:
+    In practice, to account for the dynamically changing weights and stochastic data, we use running mean and variance:
     \[
-        m^t[j] = (1 - \alpha)m^{t-1} [j] + \alpha m[j]
+        m^t[j] = (1 - \alpha)m^{t-1} [j] + \alpha m[j] \quad \alpha \in \text{[0,1] is a hyperparameter}
     \]
     \[
         v^t[j] = (1 - \alpha)v^{t-1} [j] + \alpha v[j]
     \]
-    \[
-        \alpha \in \text{[0,1] is a hyperparameter}
-    \]
+    <br>
 
     <!------------------------------------------------------------------------------------------------------------------------------>
     <h1>Dropouts</h1>
@@ -184,7 +183,8 @@
     &= (1-p)X[i,j]
     \end{align*}
     \]
-
+    <br>
+    
     <!------------------------------------------------------------------------------------------------------------------------------>
     <h1>Putting It All Together</h1>
     <figure class="image" style="width:90%; max-width:100%;"  data-ckbox-resource-id="jeOXGYkvy81l">
@@ -195,66 +195,18 @@
     </figure>
 
     Using multiple hidden layers, we can build a deep MLP.
-    
-
-
-
-
-
-
-
-    
-
-
-    
-    
-
-
-    <br><br>
-    
-    <h2>text</h2>
-    - list<br>
-    -- sub<br>
-    --- and so one
-    <br><br>
-
-    equation:
-    \[
-    x = 1
-    \]
-    <br>
-
-    text
-    <br><br>
-
-    use this for images: https://onlinehtmleditor.dev/
     <br><br>
 
     <!------------------------------------------------------------------------------------------------------------------------------>
-    <h1>text</h1>
-
-
-
-
-
-
-
-
     <i>
         <b>Notes</b><br>
         [a] Element-wise refers to performing operations on corresponding elements of arrays, vectors, or matrices individually.
         Instead of performing operations on the entire dataset as a whole, the operation is applied independently to each individual element.
         <br><br>
-        [b] 
-        <br><br>
-        [c]
-        <br><br>
         <b>References</b><br>
-        [1]  
+        [1] https://lrjconan.github.io/UBC-CPEN455-DL/
     </i>
     <br><br>
-
-       
     </section>
 </body>
 </html>

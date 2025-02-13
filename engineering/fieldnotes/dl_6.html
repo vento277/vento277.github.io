@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Convolution</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include MathJax CDN -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Convolution</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        Convolution is a mathematical operation that combines two functions to produce a third function. It is widely used in signal processing, image processing, and machine learning, particularly in convolutional neural networks (CNNs).
+        Convolution takes two inputs: <br>
+        - \(f(X)\), which could represent a signal, image, or a function you're analyzing.
+        A kernel or filter <br>
+        - \(g(X)\) which is typically a small function or matrix that captures patterns or features in the data.
+        <br><br>
+
+        The operation involves "sliding" the filter (or kernel) across the input function and combining the values at each position to produce an output.
+        <br><br>
+
+        And before going into the topic, a quick review of Invariance and Equivariance. <br>
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="c6xEMDYCDuqx">
+            <picture>
+                <img src="https://miro.medium.com/v2/resize:fit:700/1*XI8nzpAc3jnACHc5WXqvRg.png" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        Invariance is A mathematical object (or a class of mathematical objects) remains unchanged after operations or
+        transformations of a certain type are applied to the objects:
+        \[
+            f(X) = f(g(X))
+        \]
+        And Equivariance is when applying a transformation and then computing the function produces the same result as computing the
+        function and then applying the transformation:
+        \[
+            g(f(X)) = f(g(X))
+        \]     
+
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>1D Discrete Convolution</h1>
+        Let us see what 1D (Discrete) Convolution looks like:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="c6xEMDYCDuqx">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/c6xEMDYCDuqx/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/c6xEMDYCDuqx/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/c6xEMDYCDuqx/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/c6xEMDYCDuqx/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/c6xEMDYCDuqx/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/c6xEMDYCDuqx/images/477.webp 477w" sizes="(max-width: 477px) 100vw, 477px" type="image/webp">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/c6xEMDYCDuqx/images/477.png" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        Imagine moving the filter across the input from left to right. The first cell of output is 2 as \( 2 \times 1 + 4 \times 0 + 0 \times -1 = 2\) and the same operation for the next cell as we move the 
+        filter across by 1 cell and so on. 
+        <br><br>
+
+        We formally denote 1D discrete convolution as:
+        \[
+            y = h * x \quad \text{and} \quad y[i] = \sum_{j = 1}^m h_jx_{i+j-1}
+        \]
+        <br>
+
+        What if we hope the output to have the same shape as input? We apply padding to the input:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="P-w451jrm79U">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/507.webp 507w" sizes="(max-width: 507px) 100vw, 507px" type="image/webp">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/P-w451jrm79U/images/507.png" width="507" height="392" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+
+        What if we hope the output to have a much smaller size compared to input? We apply stride:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="1bxUh3iWvvuP">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/514.webp 514w" type="image/webp" sizes="(max-width: 514px) 100vw, 514px">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/1bxUh3iWvvuP/images/514.png" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+
+        Padding and stride can be adjusted:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="uE1dwt2v97rE">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/560.webp 560w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/584.webp 584w" type="image/webp" sizes="(max-width: 584px) 100vw, 584px">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/uE1dwt2v97rE/images/584.png" width="584" height="418" style="max-width:100%; height:auto;">
+            </picture>
+        </figure><br>
+
+        <h2>Matrix Multiplication</h2>
+        The operation can be expanded and is represented as such:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="ZtbAP7zal_hP">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/82.webp 82w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/164.webp 164w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/246.webp 246w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/328.webp 328w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/410.webp 410w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/492.webp 492w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/574.webp 574w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/656.webp 656w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/738.webp 738w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/815.webp 815w" sizes="(max-width: 815px) 100vw, 815px" type="image/webp">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/ZtbAP7zal_hP/images/815.png" width="815" height="359" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        Where do operation happen downwards. Or it can be transformed to have the operation conducted horizontally:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="64_Z5PVITo0c">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/82.webp 82w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/164.webp 164w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/246.webp 246w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/328.webp 328w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/410.webp 410w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/492.webp 492w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/574.webp 574w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/656.webp 656w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/738.webp 738w,https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/811.webp 811w" sizes="(max-width: 811px) 100vw, 811px" type="image/webp">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/64_Z5PVITo0c/images/811.png" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        The above method is typically implmented on GPUs as it allows better parallelism.
+        <br><br>
+
+        <h2>Shift Operator</h2>
+        Consider a special Toeplitz matrix, circulant matrix (must be square):
+        <figure class="image"  style="width:70%; max-width:100%;"data-ckbox-resource-id="pCwjD6GNm9l2">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/560.webp 560w,https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/630.webp 630w" sizes="(max-width: 630px) 100vw, 630px" type="image/webp">
+                <img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/pCwjD6GNm9l2/images/630.png" width="630" height="290" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        We apply convolutions by shifting the filters. For \( w = [0,1, \ldots, 0] = C{w}\) the right-shift operator:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="uZdjmAyscLOM">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/560.webp 560w,https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/623.webp 623w" sizes="(max-width: 623px) 100vw, 623px" type="image/webp"><img style="max-width:100%; height:auto;" src="https://ckbox.cloud/c0b0d29181743234ae23/assets/uZdjmAyscLOM/images/623.png" width="623" height="354">
+            </picture>
+        </figure>
+        Note that the shift operator is an orthogonal matrix and is also circulant. And circulant matrices enable translation equivariance to convolutions
+        via. changing the location of the input for shich the results will be the same but shifted. For example, the gaussian filter with right shift:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="2VuISSuPW4sC">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/95.webp 95w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/190.webp 190w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/285.webp 285w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/380.webp 380w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/475.webp 475w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/570.webp 570w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/665.webp 665w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/760.webp 760w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/855.webp 855w,https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/943.webp 943w" sizes="(max-width: 943px) 100vw, 943px" type="image/webp"><img src="https://ckbox.cloud/c0b0d29181743234ae23/assets/2VuISSuPW4sC/images/943.png" width="943" height="343" style="max-width:100%; height:auto;">
+            </picture>
+        </figure><br>
+        
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>2D Discrete Convolution</h1>
+        Convlution in 2D gets a little more complicated. Let us see what it looks like:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="GHiJaaJAL_CP">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/87.webp 87w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/174.webp 174w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/261.webp 261w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/348.webp 348w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/435.webp 435w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/522.webp 522w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/609.webp 609w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/696.webp 696w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/783.webp 783w,https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/863.webp 863w" sizes="(max-width: 863px) 100vw, 863px" type="image/webp"><img  style="max-width:100%; height:auto;"src="https://ckbox.cloud/c0b0d29181743234ae23/assets/GHiJaaJAL_CP/images/863.png" width="863" height="355">
+            </picture>
+        </figure>
+        We formally denote 1D discrete convolution as:
+        \[
+            y_{i,j} = \sum_{m = 1}^K \sum_{n = 1}^K W_{m,n} x_{i+m-[K/2], j+n-[K/2]}
+        \]
+        <br>
+
+        The graphical representations are as follows:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="ireBXc7rgBJi">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/98.webp 98w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/196.webp 196w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/294.webp 294w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/392.webp 392w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/490.webp 490w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/588.webp 588w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/686.webp 686w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/784.webp 784w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/882.webp 882w,https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/971.webp 971w" sizes="(max-width: 971px) 100vw, 971px" type="image/webp">
+                <img style="max-width:100%; height:auto;"src="https://ckbox.cloud/c0b0d29181743234ae23/assets/ireBXc7rgBJi/images/971.png" width="971" height="422">
+            </picture>
+        </figure>
+
+        When it has multiple input channels:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="y9a6lKoVqlPV">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/97.webp 97w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/194.webp 194w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/291.webp 291w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/388.webp 388w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/485.webp 485w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/582.webp 582w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/679.webp 679w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/776.webp 776w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/873.webp 873w,https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/970.webp 970w" sizes="(max-width: 970px) 100vw, 970px" type="image/webp"><img style="max-width:100%; height:auto;"src="https://ckbox.cloud/c0b0d29181743234ae23/assets/y9a6lKoVqlPV/images/970.png" width="970" height="380">
+            </picture>
+        </figure>
+
+        As the grey move in (and down) the page, the output is genereated on the right side. With multiple filters:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="iGojvELOe2SY">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/526.webp 526w" sizes="(max-width: 526px) 100vw, 526px" type="image/webp"><img style="max-width:100%; height:auto;"src="https://ckbox.cloud/c0b0d29181743234ae23/assets/iGojvELOe2SY/images/526.png" width="526" height="372">
+            </picture>
+        </figure>
+
+        The effect of convolution is as follows:
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="Or31rvhelBhu">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/560.webp 560w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/640.webp 640w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/720.webp 720w,https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/759.webp 759w" sizes="(max-width: 759px) 100vw, 759px" type="image/webp"><img style="max-width:100%; height:auto;"src="https://ckbox.cloud/c0b0d29181743234ae23/assets/Or31rvhelBhu/images/759.png" width="759" height="401">
+            </picture>
+        </figure>
+        At the top is the filter, input at the middle, and the output at the bottom. It is clear that through filter adjustments, that even with the same input, output can largely vary. 
+        <br><br>
+
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>2D Transposed Convolution</h1>
+        We know convolution can reduce the input size, e.g., with stride > 1. Can any convolution operator enlarge the input size?
+        Yes, transposed convolution. <br>
+        - Convolution and its transposed version are mutually inverse only w.r.t. shapes of
+        input and output, but not w.r.t. values of input and output<br>
+        - Convolution and deconvolution are mutually inverse w.r.t. values of input and output
+        <br><br>
+
+        Suppose we have a 2D convolution (3x3 kernel):
+        <figure class="image"  style="width:70%; max-width:100%;" data-ckbox-resource-id="xRlFR2DGmm_D">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/560.webp 560w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/640.webp 640w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/720.webp 720w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/777.webp 777w" sizes="(max-width: 777px) 100vw, 777px" type="image/webp">
+                <img style="max-width:100%; height:auto;"src="https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/777.png" width="777" height="347">
+            </picture>
+        </figure>
+        
+        Another example:
+        <figure class="image" style="width:70%; max-width:100%;"  data-ckbox-resource-id="rrHnxqgqm7zh">
+            <picture>
+                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/94.webp 94w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/188.webp 188w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/282.webp 282w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/376.webp 376w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/470.webp 470w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/564.webp 564w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/658.webp 658w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/752.webp 752w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/846.webp 846w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/939.webp 939w" sizes="(max-width: 939px) 100vw, 939px" type="image/webp"><img style="max-width:100%; height:auto;" src="https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/939.png" width="939" height="412">
+            </picture>
+        </figure>
+        In practice, we do not pad zeros in between and then perform convolution due to its
+        high computational cost.
+
+
+
+
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <i>
+            <b>Notes</b><br>
+            <br><br>
+            
+            <b>References</b><br>
+            [1] https://lrjconan.github.io/UBC-CPEN455-DL/
+        </i>
+
+        <br><br>
+    </section>
+</body>
+</html>

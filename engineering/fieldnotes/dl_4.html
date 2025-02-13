@@ -28,11 +28,11 @@
         <h1>Math Review</h1>
         Let us recap some basic facts about variance:
         \[
-        V[X] = \mathbb{E} \left[(X - \mathbb{E}[X])^2\right] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+            V[X] = \mathbb{E} \left[(X - \mathbb{E}[X])^2\right] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
         \]
 
         For two independent random variables \( X \) and \( Y \), we have:
-        \begin{align*}
+        \begin{align}
             V[XY] &= \mathbb{E}[X^2 Y^2] - (\mathbb{E}[XY])^2 \\
             &= \mathbb{E}[X^2 Y^2] - \mathbb{E}[X]^2 \mathbb{E}[Y]^2 \\
             &= \mathbb{E}[X^2] \mathbb{E}[Y^2] - \mathbb{E}[X]^2 \mathbb{E}[Y^2] + \mathbb{E}[X]^2 \mathbb{E}[Y^2] - \mathbb{E}[X]^2 \mathbb{E}[Y]^2 \\
@@ -40,20 +40,21 @@
             &= V[X] \mathbb{E}[Y^2] + \mathbb{E}[X]^2 V[Y] \\
             &= V[X] (V[Y] + \mathbb{E}[Y]^2) + \mathbb{E}[X]^2 V[Y] \\
             &= V[X]V[Y] + \mathbb{E}[Y]^2 V[X] + \mathbb{E}[X]^2 V[Y]
-        \end{align*}    
+        \end{align}    
         If \( \mathbb{E}[X] = \mathbb{E}[Y] = 0 \), then:
         \[
-        V[XY] = V[X] V[Y]
+            V[XY] = V[X] V[Y]
         \]
         Additionally:
         \[
-        \mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y]
+            \mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y]
         \]
         \[
-        \mathbb{E}[X^2 Y^2] = \mathbb{E}[X^2] \mathbb{E}[Y^2]
+            \mathbb{E}[X^2 Y^2] = \mathbb{E}[X^2] \mathbb{E}[Y^2]
         \]
         <br><br>
 
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <h1>Forward Analysis</h1>
         Recall:
         \[
@@ -74,7 +75,7 @@
         \[
             V[h_2[i]] = V[\sum_{j=1}^{N_1}W_2[i,j]h_1[j]] = N_1 V[W_2[i,j]]V[h_1[j]]
         \]
-        This relation holds for all layers given the assumptions.When we unroll the recursion, we have:
+        This relation holds for all layers given the assumptions. When we unroll the recursion, we have:
         \[
             V[h_l[i]]] \approx V[x[j]] \prod_{k=1}^{l}N_{k-1}V[W_k[i,j]] \quad \text{[a]}
         \]
@@ -84,58 +85,51 @@
         \]
         To verify this, let's look at the graident w.r.t activations:
         \[
-        \frac{\partial L}{\partial h_1[j]} = \sum_{i=1}^{N_2} \frac{\partial L}{\partial h_2[i]} \frac{\partial h_2[i]}{\partial h_1[j]} \approx \sum_{i=1}^{N_2} \frac{\partial L}{\partial h_2[i]} W_2[i,j]
+            \frac{\partial L}{\partial h_1[j]} = \sum_{i=1}^{N_2} \frac{\partial L}{\partial h_2[i]} \frac{\partial h_2[i]}{\partial h_1[j]} \approx \sum_{i=1}^{N_2} \frac{\partial L}{\partial h_2[i]} W_2[i,j]
         \]
         Let us again assume i.i.d. and zero mean with same variance for all 
-        \(\frac{\partial L}{\partial h_2[i]}\), \(W_2[i,j]\), and \(h_2[i]\) at all layers, then
-        \[
-        V \left[ \frac{\partial L}{\partial h_1[j]} \right] \approx \sum_{i=1}^{N_2} V \left[ \frac{\partial L}{\partial h_2[i]} \right] V \left[ W_2[i,j] \right]
-        \]
-        \[
-        = N_2 V \left[ \frac{\partial L}{\partial h_2[i]} \right] V \left[ W_2[i,j] \right]
-        \]
-        \[
-        = V \left[ \frac{\partial L}{\partial y[i]} \right] \prod_{k=2}^{M+1} N_k V \left[ W_k[i,j] \right]
-        \]
+        \(\frac{\partial L}{\partial h_2[i]}\), \(W_2[i,j]\), and \(h_2[i]\) at all layers, then:
+        \begin{align}
+            V \left[ \frac{\partial L}{\partial h_1[j]} \right] &\approx \sum_{i=1}^{N_2} V \left[ \frac{\partial L}{\partial h_2[i]} \right] V \left[ W_2[i,j] \right] \\
+            &= N_2 V \left[ \frac{\partial L}{\partial h_2[i]} \right] V \left[ W_2[i,j] \right] \\
+            &= V \left[ \frac{\partial L}{\partial y[i]} \right] \prod_{k=2}^{M+1} N_k V \left[ W_k[i,j] \right]
+        \end{align}
         Setting \( V [W_k[i,j]] = \frac{1}{N_k} \) preserves the variance of gradients w.r.t. activations. What about the gradients w.r.t. weights?
         \[
             \frac{\partial L}{\partial W_2[i,j]} = \frac{\partial L}{\partial h_2[i]} \frac{\partial h_2[i]}{\partial W_2[i,j]} \approx \frac{\partial L}{\partial h_2[i]} h_1[j]
         \]        
         \begin{align}
-        V \left[ \frac{\partial L}{\partial W_2[i,j]} \right] &\approx V \left[ \frac{\partial L}{\partial h_2[i]} \right] V \left[ h_1[j] \right] \\
-        &= \left( V \left[ \frac{\partial L}{\partial y[i]} \right] \prod_{k=3}^{M+1} N_k V \left[ W_k[i,j] \right] \right) \left( V [x[j]] \prod_{k=1}^{1} N_{k-1} V [W_k[i,j]] \right) \\
-        &= \frac{N_0}{N_1} \left( \prod_{k=1}^{1} N_k V [W_k[i,j]] \right) \left( \prod_{k=3}^{M+1} N_k V [W_k[i,j]] \right) V \left[ \frac{\partial L}{\partial y[i]} \right] V [x[j]] \\
-        &= \frac{N_0}{N_1} V \left[ \frac{\partial L}{\partial y[i]} \right] V [x[j]]
+            V \left[ \frac{\partial L}{\partial W_2[i,j]} \right] &\approx V \left[ \frac{\partial L}{\partial h_2[i]} \right] V \left[ h_1[j] \right] \\
+            &= \left( V \left[ \frac{\partial L}{\partial y[i]} \right] \prod_{k=3}^{M+1} N_k V \left[ W_k[i,j] \right] \right) \left( V [x[j]] \prod_{k=1}^{1} N_{k-1} V [W_k[i,j]] \right) \\
+            &= \frac{N_0}{N_1} \left( \prod_{k=1}^{1} N_k V [W_k[i,j]] \right) \left( \prod_{k=3}^{M+1} N_k V [W_k[i,j]] \right) V \left[ \frac{\partial L}{\partial y[i]} \right] V [x[j]] \\
+            &= \frac{N_0}{N_1} V \left[ \frac{\partial L}{\partial y[i]} \right] V [x[j]]
         \end{align}
         Setting \( V [W_k[i,j]] = \frac{1}{N_k} \) makes the variance of gradients w.r.t. weights behave reasonably (e.g., no exploding or vanishing).
         In summary, to preserve the variance of activations, we set
         \[
-        V [W_k[i,j]] = \frac{1}{N_{k-1}}
+            V [W_k[i,j]] = \frac{1}{N_{k-1}}
         \]
         to preserve the variance of gradients w.r.t. activations, we set
         \[
-        V [W_k[i,j]] = \frac{1}{N_k}
+            V [W_k[i,j]] = \frac{1}{N_k}
         \]
         To compromise between two goals, we can take the mean of the denominators:
         \[
-        V [W_k[i,j]] = \frac{1}{\frac{N_k + N_{k-1}}{2}} = \frac{2}{N_k + N_{k-1}}
+            V [W_k[i,j]] = \frac{1}{\frac{N_k + N_{k-1}}{2}} = \frac{2}{N_k + N_{k-1}}
         \]
         This is the so-called “Xavier Initialization”. By considering the effect of ReLU, we can similarly derive “Kaiming Initialization”.
         <br><br>
 
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <i>
             <b>Notes</b><br>
             [a] Note that i and j here are arbitrary since we assume all activations have the same variance and all weights have the same variance as well.
             <br><br>
-            [b] 
-            <br><br>
-            [c]
-            <br><br>
-            <b>References</b><br>
-            [1]  
-        </i>
 
-       
+            <b>References</b><br>
+            [1] https://lrjconan.github.io/UBC-CPEN455-DL/
+        </i>
+        <br><br>
     </section>
 </body>
 </html>

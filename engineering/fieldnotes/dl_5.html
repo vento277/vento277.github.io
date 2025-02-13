@@ -20,11 +20,10 @@
     </section>
 
     <section>
-        <h1>text</h1>
         Previously, we have discussed the method of computing graidents. Let us see how we perofmrn gradient-based learning, such as, Stochastic Gradient Descent (SGD).
-
         <br><br>
         
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <h1>Stochastic Gradient Descent</h1>
         Stochastic Gradient Descent (SGD) is an optimization algorithm used to minimize a loss function.
         It’s a variant of the traditional gradient descent algorithm, with the key difference being that it updates the parameters using a small, random subset (a mini-batch) of the data at each step, rather than using the entire dataset.
@@ -40,6 +39,7 @@
             </picture>
         </figure>
         In these regions, SGD may struggle to make efficient progress because it can get stuck or make inconsistent updates. SGD updates parameters based on the gradient, but in ravines, the gradient can point in very different directions, making the optimization process less stable and slow.
+        <br><br>
 
         <h2>Momentum</h2>
         Gradient descent is a man walking down a hill. He follows the steepest path downwards; his progress is slow, but steady.
@@ -91,57 +91,109 @@
             W^t = W^{t-1} - \eta diag(\epsilon I + G^t)^{-1/2} g^t
         \]
         Now that we can tune the learning rate adaptively, how can we incorporate momentum? Based on RMSProp, Adam (Adaptive Momentum) proposes to keep another EMA of past gradients:
-
-
-
-
-        use this for images: https://onlinehtmleditor.dev/
-
-        <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="aEYsLGcMgdFu">
-            <picture>
-                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/94.webp 94w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/188.webp 188w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/282.webp 282w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/376.webp 376w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/470.webp 470w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/564.webp 564w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/658.webp 658w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/752.webp 752w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/846.webp 846w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.webp 934w"
-                        type="image/webp" sizes="(max-width: 934px) 100vw, 934px">
-                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.png" width="934" height="500" style="max-width:100%; height:auto;">
-            </picture>
-        </figure>
+        \[
+            g^{t} = \beta_1 g^{t - 1} + (1-\beta_1)g^T
+        \]
+        \[
+            G^t = \beta_2 G^{t-1} + (1-\beta_2)g^t {g^t}^T \quad \text{In practive, we only need} \quad g^t \odot g^t
+        \]
+        \[
+            W^t = W^{t-1} - \eta_t diag(\epsilon I + G^t)^{-1/2} g^{t}
+        \]
+        \[
+            \eta_t = \eta \frac{\sqrt{1 - \beta^t_2}}{1 - \beta^t_1} \quad \text{Where} \quad \frac{\sqrt{1 - \beta^t_2}}{1 - \beta^t_1} \text{is the correction term}
+        \]
+        The correction term comes from computing the exptected value:
+        \[
+            \mathbb{E} [g^{t}] = \mathbb{E} [\beta_1 g^{\sim t - 1} + (1-\beta_1)g^T] = (1 - \beta_1^t) \mathbb{E} [g^i]
+        \]
+        Similar with \(G^t\):
+        \[
+            \mathbb{E} [G^{t}] \approx (1 - \beta_2^t) \mathbb{E} [g^i {g^i}^T]
+        \]
+        Now to check the updates in \(\eta diag(\epsilon I + G^t)^{-1/2} g^t\):
+        \[
+            \mathbb{E}[\Delta W^t[j]] \approx \eta_t \frac{(1-\beta^t_1 \mathbb{E}[g^i[j]])}{\sqrt{1-\beta^t_2} \sqrt{\mathbb{E}[(g^i[j])^2]}} \leq \eta_t \frac{1 - \beta^t_1}{\sqrt{1 - \beta^t_2}} = \eta
+        \]
+        When \(\beta_1 = 0\) almost the same as RMSProp besides the correction term:
+        \[
+            G^t = p \beta_2 G^{t-1} + (1-p)g^t {g^t}^T \quad 
+        \]
+        \[
+            W^t = W^{t-1} - \eta_t diag(\epsilon I + G^t)^{-1/2} g^{t}
+        \]
+        In summary the algorithm for Adam is given as:<br>
+        - Input: Step \( T \), learning rate \( \eta \), initial weights \( W^0 \), batch size \( B \), momentum \( \beta_1 = 0.9 \quad \beta_2 = 0.999 \), \( \epsilon = 10^{-8} \), \( m^0 = 0 \), \(v^0 = 0 \).
+        For \( t = 1, \dots, T \):<br>
+        -- Get mini-batch data \( (X^t, Y^t) \)<br>
+        -- Compute the loss function:
+            \[
+            L(W^{t-1}, X^t, Y^t) = \frac{1}{B} \sum_{i=1}^{B} l(f(W^{t-1}, X^t[i]), Y^t[i])
+            \]<br>
+        -- Compute the momentum term:
+            \[
+                g^t = \frac{\partial L(W^{t-1}, X^t, Y^t)}{\partial W}
+            \]
+            \[
+                m^t = \beta_1 m^{t-1} + (1-\beta_1)g^t
+            \]
+            \[
+                v^t = \beta_2 v^{t-1} + (1-\beta_2)(g^t \odot g^t)
+            \]
+            <br>
+        -- Update the weights:
+            \[
+            W^t = W^{t-1} - \eta \frac{\sqrt{1-\beta^t_2}}{1-\beta^t_1} \frac{m^t}{\sqrt{v^t} + \epsilon}
+            \] <br>
+        - Return \(W^T \)
         <br><br>
 
         <!------------------------------------------------------------------------------------------------------------------------------>
-        <h1>text</h1>
+        <h1>Weight Decay</h1>
+        Suppose we observe overfitting and want to regularize the complexity of our neural networks to reduce it. We can penalize the weights
+        so that they are not far from 0, thus restricting the set of models we are considering:
+        \[
+            L(W, X, Y) = \frac{1}{B} \sum_{i=1}^B l(f(W,X[i]), Y[i])
+        \]
+        \[
+            \hat{L}(W, X, Y) = L(W, X, Y) + \frac{\lambda}{2} ||\text{Vec}(W)||^2_2
+        \]
+        We can control the lambda to trade-off model complexity and overfitting. It only adds a term to the existing gradient:
+        \[
+            \frac{\partial{\hat{Y}}}{\partial W} = \frac{\partial L}{\partial W} + \lambda W
+        \]
+        For methods like SGD, SGD + Momentum, we directly add this term to the gradient and then perform gradient update.
+        But for Adam, we have two possibilities: 1. add it to the gradient and then perform gradient update; 2. add it to the gradient update
+        This ordering change makes a difference in practice and 2 is called AdamW.
+        <br><br>
 
+        Going back to Adam, we can place the \(g^t\):
+        \[
+            g^t = \frac{\partial L(W^{t-1}, X^t, Y^t)}{\partial W} + \lambda W
+        \]
+        Which makes weight decay also goes through EMA.
+        Also for \(W^t\):
+        \[
+            W^t = W^{t-1} - \eta (\frac{\sqrt{1-\beta^t_2}}{1-\beta^t_1} \frac{m^t}{\sqrt{v^t} + \epsilon} + \lambda W^{t-1})
+        \]
+        <br>
 
+        <h2>Early Stops</h2>
+        We do not necessarily need to run the optimization until the maximum number of iterations or until its convergence.
+        We can check the validation error and if it is keep increasing within a time window, then we stop the training.
+        If you worry that it will go down again, run until the maximum number of iterations and pick the model with the least validation error.
+        <br><br>
 
-    
-
-
-
-
-
-
-
-
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <i>
             <b>Notes</b><br>
-            [a] 
             <br><br>
-            [b] 
-            <br><br>
-            [c]
-            <br><br>
+
             <b>References</b><br>
-            [1]  
+            [1] https://lrjconan.github.io/UBC-CPEN455-DL/ 
         </i>
 
-       
+        <br><br>
     </section>
 </body>
 </html>

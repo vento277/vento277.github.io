@@ -25,6 +25,10 @@
         <br><br>
 
         In simple terms, backpropagation allows the neural network to learn from its mistakes by adjusting the weights and biases to reduce the difference between the predicted output and the true output.
+        The most successful learning algorithm in machine learning so far is gradient based learning.
+        With Stochastic gradient descent being introduced in 1951 by Herbert Robbins and Sutton Monro,
+        back-propagation is an efficient SGD in the context of deep learning. 
+        It has also been the most successful learning algorithm so far for training feedforward neural networks. 
         <br><br>
 
         The process of backpropagation involves the following steps:<br>
@@ -75,6 +79,7 @@
         </figure>
         <br>
 
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <h1>Forward Pass</h1>
         Consider a MLP. During forward pass:
         <figure class="image" style="width:90%; max-width:100%;" data-ckbox-resource-id="Jq95TVpUO5O_">
@@ -84,8 +89,9 @@
             </picture>
         </figure>
         The stages from \( x \) to \( y \) can be represented as the equation on the right.
-
         <br><br>
+
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <h1>Backward Pass</h1>
         Consider a MLP. During backward pass:
         <figure class="image" style="width:80%; max-width:100%;" data-ckbox-resource-id="XgEMG-aVQdcC">
@@ -96,98 +102,99 @@
         </figure>
         Loss:
         \[
-        L = l(y, \bar{y})
+            L = l(y, \bar{y})
         \]
         Gradient of loss with respect to \(y\):
         \[
-        \frac{\partial L}{\partial y}
+            \frac{\partial L}{\partial y}
         \]
         Gradient of loss with respect to \(h_M\):
         \[
-        \frac{\partial L}{\partial h_M} = \frac{\partial L}{\partial y} \cdot \frac{\partial y}{\partial h_M}
+            \frac{\partial L}{\partial h_M} = (\frac{\partial y}{\partial h_M})^T \frac{\partial L}{\partial y} 
         \]
         where
         \[
-        y = W_{m+1} h_M
+            y = W_{m+1} h_M
         \]
         \[
-        \frac{\partial y}{\partial h_M} = W_{m+1}
+            \frac{\partial y}{\partial h_M} = W_{m+1}
         \]
         Gradient of loss with respect to \(W_{m+1}\):
         \[
-        \frac{\partial L}{\partial W_{m+1}} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial W_{m+1}}
+            \frac{\partial L}{\partial W_{m+1}} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial W_{m+1}}
         \]
         But this is incorrect as \( \frac{\partial y}{\partial W_{m+1}}\) is the derivative of a vector w.r.t. a matrix. The shape dosen't work out[a].
         Noting the \( y[i] \) only depends on \(W_{M+1}[i, :]\) and not \(W_{M+1}[j, :]\):
         \[
-        y[i] = \sum_j W_{M+1}[i, j]h[j]
+            y[i] = \sum_j W_{M+1}[i, j]h[j]
         \]
         \[
-        \frac{\partial y[i]}{\partial W_{M+1}[i, j]} = h[j]
+            \frac{\partial y[i]}{\partial W_{M+1}[i, j]} = h[j]
         \]
         Therefore:
         \[
-        \frac{\partial L}{\partial W_{M+1}[i,j]} = \frac{L}{y[i]} \frac{ \partial y[i]}{\partial W_{M+1}[i,j]} = \frac{\partial L}{\partial y[i]}h[j]
+            \frac{\partial L}{\partial W_{M+1}[i,j]} = \frac{L}{y[i]} \frac{ \partial y[i]}{\partial W_{M+1}[i,j]} = \frac{\partial L}{\partial y[i]}h[j]
         \]
         \[
-        \frac{\partial L}{\partial W_{M+1}} = \frac{\partial L}{\partial y}h^T
+            \frac{\partial L}{\partial W_{M+1}} = \frac{\partial L}{\partial y}h^T
         \]
         Gradient of loss with respect to \(h_2\):
         \[
-        \frac{\partial L}{\partial h_M} = (\frac{\partial y}{\partial h_M})^T \frac{\partial L}{\partial y}
+            \frac{\partial L}{\partial h_M} = (\frac{\partial y}{\partial h_M})^T \frac{\partial L}{\partial y}
         \]
         \[
-        \frac{\partial L}{\partial h_{M-1}} = (\frac{\partial h_M}{\partial h_{M-1}})^T \frac{\partial L}{\partial h_M}
+            \frac{\partial L}{\partial h_{M-1}} = (\frac{\partial h_M}{\partial h_{M-1}})^T \frac{\partial L}{\partial h_M}
         \]
         Therefore:
         \[
-        \frac{\partial L}{\partial h_2} = (\frac{\partial h_3}{\partial h_2})^T \ldots (\frac{\partial h_M}{\partial h_{M-1}})^T (\frac{\partial y}{\partial h_M})^T \frac{\partial L}{\partial y}
+            \frac{\partial L}{\partial h_2} = (\frac{\partial h_3}{\partial h_2})^T \ldots (\frac{\partial h_M}{\partial h_{M-1}})^T (\frac{\partial y}{\partial h_M})^T \frac{\partial L}{\partial y}
         \]
         The general form:
         \[
-        \frac{\partial L}{\partial h_i} = J_{i+1}^T \ldots J_M^T \frac{\partial L}{\partial y} \quad \text{where} \quad J_{i+1} \equiv \frac{\partial h_{i+1}}{\partial h_i} \quad h_{M+1} \equiv y
+            \frac{\partial L}{\partial h_i} = J_{i+1}^T \ldots J_M^T \frac{\partial L}{\partial y} \quad \text{where} \quad J_{i+1} \equiv \frac{\partial h_{i+1}}{\partial h_i} \quad h_{M+1} \equiv y
         \]
         What is \( J_2 \equiv \frac{\partial h_2}{\partial h_1} \)? We know that \(h_2 = \sigma (W_2 h_1)\) and \( z_2 = W_2 h_1 \) so:
         \[
-        \frac{\partial h_2}{\partial h_1} = \frac{\partial h_2}{\partial z_2} \frac{\partial z_2}{\partial h_1} = \text{diag}(\sigma ' (z_2))W_2 \quad \text{[b]}
+            \frac{\partial h_2}{\partial h_1} = \frac{\partial h_2}{\partial z_2} \frac{\partial z_2}{\partial h_1} = \text{diag}(\sigma ' (z_2))W_2 \quad \text{[b]}
         \]
         Gradient of loss with respect to \(W_2\):
         \[
-        \frac{\partial L}{\partial z_2} = (\frac{\partial h_2}{\partial z_2})^T \frac{\partial L}{\partial h_2} = \sigma ' (z_2) \odot \frac{\partial L}{\partial h_2}
+            \frac{\partial L}{\partial z_2} = (\frac{\partial h_2}{\partial z_2})^T \frac{\partial L}{\partial h_2} = \sigma ' (z_2) \odot \frac{\partial L}{\partial h_2}
         \]
         The element-wise operation is due to non-linearity[c]. Now, note \( z_2[i] = \sum_j W_{2}[i, j]h_1[j]\):
         \[
-        \frac{\partial L}{\partial W_2[i,j]} = \frac{\partial L}{\partial z_2[i]} \frac{\partial z_2[i]}{\partial W_2[i,j]} = \frac{\partial L}{\partial z_2[i]}h_1[j]
+            \frac{\partial L}{\partial W_2[i,j]} = \frac{\partial L}{\partial z_2[i]} \frac{\partial z_2[i]}{\partial W_2[i,j]} = \frac{\partial L}{\partial z_2[i]}h_1[j]
         \]
         \[
-        \frac{\partial L}{\partial W_2} = (\sigma ' (z_2) \odot \frac{\partial L}{\partial h_2})h_1^T
+            \frac{\partial L}{\partial W_2} = (\sigma ' (z_2) \odot \frac{\partial L}{\partial h_2})h_1^T
         \]
         From the above derviations, we can conclude that:
         \[
-        z_i = W_i h_{i-1}
+            z_i = W_i h_{i-1}
         \]
         \[
-        J_i = \text{diag}(\sigma ' (z_i))W_i
+            J_i = \text{diag}(\sigma ' (z_i))W_i
         \]
         \[
-        \frac{\partial L}{\partial h_i} = J_{i+1}^T \ldots J_M^T \frac{L}{y}
+            \frac{\partial L}{\partial h_i} = J_{i+1}^T \ldots J_M^T \frac{\partial L}{\partial y}
         \]
         \[
-        \frac{\partial L}{\partial W_i} = (\sigma ' (z_i) \odot \frac{\partial L}{\partial h_i})h_{i-1}^T
+            \frac{\partial L}{\partial W_i} = (\sigma ' (z_i) \odot \frac{\partial L}{\partial h_i})h_{i-1}^T
         \]
         The tensors[d] \(z_i\) and \(h_{i-1}^T\) can be cached[e] in foward pass to avoid duplicated computation in the backward pass:
         \[
-        \text{forward pass: } h_2 = \sigma (W_2 h_1)
+            \text{forward pass: } h_2 = \sigma (W_2 h_1)
         \] 
         \[
-        \text{backward pass: } \frac{\partial L}{\partial h_1} = J_2^T \frac{\partial L}{\partial h_2} \quad \text{and} \quad 
-        \frac{\partial L}{\partial W_2} = (\sigma ' (z_2) \odot \frac{\partial L}{\partial h_2})h_{1}^T
+            \text{backward pass: } \frac{\partial L}{\partial h_1} = J_2^T \frac{\partial L}{\partial h_2} \quad \text{and} \quad 
+            \frac{\partial L}{\partial W_2} = (\sigma ' (z_2) \odot \frac{\partial L}{\partial h_2})h_{1}^T
         \]
         \[
-        z_2 = W_2 h_1 \quad \text{(cached)}
+            z_2 = W_2 h_1 \quad \text{(cached)}
         \]
-        <br><br>
+        <br>
 
+        <!------------------------------------------------------------------------------------------------------------------------------>
         <i>
             <b>Notes</b><br>
             [a] The phrase "the shape doesn't work out" refers to a mismatch in the dimensions (shapes) of the tensors (vectors or matrices) involved in the calculation of gradients. 
@@ -216,13 +223,12 @@
             <br><br>
 
             [e] The idea of caching these tensors is to store the results so that they can be reused later during the backward pass. Without caching, you would need to recompute these values, which would be inefficient and slow.
+            <br><br>
             
             <b>References</b><br>
-            [1]  
+            [1] https://lrjconan.github.io/UBC-CPEN455-DL/
         </i>
         <br><br>
-
-       
     </section>
 </body>
 </html>
