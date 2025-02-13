@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Recurrent Neural Networks</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include MathJax CDN -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Recurrent Neural Networks</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>BPTT Analysis</h1>
+        RNN layer:
+        \[
+            h_t = f(X_T, h_{t-1}, w_h)
+        \]
+        \[
+            o_t = g(h_t, w_o)
+        \]
+        Thus, we have a chain value:
+        \[
+            \{ \ldots, (x_{t-1}, h_{t-1}, o_{t-1}), (x_t, h_t, o_t), \ldots \}
+        \]
+        The objective function evaluated over all T times are:
+        \[
+            L(x_1, \ldots, x_T, y_1, \ldots, y_T, w_h, w_o) = \frac{1}{T} \sum_{t=1}^T l(y_t,o_t)
+        \]
+        <br><br>
+        
+        <h2>text</h2>
+        - list<br>
+        -- sub<br>
+        --- and so one
+        <br><br>
+
+        equation:
+        \[
+        x = 1
+        \]
+        <br>
+
+        use this for images: https://onlinehtmleditor.dev/
+
+        <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="aEYsLGcMgdFu">
+            <picture>
+                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/94.webp 94w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/188.webp 188w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/282.webp 282w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/376.webp 376w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/470.webp 470w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/564.webp 564w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/658.webp 658w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/752.webp 752w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/846.webp 846w,
+                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.webp 934w"
+                        type="image/webp" sizes="(max-width: 934px) 100vw, 934px">
+                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.png" width="934" height="500" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br><br>
+
+        <i>
+            <b>Notes</b><br>
+            [a] Total derivative is a measure of the change of all variables, while Partial derivative is a measure of the change of a particular variable having others kept constant.
+            For example, given that we have a function \( f(x(t), t)\), the \( \frac{df}{dt} \) covers \( \frac{\partial f}{\partial t} + \frac{\partial f}{\partial x} \frac{\partial x}{\partial t}    \)
+            <br><br>
+            [b] 
+            <br><br>
+            [c]
+            <br><br>
+            <b>References</b><br>
+            [1]  
+        </i>
+
+        <br><br>
+    </section>
+</body>
+</html>
