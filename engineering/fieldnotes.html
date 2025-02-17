@@ -6,60 +6,157 @@
     <title>Fieldnotes</title>
     <link rel="stylesheet" href="../assets/style.css">
     <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <script src="https://esm.sh/css-doodle/css-doodle.min.js?raw"></script>
 </head>
 
 <html>
     <body>
         <section class = "header">
-            <div class="header-col-L">Fieldnotes</div>
-            <div class="header-col-R">
-            </div>
+            <div class="typing-container">
+                <div class="text-wrapper">
+                  <div class="typing-text">Fieldnotes</div>
+                </div>
+              </div>
         </section>
 
-        <section>
-            Feynman Technique is a learning method popularized by physicist Richard Feynman. It involves four steps:
-            <ol>
-                <li>Select a concept and study it.</li>
-                <li>Teach the concept to someone else (or yourself) using simple, clear language.</li>
-                <li>Identify gaps in your understanding and refine your knowledge.</li>
-                <li>Repeat steps 1~3 until you get the hang of the topic.</li>
-            </ol>
-
-            <img class="image" src="https://www.pluggedin.com/wp-content/uploads/2019/12/a-beautiful-mind.jpg">
-            <p class="caption">A Beautiful Mind (2001) by Ron Howard</p>
-
-            <footer>  
-                <br>
+        <section class = "content-details-row">
+            <section class = "content-details-col">
+                <img class="image" src="https://divisions-prod.s3.amazonaws.com/root/images/feynman01-NEWS-WEB_zxNtxwN.original.jpg">
+                <p class="caption">Richard Feynman (1918 ~ 1988)</p>
+            </section>
+            <section class = "content-details-col" style="padding: 5px;">
+                Richard Feynman was a renowned American theoretical physicist, best known for his contributions to the development of quantum mechanics and quantum electrodynamics (QED).
+                <br><br>
+                Beyond his scientific work, Feynman was also famous for his ability to explain complex topics in an engaging and accessible way. His book, "The Feynman Lectures on Physics", are widely enjoyed by both scientists and non-scientists alike.
                 <hr>
-                <div class="content-details-row">
-                    <div class="content-details-col">
-                        <a style = "font-weight: 600; text-decoration: None;">Machine Learning</a><br>
-                        1. <a href = "fieldnotes/ml_1">Linear Regression</a><br>
-                        2. <a href = "fieldnotes/ml_1">Logistic Regression</a><br>
-                    </div>
-                    <div class="content-details-col">
-                        <a style = "font-weight: 600; text-decoration: None;">Firmware</a><br>
-                        1. <a href = "">Introduction</a><br>
-                    </div>
-                    <div class="content-details-col">
-                        <a style = "font-weight: 600; text-decoration: None;">Error Control Code</a><br>
-                        1. <a href = "fieldnotes/ecc_1.html">Finite Fields I</a><br>
-                        1. <a href = "fieldnotes/ecc_5.html">Finite Fields II</a><br>
-                    </div>
-                </div>
-                <br>
-                <div class="content-details-row">
-                    <div class="content-details-col">
-                        <a style = "font-weight: 600; text-decoration: None;">Circuit Analysis</a><br>
-                        - <a href = "fieldnotes/ca_consol.pdf">Consolidated</a><br>
-                    </div>
-                    <div class="content-details-col">
-                        <a style = "font-weight: 600; text-decoration: None;">Electromagnetism</a><br>
-                        - <a href = "fieldnotes/em_consol.pdf">Consolidated</a><br>
-                    </div>
-                    <div class="content-details-col">
-                        <a style = "font-weight: 600; text-decoration: None;"></a><br>
-                    </div>
-                </div>
-            </footer>
+                Feynman Technique is a popularized learning method that involves four steps:
+                <ol>
+                    <li>Select a concept and study it.</li>
+                    <li>Teach the concept to someone else (or yourself).</li>
+                    <li>Identify gaps in your understanding and refine your knowledge.</li>
+                    <li>Repeat steps 2~3 until you get the hang of the topic.</li>
+                </ol>
+            </section>
         </section>
+        <br><br>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 120">
+            <path id="noisySineWave" fill="none" stroke="black" stroke-width="3"/>
+        </svg>
+        <br><br><br>
+
+        <div class="grid-container">
+            <div class="grid-item">
+                <a style = "font-weight: 600; text-decoration: None;">Machine Learning</a><br>
+                1. <a href = "fieldnotes/ml_1">Linear Regression</a><br>
+                2. <a href = "fieldnotes/ml_1">Logistic Regression</a><br>
+            </div>
+            <div class="grid-item">
+                <a style = "font-weight: 600; text-decoration: None;">Firmware</a><br>
+                1. <a href = "">Introduction</a><br>
+            </div>
+            <div class="grid-item">
+                <a style = "font-weight: 600; text-decoration: None;">Error Control Code</a><br>
+                1. <a href = "fieldnotes/ecc_1.html">Finite Fields I</a><br>
+                1. <a href = "fieldnotes/ecc_5.html">Finite Fields II</a><br>
+            </div>
+            <div class="grid-item">
+                <a style = "font-weight: 600; text-decoration: None;">Circuit Analysis</a><br>
+                - <a href = "fieldnotes/ca_consol.pdf">Consolidated</a><br>
+            </div>
+            <div class="grid-item">
+                <a style = "font-weight: 600; text-decoration: None;">Electromagnetism</a><br>
+                - <a href = "fieldnotes/em_consol.pdf">Consolidated</a><br>
+            </div>
+        </div>
+        <br><br>
+
+        <script>
+            const texts = [
+                "Fieldnotes",
+                "Measure twice, cut once. Panic later.",
+                "Too many wires, too little time.",
+                "Just throw more calculations at it.",
+                "I'm not procrastinating, I’m debugging",
+                "Failure is a feature.",
+                "Compiling... Still compiling...",
+                "Rerun the simulation… again.",
+                "Did you try rebooting?"
+            ];
+        
+            const typingText = document.querySelector('.typing-text');
+            let textIndex = 0;
+        
+            function typeText(text) {
+              let charIndex = 0;
+              typingText.textContent = '';
+              
+              function type() {
+                if (charIndex < text.length) {
+                  typingText.textContent += text.charAt(charIndex);
+                  charIndex++;
+                  setTimeout(type, 100);
+                } else {
+                  setTimeout(erase, 2000);
+                }
+              }
+        
+              function erase() {
+                if (typingText.textContent.length > 0) {
+                  typingText.textContent = text.substring(0, typingText.textContent.length - 1);
+                  setTimeout(erase, 50);
+                } else {
+                  textIndex = (textIndex + 1) % texts.length;
+                  setTimeout(() => typeText(texts[textIndex]), 500);
+                }
+              }
+        
+              type();
+            }
+        
+            typeText(texts[textIndex]);
+        </script>
+
+        <script>
+            const sineWave = document.getElementById('noisySineWave');
+            const amplitude = 50; // Amplitude of the sine wave
+            const frequency = 0.01; // Frequency of the sine wave
+            const noiseAmplitude = 10; // Amplitude of the noise
+            let offset = 0; // Horizontal offset for animation
+            let noiseStart = Math.random() * 1000; // Random start of the noisy portion
+            let noiseEnd = noiseStart + 100 + Math.random() * 200; // Random end of the noisy portion
+    
+            function generateSineWaveWithNoise() {
+                let pathData = ''; // Start with an empty path
+                for (let x = 0; x <= 1000; x += 10) {
+                    const sineValue = Math.sin((x + offset) * frequency) * amplitude;
+                    let y = 60 + sineValue;
+    
+                    // Apply noise only if x is within the noisy portion
+                    if (x >= noiseStart && x <= noiseEnd) {
+                        const noise = (Math.random() - 0.5) * noiseAmplitude;
+                        y += noise;
+                    }
+    
+                    if (x === 0) {
+                        pathData += `M${x} ${y}`; // Move to the starting point
+                    } else {
+                        pathData += ` L${x} ${y}`; // Draw a line to the next point
+                    }
+                }
+    
+                sineWave.setAttribute('d', pathData);
+                offset += 2; // Move the wave to the left
+    
+                // Randomly update the noisy portion over time
+                if (Math.random() < 0.02) { // 2% chance to change the noisy portion
+                    noiseStart = Math.random() * 1000;
+                    noiseEnd = noiseStart + 100 + Math.random() * 200;
+                }
+    
+                requestAnimationFrame(generateSineWaveWithNoise);
+            }
+            generateSineWaveWithNoise();
+        </script>
+    </body>
+</html>

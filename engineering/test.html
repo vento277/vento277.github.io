@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    .typing-container {
+      padding: 0px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 800px; /* Maximum width for larger screens */
+      margin: 0 20px; /* Add some margin on the sides */
+    }
+
+    /* Added a wrapper to maintain height */
+    .text-wrapper {
+      height: 60px; /* Fixed height based on font size */
+      display: flex;
+      align-items: center;
+    }
+
+    .typing-text {
+      font-size: 50px;
+      white-space: normal; /* Allow text to wrap */
+      overflow: hidden;
+      width: 100%;
+      min-height: 60px; /* Match wrapper height */
+      line-height: 1.2; /* Adjust line height for wrapped text */
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+      .typing-text {
+        font-size: 30px; /* Smaller font size on mobile */
+        min-height: 40px;
+      }
+      .text-wrapper {
+        height: 40px;
+      }
+    }
+
+    /* Media query for very small screens */
+    @media (max-width: 480px) {
+      .typing-text {
+        font-size: 20px;
+        min-height: 30px;
+      }
+      .text-wrapper {
+        height: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="typing-container">
+    <div class="text-wrapper">
+      <div class="typing-text">Hello, I am typing...</div>
+    </div>
+  </div>
+
+  <script>
+    const texts = [
+      "Hello, I am typing...",
+      "Welcome to the demo!",
+      "This is a typing animation.",
+      "Pretty cool, right?"
+    ];
+
+    const typingText = document.querySelector('.typing-text');
+    let textIndex = 0;
+
+    function typeText(text) {
+      let charIndex = 0;
+      typingText.textContent = '';
+      
+      function type() {
+        if (charIndex < text.length) {
+          typingText.textContent += text.charAt(charIndex);
+          charIndex++;
+          setTimeout(type, 100);
+        } else {
+          setTimeout(erase, 2000);
+        }
+      }
+
+      function erase() {
+        if (typingText.textContent.length > 0) {
+          typingText.textContent = text.substring(0, typingText.textContent.length - 1);
+          setTimeout(erase, 50);
+        } else {
+          textIndex = (textIndex + 1) % texts.length;
+          setTimeout(() => typeText(texts[textIndex]), 500);
+        }
+      }
+
+      type();
+    }
+
+    typeText(texts[textIndex]);
+  </script>
+</body>
+</html>

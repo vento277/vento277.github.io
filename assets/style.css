@@ -67,6 +67,18 @@ h2 {
     grid-template-columns: 3fr 7fr;
     padding: 0; /* Remove any extra padding */
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    border-radius: 10px;
+    padding: 0px;
+}
+.grid-item {
+    border: 1px solid #000;
+    padding: 10px;
+    border-radius: 10px;
+}
 .image {
     width: 100%;
     object-fit: cover;
@@ -113,6 +125,55 @@ ul{
     padding-left: 20px;
 }
 
+/*-----------Extra----------*/
+.typing-container {
+    padding: 0px;
+    width: 100%;
+    max-width: 800px; /* Maximum width for larger screens */
+  }
+
+  /* Added a wrapper to maintain height */
+  .text-wrapper {
+    height: 50px; /* Fixed height based on font size */
+    display: flex;
+    align-items: center;
+  }
+
+  .typing-text {
+    font-size: 50px;
+    white-space: normal; /* Allow text to wrap */
+    overflow: hidden;
+    width: 100%;
+    min-height: 50px; /* Match wrapper height */
+    line-height: 1.2; /* Adjust line height for wrapped text */
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .typing-text {
+      font-size: 30px; /* Smaller font size on mobile */
+      min-height: 40px;
+    }
+    .text-wrapper {
+      height: 40px;
+    }
+  }
+
+  /* Media query for very small screens */
+  @media (max-width: 480px) {
+    .typing-text {
+      font-size: 20px;
+      min-height: 30px;
+    }
+    .text-wrapper {
+      height: 30px;
+    }
+  }
 /*-----------Navigation----------*/
 .tab-button {
     text-decoration: none;
