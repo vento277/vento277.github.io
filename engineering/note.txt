@@ -1,0 +1,6 @@
+Keep Separate Notes with a Unified Reference
+Structure: Maintain two distinct sets of notes, one for each course, using the professor’s notation exactly as taught. Label them clearly (e.g., "ML - Prof A" and "DL - Prof B") and keep them in separate notebooks, folders, or digital files.
+Cross-Referencing: Create a small, separate "notation cheatsheet" or glossary that maps the differences between the two courses. 
+
+This cheatsheet acts as a quick reference so you can translate between them without mixing them up in your main notes.
+Overlap Handling: When you encounter overlapping topics (e.g., gradient descent, neural networks), write the full explanation in each set of notes using the respective professor’s notation and terminology. Add a small note like "See DL - Prof B, Week 3 for related concept" to link them without merging.
