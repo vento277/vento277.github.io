@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Support Vector Machine</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include Mathlax CDN -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+            tex2jax: { inlineMath: [ ["$", "$"], ["\\(", "\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+            TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+            messageStyle: "none"
+        });
+    </script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Support Vector Machine</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        SVMs are linear classifiers that find a hyperplane to separate two class of
+        data, positive and negative.
+        SVM not only has a rigorous theoretical foundation, but also performs
+        classification more accurately than most other methods in applications,
+        especially for high dimensional data. 
+        <br><br>
+
+        Recap <a href = "ml_3.html">Logistic Regression for Classification</a>. 
+        <br><br>
+
+        <h1>Training Data</h1>
+        Given training examples $D = \{(x_1, y_1), (x_2, y_2), \dots, (x_r, y_r)\}$, where $x_i \in \mathbb{R}^n$ and $y_i \in \{1, -1\}$ (1 for positive, -1 for negative), SVM finds a linear function:
+        \[
+            f(x) = \langle w, x \rangle + b
+        \]
+        where $w$ is the weight vector and $b$ is the bias.
+        <br><br>
+
+        The hyperplane $\langle w, x \rangle + b = 0$ separates positive and negative classes and is the decision boundary.
+        Among many possible hyperplanes, SVM chooses the one with the largest margin
+        (distance to the closest points), for better robustness against noise.
+         <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="Uc4yOigoIoPA">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/503.webp 503w" sizes="(max-width: 503px) 100vw, 503px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/Uc4yOigoIoPA/images/503.png" width="503" height="183" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        <h1>Linear SVM: Separable Case</h1>
+        The Separable Case introduces the core concept of SVM—maximizing the margin, which minimizes the generalization error—and sets the stage for dealing with non-separable cases, connecting geometric intuition with optimization.
+        Assume the data is linearly separable:<br>
+        - Margin hyperplanes $H_+$: $\langle w, x \rangle + b = 1$ (positive side) and $H_-$: $\langle w, x \rangle + b = -1$ (negative side).<br>
+        - Decision rule: $y_i = 1$ if $\langle w, x_i \rangle + b \geq 1$, $y_i = -1$ if $\langle w, x_i \rangle + b \leq -1$.
+        <br><br>
+        
+        Points where equality holds (e.g., $\langle w, x_s \rangle + b = 1$ or $-1$) are support vectors.  
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="PfcCZHyvrEKs">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/PfcCZHyvrEKs/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PfcCZHyvrEKs/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PfcCZHyvrEKs/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PfcCZHyvrEKs/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PfcCZHyvrEKs/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PfcCZHyvrEKs/images/460.webp 460w" sizes="(max-width: 460px) 100vw, 460px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/PfcCZHyvrEKs/images/460.png" width="460" height="356" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        <h2>Distance and Margin Calculation</h2>
+        Quantifying the margin connects the geometric goal of SVM to a concrete optimization problem.
+        Starting with the distance, the perpendicular distance from a point $x_i$ to $\langle w, x \rangle + b = 0$ is:
+        \[
+            \frac{|\langle w, x_i \rangle + b|}{\|w\|}
+        \]
+        where $\|w\| = \sqrt{\langle w, w \rangle}$.
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="ZsOJ8mhgHjqA">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/ZsOJ8mhgHjqA/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ZsOJ8mhgHjqA/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ZsOJ8mhgHjqA/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ZsOJ8mhgHjqA/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ZsOJ8mhgHjqA/images/339.webp 339w" sizes="(max-width: 339px) 100vw, 339px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/ZsOJ8mhgHjqA/images/339.png" width="339" height="346"style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        With regard to the margin, for a support vector $x_s$ on $H_+$ ($\langle w, x_s \rangle + b = 1$), the distance to $\langle w, x \rangle + b = 0$ is:
+        \[
+            \frac{|\langle w, x_s \rangle + b|}{\|w\|} = \frac{1}{\|w\|}
+        \]
+        since $\langle w, x_s \rangle + b = 1$. Similarly, for $H_-$, the distance is $\frac{1}{\|w\|}$. The total margin is:
+        \[
+            d = \frac{2}{\|w\|}
+        \]
+        The goal of SVM is to maximize margin. Through transformation, we can represent this as:
+        \[
+            \max_{w,b} \frac{2}{\|w\|} \to \min_{w,b} \frac{1}{2} \|w\| \to \min_{w,b} \frac{1}{2} \|w\|^2
+        \]
+        \[
+            \min_{w,b} \frac{1}{2} \|w\|^2, \quad \text{s.t.} \quad y_i (\langle w, x_i \rangle + b) \geq 1.
+        \]
+        This is a convex quadratic programming problem.
+        <figure class="image" style="width:70%; max-width:100%;" data-ckbox-resource-id="3Qrf5Sooucif">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/3Qrf5Sooucif/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/3Qrf5Sooucif/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/3Qrf5Sooucif/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/3Qrf5Sooucif/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/3Qrf5Sooucif/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/3Qrf5Sooucif/images/460.webp 460w" sizes="(max-width: 460px) 100vw, 460px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/3Qrf5Sooucif/images/460.png" width="460" height="328"style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        <h2>Lagrangian Dual</h2>
+        We can use Lagrange multipliers to transform the primal problem it
+        to a dual problem (which means solve an optimization problem by
+        looking at another its related optimization problem). 
+        <br><br>
+
+        Using Lagrange multipliers $a_i \geq 0$, the primal problem becomes:
+        \[
+            \min_{w,b} \frac{1}{2} \|w\|^2 + \sum_{i=1}^m a_i [1 - y_i (\langle w, x_i \rangle + b)]
+        \]
+        
+        Optimization theory says that an optimal solution must satisfy
+        certain conditions, called Karush-Kuhn-Tucker(KKT) conditions,
+        which are necessary (but not sufficient). 
+
+        To the find the optimla dual problem, take derivatives of the primal and set to zero:
+        \[
+            \frac{\partial L}{\partial w} = w - \sum_{i=1}^m a_i y_i x_i = 0 \quad \Rightarrow \quad w = \sum_{i=1}^m a_i y_i x_i
+        \]
+        \[
+            \frac{\partial L}{\partial b} = -\sum_{i=1}^m a_i y_i = 0 \quad \Rightarrow \quad \sum_{i=1}^m a_i y_i = 0
+        \]
+
+        Plugging them into the primal:
+        \[
+            \max_{a_i} \sum_{i=1}^m a_i - \frac{1}{2} \sum_{i,j=1}^m a_i a_j y_i y_j \langle x_i x_j \rangle
+            \quad \text{s.t.} \quad a_i \geq 0 \quad \sum_{i=1}^m a_i y_i = 0
+        \]
+        KKT conditions include:<br>
+        - If $y_i (\langle w, x_i \rangle + b) \leq 1$, then $a_i = 0$ (not a support vector).<br>
+        - If $y_i (\langle w, x_i \rangle + b) = 1$, then $a_i > 0$ (support vector).
+        <br><br>
+
+        There are many effective algorithm can solve the dual problem such as SMO (Sequential
+        Minimal Optimization). Now let's say after solving the dual (e.g., via SMO), we obtain optimal $a_i^*$. Then:
+        \[
+        w^* = \sum_{i=1}^m a_i^* y_i x_i
+        \]
+        For support vectors ($a_i^* > 0$, where $y_i (\langle w^*, x_i \rangle + b) = 1$), compute $b^*$ using any support vector $(x_s, y_s)$:
+        \[
+        y_s (\langle w^*, x_s \rangle + b^*) = 1 \quad \Rightarrow \quad b^* = \frac{1}{y_s} - \langle w^*, x_s \rangle
+        \]
+        To reduce numerical error, average over all support vectors $S = \{i : a_i^* > 0\}$:
+        \[
+        b^* = \frac{1}{|S|} \sum_{s \in S} (\frac{1}{y_s} - \langle w^*, x_s \rangle)
+        \]
+
+        Overall, we get the optimal hyperplane:
+        \[
+        f(x) = \langle w^*, x \rangle + b^* = \left\langle \sum_{i=1}^m a_i^* y_i x_i, x \right\rangle + b^*
+        \]
+        <br>
+
+        Now, let's try an example. Consider a 2D dataset ($x_i \in \mathbb{R}^2$):<br>
+        - Positive points ($y_i = 1$): $(3, 1)$, $(3, -1)$, $(6, 1)$, $(6, -1)$.<br>
+        - Negative points ($y_i = -1$): $(1, 0)$, $(0, 1)$, $(-1, 0)$, $(0, -1)$.
+        <br><br>
+
+        Recall we want to:
+        \[
+            \min_{w,b} \frac{1}{2} \|w\|^2, \quad \text{s.t.} \quad y_i (\langle w, x_i \rangle + b) \geq 1, \quad i = 1, 2, \dots, 8
+        \]
+
+        The dual problem is:
+        \[
+        \max_{a_i} \sum_{i=1}^8 a_i - \frac{1}{2} \sum_{i,j=1}^8 a_i a_j y_i y_j \langle x_i, x_j \rangle
+        \]
+        subject to:
+        \[
+        \sum_{i=1}^8 a_i y_i = 0, \quad a_i \geq 0
+        \]
+
+        Using the SMO toolbox, we get:
+        \[
+        a_1 = a_2 = 0.25, \quad a_5 = 0.5, \quad a_3 = a_4 = a_6 = a_7 = a_8 = 0
+        \]
+
+        Using the result:
+        \[
+        w^* = \sum_{i=1}^m a_i^* y_i x_i = (1, 0)
+        \]
+
+        We have three support vectors, $x_1$, $x_2$, $x_5$. So:
+        \[
+        b^* = \frac{1}{|S|} \sum_{s \in S} (\frac{1}{y_s} - \langle w^*, x_s \rangle) = -2
+        \]
+
+        Therefore we have:
+        \[
+        w = (1,0) \quad b = -2
+        \]
+        <br>
+
+        <h1>Linear SVM: Non-Separable Case</h1>
+        Real-world data often includes noise, so soft-margin SVM adapts 
+        the model to handle misclassifications, linking ideal separable cases 
+        to practical applications.
+        <br><br>
+
+        Ideal linear separability is rare due to noise or errors 
+        (e.g., incorrect labels, randomness). The separable case's problem formulation:
+        \[
+        \min_{w,b} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad y_i (\langle w, x_i \rangle + b) \geq 1
+        \]
+        may have no solution if constraints are violated.
+
+        <br><br>
+        <h2>Soft-Margin SVM</h2>
+        Soft-margin SVM allows for controlled misclassifications, 
+        balancing margin maximization with error tolerance.
+        <br><br>
+
+        We could allow noisy samples to violate constraints:
+        \[
+        \min_{w,b} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad y_i (\langle w, x_i \rangle + b) \geq 1 \text{ for clean } i, \quad y_i (\langle w, x_i \rangle + b) \geq -\infty \text{ for noisy } i
+        \]
+
+        We can represent this geometrically, where the red data points are in wrong regions that do not satisfy the original
+        constrains:
+        <figure class="image image_resized" style="height:auto;max-width:100%;width:70%;" data-ckbox-resource-id="YLkmMN4rbG3u">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/493.webp 493w" type="image/webp" sizes="(max-width: 493px) 100vw, 493px"><img style="max-width:100%;" src="https://ckbox.cloud/2ce57516f4580910f6af/assets/YLkmMN4rbG3u/images/493.png" width="493" height="327"style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+
+        In order to minimize the number of noisy samples, we can use a
+        new penalty item and our objective is transformed to:
+        \[
+        \min_{w,b} \frac{1}{2} \|w\|^2 + C \sum_{i=1}^m l_{0/1}(y_i (\langle w, x_i \rangle + b) - 1)
+        \]
+        where $C$ is a constant and $l_{1/0}(z) = 1$ if $z < 0$(satisfies the constraint condition), otherwise $l_{1/0}(z) = 0$(punished).
+        
+        However, the function $l_{1/0}$ is non-convex, discontinuous, which
+        increase the difficulties of optimizing the objective. Therefore, we
+        usually use other functions to replace the $l_{1/0}$. 
+        For example, if we use hinge loss, the objective can be rewritten as:
+        \[
+        \min_{w,b} \frac{1}{2} \|w\|^2 + C \sum_{i=1}^m max(0, 1 - y_i (\langle w, x_i \rangle + b))
+        \]
+        <figure class="image image_resized" style="height:auto;max-width:100%;width:70%;" data-ckbox-resource-id="E1QW82Zz1Y7q">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/518.webp 518w" type="image/webp" sizes="(max-width: 518px) 100vw, 518px"><img style="max-width:100%;" src="https://ckbox.cloud/2ce57516f4580910f6af/assets/E1QW82Zz1Y7q/images/518.png" width="518" height="300">
+            </picture>
+        </figure>
+        <br>
+
+        To allow errors in data, we relax the margin constraints by
+        introducing slack variables, $\xi_i \geq 0$. They quantify misclassifications, enabling a flexible
+        margin that accommodates noise:
+        \[
+        y_i (\langle w, x_i \rangle + b) \geq 1 - \xi_i, \quad i = 1, \dots, m, \quad \xi_i \geq 0.
+        \]
+
+        We need to penalize the errors in the objective function.
+        A natural way of doing it is to assign an extra cost for errors to
+        change the objective function to:
+        \[
+        \min_{w,b,\xi_i} \frac{1}{2} \|w\|^2 + C \sum_{i=1}^m \xi_i^k, \quad k = 1 \text{ (common choice)}.
+        \]
+        For $k = 1$ (hinge loss):
+        \[
+        \min_{w,b,\xi_i} \frac{1}{2} \|w\|^2 + C \sum_{i=1}^m \max(0, 1 - y_i (\langle w, x_i \rangle + b)).
+        \]
+        Hinge loss $l_{\text{hinge}}(z) = \max(0, 1 - z)$ is convex, replacing non-convex $l_{0/1}(z)$.
+        <br><br>
+
+        Formalizing the soft-margin optimization with Lagrange multipliers
+        to enable dual transformation and solution via KKT conditions:
+        \[
+        L_P = \frac{1}{2} \|w\|^2 + C \sum_{i=1}^m \xi_i - \sum_{i=1}^m a_i [y_i (\langle w, x_i \rangle + b) - 1 + \xi_i] - \sum_{i=1}^m \mu_i \xi_i,
+        \]
+        <br><br>
+
+        <h1>SVM for Non-Linear Datasets</h1>
+        Many real-world problems require non-linear decision boundaries, 
+        This is beacuse a dataset may be inseparable in the original space (e.g., 2D).  
+        <figure class="image" style="height:auto;max-width:100%;width:70%;" data-ckbox-resource-id="VmIPgx7RT_Pu">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/530.webp 530w" sizes="(max-width: 530px) 100vw, 530px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/VmIPgx7RT_Pu/images/530.png" width="530" height="276" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        Increasing dimensions (e.g., 3D) may create a gap, allowing a linear hyperplane.
+        <figure class="image" style="height:auto;max-width:100%;width:70%;" data-ckbox-resource-id="YU6rvv-BRobT">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/560.webp 560w,https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/628.webp 628w" sizes="(max-width: 628px) 100vw, 628px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/YU6rvv-BRobT/images/628.png" width="628" height="247"style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        For this, we use kernel functions. 
+        <br><br>
+
+        For example, if we have \( {x}^{(1)} \) and \( {x}^{(2)} \) that are not linearly separable, we can transform them to:
+        \[
+        \phi({x}) = \begin{bmatrix}
+        x_1^2 \\
+        x_2^2 \\
+        \sqrt{2} x_1 x_2
+        \end{bmatrix}
+        \]
+
+        It turns out that the above feature map corresponds to the well-known polynomial kernel:
+        \[
+        \kappa({x}, {x}') = ({x}^T {x}')^d
+        \]
+        Let \( d = 2 \) and \( {x} = [x_1, x_2]^T \), we get:
+        \[
+        \kappa({x}, {x}') = (x_1 x_1' + x_2 x_2')^2
+        \]
+
+        Then, we can transform the two-dimensional data to three-dimensional data by \( {x} \rightarrow \phi(\mathbf{x}) \), and the data can be linearly separable in a higher-dimensional space:
+        \[
+        f({x}) = \langle w, \phi(x) \rangle
+        \]
+        <figure class="image" data-ckbox-resource-id="qZxXPnCTEKKY" style="height:auto;max-width:100%;width:70%;">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/108.webp 108w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/216.webp 216w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/324.webp 324w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/432.webp 432w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/540.webp 540w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/648.webp 648w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/756.webp 756w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/864.webp 864w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/972.webp 972w,https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/1071.webp 1071w" sizes="(max-width: 1071px) 100vw, 1071px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/qZxXPnCTEKKY/images/1071.png" width="1071" height="534" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        The optimization objective for this new feature space should be
+        transformed to:
+        \[
+            \min_{w,b} \frac{1}{2} \|w\|^2 \quad \text{s.t.} \quad y_i (\langle w, \phi(x_i) \rangle + b) \geq 1
+        \]
+        \[
+            \max_{a_i} \sum_{i=1}^m a_i - \frac{1}{2} \sum_{i,j=1}^m a_i a_j y_i y_j \langle \phi(x_i) \phi(x_j) \rangle
+            \quad \text{s.t.} \quad a_i \geq 0 \quad \sum_{i=1}^m a_i y_i = 0
+        \]
+
+        However, very large feature spaces have potential issue of memory
+        and computational cost. The “kernel trick” can help alleviate this
+        issue. It allows us to operate in the original feature space without
+        computing the coordinates of the data in a higher dimensional
+        space. Let's assume a function:
+        \[
+            \kappa(x_i, x_j) = \langle \phi(x_i), \phi(x_j) \rangle
+        \]
+        Dual problem:
+        \[
+            \max_{a_i} \sum_{i=1}^m a_i - \frac{1}{2} \sum_{i,j=1}^m a_i a_j y_i y_j \kappa(x_i, x_j),
+            \quad \text{s.t.} \quad a_i \geq 0 \quad \sum_{i=1}^m a_i y_i = 0
+        \]
+        Optimal hyperplane:
+        \[
+            f(x) = \sum_{i=1}^m a_i^* y_i \kappa(x_i, x) + b^*.
+        \]
+        <figure class="image" data-ckbox-resource-id="d1cQWQ5Rh1nB">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/97.webp 97w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/194.webp 194w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/291.webp 291w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/388.webp 388w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/485.webp 485w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/582.webp 582w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/679.webp 679w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/776.webp 776w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/873.webp 873w,https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/961.webp 961w" sizes="(max-width: 961px) 100vw, 961px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/d1cQWQ5Rh1nB/images/961.png" width="961" height="510">
+            </picture>
+        </figure>
+
+
+
+
+
+
+
+
+
+
+
+        <hr>
+        <i>
+            <b>Notes</b><br>
+            [a] 
+            <br><br>
+            [b] 
+            <br><br>
+            [c]
+            <br><br>
+            <b>References</b><br>
+            [1]  
+        </i>
+
+        <br><br>
+    </section>
+</body>
+</html>

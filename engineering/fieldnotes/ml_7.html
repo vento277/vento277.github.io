@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Decision Tree</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include Mathlax CDN -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+            tex2jax: { inlineMath: [ ["$", "$"], ["\\(", "\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+            TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+            messageStyle: "none"
+        });
+    </script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Decision Tree</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        Decision trees are a widely used machine learning technique for both classification and regression tasks. They work by recursively splitting the input space into regions based on feature values, yielding a tree-like structure of interpretable decision rules. Each path from the root to a leaf represents a sequence of decisions leading to a prediction.
+        <br><br>
+
+        Some terminology:<br>
+        - Root Node: The top node where splitting begins.
+        <br>
+        - Internal Nodes: Points where the predictor space is split based on a condition (e.g., \( x_j < t \)).
+        <br>
+        - Terminal Nodes (Leaves): End points of the tree where predictions are made, denoted as regions \( R_1, R_2, \dots, R_J \).
+        <br><br>
+
+        For example, consider predicting baseball hitter salaries (in \$10,000s). A tree might split on features like years of experience or batting average, creating regions where the predicted salary is the average of training observations in that region.
+        <br><br>
+
+        For a test observation:<br>
+        1. Trace it through the tree based on feature conditions until it reaches a leaf \( R_j \).
+        <br>
+        2. Predict the value \( \hat{y}_{R_j} \), which depends on all training points in \( R_j \):
+        <br>
+        - Regression: \( \hat{y}_{R_j} = \frac{1}{|R_j|} \sum_{i \in R_j} y_i \) (mean of \( y \) in \( R_j \)),
+        <br>
+        - Classification: \( \hat{y}_{R_j} = \text{most frequent class in } R_j \).
+        <br><br>
+
+        The goal is to find regions \( R_1, \dots, R_J \) that best capture the relationship between features \( X \) and target \( y \).
+        <br><br>
+
+        <h1>Tree Building</h1>
+        The objective is to minimize the residual sum of squares (RSS) for regression:
+        \[
+            \text{RSS} = \sum_{j=1}^J \sum_{i \in R_j} (y_i - \hat{y}_{R_j})^2.
+        \]
+
+        Tree construction uses a \emph{greedy} approach:
+        <br>
+        1. \textbf{Recursive Binary Splitting}: At each step, choose a feature \( x_k \) and threshold \( t \) to split the data into two regions, minimizing RSS. Repeat until a stopping criterion is met.
+        <br>
+        2. \textbf{Pruning}: Reduce the tree size to prevent overfitting by removing less important splits.
+        <br><br>
+
+        The basic algorithm is a top-down, greedy divide-and-conquer method:<br>
+        1. Start with all training examples at the root.
+        <br>
+        2. Select an attribute to split based on an impurity measure (e.g., information gain).
+        <br>
+        3. Recursively partition the data.
+        <br>
+        4. Stop when:<br>
+        - All examples belong to the same class<br>
+        - No attributes remain (use majority class)<br>
+        - No examples remain
+        <br><br>
+
+        <h2>Information Theory</h2>
+        Information theory quantifies uncertainty reduction. For a random variable \( X \) with outcomes \( x_i \) and probabilities \( p(x_i) \):
+        <br>
+        - Information Content: \( I(x_i) = -\log_2 p(x_i) \) (high probability = low surprise).
+        <br>
+        - Example: Coin flip (fair, \( p = 0.5 \)): \( I(\text{head}) = -\log_2 0.5 = 1 \) bit.
+        <br>
+        - Dice roll ( \( p = 1/6 \)): \( I(6) = -\log_2 (1/6) \approx 2.58 \) bits.
+        <br>
+        - Example: Fair 8-outcome variable: \( H(X) = -\sum_{i=1}^8 \frac{1}{8} \log_2 \frac{1}{8} = 3 \) bits.
+        <br>
+        - Entropy is the expected information content:
+        \[
+        H(X) = -\sum_{i=1}^n p(x_i) \log_2 p(x_i).
+        \]
+
+        For a dataset \( D \) with classes \( c_1, \dots, c_m \):
+        \[
+            \text{entropy}(D) = -\sum_{j}^{|C|} P(c_j) \ln P(c_j),
+        \]
+        where \( P(c_j) \) is the proportion of class \( c_j \) in \( D \). Lower entropy indicates a purer (less uncertain) dataset.
+        We use entropy as a measure of impurity or disorder of data set D. 
+        When the distribution is less uniform, entropy is lower so the node is purer. 
+        <br><br>
+        
+        Consider classifying fruits with attributes like color or texture. A node with 3 apples (all positive) has:
+        \[
+            \text{Entropy} = 0 \text{ (pure, no uncertainty)}.
+        \]
+        A mixed node with 1 apple (+), 2 oranges (-) has:
+        \[
+            \text{Entropy} = -\left( \frac{1}{3} \log_2 \frac{1}{3} + \frac{2}{3} \log_2 \frac{2}{3} \right) \approx 0.92 \text{ bits}.
+        \]
+        We need more splits to reduce this uncertainty.
+        <br><br>
+
+        <h2>Choosing Attributes</h2>
+        The key to building a decision tree is to know which attribute to choose in
+        order to branch. The objective is to reduce impurity or uncertainty in data as much as
+        possible. The heuristic is to choose the attribute with the maximum
+        Information Gain or Gain Ratio based on information theory (Intuitively, you would prefer the
+        one that separates the training
+        examples as much as possible):
+        \[
+            \text{Gain}(A) = \text{Entropy}(D) - \sum_{v \in \text{values}(A)} \frac{|D_v|}{|D|} \text{Entropy}(D_v),
+        \]
+        where \( D_v \) is the subset of \( D \) with attribute \( A = v \). This reduces impurity the most.
+        <br><br>
+        Information gain measures how much entropy decreases after splitting on an attribute \( A_i \) with \( v \) values, partitioning \( D \) into \( D_1, \dots, D_v \):
+        <br>
+        1. Entropy before split: \( H(D) = -\sum_{j} P(c_j) \ln P(c_j) \).
+        <br>
+        2. Expected entropy after split: 
+        \[
+        H(D|A_i) = \sum_{k=1}^v \frac{|D_k|}{|D|} H(D_k).
+        \]
+        3. Information gain:
+        \[
+        \text{IG}(D, A_i) = H(D) - H(D|A_i).
+        \]
+        The attribute with the highest gain is chosen to split, as it best reduces uncertainty.
+        <br><br>
+
+        For example, given 7 animals (3 mammals, 4 birds):
+        \[
+            H(D) = -\left( \frac{3}{7} \log_2 \frac{3}{7} + \frac{4}{7} \log_2 \frac{4}{7} \right) \approx 0.985.
+        \]
+        - Split on "lays eggs": <br>
+          -- Yes (1 mammal, 2 birds): \( H = -\left( \frac{1}{3} \log_2 \frac{1}{3} + \frac{2}{3} \log_2 \frac{2}{3} \right) \approx 0.918 \),
+          <br>
+          -- No (all mammals): \( H = 0 \),
+          <br>
+          -- \( H(D|\text{lays eggs}) = \frac{3}{7} \cdot 0.918 + \frac{4}{7} \cdot 0 \approx 0.393 \),
+          <br>
+          -- \( \text{IG} = 0.985 - 0.393 \approx 0.592 \).
+          <br><br>
+        - Split on "flies": <br>
+          -- Yes (all birds): \( H = 0 \),
+          <br>
+          -- No (3 mammals, 1 bird): \( H = -\left( \frac{3}{4} \log_2 \frac{3}{4} + \frac{1}{4} \log_2 \frac{1}{4} \right) \approx 0.811 \),
+          <br>
+          -- \( H(D|\text{flies}) = \frac{4}{7} \cdot 0 + \frac{3}{7} \cdot 0.811 \approx 0.347 \),
+          <br>
+          -- \( \text{IG} = 0.985 - 0.347 \approx 0.638 \).
+          <br><br>
+        "Flying" yields higher gain, so we split on it.
+        <br><br>
+
+        Another example. Given data:
+        \begin{array}{|c|c|c|c|}
+        \hline
+        X1 & X2 & Y & Count \\
+        \hline
+        T & T & + & 2 \\
+        T & F & + & 2 \\
+        F & T & - & 5 \\
+        F & F & + & 1 \\
+        \hline
+        \end{array}
+        - \( H(Y) = -\left( \frac{5}{10} \log_2 \frac{5}{10} + \frac{5}{10} \log_2 \frac{5}{10} \right) = 1 \).
+        <br><br>
+        - Split on \( X1 \):
+        <br>-- \( X1 = T \): 4 positives, \( H = 0 \),
+          <br>-- \( X1 = F \): 1 positive, 5 negatives, \( H = -\left( \frac{1}{6} \log_2 \frac{1}{6} + \frac{5}{6} \log_2 \frac{5}{6} \right) \approx 0.65 \),
+          <br>-- \( H(Y|X1) = \frac{4}{10} \cdot 0 + \frac{6}{10} \cdot 0.65 \approx 0.39 \),
+          <br>-- \( \text{IG}(X1, Y) = 1 - 0.39 = 0.61 \).<br><br>
+        - Split on \( X2 \):
+        <br>-- \( X2 = T \): 2 positives, 5 negatives, \( H \approx 0.86 \),
+          <br>-- \( X2 = F \): 3 positives, \( H = 0 \),
+          <br>-- \( H(Y|X2) = \frac{7}{10} \cdot 0.86 + \frac{3}{10} \cdot 0 \approx 0.6 \),
+          <br>-- \( \text{IG}(X2, Y) = 1 - 0.6 = 0.4 \).
+        Choose \( X1 \) (gain = 0.61 > 0.4).
+        <br><br>
+
+        <h2>Avoiding Overfitting</h2>
+        Overfitting occurs when a tree is too complex (deep with many branches), fitting noise rather than patterns. Solutions:
+        <br>
+        1. Pre-pruning: Stop splitting early (hard to calibrate).
+        <br>
+        2. Post-pruning: Grow a full tree, then remove branches with low predictive power using a validation set.
+        <figure class="image" data-ckbox-resource-id="t8Y1WXIULq0E">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/93.webp 93w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/186.webp 186w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/279.webp 279w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/372.webp 372w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/465.webp 465w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/558.webp 558w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/651.webp 651w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/744.webp 744w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/837.webp 837w,https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/930.webp 930w" sizes="(max-width: 930px) 100vw, 930px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/t8Y1WXIULq0E/images/930.png" width="930" height="290">
+            </picture>
+        </figure>
+        <br>
+
+        <h2>Classification Trees</h2>
+        For a region \( R_j \), predict the most common class:
+        \[
+            \hat{y}_{R_i} = \arg\max_k \hat{P}_{jk},
+        \]
+        where \( \hat{P}_{jk} \) is the proportion of class \( c \) in \( R_j \).
+        <br><br>
+
+        <h2>Evaluation Metrics</h2>
+        - Classification Error: \( E = \sum_{j=1}^J |R_j|(1 - \max_k \hat{P}_{jk}) \).
+        <br>- Gini Index: \( G = \sum_{j=1}^J |R_j| \sum_k \hat{P}_{jk} (1 - \hat{P}_{jk}) \), favoring purer nodes.
+        <br><br>
+        The caveat is that more attribute values can inflate information gain, as they may create small, pure partitions, skewing attribute selection.
+        <br><br>
+
+        <h1>Trees vs. Linear Methods</h1>
+        Linear regression fits:
+        \[
+            f(X) = \beta + \sum_{j=1}^p X_i \beta_i
+        \]
+        while regression trees use indicator functions:
+        \[
+            f(X) = \sum_{j=1}^J \beta_i I\{X \in R_j\}
+        \]
+        Trees excel with non-linear relationships but may not outperform linear models in linear data scenarios.
+
+        <h1>Ensemble Methods</h1>
+        Ensemble methods are techniques in machine learning where multiple models (often referred to as "base learners") are combined to produce a stronger model. The idea is that combining the predictions of several models can lead to better performance than relying on a single model, especially when the individual models have complementary strengths and weaknesses.
+        <figure class="image" data-ckbox-resource-id="yC8MyUBUTAgs">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/512.webp 512w" sizes="(max-width: 512px) 100vw, 512px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/yC8MyUBUTAgs/images/512.png" width="512" height="331">
+            </picture>
+        </figure>
+        <br>
+
+        <h2>Boosting</h2>
+        Boosting improves weak learners iteratively:
+        <br>1. Train a base learner \( M_1 \).
+        <br>2. Reweight samples (e.g., increase weights for misclassified points).
+        <br>3. Train \( M_2 \) on the new distribution.
+        <br>4. Repeat for \( M_1, \dots, M_T \).
+        <br>5. Aggregate: \( f(x) = \sum_{t=1}^T \alpha_t M_t(x) \).
+        <figure class="image" data-ckbox-resource-id="PKLK-D2zKrLR">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/560.webp 560w,https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/585.webp 585w" sizes="(max-width: 585px) 100vw, 585px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/PKLK-D2zKrLR/images/585.png" width="585" height="349">
+            </picture>
+        </figure>
+
+        AdaBoost Example: Weights \( D(i) \) emphasize hard examples, but noise can degrade performance if outliers dominate.
+        <figure class="image" data-ckbox-resource-id="B_zqub5J1MsP">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/560.webp 560w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/640.webp 640w,https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/690.webp 690w" sizes="(max-width: 690px) 100vw, 690px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/B_zqub5J1MsP/images/690.png" width="690" height="338">
+            </picture>
+        </figure>
+        <br>
+
+        <h2>Bagging (Bootstrap Aggregating)</h2>
+        Bagging reduces variance by averaging predictions over bootstrap samples (good when learner is unstable but degrade when the learner is stable):
+        <br>- Draw \( S \) (size \( n \)) with replacement from \( D \) (size \( n \)), leaving out ~37% of examples (out-of-bag, OOB).
+        <br>- Train a tree on each \( S \).
+        <br>- Average (regression) or vote (classification).
+        <figure class="image" data-ckbox-resource-id="TVewqA84t1YN">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/560.webp 560w,https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/612.webp 612w" sizes="(max-width: 612px) 100vw, 612px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/TVewqA84t1YN/images/612.png" width="612" height="347">
+            </picture>
+        </figure>
+        <figure class="image" data-ckbox-resource-id="NeJfgFrxAV2Y">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/133.webp 133w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/266.webp 266w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/399.webp 399w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/532.webp 532w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/665.webp 665w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/798.webp 798w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/931.webp 931w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/1064.webp 1064w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/1197.webp 1197w,https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/1325.webp 1325w" type="image/webp" sizes="(max-width: 1325px) 100vw, 1325px"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/NeJfgFrxAV2Y/images/1325.png" width="1325" height="399">
+            </picture>
+        </figure>
+
+        OOB Error: Use OOB samples to estimate error without cross-validation, typically stabilizing at ~1/3 unused samples.
+        <figure class="image" data-ckbox-resource-id="U0brBEFbXelk">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/539.webp 539w" sizes="(max-width: 539px) 100vw, 539px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/U0brBEFbXelk/images/539.png" width="539" height="276">
+            </picture>
+        </figure>
+
+        Random Forest (RF) enhances bagging by reducing tree correlation:<br>
+        1. For \( b = 1 \) to \( B \):
+        <br>- Draw a bootstrap sample \( S \) of size \( n \).
+        <br>- Grow a tree, at each split:
+        <br>-- Randomly select \( k < p \) features.
+        <br>-- Pick the best split among them.
+        <br>- Split into two nodes until a minimum size \( n_{\text{min}} \).
+        <br>
+        2. Predict by averaging (regression) or majority vote (classification).
+        <figure class="image" data-ckbox-resource-id="evOyK-Ahs74W">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/560.webp 560w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/640.webp 640w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/720.webp 720w,https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/740.webp 740w" sizes="(max-width: 740px) 100vw, 740px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/evOyK-Ahs74W/images/740.png">
+            </picture>
+        </figure>
+
+        Tuning: 
+        <br>- Classification: \( k = \sqrt{p} \), \( n_{\text{min}} = 1 \).
+        <br>- Regression: \( k = p/3 \), \( n_{\text{min}} = 5 \).
+        <br>
+        Adjust \( k \) (e.g., \( \log_2 p \), \( \sqrt{p} \)) based on data.
+
+        <br><br>
+        Bagging vs. RF:<br>
+        Bagging perturbs samples; RF adds attribute randomness, improving generalization when predictors are correlated (e.g., avoiding dominance by a strong feature).
+        <br><br>
+
+        Boosting vs. RF:<br>
+        - RF: Robust to noise, faster, parallelizable, with internal error estimates.
+        <br>- AdaBoost: Sensitive to noise, potentially more accurate but slower.
+        <br><br>
+
+        RF Issues:<br>
+        With many irrelevant features and small \( k \), RF may miss key variables, reducing performance.
+        <br><br>
+
+        Variable Importance:<br>
+        - Gini Importance: Average decrease in Gini index per feature across trees.
+        <br>- Permutation Importance: Mean accuracy drop after permuting a feature.
+        <br>
+        These restore interpretability lost in ensembles.
+        <br><br>
+
+
+
+
+        <!--
+        \section*{Notes}
+        \begin{enumerate}
+        \item \textit{Log Base}: \( \log_2 \) is used for bits; \( \ln \) (natural log) is equivalent up to a constant factor.
+        \item \textit{ Gini vs. Entropy}: Gini is computationally lighter and often suffices for splits.
+        \item \textit{Bootstrap Sampling}: The 0.37 exclusion rate comes from \( (1 - 1/n)^n \approx e^{-1} \approx 0.37 \) as \( n \) grows.
+        \item \textit{RF Feature Selection}: \( k < p \) ensures diversity, critical when strong predictors dominate.
+        \end{enumerate}-->
+
+        <br><br>
+        <hr>
+        <i>
+            <b>Notes</b><br>
+            [a] 
+            <br><br>
+            [b] 
+            <br><br>
+            [c]
+            <br><br>
+            <b>References</b><br>
+            [1]  
+        </i>
+
+        <br><br>
+    </section>
+</body>
+</html>

@@ -14,13 +14,17 @@
             <div class="header-col-L">Peter Kim</div>
             <div class="header-col-R">
                 <button class="tab-button" onclick="switchTab('about')" id="aboutTab">About</button>
-                <button class="tab-button" onclick="switchTab('portfolio')" id="portfolioTab">Engineering</button>
-                <button class="tab-button" onclick="switchTab('investment')" id="investmentTab">Investments</button>
+                <button class="tab-button" onclick="switchTab('engineering')" id="engineeringTab">Engineering</button>
+                <button class="tab-button" onclick="switchTab('investments')" id="investmentsTab">Investments</button>
             </div>
         </section>
 
         <section class="tab-content active" id="about">          
-            I'm an electrical engineering student at UBC. Most of my days are spent solving math problems and tinkering with microcontrollers. When I'm free, I watch movies, take long walks, and study investments.
+            Hey visitor,
+            <br><br>
+            I'm an electrical engineering student at the University of British Columbia. Most of my days are spent solving math problems and tinkering with microcontrollers. 
+            <br><br>
+            When I'm free, I watch movies, take long walks, and study investments.
             <br><br>
 
             <img class="image" src="https://wallpaper.dog/large/20560050.jpg">
@@ -39,7 +43,7 @@
             </footer>
         </section>
 
-        <section class="tab-content active" id="portfolio">
+        <section class="tab-content active" id="engineering">
             <div class="grid-content">              
                 <div class="content-label">Projects</div>
                 <div class="content-details"> 
@@ -140,7 +144,7 @@
             </div>
         </section>
 
-        <section id="investment" class="tab-content">
+        <section id="investments" class="tab-content">
             <div class="grid-content">
                 <div class="content-label">Reports</div>
                 <div class="content-details">                      
@@ -204,30 +208,43 @@
         </section>
     </body>
     <script>
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.style.display = 'none';
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName).style.display = 'block';
-            
-            // Update button styles
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.style.fontWeight = 'normal';
-            });
-            document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
-            
-            // Save the selected tab
-            localStorage.setItem('selectedTab', tabName);
-        }
+function switchTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+    });
+    
+    // Show selected tab
+    document.getElementById(tabName).style.display = 'block';
+    
+    // Update button styles
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.style.fontWeight = 'normal';
+    });
+    document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
+    
+    // Save the selected tab
+    localStorage.setItem('selectedTab', tabName);
+    
+    // Update URL with the tab parameter without reloading the page
+    const url = new URL(window.location);
+    url.searchParams.set('tab', tabName);
+    window.history.pushState({}, '', url);
+}
 
-        // Initialize with the last selected tab or default to 'portfolio'
-        document.addEventListener('DOMContentLoaded', function () {
-            const savedTab = localStorage.getItem('selectedTab') || 'portfolio';
-            switchTab(savedTab);
-        });
+// Function to get tab from URL parameter
+function getTabFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('tab');
+}
+
+// Initialize with the tab from URL, or default to 'about' (no longer using localStorage)
+document.addEventListener('DOMContentLoaded', function () {
+    const urlTab = getTabFromURL();
+    // Default to 'about' if no URL parameter is provided
+    const initialTab = urlTab || 'about';
+    switchTab(initialTab);
+});
 
         function toggleSection(event) {
             const trigger = event.target;
@@ -273,7 +290,6 @@
 
         // Call initialization when the page loads
         document.addEventListener('DOMContentLoaded', initializeSections);
-
     </script>
 </html>
 

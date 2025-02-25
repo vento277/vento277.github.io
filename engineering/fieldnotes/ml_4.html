@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <title>Naïve Bayes Classifier</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
+    
+    <!-- Include Mathlax CDN -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+            tex2jax: { inlineMath: [ ["$", "$"], ["\\(", "\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+            TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+            messageStyle: "none"
+        });
+    </script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+</head>
+
+<body>
+    <section class="header">
+        <div class="header-col-L2">Naïve Bayes Classifier</div>
+        <div class="header-col-R"></div>
+    </section>
+
+    <section>
+        <!------------------------------------------------------------------------------------------------------------------------------>
+        <h1>Receiver Operating Characteristic (ROC) Curve</h1>
+        Recall from 3, ROC curve is a curve that plots the True Positive Rate (TPR) against the False Positive Rate (FPR) as the discrimination threshold varies.
+        <br><br>
+        ROC curve provide a visual tool to assess a binary classifier's performance across all possible thresholds, helping engineers choose an optimal balance between true positives and false positives for specific applications (e.g., loan repayment prediction).
+        <br><br>
+        To draw an ROC curve, we:<br>
+        - Generate classification model predictions (e.g., "will repay" vs. "won’t repay" a loan):
+        <figure class="image" style="width:70%; max-width:100%;"data-ckbox-resource-id="G6LQipbegHk6">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/130.webp 130w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/260.webp 260w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/390.webp 390w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/520.webp 520w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/650.webp 650w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/780.webp 780w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/910.webp 910w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/1040.webp 1040w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/1170.webp 1170w,https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/1291.webp 1291w" sizes="(max-width: 1291px) 100vw, 1291px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/G6LQipbegHk6/images/1291.png" width="1291" height="524" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+        - Compute FPR and TPR for different threshold cut-offs.
+        <figure class="image" style="width:70%; max-width:100%;"data-ckbox-resource-id="JgJFcFIut8Ru">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/127.webp 127w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/254.webp 254w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/381.webp 381w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/508.webp 508w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/635.webp 635w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/762.webp 762w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/889.webp 889w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/1016.webp 1016w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/1143.webp 1143w,https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/1261.webp 1261w" sizes="(max-width: 1261px) 100vw, 1261px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/JgJFcFIut8Ru/images/1261.png" width="1261" height="513" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+        - Plot TPR (y-axis) vs. FPR (x-axis) for each cut-off.
+        <figure class="image" style="width:70%; max-width:100%;"data-ckbox-resource-id="sAw-BIs_RIJO">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/141.webp 141w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/282.webp 282w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/423.webp 423w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/564.webp 564w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/705.webp 705w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/846.webp 846w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/987.webp 987w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/1128.webp 1128w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/1269.webp 1269w,https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/1405.webp 1405w" sizes="(max-width: 1405px) 100vw, 1405px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/sAw-BIs_RIJO/images/1405.png" width="1405" height="768" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        <h1>Learning from Data</h1>
+        Machine learning enables systems to make predictions or decisions based on patterns in data, automating tasks that would otherwise require human expertise.
+        <br><br>
+
+        You may ask: how to actually learn skills from the data? Well, we:<br>
+        - We use some learning algorithm to train the machine how to predict.<br>
+        - Construct a model (corresponding to a certain learning algorithm).<br>
+        - Learn the model (i.e., solve a certain optimization problem) with observewd samples in data sets.
+        <br><br>
+
+        As mentioned above, performing machine learning involves creating a model. This is
+        trained on a training data set and evaluated on an testing set which is a unseen data, independant
+        to the training data. We sometimes also use a validation data set, which is a data set of
+        examples used to tune the hyper-parameters (if any) of the model.
+        <br><br>
+
+        <h1>Cross-Validation</h1>
+        Cross validation ensures robust model evaluation when data is limited, reducing overfitting and providing a reliable estimate of performance on unseen data.
+        <br><br>
+
+        <h2>k-Fold Cross-Validation</h2>
+        One of the cross validation techniques is k-fold. It is a potentially faster approach:<br>
+        - Shuffle the dataset and split it into $k$ groups.<br>
+        - For each group $b = 1, \dots, k$:<br>
+        -- Use the $b$-th group as the test set.<br>
+        -- Use the remaining $k-1$ groups as the training set.<br>
+        -- Compute the Mean Squared Error (MSE$_b$) on the $b$-th fold.<br>
+        - Estimate test error:
+        \[
+        CV(k) = \sum_b \frac{n_b}{n} MSE_b,
+        \]
+        where $n_b$ is the number of samples in the $b$-th fold, and $n$ is the total number of samples.
+        <figure class="image" data-ckbox-resource-id="HDaYJG0lR0qp" style="width:70%; max-width:100%;">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/560.webp 560w,https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/591.webp 591w" sizes="(max-width: 591px) 100vw, 591px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/HDaYJG0lR0qp/images/591.png" width="591" height="374" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <figure class="image" data-ckbox-resource-id="ETLdZFrE_G6F" style="width:70%; max-width:100%;">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/560.webp 560w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/640.webp 640w,https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/694.webp 694w" sizes="(max-width: 694px) 100vw, 694px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/ETLdZFrE_G6F/images/694.png" width="694" height="445" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br>
+
+        <h2>Leave-One-Out Cross-Validation (LOOCV)</h2>
+        Another one of the cross validation techniques is LOOCV. It maximizes training data but is computationally expensive:<br>
+        - Use one sample $(X_i, Y_i)$ as the validation set and the rest as the training set.<br>
+        - Compute $MSE_i$ for each iteration $i = 1, \dots, n$.<br>
+        - Estimate test error:
+        \[
+        CV(n) = \frac{1}{n} \sum_{i=1}^n MSE_i.
+        \]
+        <figure class="image" data-ckbox-resource-id="6B9tdb5-vJRM" style="width:70%; max-width:100%;">
+            <picture>
+                <source srcset="https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/80.webp 80w,https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/160.webp 160w,https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/240.webp 240w,https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/320.webp 320w,https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/400.webp 400w,https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/480.webp 480w,https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/529.webp 529w" sizes="(max-width: 529px) 100vw, 529px" type="image/webp"><img src="https://ckbox.cloud/2ce57516f4580910f6af/assets/6B9tdb5-vJRM/images/529.png" width="529" height="315" style="max-width:100%; height:auto;">
+            </picture>
+        </figure>
+        <br><br>
+
+        <h1>Generative and Discriminative Classifiers</h1>
+        Classifier is a type of machine learning algorithm used to assign a class label to a data input.
+        Generative models consider both the input $X$ and output $Y$ (e.g., $P(X, Y)$). While discriminative models only consider the output $Y$ given $X$ (e.g., $P(Y \mid X)$).
+        Note that logistic regression is discriminative because it models $P(Y \mid X)$ without assuming a distribution for $X$.
+        <br><br>
+
+        <h2>Bayes Classifier</h2>
+        An example of a generative classifiers is the Bayes. 
+        They provide the theoretical foundation for optimal classification, minimizing risk based on probabilistic reasoning.
+        Its rule is as follows:
+        \[
+        h^*(X) = \begin{cases} 
+        1 & \text{if } P(Y = 1 \mid X) > \frac{1}{2} \\
+        0 & \text{otherwise}
+        \end{cases}
+        \]
+        The optimal classifier (Bayes rule) $h^*$ minimizes Bayes risk $R(h)$ with a decision boundary,
+        Applying the Bayes theorm:
+        \[
+        P(Y = 1 \mid X = x) = \frac{P(x \mid Y = 1) P(Y = 1)}{P(x \mid Y = 1) P(Y = 1) + P(x \mid Y = 0) P(Y = 0)} = \frac{\pi_1 P_1(x)}{\pi_1 P_1(x) + (1 - \pi_1) P_0(x)}
+        \]
+        where $\pi_1 = P(Y = 1)$. Since it models $P(x)$, this is a generative classifier.
+        <br><br>
+
+        For an alternative form, define $m(x) = P(Y = 1 \mid X = x)$. Then $m(x) \geq \frac{1}{2}$ if:
+        \[
+        \frac{P_1(x)}{P_0(x)} > \frac{1 - \pi_1}{\pi_1}.
+        \]
+        Thus:
+        \[
+        h^*(x) = \begin{cases} 
+        1 & \text{if } \frac{P_1(x)}{P_0(x)} > \frac{1 - \pi_1}{\pi_1}, \\
+        0 & \text{otherwise}.
+        \end{cases}
+        \]
+
+        <h2>Naïve Bayes Classifier</h2>
+        Naïve Bayes classifier simplifies the Bayes classifier for practical use.
+        Recall the Bayes theorm:
+        \[
+            P(\text{hypo} \mid \text{data}) = \frac{P(\text{data} \mid \text{hypo}) P(\text{hypo})}{P(\text{data})},
+        \]
+        where posterior $\propto$ likelihood $\times$ prior.<br><br>
+
+        From a probabilistic view, given attributes $A_1 = a_1, \dots, A_k = a_k$ and class $C$,  
+        classifier is basically to compute the probability of maximizing class $c_j$:
+        \[
+            P(C = c_j \mid A_1 = a_1, \dots, A_k = a_k) = \frac{P(A_1 = a_1, \dots, A_k = a_k \mid C = c_j) P(C = c_j)}{\sum_r P(A_1 = a_1, \dots, A_k = a_k \mid C = c_r) P(C = c_r)}.
+        \]
+
+        And when we asume all attributes are independent given the class:
+        \[
+            P(A_1 = a_1, \dots, A_k = a_k \mid C = c_j) = \prod_{i=1}^k P(A_i = a_i \mid C = c_j).
+        \]
+
+        The Naïve Bayes classifier becomes:
+        \[
+            P(C = c_j \mid A_1 = a_1, \dots, A_k = a_k) = \frac{P(C = c_j) \prod_{i=1}^k P(A_i = a_i \mid C = c_j)}{\sum_{j=1}^k P(C = c_j) \prod_{i=1}^k P(A_i = a_i \mid C = c_j)}.
+        \] 
+
+        If we only need a decision on the most probable class for the test
+        instance, we only need the numerator as its denominator is the
+        same for every class.
+        Thus, given a test example, we compute the following to decide the
+        most probable class for the test instance:
+        \[
+            c = \arg\max_{c_j} P(c_j) \prod_{i=1}^k P(A_i = a_i \mid C = c_j).
+        \]
+
+        Here, we can estimate $P(A_i = a_i \mid C = c_j)$ and $P(c_j)$ by counting frequencies in the training data.
+        <br><br>
+
+        Some of the advantages include:<br>
+        - Easy to implement and computationally efficient.<br>
+        - Performs well in many applications (e.g., spam detection).<br>
+        - Often yields accurate models due to its simplicity and robustness.
+        <br><br>
+
+        Disadvantages include:<br>
+        - Assumes conditional independence, which may reduce accuracy if violated (e.g., highly correlated features).<br>
+        - Poor performance when the mixture model assumption fails significantly.
+        <br><br>
+
+        <hr>
+        <i>
+            <b>Notes</b><br>
+            [a] 
+            <br><br>
+            [b] 
+            <br><br>
+            [c]
+            <br><br>
+            <b>References</b><br>
+            [1]  
+        </i>
+
+        <br><br>
+    </section>
+</body>
+</html>
