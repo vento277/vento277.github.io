@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="../../assets/style.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
     
-    <!-- Include MathJax CDN -->
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    <!-- Include Mathlax CDN -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+            tex2jax: { inlineMath: [ ["$", "$"], ["\\(", "\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+            TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+            messageStyle: "none"
+        });
     </script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 
 <body>
@@ -21,107 +27,211 @@
 
     <section>
         Logistic regression is a statistical model used for classification problems. Unlike linear regression, which predicts continuous values, logistic regression is used when the output is categorical.
+        Some of the real world examples include spam detection (classifies emails as spam or not spam),
+        image classification (identifies objects in an image) and disease diagnosis.
         <br><br>
 
-        Some of the real world examples include:<br>
-        - Spam Detection: Classifies emails as spam or not spam.<br>
-        - Image Classification: Identifies objects in an image (e.g., cat, dog, or car).<br>
-        - Disease Diagnosis: Determines whether a patient has a malignant tumor or a benign lesion.
+        Logistic regression is often used beacuse it exactly outputs the probability of probability of y
+        = true label conditioned on the input X. And the prediction changes significantly around 0, which helps distinguish
+        boundary samples. Overall, it is more robust against outliers.
         <br><br>
+
+        <h1>Classification Models</h1>
+        Classification is the process of categorizing objects into predefined groups. The goal of a classification model is to learn from training data and generalize to unseen examples.
+        Each sample in classification is represented as a feature vector of \(i\)-th training sample
+        and \(n\)-th feature:
+        \[
+        x^{(i)} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})^T
+        \]
+    
+        The corresponding categorical labels of a set of classes \( K \) is given as follows:
+        \[
+        y^{(i)} \in \{1, 2, \ldots, K\} \quad \forall i \in \{1, 2, \ldots, m\}
+        \]
+        <br>
+
+        <h2>Classifiers</h2>
+        In general, there are two types of classifiers. A binary classification which has
+        two possible categories (1 or 0) and multi-class classifiers which has more than two possible categories
+        (e.g., "cat", "dog", "horse").
+        <br><br>
+
+        Before diving deeper into the theory of classifiers, 
+        it's important to understand how we define which data points belong to which category. 
+        To do this, we introduce the concept of a decision boundary—a boundary that separates different 
+        classes or categories.
+        <br><br>
+
+        In the case of linear classifiers, which is a type of linear model that classifies data based on a 
+        linear combination of input features, this decision boundary is a straight line in 2D space. 
+        This is because a linear classifier creates a linear decision surface, 
+        and in 2D, this surface is a line. But the  
+        decision boundary becomes a hyperplane in higher dimensions.
+        <figure class="image" data-ckbox-resource-id="c9Wcy-jbUSGi">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/131.webp 131w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/262.webp 262w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/393.webp 393w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/524.webp 524w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/655.webp 655w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/786.webp 786w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/917.webp 917w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/1048.webp 1048w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/1179.webp 1179w,https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/1301.webp 1301w" sizes="(max-width: 1301px) 100vw, 1301px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/c9Wcy-jbUSGi/images/1301.png">
+            </picture>
+        </figure>
+        <br>
+
+        We also need to clarify the difference between likeligood and probability.
+        In the context of probability, we assume the parameters are fixed and compute the likelihood of observing data under a given model or distribution. Essentially, probability refers to how likely a certain outcome is, given specific parameters.
+        On the other hand, in the case of likelihood, we treat the data as fixed and vary the parameters of the model or distribution. The likelihood tells us how likely the parameters are, given the observed data.
+        <br><br>
+
+        In many machine learning contexts, our goal is to find the parameters that maximize the likelihood, a process known as maximum likelihood estimation (MLE). This allows us to select the model parameters that make the observed data most probable under the model.
+        <br><br>
+
+        <h2>Logit</h2>
+        In machine learning, logit refers to the log-odds of a probability.
+        It is used to map the linear combination of input features (such as weights and inputs) 
+        to the probability of a class.
+        Let's say that the odds of even A happening is given as $\frac{p}{1-p}$. Then the logit function
+        is given as:
+        \[
+            \text{logit}(p) = \ln\left(\frac{p}{1-p}\right) \rightarrow \text{logit}^{-1}(z) = p = \frac{1}{1 + e^{-z}}
+        \]
+
+        Recall the function $f_{\Theta}(X) = X^T \Theta \in (-\infty, +\infty)$. Our goal here is to find
+        $P(y = 1|X)$. So:
+        \[
+            P(\hat{y}=1|X) = \text{logit}^{-1}(X^T \Theta) = \frac{1}{1 + e^{-X^T \Theta}} \in (0,1)
+        \]
+        with the classiciation rule:
+        \[
+            \hat{y}=
+            \begin{cases} 
+            1 & \text{if } P(\hat{y}=1|X) \geq 0.5 \\
+            0 & \text{otherwise}
+            \end{cases}
+        \]
+
+        Since $\text{logit}^{-1}(X^T \Theta) \geq 0.5$ iff $X^T \Theta \geq 0$:
+        \[
+            \hat{y}=
+            \begin{cases} 
+            1 & \text{if } X^T \Theta \geq 0 \\
+            0 & \text{otherwise}
+            \end{cases}
+        \]
+
+        From this, we can observe that logistic regression is a generalized linear classifier. 
+        And the decision boundary is the hyperplane $z = X^T \Theta$.
+        <br><br>
+
+        Note that sometimes $\text{logit}$ is denoted as $\text{sigmoid}$ or $\sigma$. 
         
-        <h2>Classification</h2>
-        Classification is the process of categorizing objects into predefined groups. The goal of a classification model is to learn from training data and generalize to unseen examples.<br>
+        <br><br>
+        <h1>Maximum Likelihood Estimation (MLE)</h1>
+        How do we search for the optimal $\Theta$ through the training data to maximize the
+        classification performance? Given i-th sample, we can write the general logit function as:
+        \[
+            P(\hat{y}^{(i)}=1|{X^{(i)}}) = \sigma^{-1}({X^{(i)}}^T \Theta) = \frac{1}{1 + e^{-{X^{(i)}}^T \Theta}} \in (0,1)
+        \]
+        with the supervision criteria:
+        \[
+            P(\hat{y}^{(i)}= j|{X^{(i)}}) = 
+            \begin{cases} 
+            j = 0 \rightarrow \text{approach} \; 0 & \text{if } y^{(i)} = 0 \\
+            j = 1 \rightarrow \text{approach} \; 1 & \text{if } y^{(i)} = 1
+            \end{cases}
+        \]
+
+        Using the criteria above, we can rewrite the logit function as:
+        \[
+            p_i := P(\hat{y}^{(i)}=1|{X^{(i)}})^{y^{(i)}} P(\hat{y}^{(i)}=0|{X^{(i)}})^{1-y^{(i)}}
+        \]
+        with:
+        \[
+            p_i =
+            \begin{cases} 
+            P(\hat{y}^{(i)}=0|{X^{(i)}}) & \text{if } y^{(i)} = 0 \\
+            P(\hat{y}^{(i)}=1|{X^{(i)}}) & \text{if } y^{(i)} = 1
+            \end{cases}
+        \]
+
+        <h2>Binary Cross-Entropy</h2>
+        Now, if we consider the join probability of all samples, and try to maximize it:
+        \[
+            \max (p(\Theta)) = \max (\prod_{i=1}^{m} p_i) = - \min (\ln p(\Theta)) = - \sum_{i=1}^{m} \ln p_i
+        \]
+        \[
+        = - \sum_{i=1}^{m} \left[y^{(i)} \ln (P(\hat{y}^{(i)} = 1| X^{(i)})) + (1 - y^{(i)}) \ln (1 - P(\hat{y}^{(i)} = 1 | X^{(i)})) \right]
+        \]
+
+        This result is a form of binary cross-entropy, which measures how well the model's predicted probabilities align with the actual labels.
+        More generally, it takes the form:
+        \[
+            E_i(\Theta) = y^{(i)} ln (P(\hat{y}^{(i)} = 1| X^{(i)})) + (1 - y^{(i)}) \ln (1 - P(\hat{y}^{(i)} = 1 | X^{(i)}))
+        \]
+
+        And its error as:
+        \[
+            \text{Binary cross-entropy error} := -yln (P(y)) - (1-y)ln(1-P(y)), \; y \in \{0,1\}
+        \]
+
+        In our case, $P(y) =  P(\hat{y}^{(i)} = 1| X^{(i)}) = \frac{1}{1 + e^{-{X^{(i)}}^T \Theta}}$:
+        \[
+            error =
+            \begin{cases} 
+            - \ln (1 - \frac{1}{1 + e^{-{X^{(i)}}^T \Theta}}) & \text{if } y = 0 \\
+            - \ln (\frac{1}{1 + e^{-{X^{(i)}}^T \Theta}}) & \text{if } y  = 1
+            \end{cases}
+        \]
+        <figure class="image" data-ckbox-resource-id="IbZGanoKpZvI">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/80.webp 80w,https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/160.webp 160w,https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/240.webp 240w,https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/320.webp 320w,https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/400.webp 400w,https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/480.webp 480w,https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/526.webp 526w" sizes="(max-width: 526px) 100vw, 526px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/IbZGanoKpZvI/images/526.png">
+            </picture>
+        </figure>
         <br>
 
-        Each sample in classification is represented as a feature vector:
-        \[
-        x^{(i)} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})
-        \]
-        where \(x^{(i)}\) represents the \(i\)-th training sample, and \(x_j^{(i)}\) represents the \(j\)-th feature of that sample.<br>
-        <br>
-        The corresponding categorical labels belong to a set of classes \( K \), such as:
-        \[
-        y^{(i)} \in \{1, 2, ..., K\}
-        \]
-        <br>
-
-        In general, there are two types of classifiers<br>
-        - Binary Classification: Two possible categories (e.g., "cat" vs. "not cat").<br>
-        - Multi-Class Classification: More than two possible categories (e.g., "cat", "dog", "horse").<br>
-        <br>
-        
-        And the decision boundary is a surface that separates different categories. 
-        In a 2D space, it is often a straight line for linear classifiers.
-        Here, linear classifier is a kind of linear models, which classifies data
-        based on a linear combination of input features, where its decision boundary is a 
-        straight line / hyperplane that partitions the feature space into two half-spaces.
-        <picture>
-            <source srcset="https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/104.webp 104w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/208.webp 208w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/312.webp 312w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/416.webp 416w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/520.webp 520w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/624.webp 624w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/728.webp 728w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/832.webp 832w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/936.webp 936w,https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/1038.webp 1038w" sizes="(max-width: 1038px) 100vw, 1038px" type="image/webp"><img src="https://ckbox.cloud/f9eca54477a270baee0d/assets/WNJaBtlgDBAg/images/1038.png" width="1038" height="334">
-        </picture>
+        <h2>Gradient descent</h2>
+        Recall for <a href = "ml_1.html">Linear Regression</a>, we minimized RSS to find the optimal fit.
+        We want to do the same for $E_i(\Theta)$. But finding the analytic solution to its derivatives is very difficult.
+        So instead, we use gradient descent. It iteratively searches for the optimal solution instead of deriving
+        to the solution directly. 
         <br><br>
 
-        Before diving into the mathematics of the model, we should clarify the difference between likeligood and probability.
-        With probabilities, we assume given parameters and compute it in the context of sampling from a distribution. On the other hand,
-        when we consider likelihoods, we regard the data as fixed and vary the parameters of the distribution.
-        In a lot of ML context, we are interested in finding the parameters that maximize the likelihood.
-
-        Now, recall logistic regression is a type of linear classifier that uses the logistic (sigmoid) function to map inputs to probabilities:
+        Plugging $P(y) =  P(\hat{y}^{(i)} = 1| X^{(i)}) = \frac{1}{1 + e^{-{X^{(i)}}^T \Theta}}$ into 
+        $E_i(\Theta)$, we get:
         \[
-        P(y=1|x) = \frac{1}{1 + e^{-x^T\theta}}
+            E(\Theta) = - \sum_{i=1}^{m} \left[y^{(i)} \ln (\frac{1}{1 + e^{-{X^{(i)}}^T \Theta}}) + (1 - y^{(i)}) \ln (1 - (\frac{1}{1 + e^{-{X^{(i)}}^T \Theta}})) \right]
+        \]
+
+        This reduces to the analytic solution:
+        \[
+            \nabla E(\Theta) = \frac{\partial E(\Theta)}{\partial \Theta} = \sum_{i=1}^{m} (\frac{1}{1 + e^{-{X^{(i)}}^T \Theta}} - y^{(i)}) X^{(i)}
+        \]
+
+        Putting this into the gradient descent algo box, we can derive at the optimal solution for $\Theta$:
+        \[
+            \boxed{
+            \begin{array}{l}
+            \textbf{Gradient Descent Algorithm:} \\
+            \text{1. Initialize the parameters } \Theta \text{ (e.g., randomly).} \\
+            \text{2. Set the learning rate } \alpha. \\
+            \text{3. Repeat until convergence:} \\
+            \quad \text{a. Compute the gradient of the cost function:} \\
+            \quad \nabla E(\Theta) = \frac{\partial E(\Theta)}{\partial \Theta} = \sum_{i=1}^{m} \left( \frac{1}{1 + e^{-X^{(i)T} \Theta}} - y^{(i)} \right) X^{(i)} \\
+            \quad \text{where } X^{(i)} \text{ represents the features and } y^{(i)} \text{ represents the labels.} \\
+            \quad \text{b. Update the parameters:} \\
+            \quad \Theta := \Theta - \alpha \nabla E(\Theta) \\
+            \text{4. Continue until convergence or a maximum number of iterations.}
+            \end{array}
+            }
         \]
         <br>
 
-        The sigmoid function transforms any real-valued number into the range (0,1), making it suitable for probability estimation:
-        \[
-        \sigma(z) = \frac{1}{1 + e^{-z}}
-        \]
-        This ensures that the output can be interpreted as a probability.
-        
-        <br><br>
-        <h2>Maximum Likelihood Estimation (MLE)</h2>
-        The logistic regression model is trained by maximizing the likelihood function, which is the probability of the observed data given the model:
-        \[
-        L(\theta) = \prod_{i=1}^{m} P(y^{(i)} | x^{(i)}; \theta)
-        \]
-        Taking the negative log-likelihood gives the loss function:
-        \[
-        J(\theta) = - \sum_{i=1}^{m} \left[y^{(i)} \log P(y^{(i)} | x^{(i)}) + (1 - y^{(i)}) \log (1 - P(y^{(i)} | x^{(i)})) \right]
-        \]
-        This is known as **binary cross-entropy loss**, which measures how well the model's predicted probabilities align with the actual labels.
-        <br><br>
-        <h2>Gradient Descent for Optimization</h2>
-        Since the loss function is non-linear, we use **gradient descent** to find the optimal parameters:
-        \[
-        \theta := \theta - \alpha \nabla J(\theta)
-        \]
-        where \(\alpha\) is the learning rate, and \(\nabla J(\theta)\) is the gradient of the loss function with respect to \(\theta\).
-        <br><br>
-        <h1>Advantages of Logistic Regression</h1>
-        - Outputs direct probability estimates.<br>
-        - Works well for linearly separable data.<br>
-        - Robust to small amounts of noise in the data.<br>
-        <br>
-        
+        Let's try an example. 
+                
+        <hr>
         <i>
             <b>Notes</b><br>
-            [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process.
+            -
             <br><br>
-            [b] The dimension \( n+1 \) indicates that the vector has \( n \) parameters plus one additional parameter. 
-            The \( n \) corresponds to the actual features of the data, and the extra \( n + 1-th\) component typically
-            is a 1 to represent the bias input to hand;e the bias term algebraically in vector form.  
-            <br><br>
-            [c] Imagine a room with a bunch of colorful marbles on the floor. 
-            Some marbles are red, some are blue. Now, you're holding a big, flat board, and you want to use it to divide the marbles 
-            into two groups: all the red ones on one side, and all the blue ones on the other side.
-            <br>
-            If the room was super simple with just two directions, left and right, you could just place a board like a straight line that separates the
-            marbles. This line would be a hyperplane in 2D.
-            <br>
-            Now, if the room was more complicated, with marbles scattered in every direction (up, down, left, right, and even more directions), the board you use to divide the marbles might need to be something more than just a line—it could be a flat surface (like a wall) that separates the marbles into two groups. This "flat surface" is still a hyperplane, just in a higher number of dimensions.
-            <br><br>
-            <b>References</b><br>
-            [1] https://en.wikipedia.org/wiki/Linear_regression<br>    
-            
+
+            <b>References</b><br>  
+            -
         </i>
 
         <br><br>

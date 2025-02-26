@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="../../assets/style.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
     
-    <!-- Include MathJax CDN -->
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    <!-- Include Mathlax CDN -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+            tex2jax: { inlineMath: [ ["$", "$"], ["\\(", "\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+            TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+            messageStyle: "none"
+        });
     </script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 
 <body>
@@ -26,65 +32,76 @@
         <br><br>
 
         In building a model, we need data. Given an original dataset,  
-        we split the data into training and testing sets. The training data is used to build the model, which produces an output or prediction.  
+        we split the data into training and testing sets. The training data is used to build the model, 
+        which produces an output or prediction.  
         The testing data is then used to evaluate the model's performance. Sometimes, the data is split into three sets, including a validation set.  
         The validation data is used to tune the hyperparameters [a].  
-        <br><br>
-
-        Now, ML has two types of 'learning'. Supervised is when there is a given set of \((x, y)\) to learn and to predict the  
-        y using x. For example, predicting the housing price based on its year, location, size, etc.  
-        Unsupervised is when there is a given set of \(x\), and we are to infer the underlying structure or relationships of \(x\).  
-        For example, outlier detection and grouping customers. Essentially,  
-        supervised learning uses data with the right answers, and unsupervised learning uses data that is unlabeled.  
-        <br><br>
-
-        Finally, note that classification is different from regression. Regression models the exact point for its prediction
-        while classification models wheter \(x\) is above or below the threshold. 
-        <br><br>
-
-        <b>Basics</b><br>
-        Let's start with an example. Assume a dataset of incomes:
-        <figure class="image" data-ckbox-resource-id="zUs2KAE--YD3">
+        <figure class="image" data-ckbox-resource-id="McU5FjRnuNZW">
             <picture>
-                <source srcset="https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/80.webp 80w,https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/160.webp 160w,https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/240.webp 240w,https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/312.webp 312w" type="image/webp" sizes="(max-width: 312px) 100vw, 312px"><img src="https://ckbox.cloud/2b4a1b17b1c94242519e/assets/zUs2KAE--YD3/images/312.png" width="312" height="339">
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/80.webp 80w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/160.webp 160w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/240.webp 240w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/320.webp 320w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/400.webp 400w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/480.webp 480w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/560.webp 560w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/640.webp 640w,https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/667.webp 667w" sizes="(max-width: 667px) 100vw, 667px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/McU5FjRnuNZW/images/667.png">
             </picture>
         </figure>
+        <br>
+
+        Now, ML has two types of 'learning'. Supervised learning is when there is a given set of \((x, y)\) to learn and to predict the  
+        y using x. For example, predicting the housing price based on its year, location, size, etc.  
+        Unsupervised learning is when there is a given set of \(x\), and we are to infer the underlying structure or relationships of \(x\).  
+        For example, outlier detection and grouping customers. Essentially,  
+        supervised learning uses data with the right answers, and unsupervised learning uses data that is unlabeled.  
+        <figure class="image" data-ckbox-resource-id="zmjKdS2v1isg">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/99.webp 99w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/198.webp 198w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/297.webp 297w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/396.webp 396w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/495.webp 495w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/594.webp 594w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/693.webp 693w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/792.webp 792w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/891.webp 891w,https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/988.webp 988w" sizes="(max-width: 988px) 100vw, 988px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/zmjKdS2v1isg/images/988.png">
+            </picture>
+        </figure>
+        <br>
+
+        Let's start with an example. Assume a dataset of incomes:
+        <figure class="image" data-ckbox-resource-id="BLDCJx733Mij">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/BLDCJx733Mij/images/80.webp 80w,https://ckbox.cloud/77402af5c9b103bf8297/assets/BLDCJx733Mij/images/160.webp 160w,https://ckbox.cloud/77402af5c9b103bf8297/assets/BLDCJx733Mij/images/240.webp 240w,https://ckbox.cloud/77402af5c9b103bf8297/assets/BLDCJx733Mij/images/320.webp 320w,https://ckbox.cloud/77402af5c9b103bf8297/assets/BLDCJx733Mij/images/400.webp 400w,https://ckbox.cloud/77402af5c9b103bf8297/assets/BLDCJx733Mij/images/450.webp 450w" sizes="(max-width: 450px) 100vw, 450px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/BLDCJx733Mij/images/450.png" width="450" height="530">
+            </picture>
+        </figure>
+        <br>
+
         With predictors \(X = (X_1, ..., X_p)\), all relationships of the given data can be 
         generalized as \(Y = f(X) + \epsilon\), where \(Y\) is the quantitative response,
         \(f(X)\) is the given data, and \(\epsilon\) is the error term. And through modelling,
         we derive \(\hat{Y} = \hat{f}(X)\), where the hat represents the predicted terms.
         <br><br>
-        The result can be something like this:
-        <picture>
-            <source srcset="https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/125.webp 125w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/250.webp 250w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/375.webp 375w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/500.webp 500w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/625.webp 625w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/750.webp 750w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/875.webp 875w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1000.webp 1000w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1125.webp 1125w,https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1248.webp 1248w" sizes="(max-width: 1248px) 100vw, 1248px" type="image/webp"><img src="https://ckbox.cloud/21983d4d77797aa18c33/assets/2J05HqfLHiMm/images/1248.png">
-        </picture>
+
+        The result may be something like this:
+        <figure class="image" data-ckbox-resource-id="SQiP8HDMKZDQ">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/149.webp 149w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/298.webp 298w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/447.webp 447w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/596.webp 596w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/745.webp 745w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/894.webp 894w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/1043.webp 1043w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/1192.webp 1192w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/1341.webp 1341w,https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/1484.webp 1484w" sizes="(max-width: 1484px) 100vw, 1484px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/SQiP8HDMKZDQ/images/1484.png">
+            </picture>
+        </figure>
+        <br>
         The training represents the data that has been used to derive the fitting function. And the
         testing data are used to validate the fitting function using various statistical tools such as \( R^2 \), \( MSE \) or \( RSS \).
-        But as one can observe, this only considers a simple one to one relationship. But as we know, salary dosen't only depend on experience.
-        It also depends on location, field of specialization, and many other factors. 
+        But as one can observe, this only considers a simple one to one relationship. 
         <br><br>
-        To handle the mutifaced aspect, we can formulate a n-dimensional feature sapce:
+        
+        <h1>Multi-dimentsional Linear Regression</h1>
+        But as we know, salary dosen't only depend on experience.
+        It also depends on location, field of specialization, and many other factors. 
+        To handle the mutifaced aspect, we formulate a n-dimensional feature sapce:
         \[
-            \hat{y} = f(\theta_0, \theta_1, \dots, \theta_n; x_1, x_2, \dots, x_n) = \theta_0 + \theta_1 x_1 + \dots + \theta_n x_n
+            \hat{y} = f_{\theta_0, \theta_1, \dots, \theta_n}( x_1, x_2, \dots, x_n) = \theta_0 + \theta_1 x_1 + \dots + \theta_n x_n
         \]
 
-        Where the goal here is to find the best \({\theta_0, \theta_1, \dots, \theta_n}\) to predict y given x.
+        The goal here is to find the best \({\theta_0, \theta_1, \dots, \theta_n}\) to predict y given x.
         We can rewrite the multivariate linear function using matrix notation:
         \[
-            \hat{y} = f(\Theta, X) = X^T \Theta
-        \]
-
+            \hat{y} = f_{\Theta}(X) = X^T \Theta
+        \] 
         where:
         \[
-            \Theta = \begin{bmatrix} \theta_0 \\ \theta_1 \\ \vdots \\ \theta_n \end{bmatrix}, \quad X = \begin{bmatrix} 1 \\ x_1 \\ \vdots \\ x_n \end{bmatrix}
+            \Theta = \begin{bmatrix} \theta_0 \\ \theta_1 \\ \vdots \\ \theta_n \end{bmatrix} \quad \text{parameter vector [b]}
+            \quad \text{and} \quad
+            X = \begin{bmatrix} 1 \\ x_1 \\ \vdots \\ x_n \end{bmatrix} \quad \text{feature vector}
+            \quad
+            \Theta, X\in \mathbb{R}^{n+1}[c]
         \]
-        
-        Here: <br>
-        - \( \hat{y} \in \mathbb{R} \) is the predicted output.<br>
-        - \( \Theta \in \mathbb{R}^{n+1} \) represents the parameter vector [b].<br>
-        - \( X \in \mathbb{R}^{n+1} \) represents the feature vector.
-
-        <br><br>
 
         Now, what if there are multiple samples \( m \)? For a dataset with \( m \) training samples, each sample has its own feature vector:
         \[
@@ -92,17 +109,14 @@
             X^{(2)} = \begin{bmatrix} 1 \\ x_1^{(2)} \\ \vdots \\ x_n^{(2)} \end{bmatrix}, \quad
             \dots, \quad
             X^{(m)} = \begin{bmatrix} 1 \\ x_1^{(m)} \\ \vdots \\ x_n^{(m)} \end{bmatrix}
-        \]
-        
-        The corresponding labels are:
-        \begin{equation}
+            \quad \text{so} \quad 
             y = \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ \vdots \\ y^{(m)} \end{bmatrix}
-        \end{equation}
+        \]
 
-        We can define the data matrix \( \mathbb{X} \in \mathbb{R}^{m \times (n+1)} \), where each row represents a sample and each column represents a feature,
+        We can define the data matrix \( \mathbf{X} \in \mathbb{R}^{m \times (n+1)} \), where each row represents a sample and each column represents a feature,
         to better represent this:
         \[
-            \mathbb{X} = \begin{bmatrix}
+            \mathbf{X} = \begin{bmatrix}
             X^{(1)T} \\ X^{(2)T} \\ \vdots \\ X^{(m)T}
             \end{bmatrix} =
             \begin{bmatrix}
@@ -113,152 +127,143 @@
             \end{bmatrix}
         \]
         
-        The final equation for multiple samples is:
+        So final equation for multiple samples is:
         \[
             \hat{Y} = f(\Theta, \mathbb{X}) = \mathbb{X} \Theta
         \]
 
-        where:<br>
-        - \( \hat{Y} \) is the vector of predicted values.<br>
-        - \( \Theta \) is the parameter vector.<br>
-        - \( \mathbb{X} \) is the feature matrix
-        <br><br>
-        This allows us to compute predictions for all training samples using matrix operations, which can be more efficient. 
-        <br><br>
-
+        <h2>Geometric Representation</h2>
         Now let's explore the geometry of linear regression to gain a deeper understanding of the operation.
         Again, linear regression aims to model the relationship between a dependent variable \( y \) and multiple independent variables \( x_1, x_2, \dots, x_n \). The data points:
-        \[
+        \(
         (x_1^{(1)}, x_2^{(1)}, \dots, x_n^{(1)}, y^{(1)}), \dots, (x_1^{(m)}, x_2^{(m)}, \dots, x_n^{(m)}, y^{(m)})
-        \]
-        form an \( n + 1\)-dimensional space.<br>
-        - In a one-dimensional feature space ($n=1$), the model is a straight line.<br>
-        - In a two-dimensional feature space ($n=2$), the model is a plane.<br>
-        - In general, for $n$-dimensional feature space, the fitting function represents an $n$-dimensional hyperplane [c].
+        \) form an \( n + 1\)-dimensional space.
+        <br><br>
 
-        The goal of linear regression is to find a hyperplane that best fits the given data points. Below are some examples for
-        linear gression on 2D feature space:
-        <picture>
-            <source srcset="https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/114.webp 114w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/228.webp 228w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/342.webp 342w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/456.webp 456w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/570.webp 570w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/684.webp 684w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/798.webp 798w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/912.webp 912w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/1026.webp 1026w,https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/1138.webp 1138w" sizes="(max-width: 1138px) 100vw, 1138px" type="image/webp"><img src="https://ckbox.cloud/21983d4d77797aa18c33/assets/HZaj_z9CLMcp/images/1138.png">
-        </picture>
+        We can observe that in a one-dimensional feature space ($n=1$), the model is a straight line, and at 
+        two-dimensional feature space ($n=2$), the model is a plane. 
+        In general, for $n$-dimensional feature space, the fitting function represents an $n$-dimensional hyperplane [d].
+        And the goal of linear regression can be re-worded as to finding a hyperplane that best fits the given 
+        data points. 
+        <br><br>
 
-        <b>Optimization</b><br>
+        Below are some examples for linear gression on 2D feature space:
+        <figure class="image" data-ckbox-resource-id="ZOdQKrvE4DQi">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/125.webp 125w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/250.webp 250w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/375.webp 375w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/500.webp 500w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/625.webp 625w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/750.webp 750w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/875.webp 875w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/1000.webp 1000w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/1125.webp 1125w,https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/1248.webp 1248w" sizes="(max-width: 1248px) 100vw, 1248px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/ZOdQKrvE4DQi/images/1248.png">
+            </picture>
+        </figure>
+        <br><br>
+
+        <h1>Optimization</h1>
         Optimization is the branch of mathematics that aims to solve the problem of
         finding the elements that maximize or minimize a given function. And 
         many problems in engineering and ML can be cast as optimization problem. For example,
         when an engineer designs a pipe, we will seek for the design that minimizes cost while
-        respecting some safety constraints.
+        respecting some safety constraints. 
+        The target of the optimization problem is referred to as the objective function 
+        \( J(\Theta) = J(\Theta; Y, \hat{Y}) \)
+        (also called cost or loss function).
         <br><br>
 
-        The target of the optimization problem is referred to as the objective function \( J(\Theta) = J(\Theta; Y, \hat{Y}) \).
-        (also called cost or loss function) quantifies the error between predicted values \( \hat{Y} \) and true values \( Y \).
-        <br><br>
-
-        Another important concept in optimization is convexity. Convex functions are those in which 
+        A important concept in optimization is convexity. Convex functions are those in which 
         the line segment between any two distinct points on the graph of the function lies above or on the graph 
-        between the two points. This is important because convex functions have the desirable property that the gradient 
-        minimizes only at a global optimum (a single optimum).
+        between the two points. This is important because convex functions have the desirable property that the 
+        gradient minimizes only at a global optimum (a single optimum).
+        <figure class="image" data-ckbox-resource-id="wuGfhYzDKj7A">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/140.webp 140w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/280.webp 280w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/420.webp 420w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/560.webp 560w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/700.webp 700w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/840.webp 840w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/980.webp 980w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/1120.webp 1120w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/1260.webp 1260w,https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/1399.webp 1399w" sizes="(max-width: 1399px) 100vw, 1399px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/wuGfhYzDKj7A/images/1399.png">
+            </picture>
+        </figure>
+        <br>
+
+        What has this to do with linear regression? Well, we need to find the best parameter for \( \Theta \) such that
+        it has the most optimal fit with regard to the given data. Therefore, regression
+        in its extended form, is a process of optimization.
         <br><br>
 
-        What has this to do with linear regression? Well, we need to find the best parameter for \( \Theta \),
-        in other words, we are looking for an optimal fit. This is a optimization question!
-        <br><br>
-
+        <h2>Optimal Fit</h2>
         So what does a good fit really mean? A good fit minimizes the difference between predicted values \( \hat{Y} \) and actual target values \(Y\). 
-        This requires defining a measure of error, which leads to the concept of an objective function.
-        One of the common choice of quaityfing error is Residual Sum of Squares \( RSS \):
-        \[
-            J_\Theta(Y, \hat{Y}) = \sum_{i=1}^{m} (f_\Theta(X^i) - y^i)^2 = \|\hat{Y} - Y\|_2^2.
-        \]
-        For each training sample, the residual is the difference between the predicted value (which lies on the regression hyperplane) and the true value. 
-        The total residual error over all samples is what we aim to minimize.
+        This requires defining a measure of error since we want to reduce them.
+        One of the common choice of quaityfing error is Residual Sum of Squares, \( RSS \).
         <br><br>
 
-        To find the optimal parameters, we solve for \( \Theta^* \) that minimizes \( J(\Theta) \). The necessary condition for optimality is:
+        $RSS$ measures the level of variance in the error term/residual (or the difference between the predicted value and the true value), of a regression model. 
+        Naturally, we want to minimze the total residual error over all samples. We can do this via. odinary least squared (OLS) method. 
+        The formula for $RSS$ given as follows:
+        \[
+            J_\Theta(Y, \hat{Y}) = \sum_{i=1}^{m} (f_\Theta(X^{(i)}) - y^{(i)})^2 = \|\hat{Y} - Y\|_2^2
+        \]
+
+        To minimize the residual is the same as saying to minize the convex objective function.
+        And this translates to finding the \( \Theta^* \) that minimizes \( J(\Theta) \). 
+        Since we know that the objective function is convex, solving for the critical point guarantees an optimal solution.
+        So the \( \Theta^* \) is minimal iff:
         \[
             J'(\Theta^*) = 0, \quad J''(\Theta^*) > 0
         \]
-        Since the objective function is convex, solving for the critical point guarantees an optimal solution.
-        <br><br>
 
         The cost function can be rewritten in matrix form as:
-        \begin{equation}
-        J(\Theta) = \| f_\Theta(X) - Y \|_2^2 = \|X\Theta - Y\|_2^2.
-        \end{equation}
-        Expanding this expression:
-        \begin{equation}
-        J(\Theta) = \Theta^T X^T X \Theta - Y^T X \Theta - \Theta^T X^T Y + Y^T Y.
-        \end{equation}  
-        <br><br>
+        \[
+            J(\Theta) = \| f_\Theta(\mathbf{X}) - Y \|_2^2 = (\mathbf{X} \Theta - Y)^T (\mathbf{X} \Theta - Y)
+            = \Theta^T \mathbf{X}^T \mathbf{X} \Theta - Y^T \mathbf{X} \Theta - \Theta^T \mathbf{X}^T Y + Y^T Y
+        \] 
 
         Taking the first derivative:
-        \begin{equation}
-        \frac{\partial J(\Theta)}{\partial \Theta} = 2 X^T X \Theta - 2 X^T Y = 0.
-        \end{equation}
-        Solving for \( \Theta^* \) gives:
-        \begin{equation}
-        \Theta^* = (X^T X)^{-1} X^T Y.
-        \end{equation}
+        \[
+            \frac{\partial J(\Theta)}{\partial \Theta} = 2 \mathbf{X}^T \mathbf{X} \Theta - 2 \mathbf{X}T Y = 0 
+            \rightarrow 
+            \Theta^* = (X^T X)^{-1} X^T Y
+        \]
+
+        The second derivative is:
+        \[
+            \frac{\partial^2 J(\Theta)}{\partial \Theta^2} = 2 X^T X > 0    
+        \]
+
+        Which confirms convexity, ensuring that \( \Theta^* \) is the optimal solution since this is
+        the global minimum.
         <br><br>
 
-        Finally, the second derivative is:
-        \begin{equation}
-        \frac{\partial^2 J(\Theta)}{\partial \Theta^2} = 2 X^T X > 0,
-        \end{equation}
-        which confirms convexity, ensuring that \( \Theta^* \) is the optimal solution.
-        <br><br>
-
-        While the analytic solution provides a closed-form expression for \( \Theta^* \) , it assumes that \( X^T X \) is invertible. This raises important questions:<br>
-        - What happens if \( (X^T X)^{-1} \) does not exist?<br>
-        - Under what conditions is \( X^T X \) invertible?
-        <br><br>
-
-        A necessary and sufficient condition for \( X^T X \) to be invertible is that the columns of \( X \) are linearly independent. If the columns are dependent, then \( X^T X \) is singular, 
+        While the analytic solution provides a closed-form expression for \( \Theta^* \) , 
+        it assumes that \( X^T X \) is invertible. What happens if \( (X^T X)^{-1} \) does not exist?
+        And under what conditions is \( X^T X \) invertible? A necessary and sufficient condition for \( X^T X \) to be invertible is that the columns of \( X \) are linearly independent. If the columns are dependent, then \( X^T X \) is singular, 
         meaning that an exact solution may not exist.
         <br><br>
 
-        <h2>Error Metrics</h2>
-        Linear regression models are evaluated based on how accurately they predict numerical values. 
+        <h1>Error Metrics</h1>
+        Linear regression models are evaluated based on how accurately they predict numerical values
+        given an unseen dataset. 
         Various metrics summarize the predictive skill of a model by measuring different types of errors.
+        For example, given total samples \( N \), true labels \( Y \), and predictions \( \hat{Y} \), 
+        the following metrics are commonly used:<br>
+        - Mean Absolute Error: \( MAE = \frac{1}{N} \sum_{n}^{N} |Y_n - \hat{Y}_n| \)<br>
+        - Mean Squared Error: \(  MSE = \frac{1}{N} \sum_{n}^{N} (Y_n - \hat{Y}_n)^2 \)<br>
+        - Root Mean Squared Error: \( RMSE = \sqrt{\text{MSE}} \)<br>
+        - R-sqaure: \( R^2 = 1 - \frac{\sum (Y - \hat{Y})^2}{\sum (Y - \bar{Y})^2} \)
         <br><br>
 
-        Given total samples \( N \), true labels \( Y \), and predictions \( \hat{Y} \), the following metrics are commonly used:<br>
-        - Mean Absolute Error (MAE): \( MAE = \frac{1}{N} \sum_{n=1}^{N} |Y_n - \hat{Y}_n| \)<br>
-        - Mean Squared Error (MSE): \(  MSE = \frac{1}{N} \sum_{n=1}^{N} (Y_n - \hat{Y}_n)^2 \)<br>
-        - Root Mean Squared Error (RMSE): \( RMSE = \sqrt{\text{MSE}} \)<br>
-        - R-sqaure (\( R^2 \) score): \( R^2 = 1 - \frac{\sum (Y - \hat{Y})^2}{\sum (Y - \bar{Y})^2} \)
-        <br><br>
-        
-        Looking at an example for R-sqaure, consider the following dataset:
-        
+        Let's look at a $R^2$ example. Consider the following dataset       
         \begin{array}{|c|c|c|c|c|c|c|}
-        \hline
-        X & Y & Y - \bar{Y} & (Y - \bar{Y})^2 & \hat{Y} & Y - \hat{Y} & (Y - \hat{Y})^2 \\
-        \hline
-        1 & 2 & -2 & 4 & 2.8 & -0.8 & 0.64 \\
-        2 & 4 & 0  & 0 & 3.4 & 0.6  & 0.36 \\
-        3 & 5 & 1  & 1 & 4.0 & 1.0  & 1.00 \\
-        4 & 4 & 0  & 0 & 4.6 & -0.6 & 0.36 \\
-        5 & 5 & 1  & 1 & 5.2 & -0.2 & 0.04 \\
-        \hline
+            \hline
+            X & Y & Y - \bar{Y} & (Y - \bar{Y})^2 & \hat{Y} & Y - \hat{Y} & (Y - \hat{Y})^2 \\
+            \hline
+            1 & 2 & -2 & 4 & 2.8 & -0.8 & 0.64 \\
+            2 & 4 & 0  & 0 & 3.4 & 0.6  & 0.36 \\
+            3 & 5 & 1  & 1 & 4.0 & 1.0  & 1.00 \\
+            4 & 4 & 0  & 0 & 4.6 & -0.6 & 0.36 \\
+            5 & 5 & 1  & 1 & 5.2 & -0.2 & 0.04 \\
+            \hline
         \end{array}
         
-        
-        The total variance (sum of squares of deviations from the mean) is:
+        The total variance (sum of squares of deviations from the mean) is \(\sum (Y - \bar{Y})^2 = 6\).
+        The residual sum of squares (sum of squared errors between actual and predicted values) is \(\sum (Y - \hat{Y})^2 = 2.4\).
+        Therefore:
         \[
-        \sum (Y - \bar{Y})^2 = 6
+            R^2 = 1 - \frac{2.4}{6} = 0.6
         \]
-        The residual sum of squares (sum of squared errors between actual and predicted values) is:
-        \[
-        \sum (Y - \hat{Y})^2 = 2.4
-        \]
-        Thus, the ℝ<sup>2</sup> value is:
-        \[
-        R^2 = 1 - \frac{2.4}{6} = 0.6
-        \]
-        <br><br>
 
-        In Interpreting this result with regards to the fit of the model:
+       We can interpret this as a moderate fit. As a reference:<br>
         - \( R^2 = 0.02 \): Poor fit; the model explains only 2% of the variance.<br>
         - \( R^2 = 0.6 \): Moderate fit; the model explains 60% of the variance.<br>
         - \( R^2 = 0.9 \): Good fit; the model explains 90% of the variance.<br>
@@ -268,121 +273,85 @@
         Bias is the measure of how far off predictions are from actual values on average. 
         And variance is the measure of how much predictions fluctuate for different training datasets.
         A model should balance the trade-offs between bias and variance to avoid overfitting (low bias, high variance) or underfitting (high bias, low variance).
-        <br><br>
+        <figure class="image" data-ckbox-resource-id="yd-QNuWXPONC">
+            <picture>
+                <source srcset="https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/88.webp 88w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/176.webp 176w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/264.webp 264w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/352.webp 352w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/440.webp 440w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/528.webp 528w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/616.webp 616w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/704.webp 704w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/792.webp 792w,https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/879.webp 879w" sizes="(max-width: 879px) 100vw, 879px" type="image/webp"><img src="https://ckbox.cloud/77402af5c9b103bf8297/assets/yd-QNuWXPONC/images/879.png" width="879" height="545">
+            </picture>
+        </figure>
+        <br>
 
         Using the two meaures, we can compute the expected prediction error (EPE) which 
         refers to the difference between the actual values (observed data) and the predicted values (obtained from the model) on unseen data.
         It essentially measures how well the linear regression model generalizes to new, unseen data.
         <br><br>
 
-        The relation between input and output is modeled by a function \( f(X) \), but due to noise \( \epsilon \):
+        Recall \(Y = f(X) + \epsilon\). Here, we assume \( \mathbb{E}[\epsilon] = 0 \) and \( \text{Var}(\epsilon) = \sigma^2 \).
+        And for a fixed input \( X \), the Expected Prediction Error (EPE) is given by:
         \[
-        Y = f(X) + \epsilon,
-        \]
-        where we assume \( \mathbb{E}[\epsilon] = 0 \) and \( \text{Var}(\epsilon) = \sigma^2 \).
-        <br><br>
-
-        For a fixed input \( X \), the Expected Prediction Error (EPE) is given by:
-        \[
-        EPE(X) = \mathbb{E}[(Y - \hat{f}(X))^2] = \text{Bias}^2 + \text{Variance} + \sigma^2,
+            EPE(X) = \mathbb{E}[(y - \hat{f}(X))^2] = \text{Bias}(\hat{f}(X))^2 + \text{Variance}(\hat{f}(X)) + \sigma^2
         \]
         where:
         \[
-        \text{Bias}(\hat{f}(X)) = f(X) - \mathbb{E}[\hat{f}(X)],
+            \text{Bias}(\hat{f}(X)) = f(X) - \mathbb{E}[\hat{f}(X)]
         \]
         \[
-        \text{Var}(\hat{f}(X)) = \mathbb{E}[(\hat{f}(X) - \mathbb{E}[\hat{f}(X)])^2].
+            \text{Var}((X)) = \mathbb{E}[(\hat{f}(X) - \mathbb{E}[\hat{f}(X)])^2]
         \]
-        For a detailed derivation, see [Bias-Variance Tradeoff](https://en.wikipedia.org/wiki/Bias-variance_tradeoff#Derivation).
-        <br><br>
+        <br>
 
         <h2>Regularization</h2>
         Regularization is a technique used in linear regression to prevent overfitting, 
         especially when the model has too many parameters (features) relative to the number of observations. 
         It involves adding a penalty to the loss function, which discourages overly complex models that fit the noise in the data rather than the true underlying relationship.
+        Note that involovement of regularization tend to reduce variance but increase bias as the model
+        natraully better fit to the given dataset. 
         <br><br>
         
-        There are two common types of regularization used in linear regression:  Ridge Regression (L2 Regularization) and Lasso Regression (L1 Regularization).
+        There are two common types of regularization used in linear regression:  
+        Ridge Regression (L2 Regularization) and Lasso Regression (L1 Regularization).
+        Let's start with the L2 Regression. 
+        Ridge shrinks all coefficients towards zero but does not eliminate any features,
+        and it helps prevent multicollinearity and improves generalization without performing feature selection.
         <br><br>
 
-        Let's start with the Ridge Regression. The standard linear regression function is:
+        Recall the linear function \(\hat{Y} = \mathbf{X} \Theta + \theta_0\).       
+        The ordinary least squares (OLS) optimization problem for this linear equation is given as:
         \[
-        \hat{Y} = X\Theta + \theta_0
+            \hat{\Theta} = \arg\min_{\Theta} \|\mathbf{X} \Theta + \theta_0 - Y\|^2_2
         \]
         
-        The ordinary least squares (OLS) optimization problem is:
+        Ridge regression aims to shrink the parameters by imposing a penalty on the square of the magnitude of 
+        the coefficients. The objective function is therefore modified as:
         \[
-        \hat{\Theta} = \arg\min_{\Theta} \|X\Theta + \theta_0 - Y\|^2_2
+            \hat{\Theta}_{\text{ridge}} = \arg\min_{\Theta} \|\mathbf{X} \Theta + \theta_0 - Y\|^2_2 + \lambda \|\Theta\|^2_2
+        \]
+        where \( \lambda \) is the regularization parameter that controls the strength of the penalty, 
+        and \( \|\Theta\|^2_2 = \sum_{i=1}^{n} \theta_i^2\) is the penalty term (or L2 norm)
+        which regularizes the coefficients such that large values are penalized, reducing overfitting.
+        <br><br>
+
+        Note that when there are many correlated features in a linear regression model, 
+        their coefficients can become poorly determined and exhibit high variance.      
+        <br><br>
+
+        Next, let's take a look at the Lasso Regression. 
+        Lasso Regression is similar to ridge regression but differs in the penalty term:
+        \[
+            \hat{\Theta}_{\text{lasso}} = \arg\min_{\Theta} \| \mathbf{X}\Theta + \theta_0 - Y\|^2_2 + \lambda \|\Theta\|_1
         \]
         
-        Ridge regression aims to shrink the parameters by imposing a penalty on the square of the magnitude of the coefficients. The objective function is modified as follows:
-        \[
-        \hat{\Theta}_{\text{ridge}} = \arg\min_{\Theta} \|X\Theta + \theta_0 - Y\|^2_2 + \lambda \|\Theta\|^2_2
-        \]
-        
-        where \( \lambda \) is the regularization parameter that controls the strength of the penalty, and \( \|\Theta\|^2_2 \) is the penalty term (or L2 norm), given by:
-        \[
-        \|\Theta\|^2_2 = \sum_{i=1}^{n} \theta_i^2.
-        \]
-        <br>
-        
-        For the L2 penalty term, consider:<br>
-        - When there are many correlated features in a linear regression model, their coefficients can become poorly determined and exhibit high variance.<br>
-        - A large positive coefficient on one variable can be canceled by a similarly large negative coefficient on its correlated feature.<br>
-        - The penalty term regularizes the coefficients such that large values are penalized, reducing overfitting.<br>
-        - This technique is also used in neural networks, where it is known as weight decay.<br>
-        - Note that the bias term \( \theta_0 \) is not included in the penalty term.
-        <br><br>
-        
-        And finally, for L2, note:<br>
-        - Ridge shrinks all coefficients towards zero but does not eliminate any features.<br>
-        - The penalty term regularizes the coefficients such that the coefficients won’t be large. Shrinks coefficients but retains all features.<br>
-        - It helps prevent multicollinearity and improves generalization without performing feature selection.
+        where \( \|\Theta\|_1 = \sum_{i=1}^{n} |\theta_i|\) is the L1 norm, designed for measuring the sparsity of parameters.
+        Sparsity implies the number of zeros in $\Theta$. If many elements in $\Theta$ are around
+        zero, less features will be used, namely, the model complexity is reduced.
         <br><br>
 
-        Next, we'll take a look at the Lasso Regression. Lasso Regression is similar to ridge regression but differs in the penalty term:
-        \[
-        \hat{\Theta}_{\text{lasso}} = \arg\min_{\Theta} \|X\Theta + \theta_0 - Y\|^2_2 + \lambda \|\Theta\|_1
-        \]
-        
-        where \( \|\Theta\|_1 \) is the L1 norm, given by:
-        \[
-        \|\Theta\|_1 = \sum_{i=1}^{n} |\theta_i|.
-        \]
-        
-        For the L1 penalty term, consider:<br>
-        - The L1 norm measures the sparsity of parameters, meaning it encourages some coefficients to become exactly zero.<br>
-        - This leads to a simpler model that selects only the most important features.<br>
-        - Sparsity implies that fewer features are used, reducing model complexity and improving interpretability.
+        Since L1 norm measures the sparsity of parameters, meaning it encourages some coefficients to 
+        become exactly zero.
+        This leads to a simpler model as it effectively removes less important features, performing feature selection.
+        Essentially, it provides both regularization and feature selection, making it useful for high-dimensional data. 
         <br><br>
 
-        And finally, for L1, note:<br>
-        - Lasso tends to drive some coefficients to zero, effectively removing less important features from the model.<br>
-        - The penalty term regularizes the coefficients such that coefficients are sparse (containing many zeros elements). Shrinks some coefficients to zero, performing feature selection.<br>
-        - It provides both regularization and feature selection, making it useful for high-dimensional data.
-        <br><br>
-
-        There are also implications with regards to the bias and variance as regularization helps manage the bias-variance trade-off:<br>
-        - Without regularization, a complex model may overfit the data (low bias, high variance).<br>
-        - With regularization, the model is more constrained, reducing variance but increasing bias.
-        <br><br>
-
-        So regularization is essential for building models that generalize well, reducing overfitting and improving predictive performance!
-        
-        
-
-        
-        
-
-
-
-
-        
-
-        
-
-
-        <br><br>
+        <hr>
         <i>
             <b>Notes</b><br>
             [a] Hyperparameter is a parameter that can be set to define any configurable part of a model's learning process.
@@ -391,20 +360,25 @@
             The \( n \) corresponds to the actual features of the data, and the extra \( n + 1-th\) component typically
             is a 1 to represent the bias input to hand;e the bias term algebraically in vector form.  
             <br><br>
-            [c] Imagine a room with a bunch of colorful marbles on the floor. 
+            [c] The notation referes to all $(n+1)$ dimentional vectors with real-number components. For example, if $n = 1$, then,
+            $\mathbb{R}^{2}$, which is the 2-dimensional Euclidean plane 
+            (i.e., all points with 2 real-number coordinates, such as $(x,y)$). 
+            <br><br>
+            [d] Imagine a room with a bunch of colorful marbles on the floor. 
             Some marbles are red, some are blue. Now, you're holding a big, flat board, and you want to use it to divide the marbles 
             into two groups: all the red ones on one side, and all the blue ones on the other side.
-            <br>
+            <br><br>
             If the room was super simple with just two directions, left and right, you could just place a board like a straight line that separates the
             marbles. This line would be a hyperplane in 2D.
-            <br>
+            <br><br>
             Now, if the room was more complicated, with marbles scattered in every direction (up, down, left, right, and even more directions), the board you use to divide the marbles might need to be something more than just a line—it could be a flat surface (like a wall) that separates the marbles into two groups. This "flat surface" is still a hyperplane, just in a higher number of dimensions.
             <br><br>
+
             <b>References</b><br>
             [1] https://en.wikipedia.org/wiki/Linear_regression<br>    
         </i>
-
         <br><br>
+
     </section>
 </body>
 </html>
