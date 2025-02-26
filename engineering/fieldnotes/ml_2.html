@@ -16,7 +16,7 @@
         });
     </script>
 
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 
 <body>
@@ -222,7 +222,25 @@
         \]
         <br>
 
-        Let's try an example. 
+        Let's try an example. If we apply a gradient descent to find the $\Theta^*$ that minimizes $f(\Theta) = \Theta^2$,
+        with a step size $\alpha = 0.4$ given that $\Theta$ initializes to 10, and regard the algo converges 
+        once $ |f(\Theta, t) - f(\Theta, t-1)| \leq 0.01 $, we first start by computing the derivatives:
+        \[
+            \frac{\partial f(\Theta)}{\partial \Theta} = 2 \Theta
+        \]
+
+        So the descent formulation is:
+        \[
+            \Theta_1 = \Theta_0 - \alpha 2 \Theta_0 = 10 - 2(0.4) \Theta = 10 - 8 = 2
+        \]
+
+        Going through with the iteration:
+        \[
+            \Theta_2 = 2 - 0.8(2) = 0.4 \quad \Theta_3 = 0.08 \quad \Theta_4 = 0.016
+        \]
+
+        Since $|0.016 - 0.08| \leq 0.01$, at least 4 iteration is required for it to converge. 
+        <br><br>
                 
         <hr>
         <i>

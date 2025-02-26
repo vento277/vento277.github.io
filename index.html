@@ -223,29 +223,79 @@ function switchTab(tabName) {
     });
     document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
     
-    // Save the selected tab
-    localStorage.setItem('selectedTab', tabName);
+    // Update URL with hash-based path without triggering scroll
+    // This is done by temporarily removing the hashchange event listener
+    window.removeEventListener('hashchange', handleHashChange);
     
-    // Update URL with the tab parameter without reloading the page
-    const url = new URL(window.location);
-    url.searchParams.set('tab', tabName);
-    window.history.pushState({}, '', url);
+    // Change the hash without causing the page to scroll
+    history.replaceState(null, null, '#' + tabName);
+    
+    // Re-add the event listener after a brief delay
+    setTimeout(function() {
+        window.addEventListener('hashchange', handleHashChange);
+    }, 0);
 }
 
-// Function to get tab from URL parameter
+// Function to get tab from the URL hash
 function getTabFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('tab');
+    // Get the hash (removing # character)
+    let hash = window.location.hash.substring(1);
+    
+    // If hash is empty, return default tab
+    if (!hash) {
+        return 'about';
+    }
+    
+    return hash;
 }
 
-// Initialize with the tab from URL, or default to 'about' (no longer using localStorage)
-document.addEventListener('DOMContentLoaded', function () {
-    const urlTab = getTabFromURL();
-    // Default to 'about' if no URL parameter is provided
-    const initialTab = urlTab || 'about';
-    switchTab(initialTab);
-});
+// Handler for hash changes (extracted to a named function so we can remove/add it)
+function handleHashChange() {
+    const tabName = getTabFromURL();
+    
+    // Check if the tab exists before switching
+    if (document.getElementById(tabName)) {
+        // Call switchTab but prevent it from updating the hash again to avoid loops
+        switchTabWithoutHashUpdate(tabName);
+    } else {
+        switchTabWithoutHashUpdate('about');
+    }
+}
 
+// A version of switchTab that doesn't update the hash
+function switchTabWithoutHashUpdate(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+    });
+    
+    // Show selected tab
+    document.getElementById(tabName).style.display = 'block';
+    
+    // Update button styles
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.style.fontWeight = 'normal';
+    });
+    document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
+}
+
+// Initialize with the tab from URL hash
+document.addEventListener('DOMContentLoaded', function () {
+    const tabName = getTabFromURL();
+    
+    // Check if the tab exists in our DOM
+    if (document.getElementById(tabName)) {
+        switchTabWithoutHashUpdate(tabName);
+    } else {
+        // If tab doesn't exist, default to 'about'
+        switchTabWithoutHashUpdate('about');
+        // Update URL to the default tab without scrolling
+        history.replaceState(null, null, '#about');
+    }
+    
+    // Set up the hash change listener
+    window.addEventListener('hashchange', handleHashChange);
+});
         function toggleSection(event) {
             const trigger = event.target;
             const section = trigger.nextElementSibling;
