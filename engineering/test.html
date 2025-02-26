@@ -1,114 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: 'Courier New', monospace;
-    }
+    <meta charset="UTF-8">
+    <title>Dynamic Line Graph with Hover X-Axis</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+        }
+        
+        .graph-container {
+            position: relative;
+            width: 500px;
+            height: 300px;
+        }
 
-    .typing-container {
-      padding: 0px;
-      border-radius: 8px;
-      width: 100%;
-      max-width: 800px; /* Maximum width for larger screens */
-      margin: 0 20px; /* Add some margin on the sides */
-    }
+        svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
 
-    /* Added a wrapper to maintain height */
-    .text-wrapper {
-      height: 60px; /* Fixed height based on font size */
-      display: flex;
-      align-items: center;
-    }
+        .axis, .grid-line {
+            stroke: black;
+            stroke-width: 1;
+        }
 
-    .typing-text {
-      font-size: 50px;
-      white-space: normal; /* Allow text to wrap */
-      overflow: hidden;
-      width: 100%;
-      min-height: 60px; /* Match wrapper height */
-      line-height: 1.2; /* Adjust line height for wrapped text */
-    }
+        .x-axis-group {
+            visibility: hidden; /* Hidden by default */
+        }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
+        .graph-container:hover .x-axis-group {
+            visibility: visible; /* Visible on hover */
+        }
 
-    /* Media query for smaller screens */
-    @media (max-width: 768px) {
-      .typing-text {
-        font-size: 30px; /* Smaller font size on mobile */
-        min-height: 40px;
-      }
-      .text-wrapper {
-        height: 40px;
-      }
-    }
+        .solid-line {
+            fill: none;
+            stroke: black;
+            stroke-width: 2;
+        }
 
-    /* Media query for very small screens */
-    @media (max-width: 480px) {
-      .typing-text {
-        font-size: 20px;
-        min-height: 30px;
-      }
-      .text-wrapper {
-        height: 30px;
-      }
-    }
-  </style>
+        .dotted-line {
+            fill: none;
+            stroke: black;
+            stroke-width: 2;
+            stroke-dasharray: 5, 5;
+        }
+
+        .data-point {
+            fill: black;
+            r: 4;
+            cursor: pointer;
+        }
+
+        .label {
+            fill: black;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        .tooltip {
+            fill: black;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="typing-container">
-    <div class="text-wrapper">
-      <div class="typing-text">Hello, I am typing...</div>
+    <div class="graph-container">
+        <svg id="graph"></svg>
     </div>
-  </div>
 
-  <script>
-    const texts = [
-      "Hello, I am typing...",
-      "Welcome to the demo!",
-      "This is a typing animation.",
-      "Pretty cool, right?"
-    ];
+    <script>
+        // Two sets of data points [xLabel, y]
+        const dataPoints1 = [
+            ["Jan", 10],
+            ["Feb", 50],
+            ["Mar", 30],
+            ["Apr", 70],
+            ["May", 20],
+            ["Jun", 60]
+        ];
 
-    const typingText = document.querySelector('.typing-text');
-    let textIndex = 0;
+        const dataPoints2 = [
+            ["Jan", 20],
+            ["Feb", 40],
+            ["Mar", 60],
+            ["Apr", 30],
+            ["May", 50],
+            ["Jun", 10]
+        ];
 
-    function typeText(text) {
-      let charIndex = 0;
-      typingText.textContent = '';
-      
-      function type() {
-        if (charIndex < text.length) {
-          typingText.textContent += text.charAt(charIndex);
-          charIndex++;
-          setTimeout(type, 100);
-        } else {
-          setTimeout(erase, 2000);
+        const svg = document.getElementById('graph');
+        const width = 500;
+        const height = 300;
+        const padding = 40;
+
+        // Extract Y values for dynamic scaling
+        const allPoints = [...dataPoints1, ...dataPoints2];
+        const yValues = allPoints.map(point => point[1]);
+        const yMin = Math.floor(Math.min(...yValues) / 10) * 10; // Round down to nearest 10
+        const yMax = Math.ceil(Math.max(...yValues) / 10) * 10;  // Round up to nearest 10
+
+        // Scale functions
+        const scaleX = (index) => {
+            return padding + (index / (dataPoints1.length - 1)) * (width - 2 * padding);
+        };
+        const scaleY = (y) => {
+            return height - padding - ((y - yMin) / (yMax - yMin)) * (height - 2 * padding);
+        };
+
+        // Draw Y-axis (always visible)
+        svg.innerHTML += `
+            <line x1="${padding}" y1="${padding}" x2="${padding}" y2="${height - padding}" class="axis" />
+        `;
+
+        // Y-axis ticks and labels (increments of 10)
+        const yRange = yMax - yMin;
+        const yTickCount = Math.floor(yRange / 10) + 1;
+        for (let i = 0; i < yTickCount; i++) {
+            const yValue = yMin + i * 10;
+            const y = scaleY(yValue);
+            svg.innerHTML += `
+                <line x1="${padding - 5}" y1="${y}" x2="${padding}" y2="${y}" class="grid-line" />
+                <text x="${padding - 10}" y="${y + 4}" class="label" text-anchor="end">${yValue}</text>
+            `;
         }
-      }
 
-      function erase() {
-        if (typingText.textContent.length > 0) {
-          typingText.textContent = text.substring(0, typingText.textContent.length - 1);
-          setTimeout(erase, 50);
-        } else {
-          textIndex = (textIndex + 1) % texts.length;
-          setTimeout(() => typeText(texts[textIndex]), 500);
-        }
-      }
+        // Draw X-axis (hidden until hover) within a group
+        svg.innerHTML += `
+            <g class="x-axis-group">
+                <line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" class="axis" />
+            </g>
+        `;
 
-      type();
-    }
+        // X-axis labels (text-based)
+        dataPoints1.forEach((point, index) => {
+            const x = scaleX(index);
+            svg.innerHTML += `
+                <text x="${x}" y="${height - padding + 20}" class="label x-axis-group" text-anchor="middle">${point[0]}</text>
+            `;
+        });
 
-    typeText(texts[textIndex]);
-  </script>
+        // Draw solid line (dataPoints1)
+        let pathData1 = '';
+        dataPoints1.forEach((point, index) => {
+            const x = scaleX(index);
+            const y = scaleY(point[1]);
+            pathData1 += index === 0 ? `M ${x},${y}` : ` L ${x},${y}`;
+        });
+        svg.innerHTML += `<path d="${pathData1}" class="solid-line" />`;
+
+        // Draw dotted line (dataPoints2)
+        let pathData2 = '';
+        dataPoints2.forEach((point, index) => {
+            const x = scaleX(index);
+            const y = scaleY(point[1]);
+            pathData2 += index === 0 ? `M ${x},${y}` : ` L ${x},${y}`;
+        });
+        svg.innerHTML += `<path d="${pathData2}" class="dotted-line" />`;
+
+        // Add data points and tooltips for both datasets
+        [dataPoints1, dataPoints2].forEach((dataset, setIndex) => {
+            dataset.forEach((point, index) => {
+                const x = scaleX(index);
+                const y = scaleY(point[1]);
+                const pointId = `point-${setIndex}-${index}`;
+                svg.innerHTML += `
+                    <circle cx="${x}" cy="${y}" class="data-point" id="${pointId}" />
+                    <text x="${x + 10}" y="${y - 10}" class="tooltip" id="tooltip-${pointId}">${point[0]}, ${point[1]}</text>
+                `;
+            });
+        });
+
+        // Add hover functionality
+        document.querySelectorAll('.data-point').forEach(point => {
+            const tooltip = document.getElementById(`tooltip-${point.id}`);
+            point.addEventListener('mouseover', () => {
+                tooltip.style.visibility = 'visible';
+            });
+            point.addEventListener('mouseout', () => {
+                tooltip.style.visibility = 'hidden';
+            });
+            point.addEventListener('mousemove', (e) => {
+                tooltip.setAttribute('x', e.clientX - svg.getBoundingClientRect().left + 10);
+                tooltip.setAttribute('y', e.clientY - svg.getBoundingClientRect().top - 10);
+            });
+        });
+    </script>
 </body>
 </html>
