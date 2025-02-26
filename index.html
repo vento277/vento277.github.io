@@ -15,12 +15,12 @@
             <div class="header-col-R">
                 <button class="tab-button" onclick="switchTab('about')" id="aboutTab">About</button>
                 <button class="tab-button" onclick="switchTab('engineering')" id="engineeringTab">Engineering</button>
-                <button class="tab-button" onclick="switchTab('investments')" id="investmentsTab">Investments</button>
+                <a class="tab-button2" href ="investments" id="investmentsTab">Investments</a>
             </div>
         </section>
 
         <section class="tab-content active" id="about">          
-            Hey visitor,
+            Hey reader,
             <br><br>
             I'm an electrical engineering student at the University of British Columbia. Most of my days are spent solving math problems and tinkering with microcontrollers. 
             <br><br>
@@ -142,160 +142,34 @@
                     </section>
                 </div>
             </div>
-        </section>
-
-        <section id="investments" class="tab-content">
-            <div class="grid-content">
-                <div class="content-label">Reports</div>
-                <div class="content-details">                      
-                    <table>
-                        <tr>
-                            <td><a href="">Q1 2025</a></td>
-                            <td><a href="">Q2 2025</a></td>
-                            <td><a href="">Q3 2025</a></td>
-                            <td><a href="">Q4 2025</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href=""></a></td>
-                            <td><a href=""></a></td>
-                            <td><a href="investments/240930.pdf">Q3 2024</a></td>
-                            <td><a href="">Q4 2024</a></td>
-                        </tr>
-                    </table>          
-                </div>  
-                
-                <div class="content-label">Resources</div>
-                <div class="content-details-row">   
-                    <div class="content-details-col">
-                        <a href="https://www.berkshirehathaway.com/letters/letters.html">Berkshire Hathaway Letters</a><br>
-                        <a href="https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf">Buffett Partnership Letters</a><br>
-                        <a href="https://buffett.cnbc.com/warren-buffett-archive/">Warren Buffett Archive</a><br>
-                        <a href="https://worldlypartners.com/charlie-munger-archive/">Charlie Munger Archive</a><br>
-                        <br>
-                        <a href="https://bn.brookfield.com/reports-filings/letters-shareholders">Brooksfield Letters</a><br>
-                        <a href="https://www.csisoftware.com/category/pres-letters">Constellation Software Letters</a><br>
-                        <a href="https://www.mklgroup.com/who-we-are/shareholder-letters">Markel Group Letters</a><br>
-                        <a href="https://www.baroncapitalgroup.com/insights-webcasts#Reports">Baron Capital Letters</a><br>
-                        <a href="https://pershingsquareholdings.com/materials/letters-to-shareholders/">Pershing Square Holdings Letters</a><br>
-                        <a href="https://www.aquamarinefund.com/annual-letter-to-investors/">Aquamarine Fund Letters</a><br>
-                        <a href="https://givernycapital.com/en/letters-to-our-partners/">Giverny Capital Letters</a><br>
-                        <a href="https://www.semperaugustus.com/clientletter">Semper Augustus Letters</a><br>
-                        <a href="https://igyfoundation.org.uk/wp-content/uploads/2021/03/Full_Collection_Nomad_Letters_.pdf">Nomad Parnership Letters</a><br>
-                        <br>
-                        <a href="https://www.oaktreecapital.com/insights/memos">Oaktree Capital Memos</a><br>
-                        <a href="https://www.bvp.com/memos">Bessemer Venture Partners Memos</a><br>
-                    </div>
-                    <div class="content-details-col">
-                        <a href="https://www.tweedyfunds.com/commentary/">Tweedy Browne Insights</a><br>
-                        <a href="https://www.akrecapital.com/our-thinking/">Akre Capital Insights</a><br>
-                        <a href="https://altos.vc/blog/foxes-and-hedgehogs">Altos Ventures Insights</a><br>
-                        <a href="https://www.sequoiacap.com/stories/">Sequoia Capital Insights</a><br>
-                        <a href="https://foundersfund.com/anatomy-of-next/">Founders Fund Insights</a><br>
-                        <br>
-                        <a href="https://taovalue.net/2015/12/02/whos-who-behind-vic-anonymous-users/">VIC users</a><br>  
-                        <a href="http://csinvesting.org/about/">CSI Investing</a><br> 
-                        <a href="https://www.grahamanddoddsville.net/">Graham and Doddsville</a><br>
-                        <a href="https://www.joinyellowbrick.com/">Yellowbrick</a><br>
-                        <a href="https://thebearcave.substack.com/p/our-2024-hedge-fund-analyst-christmas?utm_source=post-email-title&publication_id=26828&post_id=153355211&utm_campaign=email-post-title&isFreemail=true&r=30398p&triedRedirect=true&utm_medium=email">The Bear Cave</a><br>
-                        <a href="https://www.michaelmauboussin.com/writing">Michael J. Mauboussin</a><br>
-                        <a href="https://theoraclesclassroom.com/resources/">The Oracle's Classroom</a><br>
-                        <a href="https://www.reddit.com/r/SecurityAnalysis/search/?q=Letters+%26+Reports&cId=02034f4d-396f-438f-b55b-90fdf19bb29e&iId=32055441-20ec-400d-9e4c-a3b664bec0ed">r/SecurityAnalysis</a><br>
-                    </div>
-                </div>   
-            </div>
-                
-            <p>&nbsp;</p>
-        </section>
+        </section>      
     </body>
     <script>
-function switchTab(tabName) {
-    // Hide all tabs
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.style.display = 'none';
-    });
-    
-    // Show selected tab
-    document.getElementById(tabName).style.display = 'block';
-    
-    // Update button styles
-    document.querySelectorAll('.tab-button').forEach(button => {
-        button.style.fontWeight = 'normal';
-    });
-    document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
-    
-    // Update URL with hash-based path without triggering scroll
-    // This is done by temporarily removing the hashchange event listener
-    window.removeEventListener('hashchange', handleHashChange);
-    
-    // Change the hash without causing the page to scroll
-    history.replaceState(null, null, '#' + tabName);
-    
-    // Re-add the event listener after a brief delay
-    setTimeout(function() {
-        window.addEventListener('hashchange', handleHashChange);
-    }, 0);
-}
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).style.display = 'block';
+            
+            // Update button styles
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.style.fontWeight = 'normal';
+            });
+            document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
+            
+            // Save the selected tab
+            localStorage.setItem('selectedTab', tabName);
+        }
 
-// Function to get tab from the URL hash
-function getTabFromURL() {
-    // Get the hash (removing # character)
-    let hash = window.location.hash.substring(1);
-    
-    // If hash is empty, return default tab
-    if (!hash) {
-        return 'about';
-    }
-    
-    return hash;
-}
+        // Initialize with the last selected tab or default to 'portfolio'
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTab = localStorage.getItem('selectedTab') || 'portfolio';
+            switchTab(savedTab);
+        });
 
-// Handler for hash changes (extracted to a named function so we can remove/add it)
-function handleHashChange() {
-    const tabName = getTabFromURL();
-    
-    // Check if the tab exists before switching
-    if (document.getElementById(tabName)) {
-        // Call switchTab but prevent it from updating the hash again to avoid loops
-        switchTabWithoutHashUpdate(tabName);
-    } else {
-        switchTabWithoutHashUpdate('about');
-    }
-}
-
-// A version of switchTab that doesn't update the hash
-function switchTabWithoutHashUpdate(tabName) {
-    // Hide all tabs
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.style.display = 'none';
-    });
-    
-    // Show selected tab
-    document.getElementById(tabName).style.display = 'block';
-    
-    // Update button styles
-    document.querySelectorAll('.tab-button').forEach(button => {
-        button.style.fontWeight = 'normal';
-    });
-    document.getElementById(tabName + 'Tab').style.fontWeight = 'bold';
-}
-
-// Initialize with the tab from URL hash
-document.addEventListener('DOMContentLoaded', function () {
-    const tabName = getTabFromURL();
-    
-    // Check if the tab exists in our DOM
-    if (document.getElementById(tabName)) {
-        switchTabWithoutHashUpdate(tabName);
-    } else {
-        // If tab doesn't exist, default to 'about'
-        switchTabWithoutHashUpdate('about');
-        // Update URL to the default tab without scrolling
-        history.replaceState(null, null, '#about');
-    }
-    
-    // Set up the hash change listener
-    window.addEventListener('hashchange', handleHashChange);
-});
         function toggleSection(event) {
             const trigger = event.target;
             const section = trigger.nextElementSibling;
@@ -340,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Call initialization when the page loads
         document.addEventListener('DOMContentLoaded', initializeSections);
+
     </script>
 </html>
 

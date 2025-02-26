@@ -203,7 +203,7 @@ figure.image img {
     }
   }
 /*-----------Navigation----------*/
-.tab-button {
+.tab-button, .tab-button2 {
     text-decoration: none;
     margin-right: 2%;
     border: none;
@@ -212,11 +212,12 @@ figure.image img {
     background-color: transparent;
     cursor: pointer;
     transition: opacity 0.3s ease;
-    color:#0460c2
+    color:#0460c2 !important;
 }
 
-.tab-button:hover {
-    opacity: 0.7;
+.tab-button:hover, .tab-button2:hover {
+    opacity: 0.7 !important;
+    color:#0460c2 !important;
 }
 
 .tab-content {
