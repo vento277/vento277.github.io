@@ -164,9 +164,9 @@
             localStorage.setItem('selectedTab', tabName);
         }
 
-        // Initialize with the last selected tab or default to 'portfolio'
+        // Initialize with the last selected tab or default to about
         document.addEventListener('DOMContentLoaded', function () {
-            const savedTab = localStorage.getItem('selectedTab') || 'portfolio';
+            const savedTab = localStorage.getItem('selectedTab') || 'about';
             switchTab(savedTab);
         });
 
