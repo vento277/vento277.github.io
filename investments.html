@@ -138,7 +138,7 @@
                 <div class="graph-container">
                     <svg id="graph"></svg>
                 </div>
-                <br><br>
+                <br>
             </div>
         </div>
 
@@ -280,10 +280,9 @@
                 const y = scaleY(yValue);
                 svg.innerHTML += `
                     <line x1="${padding - 5}" y1="${y}" x2="${padding}" y2="${y}" class="grid-line" />
-                    <text x="${padding - 10}" y="${y + 4}" class="label" text-anchor="end">${yValue}</text>
+                    <text x="${padding - 10}" y="${y + 4}" class="label" text-anchor="end">$${yValue}</text>
                 `;
             }
-
             dataPoints1.forEach((point, index) => {
                 const x = scaleX(index);
                 svg.innerHTML += `
@@ -321,10 +320,10 @@
 
             svg.innerHTML += `
                 <g transform="translate(${width - padding - 80}, ${padding - 20})">
-                    <line x1="0" y1="0" x2="20" y2="0" class="legend-line solid-line" />
-                    <text x="25" y="4" class="legend">Portfolio</text>
-                    <line x1="0" y1="15" x2="20" y2="15" class="legend-line dotted-line" />
-                    <text x="25" y="19" class="legend">VFV</text>
+                    <line x1="0" y1="0" x2="25" y2="0" class="legend-line solid-line" />
+                    <text x="30" y="4" class="legend">PK</text>
+                    <line x1="0" y1="15" x2="25" y2="15" class="legend-line dotted-line" />
+                    <text x="30" y="19" class="legend">VFV</text>
                 </g>
             `;
 
