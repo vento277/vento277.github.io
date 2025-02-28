@@ -1,343 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Investments</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
-
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <style>
+        /* Base Styles */
         html {
             scroll-behavior: smooth;
             overflow-x: hidden;
         }
+        
         body {
-            font-family: 'Inter';
-            font-weight: 400;
-            text-rendering: optimizeLegibility;
             max-width: 100%;
-            font-size: 13px;
-            margin: auto;
             background-color: #fcfcfc;
-            line-height: 150%;
-            display: flex; /* Use flexbox for main layout */
-            flex-direction: row;
-            min-height: 100vh;
-        }
-        .content-container {
-            flex: 1; /* Takes remaining space on the left */
-            padding: 0 20px;
-        }
-        .svg-container1 {
-            flex: 0 0 40%; /* Fixed width for SVG container */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            height: 100vh;
-            box-sizing: border-box;
-        }
-        .svg-container1 svg {
-            width: 100%;
-            height: calc(100vh - 3px);
-            max-height: 1000px; /* Maintains the original viewBox aspect */
-        }
-        .container {
-            max-width: 100%; /* Adjusted for new layout */
+            font-family: 'Inter', sans-serif;
+            margin: 0;
             padding: 0;
         }
-        .row {
+        
+        /* Layout Components */
+        .header {
+            text-align: center;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            width: 100%;
-            margin-bottom: 5%;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            margin-top: 5%;
         }
-        .full-section {
-            flex: 0 0 100%;
-            max-width: 99%;
+        
+        .content {
+            max-width: 60%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
         }
+        
         .half-section {
             flex: 0 0 48%;
             max-width: 48%;
-            margin: 0 5px;
         }
-        .section h1 {
-            font-size: 50px;
-            text-align: center;
-            margin-top: 10%;
-            margin-bottom: 3%;
+        
+        hr {
+            max-width: 60%;
+            margin: 1rem auto 2rem;
+            border: none;
+            border-top: 1px solid black;
         }
-        .section p.subtitle {
-            font-size: 12px;
-            text-align: center;
-        }
+        
+        /* Tables */
         table {
             width: 100%;
+            margin-bottom: 2rem;
             border-collapse: collapse;
-            font-size: 12px;
-            text-align: left;
-            margin: 0;
         }
-        th, td {
-            padding: 5px;
-            border: 1px solid black;
-        }
+        
         th {
-            background-color: white;
+            background: inherit;
+            padding: 0.75rem;
+            text-align: center;
         }
-        .graph-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
+        
+        table, th, td {
+            border: 1px solid #333;
         }
+        
+        td {
+            padding: 0.5rem;
+        }
+        
+        /* SVG Graph */
         svg.graph-svg {
             width: 100%;
-            height: 100%;
+            height: 400px;
             overflow: visible;
         }
+        
         .axis, .grid-line {
-            stroke: black;
+            stroke: #333;
             stroke-width: 1;
         }
+        
         .solid-line {
             fill: none;
-            stroke: black;
+            stroke: #000;
             stroke-width: 2;
         }
+        
         .dotted-line {
             fill: none;
-            stroke: black;
+            stroke: #000;
             stroke-width: 2;
             stroke-dasharray: 5, 5;
         }
+        
         .data-point {
-            fill: black;
-            r: 1;
+            fill: #000;
             cursor: pointer;
         }
+        
         .label, .tooltip, .legend {
-            fill: black;
-            font-family: Arial, sans-serif;
+            fill: #000;
+            font-family: 'Inter', Arial, sans-serif;
             font-size: 12px;
         }
+        
         .tooltip {
             visibility: hidden;
             font-size: 12px;
             pointer-events: none;
         }
+        
         .legend-line {
-            stroke: black;
+            stroke: #000;
             stroke-width: 2;
         }
-
-        /* Mobile responsiveness */
-        @media (max-width: 780px) {
-            body {
-                flex-direction: column-reverse; /* SVG below content on mobile */
-            }
-            .content-container {
-                padding: 0 10px;
-            }
-            .svg-container1 {
-                flex: 0 0 100%;
-                padding: 10px;
-            }
-            .row {
+        
+        /* Images */
+        .logo {
+            max-width: 5%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1%;
+            width: 100%;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .content {
+                max-width: 90%;
                 flex-direction: column;
-                margin-bottom: 5%;
             }
-            .full-section, .half-section {
-                flex: 0 0 100%;
+            
+            .half-section {
                 max-width: 100%;
-                margin: 0;
+                margin-bottom: 2rem;
             }
-            .graph-container {
-                height: 200px;
+            
+            .logo {
+                max-width: 25%;
+            }
+            
+            hr {
+                max-width: 80%;
             }
         }
     </style>
-
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>    
 </head>
 <body>
-    <div class="content-container">
-        <div class="container">
-            <!-- Row 1: Performance (Full Width) -->
-             <br>
-            <div class="row">
-                <div class="full-section section">
-                    <table>
-                        <tr>
-                            <th>Performance</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="graph-container">
-                                    <svg id="graph" class="graph-svg"></svg>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Row 2: Reports and Resources (Two Columns) -->
-            <div class="row">
-                <!-- Reports -->
-                <div class="half-section section">
-                    <table>
-                        <tr>
-                            <th colspan="4">Reports</th>
-                        </tr>
-                        <tr>
-                            <td><a href="">Q1 2025</a></td>
-                            <td><a href="">Q2 2025</a></td>
-                            <td><a href="">Q3 2025</a></td>
-                            <td><a href="">Q4 2025</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="">NA</a></td>
-                            <td><a href="">NA</a></td>
-                            <td><a href="investments/240930.pdf">Q3 2024</a></td>
-                            <td><a href="">Q4 2024</a></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- <div class="half-section section">
-                    <table>
-                        <tr>
-                            <th colspan="4">Resources</th>
-                        </tr>
-                        <tr>
-                            <td>Berkshire Hathaway</td>
-                            <td>
-                                <a href="https://www.berkshirehathaway.com/letters/letters.html">Berkshire Hathaway Letters</a><br>
-                                <a href="https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf">Buffett Partnership Letters</a><br>
-                                <a href="https://buffett.cnbc.com/warren-buffett-archive/">Warren Buffett Archive</a><br>
-                                <a href="https://worldlypartners.com/charlie-munger-archive/">Charlie Munger Archive</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Corporations</td>
-                            <td>
-                                <a href="https://bn.brookfield.com/reports-filings/letters-shareholders">Brooksfield Letters</a><br>
-                                <a href="https://www.csisoftware.com/category/pres-letters">Constellation Software Letters</a><br>
-                                <a href="https://www.mklgroup.com/who-we-are/shareholder-letters">Markel Group Letters</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Public Funds</td>
-                            <td>
-                                <a href="https://www.baroncapitalgroup.com/insights-webcasts#Reports">Baron Capital Letters</a><br>
-                                <a href="https://pershingsquareholdings.com/materials/letters-to-shareholders/">Pershing Square Holdings Letters</a><br>
-                                <a href="https://www.aquamarinefund.com/annual-letter-to-investors/">Aquamarine Fund Letters</a><br>
-                                <a href="https://givernycapital.com/en/letters-to-our-partners/">Giverny Capital Letters</a><br>
-                                <a href="https://www.semperaugustus.com/clientletter">Semper Augustus Letters</a><br>
-                                <a href="https://igyfoundation.org.uk/wp-content/uploads/2021/03/Full_Collection_Nomad_Letters_.pdf">Nomad Parnership Letters</a><br>
-                                <a href="https://www.oaktreecapital.com/insights/memos">Oaktree Capital Memos</a><br>
-                                <a href="https://www.tweedyfunds.com/commentary/">Tweedy Browne Insights</a><br>
-                                <a href="https://www.akrecapital.com/our-thinking/">Akre Capital Insights</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Private Funds</td>
-                            <td>
-                                <a href="https://www.bvp.com/memos">Bessemer Venture Partners Memos</a><br>
-                                <a href="https://altos.vc/blog/foxes-and-hedgehogs">Altos Ventures Insights</a><br>
-                                <a href="https://www.sequoiacap.com/stories/">Sequoia Capital Insights</a><br>
-                                <a href="https://foundersfund.com/anatomy-of-next/">Founders Fund Insights</a><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Other</td>
-                            <td>
-                                <a href="https://taovalue.net/2015/12/02/whos-who-behind-vic-anonymous-users/">VIC users</a><br>  
-                                <a href="http://csinvesting.org/about/">CSI Investing</a><br> 
-                                <a href="https://www.grahamanddoddsville.net/">Graham and Doddsville</a><br>
-                                <a href="https://www.joinyellowbrick.com/">Yellowbrick</a><br>
-                                <a href="https://thebearcave.substack.com/p/our-2024-hedge-fund-analyst-christmas">The Bear Cave</a><br>
-                                <a href="https://www.michaelmauboussin.com/writing">Michael J. Mauboussin</a><br>
-                                <a href="https://theoraclesclassroom.com/resources/">The Oracle's Classroom</a><br>
-                                <a href="https://www.reddit.com/r/SecurityAnalysis/search/?q=Letters+%26+Reports">r/SecurityAnalysis</a><br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                -->
-            </div>
-        </div>
-    </div>
-    <div class="svg-container1">
-        <svg viewBox="0 0 500 1000" preserveAspectRatio="xMidYMid meet">
-            <defs>
-                <radialGradient id="grad" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" style="stop-color:#1e90ff;stop-opacity:0.8" />
-                    <stop offset="100%" style="stop-color:#f0f8ff;stop-opacity:0" />
-                </radialGradient>
-            </defs>
-            <!-- Base circle -->
-            <circle cx="250" cy="500" r="300" fill="url(#grad)" />
-            <!-- Ripple circles -->
-            <circle cx="250" cy="500" r="0" fill="url(#grad)">
-                <animate attributeName="r" from="0" to="250" dur="2s" repeatCount="indefinite" />
-                <animate attributeName="opacity" from="0.8" to="0" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="250" cy="500" r="0" fill="url(#grad)">
-                <animate attributeName="r" from="0" to="250" dur="2s" begin="0.5s" repeatCount="indefinite" />
-                <animate attributeName="opacity" from="0.8" to="0" dur="2s" begin="0.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="250" cy="500" r="0" fill="url(#grad)">
-                <animate attributeName="r" from="0" to="250" dur="2s" begin="1s" repeatCount="indefinite" />
-                <animate attributeName="opacity" from="0.8" to="0" dur="2s" begin="1s" repeatCount="indefinite" />
-            </circle>
-        </svg>
-    </div>
+    <section class="header">
+        <img class="logo" src="assets/img/signature.png" alt="Signature">
+        <h1 style="font-size: 25px; margin-bottom: 5px;">INVESTMENTS</h1>
+        <p>Aiming to preserve and grow my family's capital.</p>
+    </section>
+    
+    <hr>
+    
+    <section class="content">
+        <section class="half-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="4">Reports</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#">Q1 2025</a></td>
+                        <td><a href="#">Q2 2025</a></td>
+                        <td><a href="#">Q3 2025</a></td>
+                        <td><a href="#">Q4 2025</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">NA</a></td>
+                        <td><a href="#">NA</a></td>
+                        <td><a href="investments/240930.pdf">Q3 2024</a></td>
+                        <td><a href="#">Q4 2024</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <svg id="performance-graph" class="graph-svg"></svg>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section class="half-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Resources</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Berkshire Hathaway</td>
+                        <td>
+                            <a href="https://www.berkshirehathaway.com/letters/letters.html">Berkshire Hathaway Letters</a><br>
+                            <a href="https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf">Buffett Partnership Letters</a><br>
+                            <a href="https://buffett.cnbc.com/warren-buffett-archive/">Warren Buffett Archive</a><br>
+                            <a href="https://worldlypartners.com/charlie-munger-archive/">Charlie Munger Archive</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Corporations</td>
+                        <td>
+                            <a href="https://bn.brookfield.com/reports-filings/letters-shareholders">Brooksfield Letters</a><br>
+                            <a href="https://www.csisoftware.com/category/pres-letters">Constellation Software Letters</a><br>
+                            <a href="https://www.mklgroup.com/who-we-are/shareholder-letters">Markel Group Letters</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Public Funds</td>
+                        <td>
+                            <a href="https://www.baroncapitalgroup.com/insights-webcasts#Reports">Baron Capital Letters</a><br>
+                            <a href="https://pershingsquareholdings.com/materials/letters-to-shareholders/">Pershing Square Holdings Letters</a><br>
+                            <a href="https://www.aquamarinefund.com/annual-letter-to-investors/">Aquamarine Fund Letters</a><br>
+                            <a href="https://givernycapital.com/en/letters-to-our-partners/">Giverny Capital Letters</a><br>
+                            <a href="https://www.semperaugustus.com/clientletter">Semper Augustus Letters</a><br>
+                            <a href="https://igyfoundation.org.uk/wp-content/uploads/2021/03/Full_Collection_Nomad_Letters_.pdf">Nomad Parnership Letters</a><br>
+                            <a href="https://www.oaktreecapital.com/insights/memos">Oaktree Capital Memos</a><br>
+                            <a href="https://www.tweedyfunds.com/commentary/">Tweedy Browne Insights</a><br>
+                            <a href="https://www.akrecapital.com/our-thinking/">Akre Capital Insights</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Private Funds</td>
+                        <td>
+                            <a href="https://www.bvp.com/memos">Bessemer Venture Partners Memos</a><br>
+                            <a href="https://altos.vc/blog/foxes-and-hedgehogs">Altos Ventures Insights</a><br>
+                            <a href="https://www.sequoiacap.com/stories/">Sequoia Capital Insights</a><br>
+                            <a href="https://foundersfund.com/anatomy-of-next/">Founders Fund Insights</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Other</td>
+                        <td>
+                            <a href="https://taovalue.net/2015/12/02/whos-who-behind-vic-anonymous-users/">VIC users</a><br>  
+                            <a href="http://csinvesting.org/about/">CSI Investing</a><br> 
+                            <a href="https://www.grahamanddoddsville.net/">Graham and Doddsville</a><br>
+                            <a href="https://www.joinyellowbrick.com/">Yellowbrick</a><br>
+                            <a href="https://thebearcave.substack.com/p/our-2024-hedge-fund-analyst-christmas">The Bear Cave</a><br>
+                            <a href="https://www.michaelmauboussin.com/writing">Michael J. Mauboussin</a><br>
+                            <a href="https://theoraclesclassroom.com/resources/">The Oracle's Classroom</a><br>
+                            <a href="https://www.reddit.com/r/SecurityAnalysis/search/?q=Letters+%26+Reports">r/SecurityAnalysis</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </section>
 
     <script>
-        const dataPoints1 = [
+        // Performance data
+        const portfolioData = [
             ["Incep.", 100],
             ["Q3'24", 105.22],
             ["Q4'24", 113.58]
         ];
 
-        const dataPoints2 = [
+        const benchmarkData = [
             ["24", 100],
             ["Q3'24", 104.56],
             ["Q4'24", 113.77]
         ];
 
-        const svg = document.getElementById('graph');
+        // Graph rendering
+        const svg = document.getElementById('performance-graph');
         const graphContainer = svg.parentElement;
         const padding = 40;
 
-        function updateGraph() {
+        function renderGraph() {
             const width = graphContainer.clientWidth;
-            const height = graphContainer.clientHeight;
+            const height = 400;
+            
             svg.setAttribute('width', width);
             svg.setAttribute('height', height);
 
-            const allPoints = [...dataPoints1, ...dataPoints2];
+            // Calculate scale bounds
+            const allPoints = [...portfolioData, ...benchmarkData];
             const yValues = allPoints.map(point => point[1]);
             const yMin = Math.floor(Math.min(...yValues) / 10) * 10;
             const yMax = Math.ceil(Math.max(...yValues) / 10) * 10;
 
-            const scaleX = (index) => {
-                return padding + (index / (dataPoints1.length - 1)) * (width - 2 * padding);
-            };
-            const scaleY = (y) => {
-                return height - padding - ((y - yMin) / (yMax - yMin)) * (height - 2 * padding);
-            };
+            // Scale functions
+            const scaleX = (index) => padding + (index / (portfolioData.length - 1)) * (width - 2 * padding);
+            const scaleY = (y) => height - padding - ((y - yMin) / (yMax - yMin)) * (height - 2 * padding);
 
+            // Clear SVG
             svg.innerHTML = '';
 
+            // Draw axes
             svg.innerHTML += `
                 <line x1="${padding}" y1="${padding}" x2="${padding}" y2="${height - padding}" class="axis" />
                 <line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" class="axis" />
             `;
 
+            // Draw Y-axis labels
             const yRange = yMax - yMin;
             const yTickCount = Math.floor(yRange / 10) + 1;
             for (let i = 0; i < yTickCount; i++) {
@@ -348,43 +322,49 @@
                     <text x="${padding - 10}" y="${y + 4}" class="label" text-anchor="end">$${yValue}</text>
                 `;
             }
-            dataPoints1.forEach((point, index) => {
+
+            // Draw X-axis labels
+            portfolioData.forEach((point, index) => {
                 const x = scaleX(index);
                 svg.innerHTML += `
                     <text x="${x}" y="${height - padding + 20}" class="label" text-anchor="middle">${point[0]}</text>
                 `;
             });
 
-            let pathData1 = '';
-            dataPoints1.forEach((point, index) => {
+            // Draw portfolio line
+            let portfolioPath = '';
+            portfolioData.forEach((point, index) => {
                 const x = scaleX(index);
                 const y = scaleY(point[1]);
-                pathData1 += index === 0 ? `M ${x},${y}` : ` L ${x},${y}`;
+                portfolioPath += index === 0 ? `M ${x},${y}` : ` L ${x},${y}`;
             });
-            svg.innerHTML += `<path d="${pathData1}" class="solid-line" />`;
+            svg.innerHTML += `<path d="${portfolioPath}" class="solid-line" />`;
 
-            let pathData2 = '';
-            dataPoints2.forEach((point, index) => {
+            // Draw benchmark line
+            let benchmarkPath = '';
+            benchmarkData.forEach((point, index) => {
                 const x = scaleX(index);
                 const y = scaleY(point[1]);
-                pathData2 += index === 0 ? `M ${x},${y}` : ` L ${x},${y}`;
+                benchmarkPath += index === 0 ? `M ${x},${y}` : ` L ${x},${y}`;
             });
-            svg.innerHTML += `<path d="${pathData2}" class="dotted-line" />`;
+            svg.innerHTML += `<path d="${benchmarkPath}" class="dotted-line" />`;
 
-            [dataPoints1, dataPoints2].forEach((dataset, setIndex) => {
+            // Draw data points with tooltips
+            [portfolioData, benchmarkData].forEach((dataset, setIndex) => {
                 dataset.forEach((point, index) => {
                     const x = scaleX(index);
                     const y = scaleY(point[1]);
                     const pointId = `point-${setIndex}-${index}`;
                     svg.innerHTML += `
-                        <circle cx="${x}" cy="${y}" r="3.5" fill="black" class="data-point" id="${pointId}" />
-                        <text x="${x + 10}" y="${y - 10}" class="tooltip" id="tooltip-${pointId}">${point[0]}, ${point[1]}</text>
+                        <circle cx="${x}" cy="${y}" r="3.5" class="data-point" id="${pointId}" />
+                        <text x="${x + 10}" y="${y - 10}" class="tooltip" id="tooltip-${pointId}">${point[0]}: ${point[1].toFixed(2)}</text>
                     `;
                 });
             });
 
+            // Add legend
             svg.innerHTML += `
-                <g transform="translate(${width - padding - 80}, ${padding - 20})">
+                <g transform="translate(${width - padding - 80}, ${padding})">
                     <line x1="0" y1="0" x2="25" y2="0" class="legend-line solid-line" />
                     <text x="30" y="4" class="legend">PK</text>
                     <line x1="0" y1="15" x2="25" y2="15" class="legend-line dotted-line" />
@@ -392,23 +372,30 @@
                 </g>
             `;
 
+            // Add event listeners
+            addTooltipInteractivity();
+        }
+
+        function addTooltipInteractivity() {
             document.querySelectorAll('.data-point').forEach(point => {
                 const tooltip = document.getElementById(`tooltip-${point.id}`);
-            
-                // Mouse events (desktop/MacBook)
+                
+                // Mouse events (desktop/laptop)
                 point.addEventListener('mouseover', () => {
                     tooltip.style.visibility = 'visible';
                 });
+                
                 point.addEventListener('mouseout', () => {
                     tooltip.style.visibility = 'hidden';
                 });
+                
                 point.addEventListener('mousemove', (e) => {
                     const rect = svg.getBoundingClientRect();
                     tooltip.setAttribute('x', e.clientX - rect.left + 10);
                     tooltip.setAttribute('y', e.clientY - rect.top - 10);
                 });
-            
-                // Touch events (iOS/mobile)
+                
+                // Touch events (mobile)
                 point.addEventListener('touchstart', (e) => {
                     e.preventDefault();
                     tooltip.style.visibility = 'visible';
@@ -417,6 +404,7 @@
                     tooltip.setAttribute('x', touch.clientX - rect.left + 10);
                     tooltip.setAttribute('y', touch.clientY - rect.top - 10);
                 });
+                
                 point.addEventListener('touchmove', (e) => {
                     e.preventDefault();
                     const touch = e.touches[0];
@@ -424,15 +412,16 @@
                     tooltip.setAttribute('x', touch.clientX - rect.left + 10);
                     tooltip.setAttribute('y', touch.clientY - rect.top - 10);
                 });
-                point.addEventListener('touchend', (e) => {
-                    e.preventDefault();
+                
+                point.addEventListener('touchend', () => {
                     tooltip.style.visibility = 'hidden';
                 });
             });
         }
 
-        updateGraph();
-        window.addEventListener('resize', updateGraph);
+        // Initialize graph and handle window resizing
+        renderGraph();
+        window.addEventListener('resize', renderGraph);
     </script>
 </body>
 </html>
