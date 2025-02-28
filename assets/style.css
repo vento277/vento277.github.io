@@ -64,7 +64,7 @@ h2 {
 /*-----------Content----------*/
 .grid-content {
     display: grid;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 2fr 8fr;
     padding: 0; /* Remove any extra padding */
 }
 .grid-container {
@@ -81,9 +81,11 @@ h2 {
 }
 .grid-content2 {
     display: grid;
-    grid-template-columns: 4fr 6fr;
+    grid-template-columns: 3fr 7fr;
     gap: 5%;
     padding: 0; /* Remove any extra padding */
+    align-items: center; /* Vertically centers the content */
+    justify-content: center; /* Optional, to horizontally center content */
 }
 .grid-item2 {
     border: 1px solid #000;
@@ -95,6 +97,20 @@ h2 {
     object-fit: cover;
     border-radius: 2%;
     margin-top: 1%;
+}
+.image2-container {
+    display: flex; /* or grid */
+    justify-content: center; /* Centers the image horizontally */
+    align-items: center; /* Centers the image vertically */
+    width: 100%; /* Ensure the container takes up the full width */
+    height: 100%; /* Ensure the container takes up the full height */
+    position: relative; /* Helps position the image correctly */
+}
+
+.image2 {
+    width: 50%; /* Ensures the image fills the container */
+    object-fit: cover; /* Ensures the image covers the container */
+    border-radius: 2%; /* Optional: Adds rounded corners */
 }
 .content-details{
     margin-bottom: 10%;
