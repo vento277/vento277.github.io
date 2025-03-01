@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <title>Template</title>
-    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
     
     <!-- Include Mathlax CDN -->
@@ -15,70 +15,93 @@
             messageStyle: "none"
         });
     </script>
-
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-
 </head>
 
 <body>
     <section class="header">
-        <div class="header-col-L2">Template</div>
-        <div class="header-col-R"></div>
+        <div class="title">
+            Template
+        </div>
+        <div class="author">
+            Author: Peter Kim | Professor: XiaoXiao Li
+        </div>
     </section>
+    <hr><!------------------------------------------------------------------------------------------------------------------------------>
 
-    <section>
-        <!------------------------------------------------------------------------------------------------------------------------------>
-        <h1>text</h1>
-        text
-        <br><br>
+    <!--Start-->
+    <p>
+        This is where introduction of the topic should go.
+    </p>
+    <p>
+        This is a new p
+    </p>
         
-        <h2>text</h2>
-        - list<br>
-        -- sub<br>
-        --- and so one
-        <br><br>
+    <h1>Subsection 1</h1>
+    <p>
+        asdasdasdasdasd
+    </p>
+        
+    <h2>Subsection 2</h2>
+    <p>
+        asdasdasdasdasd
+    </p>
 
-        equation:
+    <h3>Subsection 3</h3>
+    <p>
+        asdasdasdasdasd
+    </p>
+    <p>
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2
+                <ul>
+                    <li>Subitem 2.1</li>
+                    <li>Subitem 2.2
+                        <ul>
+                            <li>Sub-subitem 2.2.1</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Item 3</li>
+        </ul>
+        <ol>
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Milk</li>
+        </ol>
+    </p>
+
+    <p>
+        Equation:
         \[
-        x = 1
+            \text{regression}: x_n \in \mathbb{R}^2 \quad y_n \in \mathbb{R} \quad
+            \text{classification}: x_n \in \mathbb{R}^2 \quad y_n \in {1,2,\ldots,K}
         \]
-        <br>
-
-        use this for images: https://onlinehtmleditor.dev/
-
-        <figure class="image image_resized" style="width:70%; max-width:100%;" data-ckbox-resource-id="aEYsLGcMgdFu">
-            <picture>
-                <source srcset="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/94.webp 94w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/188.webp 188w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/282.webp 282w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/376.webp 376w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/470.webp 470w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/564.webp 564w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/658.webp 658w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/752.webp 752w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/846.webp 846w,
-                                https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.webp 934w"
-                        type="image/webp" sizes="(max-width: 934px) 100vw, 934px">
-                <img src="https://ckbox.cloud/830b7006e5852830747f/assets/aEYsLGcMgdFu/images/934.png" width="934" height="500" 
-                style="max-width:100%; height:auto;">
-            </picture>
-        </figure>
-        <br>
-
-        <hr>
-        <i>
-            <b>Notes</b><br>
-            [a] 
-            <br><br>
-            [b] 
-            <br><br>
-            [c]
-            <br><br>
-            <b>References</b><br>
-            [1]  
-        </i>
-
-        <br><br>
+    </p>
+    <p>
+        The use of br is avoided for the entire document for consistent line spacing. 
+    </p>
+    <p>
+        Use this for images: https://onlinehtmleditor.dev/
+    </p>
+    <figure class="image"><img style="aspect-ratio:554/554;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFUAfyVe3Easiycyh3isP9wDQTYuSmGPsPQvLIJdEYvQ_DsFq5Ez2Nh_QjiS3oZ3B8ZPfK9cZQyIStmQMV1lDPLw" alt="How to Read Your Dog’s Body Language" width="554" height="554"></figure>
+    <a class="caption">This is a image caption</a>
+    <p>
+        asdasdasdasdasd
+    </p>
+    
+    <hr><!------------------------------------------------------------------------------------------------------------------------------>
+    <section class="footer">
+        <h3>Notes</h3>
+        <p>
+            [a]
+        </p>
+        <h3>References</h3>
+        <p>
+            [1]
+        </p>
     </section>
 </body>
 </html>

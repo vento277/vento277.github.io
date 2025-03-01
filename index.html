@@ -13,18 +13,18 @@
         <section class = "header">
             <div class="header-col-L">Peter Kim</div>
             <div class="header-col-R">
-                <button class="tab-button" onclick="switchTab('about')" id="aboutTab">About</button>
-                <button class="tab-button" onclick="switchTab('engineering')" id="engineeringTab">Engineering</button>
-                <a class="tab-button2" href ="investments" id="investmentsTab">Investments</a>
+                <button class="tab-button" onclick="switchTab('about')" id="aboutTab" style="margin-right: 1%;">About</button>
+                <button class="tab-button" onclick="switchTab('engineering')" id="engineeringTab" style="margin-right: 1.7%;">Engineering</button>
             </div>
         </section>
 
         <section class="tab-content active" id="about">          
             Hey,
             <br><br>
-            I'm an electrical engineering student at the University of British Columbia. Most of my days are spent solving math problems and tinkering with microcontrollers. 
+            I'm an electrical engineering student at the University of British Columbia. 
+            Most of my days are spent finishg labs and assignments.
             <br><br>
-            When I'm free, I watch movies, take long walks, and study investments.
+            When I'm free, I watch movies, take long walks, and study <a href = "investments.html">investments</a>.
             <br><br>
 
             <img class="image" src="https://wallpaper.dog/large/20560050.jpg">
@@ -41,91 +41,158 @@
 
         <section class="tab-content active" id="engineering">
             <div class="grid-content">              
-                <div class="content-label">Projects</div>
-                <div class="content-details"> 
-                    <div class = "grid-content2">
-                        <div class = "image2-container">
-                            <img style = "width: 70%;" src = "https://fredfredfred.com/wp-content/uploads/2021/05/PikPng.com_vitruvian-man-png_2552379.png">
+                <div class="content-details">    
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="dot"></div><h2>Vento</h2>
+                            <p>
+                                A net-zero street light featuring a turbine, autonomous lighting control, and a remote control system.
+                                I serve as the <a style="text-decoration: none; font-weight: bold;">project lead</a>, managing everything from bookkeeping to writing firmware.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                                [<a href="https://github.com/UBCSmartCity/SmartStreetLight">Github</a>]
+                            </p>
                         </div>
-                        <div>
-                            <a style="font-weight: 600; text-decoration: None;">Fieldnotes</a><br>
-                            Building a technical <a href = "engineering/fieldnotes">archive</a> to practice the Feynman Technique.
+                    
+                        <div class="card">
+                          <div class="dot"></div><h2>Polaris</h2>
+                            <p>
+                                An autonomous sailboat designed for oceanic data collection.
+                                I serve as the <a style="text-decoration: none; font-weight: bold;">firmware lead</a>, designing the embedded systems for the communication module using the STM32U575ZI.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                                [<a href="https://www.ubcsailbot.org/">Website</a>]
+                                [<a href="https://github.com/UBCSailbot/com-module-firmware/tree/main/projects/base-library">Github</a>]
+                            </p>
                         </div>
-                    </div>
-                    <br><br>
 
-                    <div class = "grid-content2">
-                        <div class = "image2-container">
-                            <img style = "width: 80%;" src = "https://i.ibb.co/kVx6nzYN/1d36c2a4-8d60-4207-98e6-c266bd65bb69-removalai-preview.png">
+                        <div class="card">
+                            <div class="dot"></div><h2>Fieldnote</h2>
+                            <p>
+                                A technical archive.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                                [<a href="engineering/fieldnotes">Page</a>]
+                            </p>
                         </div>
-                        <div>
-                            <a style="font-weight: 600; text-decoration: None;">Vento</a><br>
-                            Leading a team to develop a net-zero <a href= "https://github.com/UBCSmartCity/SmartStreetLight">smart street light</a> featuring a wind turbine, autonomous lighting control, and a remote maintenance system.
+                    
+                        <div class="card">
+                            <h2>UBC Smart City</h2>
+                            <p>
+                                An engineering design team focused on applying technologies for city development purposes.
+                                I served as its <a style="text-decoration: none; font-weight: bold;">team captain</a> from 2022 to 2024, increasing the project budget by 50%.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                                [<a href="https://ubcsmartcity.com/">Website</a>]
+                                [<a href="engineering/sc_annual.pdf">Annual Report</a>]
+                                [<a href="engineering/sc_prospectus.pdf">Prospectus</a>]</p>
                         </div>
-                    </div>
-                    <br><br>
-
-                    <div class = "grid-content2">
-                        <div class = "image2-container">
-                            <img style = "width: 50%;" src = "https://ece.sites.olt.ubc.ca/files/2024/10/Sailbot-Logo-New-583x960.png">
+                    
+                        <div class="card">
+                            <h2>EUI Optimization</h2>
+                            <p>
+                                A research on optimizing energy usage in existing buildings.
+                                I served as the <a style="text-decoration: none; font-weight: bold;">research lead</a>, managing everything from topic ideation to writing data acquisition code.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                                [<a href="https://students.ubc.ca/career/events-workshops/multidisciplinary-undergraduate-research-conference/">Competition Info</a>]
+                                [<a href="engineering/sc_murc.pdf">Poster</a>]
+                                [<a href="https://github.com/UBCSmartCity/EUI_Model">Github</a>]
+                            </p>
                         </div>
-                        <div>
-                            <a style="font-weight: 600; text-decoration: None;">Polaris</a><br>
-                            Leading the <a href="https://github.com/UBCSailbot/com-module-firmware/tree/main/projects/base-library">firmware</a> development at <a href="https://www.ubcsailbot.org/">UBC Sailbot</a> for a communication module that provides control and computation abilities for an autonomous sailboat.         
+                    
+                        <div class="card">
+                            <h2>Third Space</h2>
+                            <p>
+                                A single family home with a live-work typology, constructed at the University of British Columbia.
+                                I served as the <a style="text-decoration: none; font-weight: bold;">electrical lead</a>, designing the smart home system.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                                [<a href="https://www.solardecathlon.gov/event/2023-design-challenge-teams">Competition Info</a>]
+                                [<a href="engineering/sc_tqd.pdf">Slide Deck</a>]
+                            </p>
                         </div>
-                    </div>
-                    <br><br>
 
-                    <div class = "grid-content2">
-                        <div class = "image2-container">
-                            <img style = "width: 70%;" src = "https://i.ibb.co/nsdTSX3t/Smart-City-Logo-removebg-preview.png" alt="Smart-City-Logo-removebg-preview">
+                        <div class="card">
+                            <h2>Digital Communication</h2>
+                            <p>
+                                A digital communication system with DE1-SoC.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                              [<a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-II">Github</a>]
+                            </p>
                         </div>
-                        <div>
-                            <a style="font-weight: 600; text-decoration: None;">Captain</a><br>
-                            Led <a href="https://ubcsmartcity.com/">UBC Smart City</a> from 2022 to 2024, increasing its project budget by 50%. 
-                            I also oversaw the design of a <a href="engineering/sc_tqd.pdf">smart home system</a> for <a href="https://www.solardecathlon.gov/event/2023-design-challenge-teams">US Solar Decathlon 2023</a>
-                            and the study of <a href = "engineering/sc_murc.pdf">energy usage intensity forecasting</a> for 
-                            <a href="https://students.ubc.ca/career/events-workshops/multidisciplinary-undergraduate-research-conference/">Multidisciplinary Undergraduate Research Conference 2024</a>.
-                            Read my 
-                            <a href="engineering/sc_annual.pdf">annual report</a> and 
-                            <a href="engineering/sc_prospectus.pdf">prospectus</a> for additional information.
+
+                        <div class="card">
+                            <h2>Metal-Detecting Robot</h2>
+                            <p>
+                                A metal-detecting robot with SAMD20E16 and Intel 8051.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                              [<a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I/tree/main/Robot%20Design">Github</a>]
+                            </p>
                         </div>
-                    </div>
-                </div>
 
-                <div class="content-label">Experiences</div>
-                <div class="content-details">
-                    <a style="font-weight: 600;" href="https://smithandandersen.com/">Smith and Andersen</a><br>
-                    As an Electrical Engineer Co-op, I was responsible for drafting and designing electrical systems for residential buildings, including power, lighting and fire alarm systems.
-                    <br><br>
+                        <div class="card">
+                            <h2>Capacitive Piano & Games</h2>
+                            <p>
+                                A capacitive piano with Intel 8051.
+                            </p>
+                            <p class="duration" style = "margin-top: 5%;">
+                              [<a href="https://github.com/vento277/Electrical-Engineering-Design-Studio-I/tree/main/Game%20Design">Github</a>]
+                            </p>
+                        </div>
+                    </div> 
 
-                    <div class="toggle-text" onclick="toggleSection(event)">&#8594; Involvement</div>
-                    <section class="toggle-section"><br>
-                        &#8226; Low-Rise Design Manual<br>
-                        &#8226; Maplewood Garden (SLD + P, L & FA design)<br>
-                        &#8226; King George Tower (Load Calc. + P, L & FA design)<br>
-                        &#8226; Laval Square (Load Calc.)<br>
-                        &#8226; VAHA Apartments (Load Calc.)<br>
-                        &#8226; Isabella Residences (Light. Coord. + P, L & FA design)<br>
-                        &#8226; Univ. of Waterloo Residence (Mech. Coord.)<br>
-                        &#8226; OAK & 37th (P, L & FA design)<br>
-                        &#8226; The Steller (P, L & FA design)
-                    </section>
+                    <br><hr><br>
 
-                    <br><br>
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="dot-g"></div><h2>Smith and Andersen</h2>
+                            <p>
+                                As an <a style="text-decoration: none; font-weight: bold;">Electrical Engineer Co-op</a>, I was responsible for drafting and designing electrical systems for residential buildings, 
+                                including power, lighting and fire alarm systems.
+                            </p>
+                            <p class="duration" style = "text-align: left; margin-top: 5%;">
+                              &#8226; Low-Rise Design Manual<br>
+                              &#8226; King George Tower<br>
+                              &#8226; Richmond Center<br>
+                              &#8226; Univ. of Waterloo<br>
+                              &#8226; Isabella Residences<br>
+                              &#8226; Maplewood Garden<br>
+                              &#8226; Laval Square<br>
+                              &#8226; VAHA Apartments<br>
+                              &#8226; OAK & 37th<br>
+                              &#8226; The Steller
+                            </p> 
+                        </div>
 
-                    <a style="font-weight: 600;" href="https://www.motionmetrics.com/">Weir Motion Metrics</a><br>
-                    As a Hardware Engineer Co-op, I was responsible for testing both the electrical and software systems of the products.
-                    My role later extended to writing new production manuals and reviewing out-dated BOMs, as well as streamlining the manufacturing processes.
-                    <br><br>
-                    <div class="toggle-text" onclick="toggleSection(event)">&#8594; Involvement</div>
-                    <section class="toggle-section"><br>
-                        &#8226; ShovelMetrics (Test + Manual & BOM)<br>
-                        &#8226; RS232 - RS422 Converter (Test + Manual & BOM)<br>
-                        &#8226; Power Supplies (Test)
-                        &#8226; Order Management Tool<br>
-                        &#8226; Storage Labelling System<br>
-                    </section>
+                        <div class="card">
+                            <div class="dot-g"></div><h2>Weir Motion Metrics</h2>
+                            <p>
+                                As a <a style="text-decoration: none; font-weight: bold;">Hardware Engineer Co-op</a>, 
+                                I was responsible for testing both the electrical and software systems.
+                                My role later extended to writing new production manuals and reviewing out-dated BOMs, as well as streamlining the manufacturing processes.
+                            </p>
+                            <p class="duration" style = "text-align: left; margin-top: 5%;">
+                                &#8226; ShovelMetrics<br>
+                                &#8226; RS232-RS422 Converter<br>
+                                &#8226; Power Supplies<br>
+                                &#8226; Production Optimization<br>
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <div class="dot-g"></div><h2>Dorigo Systems</h2>
+                            <p>
+                                As an <a style="text-decoration: none; font-weight: bold;">Assembler</a>, 
+                                I performed mechanical and electrical assembly of PCBs. 
+                                My role later extended to a wide range of testing procedures, 
+                                such as in-circuit testing, flying probe testing, functional testing, and burn-in testing. 
+                                I also operated and maintained a THT machine.
+                            </p>
+                        </div>
+                    </div>                 
                 </div>
             </div>
         </section>      
@@ -197,6 +264,43 @@
                 }
             });
         }
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left; // Mouse X relative to card
+                const mouseY = e.clientY - rect.top;  // Mouse Y relative to card
+
+                // Calculate center of the card
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                // Calculate tilt and enhanced depth based on mouse position
+                const tiltX = (mouseY - centerY) / 50; // Stronger tilt on X-axis
+                const tiltY = (mouseX - centerX) / -50; // Stronger tilt on Y-axis
+                const depth = Math.min(Math.max((mouseX - centerX) / 10, -20), 20); // Increased depth effect (stronger push-down)
+
+                // Apply transform for 3D effect
+                card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(${depth}px)`;
+
+                // Subtle light blue gradient centered on mouse pointer
+                const blueIntensity = Math.min(Math.max((mouseX / rect.width) * 30, 0), 30); // Reduced range to 0-30 for even subtler change
+                const gradientStart = `rgba(173, 216, 230, ${blueIntensity / 50})`; // Light blue color (lighter blue)
+                const gradientEnd = `rgba(173, 216, 230, ${blueIntensity / 100})`; // Even subtler end with lighter opacity
+
+                // Adjust the size of the gradient to make it smaller
+                const gradientSize = 150; // Radius of the gradient effect
+
+                card.style.background = `radial-gradient(circle at ${mouseX}px ${mouseY}px, ${gradientStart}, ${gradientEnd}, #ffffff ${gradientSize}px)`;
+
+            });
+
+            card.addEventListener('mouseleave', () => {
+                // Reset to original state on mouse leave
+                card.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                card.style.background = '#ffffff';
+            });
+        });
 
         // Call initialization when the page loads
         document.addEventListener('DOMContentLoaded', initializeSections);
