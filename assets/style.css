@@ -66,6 +66,10 @@ a[href]:hover {
     text-align: right;
 }
 
+footer p{
+    font-size: 13px;
+}
+
 /* Cards */
 .card {
     background: var(--card-background);
@@ -112,22 +116,19 @@ a[href]:hover {
     width: var(--spacing-unit);
     height: var(--spacing-unit);
     border-radius: 50%;
-    box-shadow: 0 0 10px grey;
-    animation: pulse 4s infinite;
-}
-
-.dot {
-    background-color: green;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+    animation: pulse 4s infinite ease-in-out;
+    background: radial-gradient(circle, green 30%, white 80%);
 }
 
 .dot-g {
-    background-color: salmon;
+    background: radial-gradient(circle, salmon 30%, white 80%);
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 5px white; }
-    50% { transform: scale(1.2); box-shadow: 0 0 12px white; }
-    100% { transform: scale(1); box-shadow: 0 0 5px white; }
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 255, 255, 0.4); }
 }
 
 /* Content */
@@ -310,6 +311,9 @@ ul {
 @media (max-width: 800px) {
     body {
         max-width: 92%;
+        font-size: 11px;
+    }
+    footer p{
         font-size: 11px;
     }
 
