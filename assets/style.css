@@ -101,8 +101,12 @@ footer p{
     color: var(--secondary-text-color);
 }
 
-.card .duration a {
+.card .duration{
     font-size: 0.8em;
+    color: #888;
+}
+
+.card .duration a {
     color: #888;
 }
 
