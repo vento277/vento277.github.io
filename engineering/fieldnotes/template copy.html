@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <title>Recurrent Neural Networks</title>
+    <title>Template</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
     
@@ -21,10 +21,10 @@
 <body>
     <section class="header">
         <div class="title">
-            Recurrent Neural Networks
+            Template
         </div>
         <div class="author">
-            Author: Peter Kim | Professor: Renjie Liao
+            Author: Peter Kim | Professor: Name
         </div>
     </section>
     <hr><!------------------------------------------------------------------------------------------------------------------------------>
@@ -117,7 +117,7 @@
             <li>$(h_1,y_1) = F(h_0,x_1,W)$</li>
             <li>$(h_2,y_2) = F(h_1,x_2,W)$</li>
             <li>$(x_1,x_2)$ compress a length-2 sequence</li>
-        </ul>
+        <ul>
     </p>
 
     <figure class="image">
@@ -125,101 +125,7 @@
     </figure>
     <a class="caption">RNN Computational Graph with Shared Weights</a>
 
-    <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/bMPVVm5g/image.png">
-    </figure>
-    <a class="caption">Many-To-One</a>
-
-    <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/9HgRvVBH/image.png">
-    </figure>
-    <a class="caption">One-To-Many</a>
-
-    <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/C3bqD1Xv/image.png">
-    </figure>
-    <a class="caption">Many-To-Many</a>
-
-    <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/CKCGvfw4/image.png">
-    </figure>
-    <a class="caption">Many-To-One + One-To-Many</a>
-
-    <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/v6DWPkyL/image.png">
-    </figure>
-    <a class="caption">Example: Character-level Language Model</a>
-
-    <h1>Long Short Term Memory (LSTM)</h1>
-    <p> 
-        In RNNs, during the gradient backpropagation phase, the gradient signal can end up being multiplied many times. This leads to two major issues: 
-    </p> 
-    <ul> 
-        <li> If the gradients are large: 
-            <ul> 
-                <li>Exploding gradients: Learning diverges.</li> 
-                <li>Solution: Clip the gradients to a certain maximum value.</li> 
-            </ul> 
-        </li> 
-        <li> If the gradients are small: 
-            <ul> 
-                <li>Vanishing gradients: Learning becomes very slow or stops.</li> 
-                <li>Solution: Introduce memory via LSTM, GRU, etc.</li> 
-            </ul> 
-        </li> 
-    </ul>
-
-    <h2>Long Short-Term Memory Networks (LSTM)</h2> 
-    <p> 
-        Vanilla RNN struggles with long-term dependencies due to vanishing gradients. 
-        Long Short-Term Memory (LSTM) networks are a type of RNN specifically designed to learn long-term dependencies. 
-        They address the limitations of vanilla RNNs by introducing a more sophisticated memory mechanism - 
-        a cell state and gating mechanisms to retain and manage information over long sequences.
-    </p>
-    <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/7x3YkMgM/image.png">
-    </figure>
-    <p> 
-        The cell state is like a conveyor belt that runs straight down the entire chain, 
-        with only minor linear interactions. Gates are used to optionally let information through. 
-        These gates are composed of a sigmoid neural net layer (outputs values between 0 and 1) and 
-        a pointwise multiplication operation.
-    </p> 
-    <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/ccJmyc9G/image.png">
-    </figure>
-    <p> 
-        LSTMs operate using the following steps: 
-    </p> 
-    <ol> 
-        <li> <strong>Forget Gate Layer:</strong> 
-            <ul> 
-                <li>Decides what information to discard from the cell state.</li> 
-                <li>Output: A value between 0 (completely forget) and 1 (completely retain).</li> 
-            </ul> 
-        </li> 
-        <li> <strong>Input Gate Layer + tanh Layer:</strong> 
-            <ul> 
-                <li>Decides what new information to store in the cell state.</li> 
-                <li>Uses a sigmoid layer to decide which values to update and a tanh layer to create candidate values.</li> 
-            </ul> 
-        </li> 
-        <li> <strong>Update Cell State:</strong> 
-            <ul> 
-                <li>Combines the forget gate and input gate operations to update the cell state.</li> 
-            </ul> 
-        </li> 
-        <li> <strong>Output Gate Layer:</strong> 
-            <ul> 
-                <li>Decides what part of the cell state to output.</li>
-                <li>Uses a sigmoid layer to filter the cell state and a tanh layer to scale the output.</li> 
-            </ul> 
-        </li> 
-    </ol>
-
-
-
-
+    
     <hr><!------------------------------------------------------------------------------------------------------------------------------>
     <section class="footer">
         <h3>Notes</h3>
