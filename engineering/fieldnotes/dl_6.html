@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <title>Convolution</title>
+    <title>Convolution I</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon/favicon.ico">
     
@@ -15,7 +15,7 @@
 
 <body>
     <section class="header">
-        <div class="header-col-L2">Convolution</div>
+        <div class="header-col-L2">Convolution I</div>
         <div class="header-col-R"></div>
     </section>
 
@@ -174,36 +174,6 @@
         </figure>
         At the top is the filter, input at the middle, and the output at the bottom. It is clear that through filter adjustments, that even with the same input, output can largely vary. 
         <br><br>
-
-        <!------------------------------------------------------------------------------------------------------------------------------>
-        <h1>2D Transposed Convolution</h1>
-        We know convolution can reduce the input size, e.g., with stride > 1. Can any convolution operator enlarge the input size?
-        Yes, transposed convolution. <br>
-        - Convolution and its transposed version are mutually inverse only w.r.t. shapes of
-        input and output, but not w.r.t. values of input and output<br>
-        - Convolution and deconvolution are mutually inverse w.r.t. values of input and output
-        <br><br>
-
-        Suppose we have a 2D convolution (3x3 kernel):
-        <figure class="image"  style="width:70%; max-width:100%;" data-ckbox-resource-id="xRlFR2DGmm_D">
-            <picture>
-                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/80.webp 80w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/160.webp 160w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/240.webp 240w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/320.webp 320w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/400.webp 400w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/480.webp 480w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/560.webp 560w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/640.webp 640w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/720.webp 720w,https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/777.webp 777w" sizes="(max-width: 777px) 100vw, 777px" type="image/webp">
-                <img style="max-width:100%; height:auto;"src="https://ckbox.cloud/c0b0d29181743234ae23/assets/xRlFR2DGmm_D/images/777.png" width="777" height="347">
-            </picture>
-        </figure>
-        
-        Another example:
-        <figure class="image" style="width:70%; max-width:100%;"  data-ckbox-resource-id="rrHnxqgqm7zh">
-            <picture>
-                <source srcset="https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/94.webp 94w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/188.webp 188w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/282.webp 282w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/376.webp 376w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/470.webp 470w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/564.webp 564w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/658.webp 658w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/752.webp 752w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/846.webp 846w,https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/939.webp 939w" sizes="(max-width: 939px) 100vw, 939px" type="image/webp"><img style="max-width:100%; height:auto;" src="https://ckbox.cloud/c0b0d29181743234ae23/assets/rrHnxqgqm7zh/images/939.png" width="939" height="412">
-            </picture>
-        </figure>
-        In practice, we do not pad zeros in between and then perform convolution due to its
-        high computational cost.
-
-
-
-
         <!------------------------------------------------------------------------------------------------------------------------------>
         <i>
             <b>Notes</b><br>

@@ -34,6 +34,7 @@ body {
 h1, h2, h3{
     opacity: 100;
     font-weight: 600;
+    margin-top: 5%;
 }
 h1 {
     font-size: 20px;
@@ -90,6 +91,17 @@ figure.image img {
     max-width: 100% !important;    /* Fit to window width */
     overflow-x:visible;              /* Scroll if too wide */
     white-space: normal;           /* Encourage wrapping */
+}
+table {
+    margin: auto;
+    border-collapse: collapse;
+    text-align: center;
+    width: 50%; /* Adjust as needed */
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 4px;
 }
 /* ----------------------------------------------- */
 @media (max-width: 1200px) {
