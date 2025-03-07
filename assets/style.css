@@ -49,12 +49,13 @@ ol {
     margin-top: 0;
 }
 
-a[href] {
+p a[href],  a[href]{
     color: #808080;
 }
 
-a[href]:hover {
-    color: rgb(225, 139, 9);
+p a[href]:hover, a[href]:hover {
+    transition-duration: 0.5s;
+    color: black;
 }
 
 /* Image Styles */
@@ -91,11 +92,6 @@ a[href]:hover {
     padding: 0 20px;
     margin-top: 10%;
     margin-bottom: 0;
-}
-
-.tab-button:hover {
-    transition-duration: 0.5s;
-    color: #000000;
 }
 
 /* Main Content */
