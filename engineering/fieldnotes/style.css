@@ -104,17 +104,6 @@ th, td {
     padding: 4px;
 }
 /* ----------------------------------------------- */
-@media (max-width: 1200px) {
-    body {
-        max-width: 65%;
-    }
-    .author{
-        margin-top: 4%;
-        font-size: 12px;
-        line-height:normal;
-    }
-}
-
 @media (max-width: 768px) {
     body {
         max-width: 90%;
