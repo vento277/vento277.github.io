@@ -202,7 +202,7 @@ width: 100%;
 }
 
 /* Media Queries */
-@media (max-width: 690px) {
+@media (max-width: 768px) {
 main {
 max-width: 90%;
 }
