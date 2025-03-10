@@ -36,19 +36,37 @@
         
     <h1>Hamming Codes</h1>
     <p>
-        Hamming codes are a family of linear error-correcting codes that can detect up to two-bit errors and correct single-bit errors. For \( m \geq 3 \), a Hamming code has the following parameters: code length \( n = 2^m - 1 \), number of information bits \( k = 2^m - m - 1 \), number of parity-check bits \( n - k = m \), and error-correcting capability \( t = 1 \) due to a minimum Hamming distance \( d_{\text{min}} = 3 \). These codes are constructed using a parity-check matrix \( H \) whose columns are all non-zero \( m \)-tuples in the vector space \( V_m \) over \( \text{GF}(2) \) (the binary field).
+        Hamming codes are a family of linear error-correcting codes that can detect up to two-bit errors and correct single-bit errors. 
+    </p>
+    <p>
+        For \( m \geq 3 \), a Hamming code has the following parameters: 
+        <ul>
+            <li>Code length \( n = 2^m - 1 \)</li>
+            <li>Number of information bits \( k = 2^m - m - 1 \)</li>
+            <li>Number of parity-check bits \( n - k = m \)</li>
+            <li>Error-correcting capability \( t = 1 \) due to a minimum Hamming distance \( d_{\text{min}} = 3 \)</li>
+        </ul>
+    </p>
+    <p>   
+        These codes are constructed using a parity-check matrix \( H \) whose columns are all non-zero \( m \)-tuples in the vector space \( V_m \) over \( \text{GF}(2) \) (the binary field).
     </p>
     
     <h2>Systematic Hamming Code C(7, 4, 3)</h2>
     <p>
-        Consider the Hamming code \( C(7, 4) \) with \( m = 3 \). Here, \( n = 2^3 - 1 = 7 \), \( k = 2^3 - 3 - 1 = 4 \), and \( n - k = 3 \). In systematic form, the parity-check matrix \( H \) is arranged such that the left submatrix is the \( m \times m \) identity matrix \( I_m \), followed by a submatrix \( Q \). For \( C(7, 4) \), the parity-check matrix is:
+        Consider the Hamming code \( C(7, 4, 3) \) with \( m = 3 \). 
+        Here, \( n = 2^3 - 1 = 7 \), \( k = 2^3 - 3 - 1 = 4 \), and \( n - k = 3 \). 
+    </p>
+    <p>
+        In systematic form, the parity-check matrix \( H \) is arranged such that the left submatrix is the \( m \times m = 3 \times 3 \) 
+        identity matrix \( I_m = I_3 \), followed by a submatrix \( Q \). For \( C(7, 4, 3) \), the parity-check matrix is:
     </p>
     <p>
         \[
-        H = \begin{bmatrix}
-        1 & 0 & 0 & 1 & 0 & 1 & 1 \\
-        0 & 1 & 0 & 1 & 1 & 1 & 0 \\
-        0 & 0 & 1 & 0 & 1 & 1 & 1
+        H = [ I_m | Q ] =    
+        \begin{bmatrix}
+        1 & 0 & 0 &|& 1 & 0 & 1 & 1 \\
+        0 & 1 & 0 &|& 1 & 1 & 1 & 0 \\
+        0 & 0 & 1 &|& 0 & 1 & 1 & 1
         \end{bmatrix}
         \]
     </p>
@@ -58,13 +76,13 @@
     
     <h3>Why \( d_{\text{min}} = 3 \)?</h3>
     <p>
-        The minimum Hamming distance \( d_{\text{min}} \) of a code determines its error-correcting capability. For Hamming codes like \( C(7, 4) \), \( d_{\text{min}} = 3 \), and here’s why:
+        The minimum Hamming distance \( d_{\text{min}} \) of a code determines its error-correcting capability. For Hamming codes like \( C(7, 4, 3) \), \( d_{\text{min}} = 3 \), and here’s why:
     </p>
     <p>
         <ul>
-            <li><strong>No column is the zero vector:</strong> Each column of \( H \) is a non-zero \( m \)-tuple, ensuring that the weight of any codeword (a linear combination of columns of \( G \)) is at least 1. Thus, \( d_{\text{min}} > 1 \).</li>
-            <li><strong>No two columns are identical:</strong> Since all columns of \( H \) are distinct non-zero \( m \)-tuples, the sum of any two columns (corresponding to a codeword) has weight at least 2, implying \( d_{\text{min}} > 2 \).</li>
-            <li><strong>Sum of two columns is another column:</strong> Because \( H \) contains all \( 2^m - 1 \) non-zero \( m \)-tuples, the binary sum of any two distinct columns is another non-zero column of \( H \). The minimum weight of a codeword formed by three or more columns can be 3 (e.g., adding three columns like \( [1,0,0]^T \), \( [0,1,0]^T \), and \( [1,1,1]^T \) yields a weight-3 codeword). Thus, \( d_{\text{min}} = 3 \).</li>
+            <li>No column is the zero vector: Each column of \( H \) is a non-zero \( m \)-tuple, ensuring that the weight of any codeword (a linear combination of columns of \( G \)) is at least 1. Thus, \( d_{\text{min}} > 1 \).</li>
+            <li>No two columns are identical: Since all columns of \( H \) are distinct non-zero \( m \)-tuples, the sum of any two columns (corresponding to a codeword) has weight at least 2, implying \( d_{\text{min}} > 2 \).</li>
+            <li>Sum of two columns is another column: Because \( H \) contains all \( 2^m - 1 \) non-zero \( m \)-tuples, the binary sum of any two distinct columns is another non-zero column of \( H \). The minimum weight of a codeword formed by three or more columns can be 3 (e.g., adding three columns like \( [1,0,0]^T \), \( [0,1,0]^T \), and \( [1,1,1]^T \) yields a weight-3 codeword). Thus, \( d_{\text{min}} = 3 \).</li>
         </ul>
     </p>
     <p>
@@ -77,13 +95,13 @@
     
     <h3>Decoding with a Look-Up Table</h3>
     <p>
-        Decoding a Hamming code like \( C(7, 4, 3) \) can be efficiently performed using a syndrome look-up table. The syndrome of a received vector \( r \) is computed as \( s = H r^T \). If \( s = 0 \), no error is detected. If \( s \) matches a column of \( H \), a single-bit error is assumed at the position corresponding to that column. For \( C(7, 4) \), with \( H \) as given, the look-up table is constructed as follows:
+        Decoding a Hamming code like \( C(7, 4, 3) \) can be efficiently performed using a syndrome look-up table. The syndrome of a received vector \( r \) is computed as \( s = H r^T \). If \( s = 0 \), no error is detected. If \( s \) matches a column of \( H \), a single-bit error is assumed at the position corresponding to that column. For \( C(7, 4, 3) \), with \( H \) as given, the look-up table is constructed as follows:
     </p>
     <p>
         <ul>
-            <li><strong>Syndrome computation:</strong> For a received vector \( r = [r_1, r_2, r_3, r_4, r_5, r_6, r_7] \), compute \( s = H r^T \) (modulo 2).</li>
-            <li><strong>Coset leaders:</strong> There are \( 2^{n-k} = 2^3 = 8 \) coset leaders, corresponding to the all-zero vector (no error) and the 7 single-bit error patterns.</li>
-            <li><strong>Table:</strong>
+            <li>Syndrome computation: For a received vector \( r = [r_1, r_2, r_3, r_4, r_5, r_6, r_7] \), compute \( s = H r^T \) (modulo 2).</li>
+            <li>Coset leaders: There are \( 2^{n-k} = 2^3 = 8 \) coset leaders, corresponding to the all-zero vector (no error) and the 7 single-bit error patterns.</li>
+            <li>Table:
                 <ul>
                     <li>Syndrome \( [0, 0, 0]^T \): No error, error pattern \( [0, 0, 0, 0, 0, 0, 0] \).</li>
                     <li>Syndrome \( [1, 0, 0]^T \): Error in position 1, error pattern \( [1, 0, 0, 0, 0, 0, 0] \).</li>
@@ -105,71 +123,230 @@
     <p>
         Hamming codes are perfect codes, meaning they achieve the Hamming bound exactly. For a code with minimum distance \( d_{\text{min}} \) and error-correcting capability \( t = \lfloor (d_{\text{min}} - 1)/2 \rfloor \), the number of correctable error patterns is:
         \[
-        \sum_{\ell=0}^{t} \binom{n}{\ell}
+        \sum_{\ell=0}^{t} \binom{n}{\ell} = 2^{n-k}
         \]
         For \( C(7, 4, 3) \), \( t = 1 \), and:
         \[
-        \binom{7}{0} + \binom{7}{1} = 1 + 7 = 8 = 2^{n-k} = 2^3
+        \binom{7}{0} + \binom{7}{1} = 1 + 7 = 8 = 2^{7-4} = 2^3
         \]
         This confirms \( C(7, 4, 3) \) is perfect, as all error patterns of weight \( t = 1 \) or less are coset leaders.
     </p>
+    <p>
+        Note that perfect codes are rare. And Besides the Hamming codes, the only other nontrivial binary perfect
+        codes is \( C(23, 12, 7) \), Golay code, with \( d_{\text{min}} = 7 \).
+    </p>
     
-    <p>
-        The use of <code>&lt;br&gt;</code> is avoided throughout this document for consistent line spacing.
-    </p>
-        
-    <h2>Subsection 2</h2>
-    <p>
-        asdasdasdasdasd
-    </p>
+    <h1>Shortened Hamming Codes</h1>
 
-    <h3>Subsection 3</h3>
     <p>
-        asdasdasdasdasd
-    </p>
-    <p>
+        By deleting \(\ell\) columns from the parity check matrix \(H\), a new parity check matrix \(H'\) of size \(m \times (2^m - m - \ell - 1)\) is obtained, with the following properties:
         <ul>
-            <li>Item 1</li>
-            <li>Item 2
-                <ul>
-                    <li>Subitem 2.1</li>
-                    <li>Subitem 2.2
-                        <ul>
-                            <li>Sub-subitem 2.2.1</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>Item 3</li>
+            <li>Code length: \( n = 2^m - \ell - 1 \)</li>
+            <li>Number of information bits: \( k = 2^m - m - \ell - 1 \)</li>
+            <li>Number of parity check bits: \( n - k = m \)</li>
+            <li>Error correcting capability: \( d_{\text{min}} \geq 3 \)</li>
         </ul>
-        <ol>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>Milk</li>
-        </ol>
     </p>
-
     <p>
-        Equation:
+        By deleting specific columns of \(H\), a shortened Hamming code with \( d_{\text{min}} = 4 \) can be obtained.
+    </p>
+    <p>
+        For a systematic Hamming code \( C(2^m - 1, 2^m - m - 1, 3) \), the parity check matrix is:
         \[
-            \text{regression}: x_n \in \mathbb{R}^2 \quad y_n \in \mathbb{R} \quad
-            \text{classification}: x_n \in \mathbb{R}^2 \quad y_n \in {1,2,\ldots,K}
+            H_{m \times (2^m - 1)} = \begin{bmatrix} I_m | Q_{m \times (2^m - m - 1)} \end{bmatrix}
         \]
     </p>
     <p>
-        The use of br is avoided for the entire document for consistent line spacing. 
+        If all columns of even weight from submatrix \(Q\) are deleted, the resulting matrix \(H'\) is:
+        \[
+            H'_{m \times (2^m - 1)} = \begin{bmatrix} I_m | Q'_{m \times (2^{m - 1} - m)} \end{bmatrix}
+        \]
+        where \(Q'\) contains \( 2^{m-1} - m \) columns of odd weight.
     </p>
     <p>
-        Use this for images: https://onlinehtmleditor.dev/
-        or https://imgbb.com/
+        Observe that:
+        <ul>
+            <li>All columns of \(H'\) have odd weights.</li>
+            <li>No three columns in \(H'\) add to zero (ensuring \( d_{\text{min}} \geq 3 \)).</li>
+            <li>Four columns in \(H'\) can be found that add to zero, implying \( d_{\text{min}} = 4 \).</li>
+        </ul>
+    </p>
+
+    <h2>Error Correction and Detection Capabilities</h2>
+    <p>
+        The distance-4 shortened Hamming code can:
+    </p>
+    <ol>
+        <li>Correct all error patterns of weight 1 (single errors).</li>
+        <li>Detect all error patterns of weight 2 (double errors).</li>
+    </ol>
+
+    <p>
+        The decoding process is as follows:
+    </p>
+    <ol>
+        <li>Compute the syndrome vector \( \mathbf{s} = \mathbf{r} \cdot H'^T \).</li>
+        <li>If \( \mathbf{s} = 0 \):
+            <ul>
+                <li>No error is assumed.</li>
+            </ul>
+        </li>
+        <li>If \( \mathbf{s} \neq 0 \):
+            <ul>
+                <li>If \( \mathbf{s} \) contains an odd number of 1's:
+                    <ul>
+                        <li>A weight-1 error is assumed, and the corresponding error pattern is added to \( \mathbf{r} \) to correct it.</li>
+                    </ul>
+                </li>
+                <li>If \( \mathbf{s} \) contains an even number of 1's:
+                    <ul>
+                        <li>A weight-2 error is detected (uncorrectable).</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ol>
+
+    <h1>Extended Hamming Codes</h1>
+
+    <p>
+        Extended Hamming Codes can be constructed by adding an additional overall even parity check coordinate to every codeword, producing:
+    </p>
+
+    <ul>
+        <li>Code length: \( n = 2^m \)</li>
+        <li>Number of information bits: \( k = 2^m - m - 1 \)</li>
+        <li>Number of parity check bits: \( n - k = m + 1 \)</li>
+        <li>Error correcting capability: \( d_{\text{min}} = 4 \)</li>
+    </ul>
+
+    <p>
+        To do so, a parity check bit is added to every codeword. That is, if \( \mathbf{v} = (v_0, v_1, \ldots, v_{2^m-2}) \) is a codeword of the Hamming code, the corresponding codeword \( \mathbf{v}' \) in the extended Hamming code is:
+        \[
+            \mathbf{v}' = (v_0, v_1, \ldots, v_{2^m-2}, v_{2^m-1})
+        \]
+        where
+        \[
+            v_{2^m-1} = v_0 + v_1 + \cdots + v_{2^m-2}.
+        \]
+    </p>
+
+    <h2>Example</h2>
+
+    <p>
+        The parity check matrix for the \( C(7, 4, 3) \) Hamming code is given as:
+        \[
+            H = \begin{bmatrix}
+                1 & 0 & 0 &|& 1 & 0 & 1 & 1 \\
+                0 & 1 & 0 &|& 1 & 1 & 1 & 0 \\
+                0 & 0 & 1 &|& 0 & 1 & 1 & 1
+            \end{bmatrix}
+        \]
+    </p>
+
+    <p>
+        The corresponding generator matrix \( G \) is:
+        \[
+            G = \begin{bmatrix}
+                1 & 1 & 0 &|& 1 & 0 & 0 & 0 \\
+                0 & 1 & 1 &|& 0 & 1 & 0 & 0 \\
+                1 & 1 & 1 &|& 0 & 0 & 1 & 0 \\
+                1 & 0 & 1 &|& 0 & 0 & 0 & 1
+            \end{bmatrix}
+        \]
+    </p>
+
+    <p>
+        To construct the generator matrix \( G' \) of the extended Hamming code \( C(8, 4, 4) \), we add an even parity-check bit at the end of each row:
+        \[
+            G' = \begin{bmatrix}
+                1 & 1 & 0 &|& 1 & 0 & 0 & 0 &|& 1 \\
+                0 & 1 & 1 &|& 0 & 1 & 0 & 0 &|& 1 \\
+                1 & 1 & 1 &|& 0 & 0 & 1 & 0 &|& 0 \\
+                1 & 0 & 1 &|& 0 & 0 & 0 & 1 &|& 1
+            \end{bmatrix}
+        \]
+    </p>
+
+    <p>
+        The corresponding parity check matrix \( H' \) for the extended Hamming code \( C(8, 4, 4) \) is:
+        \[
+            H' = \begin{bmatrix}
+                1 & 0 & 0 &|& 1 & 0 & 1 & 1 &|& 0 \\
+                0 & 1 & 0 &|& 1 & 1 & 1 & 0 &|& 0 \\
+                0 & 0 & 1 &|& 0 & 1 & 1 & 1 &|& 0 \\
+                - & - & - & - & - & - & - & - & - & -\\
+                1 & 1 & 1 &|& 1 & 1 & 1 & 1 &|& 1
+            \end{bmatrix}
+        \]
+    </p>
+    <p>
+        Every codeword of the extended Hamming code has even weight.
+    </p>
+
+    <h2>Syndrome Decoding</h2>
+    <p>
+        Compute the syndrome vector:
+        \[
+            \mathbf{s} = (s_0, s_1, \ldots, s_{m-1}, s_m) = \mathbf{r} \cdot H'^T
+        \]
+    </p>
+    <ol>
+        <li>If \( \mathbf{s} = 0 \):
+            <ul>
+                <li>The decoder assumes that no error occurred.</li>
+            </ul>
+        </li>
+        <li>If \( \mathbf{s} \neq 0 \) and \( s_m = 1 \):
+            <ul>
+                <li>The error pattern has odd weight, and the decoder assumes that an error pattern of weight 1 has occurred. It will correct the error.</li>
+            </ul>
+        </li>
+        <li>If \( \mathbf{s} \neq 0 \) and \( s_m = 0 \):
+            <ul>
+                <li>The error pattern has even weight, and the decoder can detect it (but not correct it).</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h1>Code Operations</h1>
+
+    <p>
+        In summary, the following operations can be performed on a code \( C(n, k) \):
+    </p>
+
+    <ul>
+        <li>Shortening: \( C(n, k) \rightarrow C(n - \ell, k - \ell) \)</li>
+        <li>Extending: \( C(n, k) \rightarrow C(n + \ell, k) \)</li>
+        <li>Puncturing: \( C(n, k) \rightarrow C(n - \ell, k) \)</li>
+        <li>Lengthening: \( C(n, k) \rightarrow C(n + \ell, k + \ell) \)</li>
+        <li>Expurgating: Deleting some codewords</li>
+        <li>Augmenting: Adding new codewords</li>
+    </ul>
+
+    <h2>Hamming Code Properties</h2>
+
+    <p>
+        The Hamming code is a \( C(2^m - 1, m) \) linear block code. Its weight distribution in polynomial form is:
+        \[
+            B(z) = 1 + (2^m - 1) z^{2^{m-1}} \quad
+        \]
+    </p>
+
+    <p>
+        The probability that the decoder fails to detect the presence of errors in the Hamming code \( C(2^m - 1, 2^m - m - 1, 3) \) is given by:
+        \[
+            P_U(E) = 2^{n-k} B(1 - 2p) - (1 - p)^n \quad 
+        \]
+        Substituting the weight distribution polynomial \( B(z) \) from (3) into (4), we get:
+        \[
+            P_U(E) = 2^{-m} \left[ 1 + (2^m - 1)(1 - 2p)^{2^{m-1}} \right] - (1 - p)^{2^m - 1} \quad 
+        \]
     </p>
     <figure class="image">
-        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/RT28vVNx/image.png">
+        <source><img style="max-width:100%; height:auto;" src="https://i.ibb.co/WvZfKKG5/image.png">
     </figure>
-        <a class="caption">This is a image caption</a>
-    <p>
-        asdasdasdasdasd
-    </p>
+        <a class="caption">Demonstrating modifications on a Hamming code</a>
     
     <hr><!------------------------------------------------------------------------------------------------------------------------------>
     <section class="footer">
