@@ -167,7 +167,7 @@ justify-content: center;
 width: var(--width-container);
 max-width: 100%;
 margin-top: var(--spacing-xs);
-margin-bottom: var(--spacing-xs);
+margin-bottom: 2%;
 flex-wrap: wrap;
 }
 
