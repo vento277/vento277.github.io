@@ -112,8 +112,7 @@ justify-content: center;
 width: var(--width-container);
 position: sticky;
 z-index: 100;
-padding: 20px 0;
-margin-top: 2%;
+margin-top: 5%;
 margin-bottom: 0 !important; /* Force bottom margin to be 0 */
 background-color: var(--color-background, black);
 transition: box-shadow 0.3s ease;
@@ -167,7 +166,7 @@ justify-content: center;
 width: var(--width-container);
 max-width: 100%;
 margin-top: var(--spacing-xs);
-margin-bottom: 2%;
+margin-bottom: 5%;
 flex-wrap: wrap;
 }
 
