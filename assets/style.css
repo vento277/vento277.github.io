@@ -115,7 +115,7 @@ z-index: 100;
 padding: 20px 0;
 margin-top: 2%;
 margin-bottom: 0 !important; /* Force bottom margin to be 0 */
-background-color: var(--color-background, #ffffff);
+background-color: var(--color-background, black);
 transition: box-shadow 0.3s ease;
 top: 0;
 max-width: 500px;
@@ -123,7 +123,7 @@ max-width: 500px;
 
 /* Header Styling */
 .header-style {
-background-color: #3d3d3d;
+background-color: white;
 padding: 5px 15px;
 border-radius: 20px;
 margin-bottom: 0 !important; /* Ensure no bottom margin */
@@ -136,7 +136,7 @@ justify-content: center;
 .tab-button {
 text-decoration: none;
 background: transparent;
-color: rgb(238, 238, 238) !important;
+color: rgb(#808080) !important;
 transition: color 0.3s ease-in-out, transform 0.2s ease-in-out, filter 0.3s ease-in-out;
 padding: 0 var(--spacing-md);
 cursor: pointer;
@@ -153,7 +153,7 @@ opacity: 0.7;
 }
 
 .tab-button:hover {
-color: var(--color-accent, #ffffff) !important;
+color: var(--color-accent, black) !important;
 transform: scale(1.0) !important;
 filter: blur(0) !important;
 opacity: 1 !important;
