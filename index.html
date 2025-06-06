@@ -28,52 +28,6 @@
         td {
             padding: 0.5rem;
         }
-
-        /* SVG Graph */
-        svg.graph-svg {
-            width: 100%;
-            overflow: visible;
-        }
-        
-        .axis, .grid-line {
-            stroke: #333;
-            stroke-width: 1;
-        }
-        
-        .solid-line {
-            fill: none;
-            stroke: #000;
-            stroke-width: 2;
-        }
-        
-        .dotted-line {
-            fill: none;
-            stroke: #000;
-            stroke-width: 2;
-            stroke-dasharray: 5, 5;
-        }
-        
-        .data-point {
-            fill: #000;
-            cursor: pointer;
-        }
-        
-        .label, .tooltip, .legend {
-            fill: #000;
-            font-family: 'Inter', Arial, sans-serif;
-            font-size: 12px;
-        }
-        
-        .tooltip {
-            visibility: hidden;
-            font-size: 12px;
-            pointer-events: none;
-        }
-        
-        .legend-line {
-            stroke: #000;
-            stroke-width: 2;
-        }
     </style>
 </head>
 
@@ -85,8 +39,45 @@
             the art of worldly wisdom</p>
             <hr>
 
-            <svg id="performance-graph" class="graph-svg"></svg>    
-            <br><br>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="4">Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 150px;">Date</td>
+                        <td style="width: 150px;">KP</td>
+                        <td style="width: 150px;">VFV</td>
+                        <td style="width: 150px;">Relative</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px;">Q3 2024</td>
+                        <td style="width: 150px;">5.22%</td>
+                        <td style="width: 150px;">4.56%</td>
+                        <td style="width: 150px;">+0.66%</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px;">Q4 2024</td>
+                        <td style="width: 150px;">7.95%</td>
+                        <td style="width: 150px;">8.81%</td>
+                        <td style="width: 150px;">-0.86%</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px;">Q1 2025</td>
+                        <td style="width: 150px;">0.98%</td>
+                        <td style="width: 150px;">-4.24%</td>
+                        <td style="width: 150px;">+5.22%</td>
+                    </tr>
+                    <tr style = "border: 2px solid;">
+                        <td style="width: 150px;">Overall</td>
+                        <td style="width: 150px;">14.70%</td>
+                        <td style="width: 150px;">8.95%</td>
+                        <td style="width: 150px;">+5.75%</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <table>
                 <thead>
