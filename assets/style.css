@@ -45,11 +45,12 @@ h3 {
 }
 p {
     font-size: 13px;
+    line-height: 18px;
 }
 ul {
     font-size: 13px;
 }
-.cw{
+.cr{
     margin-top: 10%;
     font-size: 10px;
 }
