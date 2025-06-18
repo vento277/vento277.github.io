@@ -1,5 +1,5 @@
 html {
-    font-family: 'Inter', sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     text-rendering: optimizeLegibility;
     margin: 0 auto;
     min-height: 100vh;
@@ -8,7 +8,7 @@ html {
 
 body {
     text-align: left;
-    margin-top: 5%;
+    margin-top: 70px;
     padding: 0 13%; 
     max-width: 500px; 
     margin-left: auto; 
@@ -38,10 +38,10 @@ tr:last-child td {
 }
 
 h1 {
-    font-size: 25px;
+    font-size: 21px;
 }
 h2 {
-    font-size: 15px;
+    font-size: 17px;
 }
 h3 {
     font-size: 13px;
