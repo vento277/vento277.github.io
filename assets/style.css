@@ -1,18 +1,21 @@
 html {
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     text-rendering: optimizeLegibility;
-    margin: 0 auto;
-    min-height: 100vh;
     overflow-x: hidden;
 }
 
 body {
-    text-align: left;
-    margin-top: 70px;
-    padding: 0 1%; 
-    max-width: 500px; 
-    margin-left: auto; 
-    margin-right: auto; 
+    margin: 0 auto;
+    min-height: 100vh;
+    max-width: 400px; 
+    margin-top: 50px;
+    text-align: center;
+}
+
+.cr{
+    margin-top: 5%;
+    font-size: 10px;
+    margin-bottom: 5%;
 }
 
 table {
@@ -32,38 +35,6 @@ tr:last-child td {
     font-weight: 600;
 }
 
-.title {
-    font-size: 13px;
-    font-weight: bold;
-}
-.subtitle{
-    font-size: 13px;
+a[href]{
     color: grey;
-}
-.content{
-    font-size: 13px;
-    line-height: 18px;
-}
-ul {
-    font-size: 13px;
-}
-.cr{
-    margin-top: 10%;
-    font-size: 10px;
-    margin-bottom: 5%;
-}
-
-ul {
-padding: 0;
-list-style-position: inside;
-}
-ul ul{
-padding-left: 3%;
-}
-a[href] {
-color: black;
-transition: color 0.3s ease;
-}
-a[href]:hover {
-color: grey;
 }
