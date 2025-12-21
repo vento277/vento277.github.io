@@ -12,6 +12,16 @@ body {
     text-align: center;
 }
 
+h1 {
+    margin-bottom: 2%;
+}
+
+.sh{
+    margin-top: 0;
+    font-size: 13px;
+    margin-bottom: 5%;
+}
+
 .cr{
     margin-top: 5%;
     font-size: 10px;
